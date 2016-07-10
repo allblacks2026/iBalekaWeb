@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 //using prototypeWeb.Models;
 
 namespace iBalekaWeb.Controllers
@@ -14,6 +15,7 @@ namespace iBalekaWeb.Controllers
     
         }
 
+        [Authorize]
         public IActionResult Map()
         {
             ViewData["Message"] = "Map A Route";
