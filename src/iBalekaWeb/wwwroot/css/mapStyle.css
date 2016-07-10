@@ -1,4 +1,17 @@
-﻿/*Position Map*/
+﻿/*Stats Panel*/
+#toolbox {
+    background-color:#99CCFF;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    box-shadow:0 2px 6px rgba(0,0,0,.3);
+    cursor:pointer;
+    margin-bottom:22px;
+    text-align:center;
+}
+/*End Toolbox Panel*/
+
+
+/*Position Map*/
 html, body {
     overflow-y: hidden;
     overflow-x: hidden;
@@ -11,6 +24,9 @@ html, body {
     left: -1%;
     width: 109%;
 }
+/*End Position Map*/
+
+/*Media queries*/
 /* SMARTPHONES PORTRAIT */
 @media only screen and (min-width: 300px) {
     #map {
@@ -20,30 +36,30 @@ html, body {
     }
 }
 
-    @media only screen and (min-width: 320px) {
-        #map {
-            margin-left: -11%;
-            height: 101vh;
-            width: 123%;
-        }
+@media only screen and (min-width: 320px) {
+    #map {
+        margin-left: -11%;
+        height: 101vh;
+        width: 123%;
     }
+}
 
 
-    @media only screen and (min-width: 360px) {
-        #map {
-            margin-left: -9%;
-            height: 101vh;
-            width: 120%;
-        }
+@media only screen and (min-width: 360px) {
+    #map {
+        margin-left: -9%;
+        height: 101vh;
+        width: 120%;
     }
+}
 
-    @media only screen and (min-width: 400px) {
-        #map {
-            margin-left: -8%;
-            height: 102vh;
-            width: 118%;
-        }
+@media only screen and (min-width: 400px) {
+    #map {
+        margin-left: -8%;
+        height: 102vh;
+        width: 118%;
     }
+}
 
 /* SMARTPHONES LANDSCAPE */
 @media only screen and (min-width: 480px) {
@@ -94,13 +110,6 @@ html, body {
         width: 108%;
     }
 }
+/*End Media Queries*/
 /*End Positioning Map*/
 
-/*Position Stats Panel*/
-/*#coordinates {
-    margin-top: 10%;
-}*/
-
-/*Marker Table*/
-/*.markerTable {
-}*/ /*/*/

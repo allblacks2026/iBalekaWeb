@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using iBalekaWeb.Models;
 using JetBrains.Annotations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace iBalekaWeb.Data.Configurations
 {
-    public partial class iBalekaDBContext : DbContext
+    public partial class iBalekaDBContext : IdentityDbContext<iBalekaUser>
     {
         public iBalekaDBContext(DbContextOptions options) : base(options)
         {
@@ -19,6 +20,7 @@ namespace iBalekaWeb.Data.Configurations
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
             {
                 entity.HasIndex(e => e.RoleId)

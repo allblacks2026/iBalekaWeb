@@ -8,30 +8,31 @@ function initMap() {
         scaleControl: true
     });
     getLocation();
+    var toolBoxDiv = document.createElement('div');
+    var toolBoxControl = new createToolbox(toolBoxDiv, map);
+    toolBoxDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(toolBoxControl);
     // Add a listener for the click event
     map.addListener('click', addCheckPoint);
 }
 //**************End Load Google Maps************************//
 
 //Get Current Location
-var demoBox = document.getElementById("demo");
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        demoBox.innerHTML = "Geolocation is not supported by this browser.";
-        myLatlng = { lat: -34.0034, lng: 25.6680 };
+        //demoBox.innerHTML = "Geolocation is not supported by this browser.";
+        //error message overly
     }
 }
 function showPosition(position) {
-    var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-    };
-    demoBox.innerHTML = "Current Location:<br />Latitude: " + position.coords.latitude + "<br/>Longitude: " + position.coords.longitude;
-    map.setCenter(pos);
+    //add marker animation
+    //demoBox.innerHTML = "Current Location:<br />Latitude: " + position.coords.latitude + "<br/>Longitude: " + position.coords.longitude;
+    map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 }
 //**************End Current Location************************//
+
 
 //Checkpoints
 var routePath;
@@ -40,6 +41,7 @@ var markersOrders = new Array(0);
 var routePoints = new Array(0);
 var prevLocation;
 var marker;
+var totalDistance;
 //get unique marker methods
 var getMarkerUniqueId = function (lat, lng) {
     return lat + '_' + lng;
@@ -80,7 +82,7 @@ function dragMarkerEvent(marker) {
             };
             for (var key in markers) {
                 if (markers.hasOwnProperty(key)) {
-                    if (markers[key].id === ('marker_' + getMarkerUniqueId(prevLocation.lat(), prevLocation.lng()))) {
+                    if (key == getMarkerUniqueId(prevLocation.lat(), prevLocation.lng())) {
                         var markerId = getMarkerUniqueId(event.latLng.lat(), event.latLng.lng());
                         markers[markerId] = marker;
                         delete markers[key];
@@ -105,8 +107,9 @@ function getRoutePath() {
     return routePath;
 
 }
-//Delete Checkpoint
+//marker events
 function bindMarkerPolylineEvents(marker) {
+    //remove any listeners on marker first
     google.maps.event.addListener(marker, "rightclick", function (point) {
         var markerId = getMarkerUniqueId(point.latLng.lat(), point.latLng.lng());
         var _marker = markers[markerId];
@@ -116,6 +119,7 @@ function bindMarkerPolylineEvents(marker) {
         refreshMarkers();
     });
 }
+//Delete Checkpoint
 function removeCheckpoint(_marker, markerId) {
     _marker.setMap(null);
     delete markers[markerId];
@@ -137,6 +141,7 @@ function removePolyline(point) {
         }
     }
 }
+//reset route
 function resetPolyline() {
     //remove polyline
     routePath.setMap(null);
@@ -145,7 +150,6 @@ function resetPolyline() {
     routePath.setMap(map);
 
 }
-
 function refreshMarkers() {
     for (var i = 0; i < markersOrders.length; i++) {
         markersOrders[i].setTitle('Checkpoint ' + (i + 1));
@@ -160,3 +164,62 @@ function refreshMarkers() {
     }
 }
 //**************End Checkpoints************************//
+
+//Map HUD
+
+function createToolbox(toolboxDiv,map)
+{
+    //toolbox border css
+    
+    //toolbox interior 
+    //stats div
+    var statisticsDiv = document.createElement('div');
+    statisticsDiv.style.border = '1px solid #000000';
+    statisticsDiv.style.borderRadius = "3px";
+    statisticsDiv.style.textAlign = 'left';
+    statisticsDiv.style.cssFloat = 'left';
+    statisticsDiv.style.title = 'Route Stats';
+    //stats info
+    var statisticsText = document.createElement('div');
+    statisticsText.style.color = '#000000';
+    statisticsText.style.fontSize = '13px';
+    statisticsText.innerHTML = 'Route Statistics';
+    var totalDistanceStat = document.createElement('div');
+    totalDistanceStat.id = 'txtTotalDistance';
+    totalDistanceStat.innerHTML = 'Total Distance: ';
+    statisticsText.appendChild(totalDistanceStat);
+    var checkpointStat = document.createElement('div');
+    checkpointStat.id = 'txtCheckpointStat';
+    checkpointStat.innerHTML = 'Nr of Checkpoints: ';
+    statisticsText.appendChild(checkpointStat);
+    statisticsDiv.appendChild(statisticsText);
+    //buttons div border 
+    var buttonDiv = document.createElement('div');
+    buttonDiv.style.border = '1px solid #000000';
+    buttonDiv.style.borderRadius = "3px";
+    buttonDiv.style.textAlign = 'left';
+    //buttons
+    //save route
+    var btnSaveRoute = document.createElement('button');
+    btnSaveRoute.id = 'btnSaveRoute';
+    btnSaveRoute.onclick = saveRoute();
+    btnSaveRoute.style.color = '#3366ff';
+    var text = document.createTextNode("Save Route");
+    btnSaveRoute.appendChild(text);
+    buttonDiv.appendChild(btnSaveRoute);
+    //clear route
+    var btnClearRoute = document.createElement('button');
+    btnClearRoute.id = 'btnClearRoute';
+    btnClearRoute.onclick = cleareRoute();
+    btnClearRoute.style.color = '#3366ff';
+    text = document.createTextNode("Clear Route");
+    buttonDiv.appendChild(btnClearRoute);
+    statisticsDiv.appendChild(buttonDiv);
+    }
+function saveRoute() {
+
+}
+function cleareRoute() {
+
+}
+//**************End Map HUD************************//

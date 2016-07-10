@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace iBalekaWeb.Models
 {
-    public partial class User
+    public partial class User:IdentityUser
     {
         public User()
         {

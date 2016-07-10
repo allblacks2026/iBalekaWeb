@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace iBalekaWeb.Models
 {
-    // Add profile data for application users by adding properties to the ApplicationUser class
+    // Add profile data for application users by adding properties to the iBalekaUser class
     public class iBalekaUser : IdentityUser
     {
     }
