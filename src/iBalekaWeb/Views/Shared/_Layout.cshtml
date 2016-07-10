@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - All Blacks</title>    
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/dashboard.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="~/css/simple-sidebar.css" rel="stylesheet" />
+    </environment>
+    <environment names="Staging,Production">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @RenderSection("AddToHead", required: false)
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-md-12 col-sm-12">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index"><i id="menu-toggle" class="material-icons">apps</i>iBaleka</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Log Out</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                        <form class="navbar-form navbar-right">
+                            @*<input type="text" class="form-control" placeholder="Search...">*@
+
+                            <input class="form-control" type="text" placeholder="Search">
+                            @*<button class="btn btn-success-outline" type="submit">Search</button>*@
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="active"><a class="btn btn-primary">Events</a></li>
+                <li><a asp-controller="Map" asp-action="Map" class="btn btn-primary">Map a Route</a></li>
+                <li><a class="btn btn-primary">Saved Routes</a></li>
+                <li><a class="btn btn-primary">..</a></li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12 no-gutter">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

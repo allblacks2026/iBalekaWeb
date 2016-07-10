@@ -1,0 +1,33 @@
+@section AddToHead {
+    <link rel="stylesheet" href="~/css/mapStyle.css" />
+}
+@{
+    ViewData["Title"] = "iBaleka Route Mapping Tool";
+}
+
+<form asp-action="Map">
+        <div id="map"></div><br />
+
+        @*<div class="row">
+            <div class="col-sm-6" id="coordinates">
+                <div class="row">
+                    <p id="pauseIndicate"></p>
+                    <div class="col-sm-6">
+                        <p id="demo"></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p id="routeStats"></p>
+                    </div>
+                </div>
+                <div id="markerTable">
+                </div>
+            </div>
+        </div>*@
+        
+    
+</form>
+
+@section Scripts {
+    <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDR4BBX8Is0UhU2sYIv3HbpycxS0Vp1JdY&libraries=drawing,geometry&callback=initMap") async defer></script>
+    <script src=@Url.Content("~/js/ibalekaMap.js")></script>
+}

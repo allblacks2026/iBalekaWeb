@@ -1,0 +1,17 @@
+﻿html, body, .main,#wrapper{
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width:100%;
+      }
+#map {
+    margin: 0;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid black;
+}
+
+
+
+
+
