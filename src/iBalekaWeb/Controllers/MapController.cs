@@ -2,10 +2,14 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
 using iBalekaWeb.Models;
 using iBalekaWeb.Services;
 using System.Collections.Generic;
 using iBalekaWeb.Models.MapViewModels;
+=======
+using Microsoft.AspNetCore.Authorization;
+>>>>>>> 44ccdd2d0dd6e11ceeee6af1dd48d75c95eab1e4
 //using prototypeWeb.Models;
 
 namespace iBalekaWeb.Controllers
@@ -18,6 +22,7 @@ namespace iBalekaWeb.Controllers
             _context = _repo;
         }
 
+        [Authorize]
         public IActionResult Map()
         {
             ViewData["Message"] = "Map A Route";
