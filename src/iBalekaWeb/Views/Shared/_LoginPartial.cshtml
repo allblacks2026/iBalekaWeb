@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using iBalekaWeb.Models
 
-@inject SignInManager<iBalekaUser> SignInManager
-@inject UserManager<iBalekaUser> UserManager
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

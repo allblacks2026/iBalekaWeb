@@ -1,6 +1,7 @@
 ﻿using iBalekaWeb.Data.Infastructure;
 using iBalekaWeb.Data.Repositories;
 using iBalekaWeb.Models;
+using iBalekaWeb.Models.MapViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace iBalekaWeb.Services
         Route GetRouteByID(int id);
         IEnumerable<Checkpoint> GetCheckpoints(int id);
         IEnumerable<Route> GetRoutes();
-        void AddRoute(Route route, Checkpoint[] checkpoints);
+        void AddRoute(CheckpointViewModel[] checkpoints, int totalDistance);
         void UpdateRoute(Route route, Checkpoint[] checkpoints);
         void DeleteRoute(Route route);
         void SaveRoute();
@@ -42,9 +43,9 @@ namespace iBalekaWeb.Services
         {
             return _routeRepo.GetRouteByID(id);
         }
-        public void AddRoute(Route route,Checkpoint[] Checkpoints)
-        {
-            _routeRepo.AddRoute(route, Checkpoints);
+        public void AddRoute(CheckpointViewModel[] Checkpoints, int totalDistance)
+        { 
+            _routeRepo.AddRoute(Checkpoints,totalDistance);
         }
         public void UpdateRoute(Route route, Checkpoint[] Checkpoints)
         {

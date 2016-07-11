@@ -8,10 +8,9 @@ function initMap() {
         scaleControl: true
     });
     getLocation();
-    var toolBoxDiv = document.createElement('div');
-    var toolBoxControl = new createToolbox(toolBoxDiv, map);
-    toolBoxDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(toolBoxControl);
+    var toolBox = document.getElementById('toolBoxWrapper');
+    toolBox.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(toolBox);
     // Add a listener for the click event
     map.addListener('click', addCheckPoint);
 }
@@ -35,17 +34,18 @@ function showPosition(position) {
 
 
 //Checkpoints
-var routePath;
+var routePath, marker, totalDistance, prevLocation;
 var markers = [];
-var markersOrders = new Array(0);
-var routePoints = new Array(0);
-var prevLocation;
-var marker;
-var totalDistance;
+var markersOrders = [];
+var routePoints = [];
+var nrCheckpointsText = document.getElementById('nrCheckpoints');
+var totalDistanceText = document.getElementById('totalDistance');
+var totalDistance = 0;
+var distanceCoords = [];
 //get unique marker methods
 var getMarkerUniqueId = function (lat, lng) {
     return lat + '_' + lng;
-}
+};
 //Add Markers and Polylines
 function addCheckPoint(event) {
     routePoints.push(event.latLng);
@@ -60,15 +60,17 @@ function addCheckPoint(event) {
         position: event.latLng,
         draggable: true,
         //animation: google.maps.Animation.DROP,
-        title: 'Checkpoint ' + (routePoints.length),
+        title: 'Checkpoint ' + routePoints.length,
         id: routePoints.length,
         map: map
     });
-
+    //update toolbox
     markers[markerId] = marker;
     markersOrders.push(marker);
     dragMarkerEvent(marker);
-    bindMarkerPolylineEvents(marker)
+    updateToolboxStats();
+    //totalDistanceText.innerHTML = "Total Distance: ";
+    bindMarkerPolylineEvents(marker);
 }
 function dragMarkerEvent(marker) {
     google.maps.event.addListener(marker, 'dragstart', function (event) {
@@ -79,17 +81,17 @@ function dragMarkerEvent(marker) {
                     routePoints[i] = event.latLng;
                     break;
                 }
-            };
+            }
             for (var key in markers) {
                 if (markers.hasOwnProperty(key)) {
-                    if (key == getMarkerUniqueId(prevLocation.lat(), prevLocation.lng())) {
+                    if (key === getMarkerUniqueId(prevLocation.lat(), prevLocation.lng())) {
                         var markerId = getMarkerUniqueId(event.latLng.lat(), event.latLng.lng());
                         markers[markerId] = marker;
                         delete markers[key];
                         break;
                     }
                 }
-            };
+            }
             resetPolyline();
         });
 
@@ -130,7 +132,7 @@ function removeCheckpoint(_marker, markerId) {
             break;
         }
     }
-    
+    updateToolboxStats();
 
 }
 function removePolyline(point) {
@@ -166,60 +168,80 @@ function refreshMarkers() {
 //**************End Checkpoints************************//
 
 //Map HUD
+function createToolbox(toolboxDiv, map) {
 
-function createToolbox(toolboxDiv,map)
-{
-    //toolbox border css
-    
-    //toolbox interior 
-    //stats div
-    var statisticsDiv = document.createElement('div');
-    statisticsDiv.style.border = '1px solid #000000';
-    statisticsDiv.style.borderRadius = "3px";
-    statisticsDiv.style.textAlign = 'left';
-    statisticsDiv.style.cssFloat = 'left';
-    statisticsDiv.style.title = 'Route Stats';
-    //stats info
-    var statisticsText = document.createElement('div');
-    statisticsText.style.color = '#000000';
-    statisticsText.style.fontSize = '13px';
-    statisticsText.innerHTML = 'Route Statistics';
-    var totalDistanceStat = document.createElement('div');
-    totalDistanceStat.id = 'txtTotalDistance';
-    totalDistanceStat.innerHTML = 'Total Distance: ';
-    statisticsText.appendChild(totalDistanceStat);
-    var checkpointStat = document.createElement('div');
-    checkpointStat.id = 'txtCheckpointStat';
-    checkpointStat.innerHTML = 'Nr of Checkpoints: ';
-    statisticsText.appendChild(checkpointStat);
-    statisticsDiv.appendChild(statisticsText);
-    //buttons div border 
-    var buttonDiv = document.createElement('div');
-    buttonDiv.style.border = '1px solid #000000';
-    buttonDiv.style.borderRadius = "3px";
-    buttonDiv.style.textAlign = 'left';
-    //buttons
-    //save route
-    var btnSaveRoute = document.createElement('button');
-    btnSaveRoute.id = 'btnSaveRoute';
-    btnSaveRoute.onclick = saveRoute();
-    btnSaveRoute.style.color = '#3366ff';
-    var text = document.createTextNode("Save Route");
-    btnSaveRoute.appendChild(text);
-    buttonDiv.appendChild(btnSaveRoute);
-    //clear route
-    var btnClearRoute = document.createElement('button');
-    btnClearRoute.id = 'btnClearRoute';
-    btnClearRoute.onclick = cleareRoute();
-    btnClearRoute.style.color = '#3366ff';
-    text = document.createTextNode("Clear Route");
-    buttonDiv.appendChild(btnClearRoute);
-    statisticsDiv.appendChild(buttonDiv);
-    }
-function saveRoute() {
 
 }
-function cleareRoute() {
+function saveRoute() {
+    var apiUrl = location.origin + "/map/AddRoute";
+    $.ajax({
+        method: "POST",
+        url: apiUrl,
+        contentType: "application/json;charset=utf-8",
+        data: createObjectArray()
+    }).done(function (msg) {
+        alert("Data saved: " + msg);
+    });
+}
+function createObjectArray() {
+    var checkpointsArray = [];
+    for (var i = 0; i < markersOrders.length; i++) {
+        var latlng = markersOrders[i].getPosition();
+        var checkpoint = {
+            'Latitude': latlng.lat(),
+            'Longitude': latlng.lng()
+        };
+        checkpointsArray.push(checkpoint);
+    }
+    return checkpointsArray;
+}
+function clearRoute() {
+    for (var key in markers) {
+        markers[key].setMap(null);
+    }
+    markersOrders = [];
+    markers = [];
+    routePoints = [];
+    resetPolyline();
+    updateToolboxStats();
+}
+//toolbox stats
+function updateToolboxStats() {
+    nrCheckpointsText.innerHTML = "Nr of Checkpoints: " + getCheckpointLength();
+    totalDistanceText.innerHTML = "Total Distance " + getTotalDistance();
+}
+function getTotalDistance() {
 
+    refreshDistance();
+    if (totalDistance > 999) {
+        return totalDistance / 1000 + "km";
+    }
+    return totalDistance + "m";
+}
+function calculateDistance(distanceArray) {
+    var latlng1, latlng2;
+    latlng1 = distanceCoords[0];
+    latlng2 = distanceCoords[1];
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(latlng1, latlng2);
+    return Math.round(distance);
+}
+function refreshDistance() {
+    distanceCoords = [];
+    totalDistance = 0;
+    for (var i = 0; i < markersOrders.length; i++) {
+        loadDistanceCoords(markersOrders[i]);
+        if (i >= 1) {
+            totalDistance += calculateDistance(distanceCoords);
+        }
+    }
+}
+function loadDistanceCoords(marker) {
+    distanceCoords.push(marker.getPosition());
+    if (distanceCoords.length > 2) {
+        distanceCoords.splice(0, 1);
+    }
+}
+function getCheckpointLength() {
+    return markersOrders.length;
 }
 //**************End Map HUD************************//

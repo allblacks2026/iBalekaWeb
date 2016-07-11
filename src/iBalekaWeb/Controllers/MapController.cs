@@ -2,16 +2,20 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using iBalekaWeb.Models;
+using iBalekaWeb.Services;
+using System.Collections.Generic;
+using iBalekaWeb.Models.MapViewModels;
 //using prototypeWeb.Models;
 
 namespace iBalekaWeb.Controllers
 {
     public class MapController : Controller
     {
-
-        public MapController()
+        private IRouteService _context;
+        public MapController(IRouteService _repo)
         {
-    
+            _context = _repo;
         }
 
         public IActionResult Map()
@@ -19,42 +23,44 @@ namespace iBalekaWeb.Controllers
             ViewData["Message"] = "Map A Route";
             return View();
         }
-        //// GET: Map/Details/5
-        //public IActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
+        //// GET: Map/GetRoute/5
+        [HttpGet("{id}",Name ="GetRoute")]
+        public IActionResult GetRoute(int id)
+        {
+            Route route = _context.GetRouteByID(id);
+            if (route == null)
+            {
+                return NotFound();
+            }
 
-        //    route route = _context.route.Single(m => m.RouteID == id);
-        //    if (route == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View(route);
-        //}
+            return View(route);
+        }
 
         //// GET: Map/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        [HttpGet(Name ="SavedRoutes")]
+        public IActionResult SavedRoutes()
+        {
+            IEnumerable<Route> routes = _context.GetRoutes();
+            return View(routes);
+        }
 
-        //// POST: Map/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(route route)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.route.Add(route);
-        //        _context.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(route);
-        //}
+        //// POST: Map/AddRoute
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddRoute([FromBody]CheckpointViewModel[] checkpoints, [FromBody]int totalDistance)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.AddRoute(checkpoints,totalDistance);
+                _context.SaveRoute();
+                return Ok();
+                //return RedirectToAction("SavedRoutes");
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
 
         //// GET: Map/Edit/5
         //public IActionResult Edit(int? id)

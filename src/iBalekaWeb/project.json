@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-iBalekaWeb-3487b707-5cdb-4333-a7d9-3fc0c92e3da5",
 
   "dependencies": {
@@ -6,7 +6,6 @@
       "version": "1.0.0",
       "type": "platform"
     },
-    
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -43,7 +42,8 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Microsoft.EntityFrameworkCore": "1.0.0"
   },
 
   "tools": {

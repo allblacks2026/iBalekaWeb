@@ -15,15 +15,15 @@ namespace iBalekaWeb.Controllers
     [Authorize]
     public class ManageController : Controller
     {
-        private readonly UserManager<iBalekaUser> _userManager;
-        private readonly SignInManager<iBalekaUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
 
         public ManageController(
-        UserManager<iBalekaUser> userManager,
-        SignInManager<iBalekaUser> signInManager,
+        UserManager<User> userManager,
+        SignInManager<User> signInManager,
         IEmailSender emailSender,
         ISmsSender smsSender,
         ILoggerFactory loggerFactory)
@@ -350,7 +350,7 @@ namespace iBalekaWeb.Controllers
             Error
         }
 
-        private Task<iBalekaUser> GetCurrentUserAsync()
+        private Task<User> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);
         }

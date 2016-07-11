@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace iBalekaWeb.Models
 {
@@ -10,7 +11,7 @@ namespace iBalekaWeb.Models
         {
             Club = new HashSet<Club>();
         }
-
+        [Key]
         public int UserId { get; set; }
         public string Country { get; set; }
         public DateTime DateJoined { get; set; }

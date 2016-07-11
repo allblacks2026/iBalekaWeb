@@ -1,12 +1,26 @@
 ﻿/*Stats Panel*/
-#toolbox {
-    background-color:#99CCFF;
-    border: 2px solid #fff;
+#toolBoxWrapper {
+    background-color:dodgerblue;
+    border: 1px solid black;
     border-radius: 5px;
-    box-shadow:0 2px 6px rgba(0,0,0,.3);
+    margin:1%;
     cursor:pointer;
-    margin-bottom:22px;
     text-align:center;
+}
+#statisticsWrapper {
+    font-size:13px;
+}
+#buttonsWrapper{
+   
+    border-radius :2px;
+    margin:5px;
+    text-align:left;
+}
+#btnSaveRoute{
+    color:#3366ff;
+}
+#btnClearRoute{
+    color:#3366ff;
 }
 /*End Toolbox Panel*/
 
@@ -34,6 +48,9 @@ html, body {
         height: 101vh;
         width: 117%;
     }
+    #toolBoxWrapper{
+        margin:14%;
+    }
 }
 
 @media only screen and (min-width: 320px) {
@@ -41,6 +58,9 @@ html, body {
         margin-left: -11%;
         height: 101vh;
         width: 123%;
+    }
+    #toolBoxWrapper{
+        margin:16%;
     }
 }
 
@@ -51,6 +71,9 @@ html, body {
         height: 101vh;
         width: 120%;
     }
+    #toolBoxWrapper{
+        margin:14%;
+    }
 }
 
 @media only screen and (min-width: 400px) {
@@ -58,6 +81,9 @@ html, body {
         margin-left: -8%;
         height: 102vh;
         width: 118%;
+    }
+    #toolBoxWrapper{
+        margin:14%;
     }
 }
 
@@ -68,6 +94,9 @@ html, body {
         height: 102vh;
         width: 114%;
     }
+    #toolBoxWrapper{
+        margin:8%;
+    }
 }
 
 /* TABLETS PORTRAIT */
@@ -76,6 +105,9 @@ html, body {
         margin-left: -7%;
         height: 94vh;
         width: 116%;
+    }
+    #toolBoxWrapper{
+        margin:1%;
     }
 }
 /* TABLET LANDSCAPE / DESKTOP */
