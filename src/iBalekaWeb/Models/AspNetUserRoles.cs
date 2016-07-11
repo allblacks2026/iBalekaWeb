@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace iBalekaWeb.Models
 {
     public partial class AspNetUserRoles
     {
+<<<<<<< HEAD
+=======
+        [Key]
+        public int Id { get; set; }
+>>>>>>> 2eeb5df7c2a4fb675c37dd2314e37c1618036a6e
         public int UserId { get; set; }
         public string RoleId { get; set; }
 

@@ -18,6 +18,7 @@ namespace iBalekaWeb.Models
         public string Description { get; set; }
         public string Location { get; set; }
         public string Name { get; set; }
+       
         public int UserId { get; set; }
 
         public virtual ICollection<ClubMember> ClubMember { get; set; }

@@ -21,33 +21,41 @@ namespace iBalekaWeb.Data.Configurations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<AspNetRoleClaims>(entity =>
-            {
-                entity.HasIndex(e => e.RoleId)
-                    .HasName("IX_AspNetRoleClaims_RoleId");
+            //modelBuilder.Entity<AspNetRoleClaims>(entity =>
+            //{
+            //    entity.HasIndex(e => e.RoleId)
+            //        .HasName("IX_AspNetRoleClaims_RoleId");
 
-                entity.Property(e => e.RoleId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+            //    entity.Property(e => e.RoleId)
+            //        .IsRequired()
+            //        .HasMaxLength(450);
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetRoleClaims)
-                    .HasForeignKey(d => d.RoleId);
-            });
+            //    entity.HasOne(d => d.Role)
+            //        .WithMany(p => p.AspNetRoleClaims)
+            //        .HasForeignKey(d => d.RoleId);
+            //});
 
+<<<<<<< HEAD
             modelBuilder.Entity<AspNetRoles>(entity =>
             {
                 entity.HasIndex(e => e.NormalizedName)
                     .HasName("RoleNameIndex");
+=======
+            //modelBuilder.Entity<AspNetRoles>(entity =>
+            //{
+            //    entity.HasIndex(e => e.NormalizedName)
+            //        .HasName("RoleNameIndex");
+>>>>>>> 2eeb5df7c2a4fb675c37dd2314e37c1618036a6e
                 
 
-                entity.Property(e => e.Id).HasMaxLength(450);
+            //    entity.Property(e => e.Id).HasMaxLength(450);
 
-                entity.Property(e => e.Name).HasMaxLength(256);
+            //    entity.Property(e => e.Name).HasMaxLength(256);
 
-                entity.Property(e => e.NormalizedName).HasMaxLength(256);
-            });
+            //    entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            //});
 
+<<<<<<< HEAD
             modelBuilder.Entity<AspNetUserClaims>(entity =>
             {
                 entity.Property<int>("Id");
@@ -55,95 +63,111 @@ namespace iBalekaWeb.Data.Configurations
 
                 entity.HasIndex(e => e.UserId)
                     .HasName("IX_AspNetUserClaims_UserId");
+=======
+            //modelBuilder.Entity<AspNetUserClaims>(entity =>
+            //{
+            //    entity.Property<int>("Id");
+            //    entity.HasKey("Id");
+>>>>>>> 2eeb5df7c2a4fb675c37dd2314e37c1618036a6e
 
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+            //    entity.HasIndex(e => e.UserId)
+            //        .HasName("IX_AspNetUserClaims_UserId");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserClaims)
-                    .HasForeignKey(d => d.UserId);
-            });
+            //    entity.Property(e => e.UserId)
+            //        .IsRequired()
+            //        .ValueGeneratedOnAddOrUpdate()
+            //        .HasMaxLength(450);
 
-            modelBuilder.Entity<AspNetUserLogins>(entity =>
-            {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey })
-                    .HasName("PK_AspNetUserLogins");
+            //    entity.HasOne(d => d.User)
+            //        .WithMany(p => p.AspNetUserClaims)
+                      
+            //        .HasForeignKey(d => d.UserId);
+            //});
 
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_AspNetUserLogins_UserId");
+            //modelBuilder.Entity<AspNetUserLogins>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.LoginProvider, e.ProviderKey })
+            //        .HasName("PK_AspNetUserLogins");
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(450);
+            //    entity.HasIndex(e => e.UserId)
+            //        .HasName("IX_AspNetUserLogins_UserId");
 
-                entity.Property(e => e.ProviderKey).HasMaxLength(450);
+            //    entity.Property(e => e.LoginProvider).HasMaxLength(450);
 
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+            //    entity.Property(e => e.ProviderKey).HasMaxLength(450);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserLogins)
-                    .HasForeignKey(d => d.UserId);
-            });
+            //    entity.Property(e => e.UserId)
+            //        .IsRequired()
+            //        .HasMaxLength(450);
 
-            modelBuilder.Entity<AspNetUserRoles>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.RoleId })
-                    .HasName("PK_AspNetUserRoles");
+            //    entity.HasOne(d => d.User)
+            //        .WithMany(p => p.AspNetUserLogins)
+            //        .HasForeignKey(d => d.UserId);
+            //});
 
-                entity.HasIndex(e => e.RoleId)
-                    .HasName("IX_AspNetUserRoles_RoleId");
+            //modelBuilder.Entity<AspNetUserRoles>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.UserId, e.RoleId })
+            //        .HasName("PK_AspNetUserRoles");
 
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_AspNetUserRoles_UserId");
+            //    entity.HasIndex(e => e.RoleId)
+            //        .HasName("IX_AspNetUserRoles_RoleId");
 
-                entity.Property(e => e.UserId).HasMaxLength(450);
+            //    entity.HasIndex(e => e.UserId)
+            //        .HasName("IX_AspNetUserRoles_UserId");
 
-                entity.Property(e => e.RoleId).HasMaxLength(450);
+            //    entity.Property(e => e.UserId).HasMaxLength(450);
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.RoleId);
+            //    entity.Property(e => e.RoleId).HasMaxLength(450);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.UserId);
-            });
+            //    entity.HasOne(d => d.Role)
+            //        .WithMany(p => p.AspNetUserRoles)
+            //        .HasForeignKey(d => d.RoleId);
 
-            modelBuilder.Entity<AspNetUserTokens>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name })
-                    .HasName("PK_AspNetUserTokens");
+            //    entity.HasOne(d => d.User)
+            //        .WithMany(p => p.AspNetUserRoles)
+            //        .HasForeignKey(d => d.UserId);
+            //});
 
-                entity.Property(e => e.UserId).HasMaxLength(450);
+            //modelBuilder.Entity<AspNetUserTokens>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name })
+            //        .HasName("PK_AspNetUserTokens");
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(450);
+            //    entity.Property(e => e.UserId).HasMaxLength(450);
 
-                entity.Property(e => e.Name).HasMaxLength(450);
-            });
+            //    entity.Property(e => e.LoginProvider).HasMaxLength(450);
 
-            modelBuilder.Entity<AspNetUsers>(entity =>
-            {
-                entity.HasIndex(e => e.NormalizedEmail)
-                    .HasName("EmailIndex");
+            //    entity.Property(e => e.Name).HasMaxLength(450);
+            //});
 
-                entity.HasIndex(e => e.NormalizedUserName)
-                    .HasName("UserNameIndex")
-                    .IsUnique();
+            //modelBuilder.Entity<AspNetUsers>(entity =>
+            //{
+            //    entity.HasIndex(e => e.NormalizedEmail)
+            //        .HasName("EmailIndex");
 
+<<<<<<< HEAD
                 entity.Property(e => e.UserId).HasMaxLength(450);
                 entity.HasKey("UserId");
+=======
+            //    entity.HasIndex(e => e.NormalizedUserName)
+            //        .HasName("UserNameIndex")
+            //        .IsUnique();
+>>>>>>> 2eeb5df7c2a4fb675c37dd2314e37c1618036a6e
 
-                entity.Property(e => e.Email).HasMaxLength(256);
+            //    entity.Property(e => e.UserId).HasMaxLength(450);
+            //    entity.HasKey("UserId");
 
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+            //    entity.Property(e => e.Email).HasMaxLength(256);
 
-                entity.Property(e => e.NormalizedUserName)
-                    .IsRequired()
-                    .HasMaxLength(256);
+            //    entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
-                entity.Property(e => e.UserName).HasMaxLength(256);
-            });
+            //    entity.Property(e => e.NormalizedUserName)
+            //        .IsRequired()
+            //        .HasMaxLength(256);
+
+            //    entity.Property(e => e.UserName).HasMaxLength(256);
+            //});
 
             modelBuilder.Entity<Athlete>(entity =>
             {
@@ -175,9 +199,14 @@ namespace iBalekaWeb.Data.Configurations
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Club)
-                    .HasForeignKey(d => d.UserId);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+                entity.Property<int>("UserID");
+                entity.HasKey("UserID");
+
+                //entity.HasOne(d => d.User)
+                //    .WithMany(p => p.Club)
+                //    .HasForeignKey(d => d.UserId);
             });
 
             modelBuilder.Entity<ClubMember>(entity =>
@@ -337,22 +366,33 @@ namespace iBalekaWeb.Data.Configurations
                 entity.Property(e => e.UserId).HasColumnName("UserID");
                 entity.Property<int>("UserID");
                 entity.HasKey("UserID");
+<<<<<<< HEAD
+=======
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property<string>("Id");
+                entity.HasKey("Id");
+>>>>>>> 2eeb5df7c2a4fb675c37dd2314e37c1618036a6e
+
+
+               
+
 
                 entity.Property(e => e.Country).IsRequired();
-
+             
                 entity.Property(e => e.Name).IsRequired();
 
                 entity.Property(e => e.Surname).IsRequired();
             });
         }
 
-        public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
-        public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        //public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+        //public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        //public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        //public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        //public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+        //public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
+        //public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Athlete> Athlete { get; set; }
         public virtual DbSet<Checkpoint> Checkpoint { get; set; }
         public virtual DbSet<Club> Club { get; set; }
