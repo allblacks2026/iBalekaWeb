@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace iBalekaWeb.Data.Configurations
 {
-    public partial class iBalekaDBContext : IdentityDbContext<iBalekaUser>
+    public partial class iBalekaDBContext : IdentityDbContext<User>
     {
         public iBalekaDBContext(DbContextOptions options) : base(options)
         {
@@ -39,6 +39,7 @@ namespace iBalekaWeb.Data.Configurations
             {
                 entity.HasIndex(e => e.NormalizedName)
                     .HasName("RoleNameIndex");
+                
 
                 entity.Property(e => e.Id).HasMaxLength(450);
 
@@ -49,6 +50,9 @@ namespace iBalekaWeb.Data.Configurations
 
             modelBuilder.Entity<AspNetUserClaims>(entity =>
             {
+                entity.Property<int>("Id");
+                entity.HasKey("Id");
+
                 entity.HasIndex(e => e.UserId)
                     .HasName("IX_AspNetUserClaims_UserId");
 
@@ -127,7 +131,8 @@ namespace iBalekaWeb.Data.Configurations
                     .HasName("UserNameIndex")
                     .IsUnique();
 
-                entity.Property(e => e.Id).HasMaxLength(450);
+                entity.Property(e => e.UserId).HasMaxLength(450);
+                entity.HasKey("UserId");
 
                 entity.Property(e => e.Email).HasMaxLength(256);
 
@@ -161,6 +166,8 @@ namespace iBalekaWeb.Data.Configurations
 
             modelBuilder.Entity<Club>(entity =>
             {
+                entity.Property<int>("ClubID");
+                entity.HasKey("ClubID");
                 entity.HasIndex(e => e.UserId)
                     .HasName("IX_Club_UserID");
 
@@ -328,6 +335,8 @@ namespace iBalekaWeb.Data.Configurations
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.UserId).HasColumnName("UserID");
+                entity.Property<int>("UserID");
+                entity.HasKey("UserID");
 
                 entity.Property(e => e.Country).IsRequired();
 

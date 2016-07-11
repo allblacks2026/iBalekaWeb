@@ -14,6 +14,7 @@ using iBalekaWeb.Models;
 using iBalekaWeb.Services;
 using iBalekaWeb.Data.Configurations;
 using iBalekaWeb.Data.Repositories;
+using iBalekaWeb.Data.Infastructure;
 
 namespace iBalekaWeb
 {
@@ -45,7 +46,7 @@ namespace iBalekaWeb
            services.AddDbContext<iBalekaDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<iBalekaUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<iBalekaDBContext>()
                 .AddDefaultTokenProviders();
 
@@ -55,6 +56,8 @@ namespace iBalekaWeb
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             //repos
+            services.AddScoped<IDbFactory, DbFactory>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAthleteRepository, AthleteRepository>();
             services.AddScoped<IClubMemberRepository, ClubMemberRepository>();
             services.AddScoped<IClubRepository, ClubRepository>();

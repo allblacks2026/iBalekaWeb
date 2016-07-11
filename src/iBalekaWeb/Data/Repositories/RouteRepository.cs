@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using iBalekaWeb.Data.Infastructure;
 using iBalekaWeb.Models;
+using iBalekaWeb.Models.MapViewModels;
 
 namespace iBalekaWeb.Data.Repositories
 {
@@ -14,7 +15,7 @@ namespace iBalekaWeb.Data.Repositories
         Route GetRouteByID(int id);
         IEnumerable<Checkpoint> GetCheckpoints(int id);
         void DeleteCheckPoints(IEnumerable<Checkpoint> checkpoints);
-        void AddRoute(Route route, Checkpoint[] checkpoints);
+        void AddRoute(CheckpointViewModel[] checkpoints, int totalDistance);
         void UpdateRoute(Route route, Checkpoint[] checkpoints);
     }
     public class RouteRepository : RepositoryBase<Route>, IRouteRepository
@@ -22,17 +23,22 @@ namespace iBalekaWeb.Data.Repositories
         public RouteRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
 
-        public void AddRoute(Route route, Checkpoint[] Checkpoints)
+        public void AddRoute(CheckpointViewModel[] Checkpoints,int totalDistance)
         {
-            foreach (Checkpoint chp in Checkpoints)
+            ICollection<Checkpoint> savingChecks = null;
+            foreach (CheckpointViewModel chps in Checkpoints)
             {
-                chp.RouteId = route.RouteId;
-            }
-            route.Deleted = false;
-            route.DateRecorded = DateTime.Now.Date;
+                Checkpoint checks = new Checkpoint();
+                checks.Deleted = false;
+                savingChecks.Append(checks);
+            }            
+            Route savingRoute = new Route();
+            savingRoute.DateRecorded = DateTime.Now.Date;
+            savingRoute.Deleted = false;
+            savingRoute.Checkpoint = savingChecks;
+            savingRoute.Distance = totalDistance;
             //create map image?
-            DbContext.Checkpoint.AddRange(Checkpoints);
-            DbContext.Entry(route).State = EntityState.Added;
+            DbContext.Route.Add(savingRoute);
         }
         public void UpdateRoute(Route entity, Checkpoint[] Checkpoints)
         {
@@ -49,7 +55,7 @@ namespace iBalekaWeb.Data.Repositories
         }
         public Route GetRouteByID(int id)
         {
-            return DbContext.Route.Where(m => m.RouteId == id && m.Deleted == false).SingleOrDefault();
+            return DbContext.Route.Single(m => m.RouteId == id && m.Deleted == false);
         }
         public IEnumerable<Checkpoint> GetCheckpoints(int id)
         {

@@ -7,14 +7,14 @@
 
 <form asp-action="Map">
         <div id="map"></div><br />
-        <div id="toolBox">
+        <div id="toolBoxWrapper">
             <div id="statisticsWrapper">
-                <p id="totalDistance">Total Distance: </p>
-                <p id="nrCheckpoints">Nr of Checkpoints: </p>
+                <p id="totalDistance">Total Distance: 0</p>
+                <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
             </div>
             <div id="buttonsWrapper">
-                <input type="button" id="btnSaveRoute" onclick="saveRoute" /><br />
-                <input type="button" id="btnClearRoute" onclick="cleareRoute" />
+                <input type="button" id="btnSaveRoute" onclick="saveRoute" value="Save Route" />
+                <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route"/>
             </div>
         </div>
         
