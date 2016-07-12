@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iBalekaWeb.Models
 {
-    public partial class AspNetUsers
+    public partial class AspNetUsers:IdentityUser
     {
         public AspNetUsers()
         {
@@ -13,24 +15,26 @@ namespace iBalekaWeb.Models
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
         [Key]
-        public int UserId { get; set; }
-        public int AccessFailedCount { get; set; }
-        public string ConcurrencyStamp { get; set; }
-        public string Email { get; set; }
-        public bool EmailConfirmed { get; set; }
-        public bool LockoutEnabled { get; set; }
-        public DateTimeOffset? LockoutEnd { get; set; }
-        public string NormalizedEmail { get; set; }
-        public string NormalizedUserName { get; set; }
-        public string PasswordHash { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool PhoneNumberConfirmed { get; set; }
-        public string SecurityStamp { get; set; }
-        public bool TwoFactorEnabled { get; set; }
-        public string UserName { get; set; }
+        [Column(TypeName = "varchar(MAX)")]
+        public string UserId { get; set; }
+        public override int AccessFailedCount { get; set; }
+        public override string ConcurrencyStamp { get; set; }
+        public override string Email { get; set; }
+        public override bool EmailConfirmed { get; set; }
+        public override bool LockoutEnabled { get; set; }
+        public override DateTimeOffset? LockoutEnd { get; set; }
+        public override string NormalizedEmail { get; set; }
+        public override string NormalizedUserName { get; set; }
+        public override string PasswordHash { get; set; }
+        public override string PhoneNumber { get; set; }
+        public override bool PhoneNumberConfirmed { get; set; }
+        public override string SecurityStamp { get; set; }
+        public override bool TwoFactorEnabled { get; set; }
+        public override string UserName { get; set; }
 
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        
     }
 }

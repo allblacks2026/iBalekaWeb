@@ -46,15 +46,16 @@ namespace iBalekaWeb
            services.AddDbContext<iBalekaDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<AspNetUsers, IdentityRole>()
                 .AddEntityFrameworkStores<iBalekaDBContext>()
                 .AddDefaultTokenProviders();
-
+            
             services.AddMvc();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            
             //repos
             services.AddScoped<IDbFactory, DbFactory>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -66,7 +67,7 @@ namespace iBalekaWeb
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IRouteRepository, RouteRepository>();
             services.AddScoped<IRunRepository, RunRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IUserRepository, UserRepository>();
             //services
             services.AddScoped<IAthleteService, AthleteService>();
             services.AddScoped<IClubService, ClubService>();
@@ -75,7 +76,7 @@ namespace iBalekaWeb
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IRunService, RunService>();
-            services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRouteService, RouteService>();
         }
 

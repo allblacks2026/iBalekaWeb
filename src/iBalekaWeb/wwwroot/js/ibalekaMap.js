@@ -139,6 +139,7 @@ function removePolyline(point) {
     for (var i = 0; i < routePoints.length; i++) {
         if (routePoints[i] === point.latLng) {
             routePoints.splice(i, 1);
+
             break;
         }
     }

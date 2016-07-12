@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace iBalekaWeb.Models
 {
-    public partial class AspNetUserRoles
+    public partial class AspNetUserRoles:IdentityUserRole<string>
     {
-        [Key]
+
+        
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public string RoleId { get; set; }
+
+        public override string UserId { get; set; }
+        public override string RoleId { get; set; }
 
         public virtual AspNetRoles Role { get; set; }
         public virtual AspNetUsers User { get; set; }

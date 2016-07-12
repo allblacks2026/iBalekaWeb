@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace iBalekaWeb.Models
 {
-    public partial class AspNetUserTokens
+    public partial class AspNetUserTokens:IdentityUserToken<string>
     {
-        [Key]
-        public int UserId { get; set; }
-        public string LoginProvider { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
+
+        
+
+        public override string UserId { get; set; }
+        public override string LoginProvider { get; set; }
+        public override string Name { get; set; }
+        public override string Value { get; set; }
     }
 }

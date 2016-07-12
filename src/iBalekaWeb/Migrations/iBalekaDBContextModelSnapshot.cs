@@ -16,6 +16,58 @@ namespace iBalekaWeb.Migrations
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetUsers", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(MAX)");
+
+                    b.Property<string>("UserName")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("iBalekaWeb.Models.Athlete", b =>
                 {
                     b.Property<int>("AthleteId")
@@ -68,10 +120,8 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("iBalekaWeb.Models.Club", b =>
                 {
-                    b.Property<int>("UserID")
+                    b.Property<int>("ClubID")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ClubID");
 
                     b.Property<int>("ClubId")
                         .HasColumnName("ClubID");
@@ -86,19 +136,14 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("UserId")
-                        .HasColumnName("UserID");
+                    b.Property<string>("UserId")
+                        .HasColumnName("UserID")
+                        .HasColumnType("varchar(MAX)");
 
-                    b.Property<string>("UserId1");
-
-                    b.HasKey("UserID");
-
-                    b.HasAlternateKey("ClubID");
+                    b.HasKey("ClubID");
 
                     b.HasIndex("UserId")
                         .HasName("IX_Club_UserID");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Club");
                 });
@@ -171,12 +216,16 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<bool>("Arrived");
 
+                    b.Property<int>("AthleteID");
+
                     b.Property<int>("AthleteId")
                         .HasColumnName("AthleteID");
 
                     b.Property<DateTime>("DateRegistered");
 
                     b.Property<bool>("Deleted");
+
+                    b.Property<int>("EventID");
 
                     b.Property<int>("EventId")
                         .HasColumnName("EventID");
@@ -207,8 +256,12 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<int>("EventID");
+
                     b.Property<int>("EventId")
                         .HasColumnName("EventID");
+
+                    b.Property<int>("RouteID");
 
                     b.Property<int>("RouteId")
                         .HasColumnName("RouteID");
@@ -236,8 +289,9 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<bool>("Deleted");
 
-                    b.Property<int?>("RouteId")
-                        .HasColumnName("RouteID");
+                    b.Property<int?>("RouteId");
+
+                    b.Property<int>("RunID");
 
                     b.Property<int>("RunId")
                         .HasColumnName("RunID");
@@ -283,6 +337,8 @@ namespace iBalekaWeb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("RunID");
 
+                    b.Property<int>("AthleteID");
+
                     b.Property<int>("AthleteId")
                         .HasColumnName("AthleteID");
 
@@ -294,11 +350,9 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<DateTime>("EndTime");
 
-                    b.Property<int?>("EventId")
-                        .HasColumnName("EventID");
+                    b.Property<int?>("EventId");
 
-                    b.Property<int?>("RouteId")
-                        .HasColumnName("RouteID");
+                    b.Property<int?>("RouteId");
 
                     b.Property<DateTime>("StartTime");
 
@@ -316,84 +370,15 @@ namespace iBalekaWeb.Migrations
                     b.ToTable("Run");
                 });
 
-            modelBuilder.Entity("iBalekaWeb.Models.User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnName("Id");
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Country")
-                        .IsRequired();
-
-                    b.Property<DateTime>("DateJoined");
-
-                    b.Property<DateTime>("DateOfBirth");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<string>("Surname")
-                        .IsRequired();
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<int>("UserID");
-
-                    b.Property<int>("UserId")
-                        .HasColumnName("UserID");
-
-                    b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("UserID");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
                     b.Property<string>("Id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .HasAnnotation("MaxLength", 256);
@@ -407,6 +392,8 @@ namespace iBalekaWeb.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -418,6 +405,9 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<string>("ClaimValue");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("RoleId")
                         .IsRequired();
 
@@ -426,6 +416,8 @@ namespace iBalekaWeb.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRoleClaim<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
@@ -437,6 +429,9 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<string>("ClaimValue");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("UserId")
                         .IsRequired();
 
@@ -445,6 +440,8 @@ namespace iBalekaWeb.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserClaim<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
@@ -452,6 +449,9 @@ namespace iBalekaWeb.Migrations
                     b.Property<string>("LoginProvider");
 
                     b.Property<string>("ProviderKey");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -463,6 +463,8 @@ namespace iBalekaWeb.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserLogin<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
@@ -471,6 +473,9 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<string>("RoleId");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
@@ -478,6 +483,8 @@ namespace iBalekaWeb.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b =>
@@ -495,6 +502,76 @@ namespace iBalekaWeb.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetRoles", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole");
+
+
+                    b.ToTable("AspNetRoles");
+
+                    b.HasDiscriminator().HasValue("AspNetRoles");
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetRoleClaims", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>");
+
+                    b.Property<string>("RoleId1");
+
+                    b.HasIndex("RoleId1");
+
+                    b.ToTable("AspNetRoleClaims");
+
+                    b.HasDiscriminator().HasValue("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetUserClaims", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>");
+
+                    b.Property<string>("UserId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("AspNetUserClaims");
+
+                    b.HasDiscriminator().HasValue("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetUserLogins", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>");
+
+                    b.Property<int>("Id");
+
+                    b.Property<string>("UserId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("AspNetUserLogins");
+
+                    b.HasDiscriminator().HasValue("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetUserRoles", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>");
+
+                    b.Property<int>("Id");
+
+                    b.Property<string>("RoleId1");
+
+                    b.Property<string>("UserId1");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator().HasValue("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("iBalekaWeb.Models.Checkpoint", b =>
                 {
                     b.HasOne("iBalekaWeb.Models.Route", "Route")
@@ -505,9 +582,9 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("iBalekaWeb.Models.Club", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.User", "User")
-                        .WithMany("Club")
-                        .HasForeignKey("UserId1");
+                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("iBalekaWeb.Models.ClubMember", b =>
@@ -595,7 +672,7 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.User")
+                    b.HasOne("iBalekaWeb.Models.AspNetUsers")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -603,7 +680,7 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.User")
+                    b.HasOne("iBalekaWeb.Models.AspNetUsers")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -616,10 +693,42 @@ namespace iBalekaWeb.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("iBalekaWeb.Models.User")
+                    b.HasOne("iBalekaWeb.Models.AspNetUsers")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetRoleClaims", b =>
+                {
+                    b.HasOne("iBalekaWeb.Models.AspNetRoles", "Role")
+                        .WithMany("AspNetRoleClaims")
+                        .HasForeignKey("RoleId1");
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetUserClaims", b =>
+                {
+                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                        .WithMany("AspNetUserClaims")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetUserLogins", b =>
+                {
+                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                        .WithMany("AspNetUserLogins")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("iBalekaWeb.Models.AspNetUserRoles", b =>
+                {
+                    b.HasOne("iBalekaWeb.Models.AspNetRoles", "Role")
+                        .WithMany("AspNetUserRoles")
+                        .HasForeignKey("RoleId1");
+
+                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                        .WithMany("AspNetUserRoles")
+                        .HasForeignKey("UserId1");
                 });
         }
     }
