@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace iBalekaWeb.Models
 {
-    public partial class AspNetRoles
+    public partial class AspNetRoles:IdentityRole
     {
         public AspNetRoles()
         {
@@ -11,10 +12,10 @@ namespace iBalekaWeb.Models
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
 
-        public string Id { get; set; }
-        public string ConcurrencyStamp { get; set; }
-        public string Name { get; set; }
-        public string NormalizedName { get; set; }
+        public override string Id { get; set; }
+        public override string ConcurrencyStamp { get; set; }
+        public override string Name { get; set; }
+        public override string NormalizedName { get; set; }
 
         public virtual ICollection<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }

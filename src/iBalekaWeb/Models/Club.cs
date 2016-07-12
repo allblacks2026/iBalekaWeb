@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iBalekaWeb.Models
 {
@@ -18,11 +19,12 @@ namespace iBalekaWeb.Models
         public string Description { get; set; }
         public string Location { get; set; }
         public string Name { get; set; }
-       
-        public int UserId { get; set; }
+        [Column(TypeName = "varchar(MAX)")]
+
+        public string UserId { get; set; }
 
         public virtual ICollection<ClubMember> ClubMember { get; set; }
         public virtual ICollection<Event> Event { get; set; }
-        public virtual User User { get; set; }
+        public virtual AspNetUsers User { get; set; }
     }
 }

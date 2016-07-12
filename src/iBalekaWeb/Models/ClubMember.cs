@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace iBalekaWeb.Models
 {
     public partial class ClubMember
     {
+        [Key]
         public int MemberId { get; set; }
         public int AthleteId { get; set; }
         public int ClubId { get; set; }
