@@ -19,7 +19,7 @@ namespace iBalekaWeb.Data.Repositories
 
         public EventRegistration GetEventRegByID(int id)
         {
-            return DbContext.EventRegistration.Where(m => m.RegistrationId == id && m.Deleted == false).SingleOrDefault();
+            return DbContext.EventRegistration.Where(m => m.RegistrationId == id && m.Deleted == false).FirstOrDefault();
         }
         public override IEnumerable<EventRegistration> GetAll()
         {

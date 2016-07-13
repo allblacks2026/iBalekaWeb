@@ -19,7 +19,7 @@ namespace iBalekaWeb.Data.Repositories
 
         public ClubMember GetMemberByID(int id)
         {
-            return DbContext.ClubMember.Where(m => m.MemberId == id && m.IsaMember == true).SingleOrDefault();
+            return DbContext.ClubMember.Where(m => m.MemberId == id && m.IsaMember == true).FirstOrDefault();
         }
         public override IEnumerable<ClubMember> GetAll()
         {

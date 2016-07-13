@@ -46,7 +46,7 @@ namespace iBalekaWeb
            services.AddDbContext<iBalekaDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<AspNetUsers, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<iBalekaDBContext>()
                 .AddDefaultTokenProviders();
             

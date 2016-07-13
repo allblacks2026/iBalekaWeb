@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Relational;
 
 namespace iBalekaWeb.Data.Configurations
 {
-    public partial class iBalekaDBContext : IdentityDbContext<AspNetUsers>
+    public partial class iBalekaDBContext : IdentityDbContext<ApplicationUser>
     {
         public iBalekaDBContext(DbContextOptions options) : base(options)
         {
