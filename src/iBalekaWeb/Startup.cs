@@ -109,6 +109,12 @@ namespace iBalekaWeb
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
