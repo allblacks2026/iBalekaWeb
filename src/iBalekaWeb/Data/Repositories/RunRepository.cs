@@ -22,7 +22,7 @@ namespace iBalekaWeb.Data.Repositories
             : base(dbFactory) { }
         public Run GetRunByID(int id)
         {
-            return DbContext.Run.Where(a => a.RunId == id && a.Deleted == false).SingleOrDefault();
+            return DbContext.Run.Where(a => a.RunId == id && a.Deleted == false).FirstOrDefault();
         }
         public IEnumerable<Run> GetEventRuns(int id)
         {
@@ -38,7 +38,7 @@ namespace iBalekaWeb.Data.Repositories
         }
         public override void Delete(Run entity)
         {
-            Run deletedRun = DbContext.Run.SingleOrDefault(x => x.RunId == entity.RunId);
+            Run deletedRun = DbContext.Run.FirstOrDefault(x => x.RunId == entity.RunId);
             if (deletedRun != null)
             {
                 deletedRun.Deleted = true;

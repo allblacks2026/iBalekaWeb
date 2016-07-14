@@ -83,7 +83,7 @@ namespace iBalekaWeb.Data.Repositories
                     DbContext.Entry(check).State = EntityState.Modified;
                 }
             }
-            Route deletedRoute = DbContext.Route.SingleOrDefault(x => x.RouteId == entity.RouteId);
+            Route deletedRoute = DbContext.Route.FirstOrDefault(x => x.RouteId == entity.RouteId);
             if (deletedRoute != null)
             {
 

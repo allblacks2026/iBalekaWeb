@@ -19,7 +19,7 @@ namespace iBalekaWeb.Data.Repositories
     //        : base(dbFactory) { }
     //    public User GetUserByID(int id)
     //    {
-    //        return DbContext.User.Where(a => a.UserId == id && a.Deleted == false).SingleOrDefault();
+    //        return DbContext.User.Where(a => a.UserId == id && a.Deleted == false).FirstOrDefault();
     //    }
     //    public override IEnumerable<User> GetAll()
     //    {

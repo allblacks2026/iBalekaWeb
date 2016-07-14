@@ -29,7 +29,7 @@ namespace iBalekaWeb.Data.Repositories
         }
         public Event GetEventByID(int id)
         {
-            return DbContext.Event.Where(m => m.EventId == id && m.Deleted == false).SingleOrDefault();
+            return DbContext.Event.Where(m => m.EventId == id && m.Deleted == false).FirstOrDefault();
         }
         public override IEnumerable<Event> GetAll()
         {

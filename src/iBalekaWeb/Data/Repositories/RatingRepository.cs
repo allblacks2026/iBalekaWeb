@@ -20,7 +20,7 @@ namespace iBalekaWeb.Data.Repositories
 
         public Rating GetRatingByID(int id)
         {
-            return DbContext.Rating.Where(m => m.RatingId == id && m.Deleted == false).SingleOrDefault();
+            return DbContext.Rating.Where(m => m.RatingId == id && m.Deleted == false).FirstOrDefault();
         }
         public override IEnumerable<Rating> GetAll()
         {
@@ -28,7 +28,7 @@ namespace iBalekaWeb.Data.Repositories
         }
         public Rating GetByRun(int id)
         {
-            return DbContext.Rating.Where(m => m.RunId == id).SingleOrDefault();
+            return DbContext.Rating.Where(m => m.RunId == id).FirstOrDefault();
         }
         public override void Delete(Rating entity)
         {

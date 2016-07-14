@@ -16,7 +16,7 @@ namespace iBalekaWeb.Migrations
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("iBalekaWeb.Models.AspNetUsers", b =>
+            modelBuilder.Entity("iBalekaWeb.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -65,7 +65,7 @@ namespace iBalekaWeb.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("ApplicationUser");
                 });
 
             modelBuilder.Entity("iBalekaWeb.Models.Athlete", b =>
@@ -582,7 +582,7 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("iBalekaWeb.Models.Club", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                    b.HasOne("iBalekaWeb.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -672,7 +672,7 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.AspNetUsers")
+                    b.HasOne("iBalekaWeb.Models.ApplicationUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -680,7 +680,7 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.AspNetUsers")
+                    b.HasOne("iBalekaWeb.Models.ApplicationUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -693,7 +693,7 @@ namespace iBalekaWeb.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("iBalekaWeb.Models.AspNetUsers")
+                    b.HasOne("iBalekaWeb.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -708,14 +708,14 @@ namespace iBalekaWeb.Migrations
 
             modelBuilder.Entity("iBalekaWeb.Models.AspNetUserClaims", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                    b.HasOne("iBalekaWeb.Models.ApplicationUser", "User")
                         .WithMany("AspNetUserClaims")
                         .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("iBalekaWeb.Models.AspNetUserLogins", b =>
                 {
-                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                    b.HasOne("iBalekaWeb.Models.ApplicationUser", "User")
                         .WithMany("AspNetUserLogins")
                         .HasForeignKey("UserId1");
                 });
@@ -726,7 +726,7 @@ namespace iBalekaWeb.Migrations
                         .WithMany("AspNetUserRoles")
                         .HasForeignKey("RoleId1");
 
-                    b.HasOne("iBalekaWeb.Models.AspNetUsers", "User")
+                    b.HasOne("iBalekaWeb.Models.ApplicationUser", "User")
                         .WithMany("AspNetUserRoles")
                         .HasForeignKey("UserId1");
                 });
