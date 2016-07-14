@@ -15,6 +15,7 @@ using iBalekaWeb.Services;
 using iBalekaWeb.Data.Configurations;
 using iBalekaWeb.Data.Repositories;
 using iBalekaWeb.Data.Infastructure;
+using Microsoft.AspNetCore.Mvc;
 
 namespace iBalekaWeb
 {
@@ -78,6 +79,11 @@ namespace iBalekaWeb
             services.AddScoped<IRunService, RunService>();
             //services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRouteService, RouteService>();
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
