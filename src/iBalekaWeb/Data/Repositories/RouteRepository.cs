@@ -15,43 +15,50 @@ namespace iBalekaWeb.Data.Repositories
         Route GetRouteByID(int id);
         IEnumerable<Checkpoint> GetCheckpoints(int id);
         void DeleteCheckPoints(IEnumerable<Checkpoint> checkpoints);
-        void AddRoute(CheckpointViewModel[] checkpoints, int totalDistance);
-        void UpdateRoute(Route route, Checkpoint[] checkpoints);
+        void AddRoute(RouteViewModel route);
+        void UpdateRoute(RouteViewModel route);
     }
     public class RouteRepository : RepositoryBase<Route>, IRouteRepository
     {
         public RouteRepository(IDbFactory dbFactory)
             : base(dbFactory) { }
 
-        public void AddRoute(CheckpointViewModel[] Checkpoints,int totalDistance)
+        public void AddRoute(RouteViewModel route)
         {
-            ICollection<Checkpoint> savingChecks = null;
-            foreach (CheckpointViewModel chps in Checkpoints)
-            {
-                Checkpoint checks = new Checkpoint();
-                checks.Deleted = false;
-                savingChecks.Append(checks);
-            }            
             Route savingRoute = new Route();
-            savingRoute.DateRecorded = DateTime.Now.Date;
-            savingRoute.Deleted = false;
-            savingRoute.Checkpoint = savingChecks;
-            savingRoute.Distance = totalDistance;
+            savingRoute.Title = route.Title;
+            savingRoute.Distance = route.TotalDistance;
+            foreach (CheckpointViewModel chps in route.Checkpoints)
+            {                
+                Checkpoint checks = new Checkpoint(chps.Latitude, chps.Longitude);
+                DbContext.Checkpoint.Add(checks);
+                savingRoute.Checkpoint.Add(checks);
+            }    
+            
+            
             //create map image?
             DbContext.Route.Add(savingRoute);
         }
-        public void UpdateRoute(Route entity, Checkpoint[] Checkpoints)
+        public void UpdateRoute(RouteViewModel updatedRoute)
         {
-            IEnumerable<Checkpoint> checkpoints = GetCheckpoints(entity.RouteId);
+            IEnumerable<Checkpoint> checkpoints = GetCheckpoints(updatedRoute.RouteId);            
             DeleteCheckPoints(checkpoints);
-            foreach (Checkpoint chp in Checkpoints)
+            Route route = GetRouteByID(updatedRoute.RouteId);
+            route.Checkpoint = null;
+            foreach (CheckpointViewModel chp in updatedRoute.Checkpoints)
             {
-                chp.RouteId = entity.RouteId;
-                chp.Deleted = false;
+                Checkpoint check = new Checkpoint(chp.Latitude, chp.Longitude);
+                check.RouteId = updatedRoute.RouteId;
+                check.Deleted = false;
+                DbContext.Checkpoint.Add(check);
+                route.Checkpoint.Add(check);            
+                
             }
-            entity.DateModified = DateTime.Now.Date;
-            DbContext.Checkpoint.AddRange(Checkpoints);
-            DbContext.Entry(entity).State = EntityState.Modified;
+            route.Distance = updatedRoute.TotalDistance;
+            route.Title = updatedRoute.Title;
+            route.DateModified = DateTime.Now.Date;
+            
+            DbContext.Route.Update(route);
         }
         public Route GetRouteByID(int id)
         {

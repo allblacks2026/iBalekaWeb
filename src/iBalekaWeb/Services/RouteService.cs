@@ -15,8 +15,8 @@ namespace iBalekaWeb.Services
         Route GetRouteByID(int id);
         IEnumerable<Checkpoint> GetCheckpoints(int id);
         IEnumerable<Route> GetRoutes();
-        void AddRoute(CheckpointViewModel[] checkpoints, int totalDistance);
-        void UpdateRoute(Route route, Checkpoint[] checkpoints);
+        void AddRoute(RouteViewModel route);
+        void UpdateRoute(RouteViewModel route);
         void DeleteRoute(Route route);
         void SaveRoute();
     }
@@ -43,13 +43,13 @@ namespace iBalekaWeb.Services
         {
             return _routeRepo.GetRouteByID(id);
         }
-        public void AddRoute(CheckpointViewModel[] Checkpoints, int totalDistance)
+        public void AddRoute(RouteViewModel route)
         { 
-            _routeRepo.AddRoute(Checkpoints,totalDistance);
+            _routeRepo.AddRoute(route);
         }
-        public void UpdateRoute(Route route, Checkpoint[] Checkpoints)
+        public void UpdateRoute(RouteViewModel route)
         {
-            _routeRepo.UpdateRoute(route, Checkpoints);
+            _routeRepo.UpdateRoute(route);
         }
         public void DeleteRoute(Route route)
         {
