@@ -60,6 +60,9 @@ html, body {
     #toolBoxWrapper {
         margin: 14%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 320px) {
@@ -72,6 +75,9 @@ html, body {
     #toolBoxWrapper {
         margin: 16%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 
@@ -85,6 +91,9 @@ html, body {
     #toolBoxWrapper {
         margin: 14%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 400px) {
@@ -97,6 +106,9 @@ html, body {
     #toolBoxWrapper {
         margin: 14%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 /* SMARTPHONES LANDSCAPE */
@@ -110,6 +122,9 @@ html, body {
     #toolBoxWrapper {
         margin: 8%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 /* TABLETS PORTRAIT */
@@ -123,6 +138,9 @@ html, body {
     #toolBoxWrapper {
         margin: 1%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 /* TABLET LANDSCAPE / DESKTOP */
 @media only screen and (min-width: 1024px) {
@@ -131,6 +149,9 @@ html, body {
         height: 92vh;
         width: 112%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 1200px) {
@@ -139,6 +160,9 @@ html, body {
         height: 90vh;
         width: 108%;
     }
+    #routeList {
+    margin-right: 14%;
+}
 }
 
 @media only screen and (min-width: 1300px) {
@@ -147,6 +171,9 @@ html, body {
         height: 90vh;
         width: 110%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 1400px) {
@@ -155,6 +182,9 @@ html, body {
         height: 93vh;
         width: 108%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 /*End Media Queries*/
 /*End Positioning Map*/
