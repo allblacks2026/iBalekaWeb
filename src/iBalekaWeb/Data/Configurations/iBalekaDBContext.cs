@@ -14,6 +14,10 @@ namespace iBalekaWeb.Data.Configurations
         {
         }
 
+        public iBalekaDBContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -236,8 +240,7 @@ namespace iBalekaWeb.Data.Configurations
 
       
         }
-
-  
+             
         public virtual DbSet<Athlete> Athlete { get; set; }
         public virtual DbSet<Checkpoint> Checkpoint { get; set; }
         public virtual DbSet<Club> Club { get; set; }
