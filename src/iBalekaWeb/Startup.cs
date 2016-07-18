@@ -115,6 +115,12 @@ namespace iBalekaWeb
                 AppSecret = Configuration["Authentication:Facebook:AppSecret"]
             });
 
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Authentication:Google:AppId"],
+                ClientSecret = Configuration["Authentication:Google:AppSecret"]
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
