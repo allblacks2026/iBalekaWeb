@@ -17,6 +17,7 @@ namespace iBalekaWeb.Models
         }
 
         public int RouteId { get; set; }
+        public string UserID { get; set; }
         public string Title { get; set; }
         public DateTime DateModified { get; set; }
         public DateTime DateRecorded { get; set; }

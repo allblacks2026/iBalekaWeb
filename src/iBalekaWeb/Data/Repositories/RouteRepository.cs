@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
-using System.Threading.Tasks;
 using iBalekaWeb.Data.Infastructure;
 using iBalekaWeb.Models;
 using iBalekaWeb.Models.MapViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace iBalekaWeb.Data.Repositories
 {
@@ -14,18 +14,28 @@ namespace iBalekaWeb.Data.Repositories
     {
         Route GetRouteByID(int id);
         IEnumerable<Checkpoint> GetCheckpoints(int id);
+        IEnumerable<Route> GetRoutes(string UserID);
         void DeleteCheckPoints(IEnumerable<Checkpoint> checkpoints);
         void AddRoute(RouteViewModel route);
         void UpdateRoute(RouteViewModel route);
     }
     public class RouteRepository : RepositoryBase<Route>, IRouteRepository
     {
-        public RouteRepository(IDbFactory dbFactory)
-            : base(dbFactory) { }
+        private readonly UserManager<ApplicationUser> _userManger;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public RouteRepository(IDbFactory dbFactory,UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
+            : base(dbFactory)
+        {
+            _userManger = userManager;
+            _signInManager = signInManager;
+            
+        }
+        
 
         public void AddRoute(RouteViewModel route)
         {
             Route savingRoute = new Route();
+            savingRoute.UserID = route.UserID;
             savingRoute.Title = route.Title;
             savingRoute.Distance = route.TotalDistance;
             foreach (CheckpointViewModel chps in route.Checkpoints)
@@ -68,9 +78,9 @@ namespace iBalekaWeb.Data.Repositories
         {
             return DbContext.Checkpoint.Where(x => x.RouteId == id).ToList();
         }
-        public override IEnumerable<Route> GetAll()
+        public IEnumerable<Route> GetRoutes(string UserID)
         {
-            return DbContext.Route.Where(a => a.Deleted == false).ToList();
+            return DbContext.Route.Where(a =>a.UserID==UserID && a.Deleted == false).ToList();
         }
         public void DeleteCheckPoints(IEnumerable<Checkpoint> checkpoints)
         {

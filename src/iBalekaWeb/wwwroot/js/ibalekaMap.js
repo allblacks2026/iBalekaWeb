@@ -194,7 +194,7 @@ function saveRoute() {
 
 function createObject() {
     var title = prompt("Enter the Route Title");
-    var routeModel = { Title: title,Checkpoints: [] ,TotalDistance:totalDistance};
+    var routeModel = {Title: title,Checkpoints: [] ,TotalDistance:totalDistance};
     for (var i = 0; i < markersOrders.length; i++) {
         var latlng = markersOrders[i].getPosition();
         var Checkpoint = {

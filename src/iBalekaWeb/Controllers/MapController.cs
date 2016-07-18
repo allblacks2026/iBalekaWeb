@@ -1,14 +1,11 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using iBalekaWeb.Models;
 using iBalekaWeb.Services;
 using System.Collections.Generic;
 using iBalekaWeb.Models.MapViewModels;
-
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Diagnostics;
 
 //using prototypeWeb.Models;
@@ -18,8 +15,10 @@ namespace iBalekaWeb.Controllers
     public class MapController : Controller
     {
         private IRouteService _context;
-        public MapController(IRouteService _repo)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public MapController(IRouteService _repo,UserManager<ApplicationUser> userManger)
         {
+            _userManager = userManger;
             _context = _repo;
         }
 
@@ -34,7 +33,7 @@ namespace iBalekaWeb.Controllers
         [HttpGet(Name ="SavedRoutes")]
         public IActionResult SavedRoutes()
         {
-            IEnumerable<Route> routes = _context.GetRoutes();
+            IEnumerable<Route> routes = _context.GetRoutes(_userManager.GetUserId(User));
             return View(routes);
         }
 
@@ -46,6 +45,7 @@ namespace iBalekaWeb.Controllers
             RouteViewModel newRoute = route;
             if (ModelState.IsValid)
             {
+                route.UserID = _userManager.GetUserId(User);
                 _context.AddRoute(route);
                 _context.SaveRoute();
                 string url = Url.Action("SavedRoutes", "Map");
