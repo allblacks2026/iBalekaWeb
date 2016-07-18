@@ -255,3 +255,7 @@ function getCheckpointLength() {
     return markersOrders.length;
 }
 //**************End Map HUD************************//
+//Load Route
+
+
+//**************End Map HUD************************//

@@ -13,6 +13,7 @@ namespace iBalekaWeb.Services
     public interface IRouteService
     {
         Route GetRouteByID(int id);
+        RouteViewModel GetRouteByIDView(int id);
         IEnumerable<Checkpoint> GetCheckpoints(int id);
         IEnumerable<Route> GetRoutes(string UserID);
         void AddRoute(RouteViewModel route);
@@ -42,6 +43,10 @@ namespace iBalekaWeb.Services
         public Route GetRouteByID(int id)
         {
             return _routeRepo.GetRouteByID(id);
+        }
+        public RouteViewModel GetRouteByIDView(int id)
+        {
+            return _routeRepo.GetRouteByIDView(id);
         }
         public void AddRoute(RouteViewModel route)
         { 

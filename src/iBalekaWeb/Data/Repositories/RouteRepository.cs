@@ -13,6 +13,7 @@ namespace iBalekaWeb.Data.Repositories
     public interface IRouteRepository : IRepository<Route>
     {
         Route GetRouteByID(int id);
+        RouteViewModel GetRouteByIDView(int id);
         IEnumerable<Checkpoint> GetCheckpoints(int id);
         IEnumerable<Route> GetRoutes(string UserID);
         void DeleteCheckPoints(IEnumerable<Checkpoint> checkpoints);
@@ -72,7 +73,21 @@ namespace iBalekaWeb.Data.Repositories
         }
         public Route GetRouteByID(int id)
         {
-            return DbContext.Route.Single(m => m.RouteId == id && m.Deleted == false);
+            Route route = DbContext.Route.Single(m => m.RouteId == id && m.Deleted == false);
+            return route;
+        }
+        public RouteViewModel GetRouteByIDView(int id)
+        {
+            Route route = GetRouteByID(id);
+            List<Checkpoint> checks = GetCheckpoints(route.RouteId).ToList();
+            List<CheckpointViewModel> checkViews = new List<CheckpointViewModel>();
+            foreach (Checkpoint check in checks)
+            {
+                checkViews.Add(new CheckpointViewModel(check.Latitude, check.Longitude));
+            }
+            RouteViewModel viewRoute = new RouteViewModel(route.RouteId, route.Title, route.UserID, route.Distance, checkViews);
+
+            return viewRoute;
         }
         public IEnumerable<Checkpoint> GetCheckpoints(int id)
         {

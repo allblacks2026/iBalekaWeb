@@ -7,6 +7,7 @@ using iBalekaWeb.Models.MapViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
+using iBalekaWeb.Data.HelperMethods;
 
 //using prototypeWeb.Models;
 
@@ -59,17 +60,31 @@ namespace iBalekaWeb.Controllers
                 return BadRequest(ModelState);
             }
         }
-        // GET: Map/Edit/5
-        [HttpGet(Name = "EditRoute")]
-        public IActionResult Edit(int id)
+        // GET: Map/GetRoute/5
+        [HttpGet(Name = "GetRoute")]
+        public IActionResult GetRoute([FromBody]int id)
         {
             Route route = _context.GetRouteByID(id);
             if (route == null)
             {
                 return NotFound();
             }
+            RouteViewModel routeView = _context.GetRouteByIDView(route.RouteId);
 
-            return View(route);
+            return Json(new { route = routeView});
+        }
+        // GET: Map/Edit/5
+        [HttpGet(Name = "EditRoute")]
+        public IActionResult EditRoute(int id)
+        {
+            Route route = _context.GetRouteByID(id);
+            if (route == null)
+            {
+                return NotFound();
+            }
+            RouteViewModel routeView = _context.GetRouteByIDView(route.RouteId);
+            
+            return View(routeView);
         }
 
         // POST: Map/Edit/5
