@@ -6,6 +6,13 @@ namespace iBalekaWeb.Models
 {
     public partial class Checkpoint
     {
+        public Checkpoint() { }
+        public Checkpoint(double lat, double lng)
+        {
+            Latitude = lat;
+            Longitude = lng;
+            Deleted = false;
+        }
         [Key]
         public int CheckpointId { get; set; }
         public bool Deleted { get; set; }

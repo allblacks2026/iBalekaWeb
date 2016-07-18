@@ -1,9 +1,10 @@
-﻿html, body, .main,#wrapper{
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width:100%;
-      }
+﻿html, body, .main, #wrapper {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 #map {
     margin: 0;
     bottom: 0;
@@ -13,5 +14,20 @@
 
 
 
+#mainLogo {
+        padding-left: 5%;
+}
 
+#brand {
+    display: inline-flex;
+}
 
+#logo {
+    padding-left: 5%;
+    
+}
+
+#icon {
+    padding-top: 11%;
+    padding-left: 5%;
+}

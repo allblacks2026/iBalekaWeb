@@ -1,26 +1,34 @@
-﻿/*Stats Panel*/
+﻿/*Saved Routes*/
+#routeList {
+    margin-right: 5%;
+}
+/*End Saved Routes*/
+/*Stats Panel*/
 #toolBoxWrapper {
-    background-color:dodgerblue;
+    background-color: dodgerblue;
     border: 1px solid black;
     border-radius: 5px;
-    margin:1%;
-    cursor:pointer;
-    text-align:center;
+    margin: 1%;
+    cursor: pointer;
+    text-align: center;
 }
+
 #statisticsWrapper {
-    font-size:13px;
+    font-size: 13px;
 }
-#buttonsWrapper{
-   
-    border-radius :2px;
-    margin:5px;
-    text-align:left;
+
+#buttonsWrapper {
+    border-radius: 2px;
+    margin: 5px;
+    text-align: left;
 }
-#btnSaveRoute{
-    color:#3366ff;
+
+#btnSaveRoute {
+    color: #3366ff;
 }
-#btnClearRoute{
-    color:#3366ff;
+
+#btnClearRoute {
+    color: #3366ff;
 }
 /*End Toolbox Panel*/
 
@@ -48,9 +56,13 @@ html, body {
         height: 101vh;
         width: 117%;
     }
-    #toolBoxWrapper{
-        margin:14%;
+
+    #toolBoxWrapper {
+        margin: 14%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 320px) {
@@ -59,9 +71,13 @@ html, body {
         height: 101vh;
         width: 123%;
     }
-    #toolBoxWrapper{
-        margin:16%;
+
+    #toolBoxWrapper {
+        margin: 16%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 
@@ -71,9 +87,13 @@ html, body {
         height: 101vh;
         width: 120%;
     }
-    #toolBoxWrapper{
-        margin:14%;
+
+    #toolBoxWrapper {
+        margin: 14%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 400px) {
@@ -82,9 +102,13 @@ html, body {
         height: 102vh;
         width: 118%;
     }
-    #toolBoxWrapper{
-        margin:14%;
+
+    #toolBoxWrapper {
+        margin: 14%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 /* SMARTPHONES LANDSCAPE */
@@ -94,9 +118,13 @@ html, body {
         height: 102vh;
         width: 114%;
     }
-    #toolBoxWrapper{
-        margin:8%;
+
+    #toolBoxWrapper {
+        margin: 8%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 /* TABLETS PORTRAIT */
@@ -106,9 +134,13 @@ html, body {
         height: 94vh;
         width: 116%;
     }
-    #toolBoxWrapper{
-        margin:1%;
+
+    #toolBoxWrapper {
+        margin: 1%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 /* TABLET LANDSCAPE / DESKTOP */
 @media only screen and (min-width: 1024px) {
@@ -117,6 +149,9 @@ html, body {
         height: 92vh;
         width: 112%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 1200px) {
@@ -125,6 +160,9 @@ html, body {
         height: 90vh;
         width: 108%;
     }
+    #routeList {
+    margin-right: 14%;
+}
 }
 
 @media only screen and (min-width: 1300px) {
@@ -133,6 +171,9 @@ html, body {
         height: 90vh;
         width: 110%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 
 @media only screen and (min-width: 1400px) {
@@ -141,6 +182,9 @@ html, body {
         height: 93vh;
         width: 108%;
     }
+    #routeList {
+    margin-right: 5%;
+}
 }
 /*End Media Queries*/
 /*End Positioning Map*/

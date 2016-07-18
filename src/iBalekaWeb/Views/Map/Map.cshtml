@@ -1,11 +1,17 @@
 @section AddToHead {
     <link rel="stylesheet" href="~/css/mapStyle.css" />
 }
+@using Microsoft.AspNetCore.Identity
+@using iBalekaWeb.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "iBaleka Route Mapping Tool";
 }
-
-<form asp-action="Map">
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-action="Map">
         <div id="map"></div><br />
         <div id="toolBoxWrapper">
             <div id="statisticsWrapper">
@@ -13,14 +19,14 @@
                 <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
             </div>
             <div id="buttonsWrapper">
-                <input type="button" id="btnSaveRoute" onclick="saveRoute" value="Save Route" />
-                <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route"/>
+                <input type="button" id="btnSaveRoute" onclick="saveRoute()" value="Save Route" />
+                <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
             </div>
         </div>
-        
-    
-</form>
 
+
+    </form>
+}
 @section Scripts {
     <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDR4BBX8Is0UhU2sYIv3HbpycxS0Vp1JdY&libraries=drawing,geometry&callback=initMap") async defer></script>
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>

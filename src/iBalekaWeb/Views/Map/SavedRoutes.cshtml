@@ -1,0 +1,20 @@
+@model IEnumerable<iBalekaWeb.Models.Route>
+@section AddToHead {
+    <link rel="stylesheet" href="~/css/mapStyle.css" />
+}
+@{
+    ViewData["Title"] = "SavedRoutes";
+}
+
+<h2>SavedRoutes</h2>
+
+<p>
+    <a>Saved Routes</a>
+</p>
+<ul class="list-group" id="routeList">
+    @foreach (var route in Model) { 
+        
+        <li class="list-group-item"><span class="badge">@Html.DisplayFor(distance=>route.Distance)km</span>@Html.ActionLink(route.Title,"EditRoute",new { id=route.RouteId})</li>
+
+    }
+</ul>

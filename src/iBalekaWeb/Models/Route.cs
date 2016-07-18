@@ -11,9 +11,14 @@ namespace iBalekaWeb.Models
             EventRoute = new HashSet<EventRoute>();
             Rating = new HashSet<Rating>();
             Run = new HashSet<Run>();
+            DateRecorded = DateTime.Now;
+            DateModified = DateTime.Now;
+            Deleted = false;
         }
 
         public int RouteId { get; set; }
+        public string UserID { get; set; }
+        public string Title { get; set; }
         public DateTime DateModified { get; set; }
         public DateTime DateRecorded { get; set; }
         public bool Deleted { get; set; }

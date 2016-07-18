@@ -174,27 +174,36 @@ function createToolbox(toolboxDiv, map) {
 
 }
 function saveRoute() {
+
     var apiUrl = location.origin + "/map/AddRoute";
     $.ajax({
         method: "POST",
         url: apiUrl,
         contentType: "application/json;charset=utf-8",
-        data: createObjectArray()
-    }).done(function (msg) {
-        alert("Data saved: " + msg);
+        processData: false,
+        data: createObject(),
+        success: function (response) {
+            window.location.href = location.origin + "/map/SavedRoutes";
+        },
+        error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
+            alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
+        }
     });
 }
-function createObjectArray() {
-    var checkpointsArray = [];
+
+
+function createObject() {
+    var title = prompt("Enter the Route Title");
+    var routeModel = {Title: title,Checkpoints: [] ,TotalDistance:totalDistance};
     for (var i = 0; i < markersOrders.length; i++) {
         var latlng = markersOrders[i].getPosition();
-        var checkpoint = {
+        var Checkpoint = {
             'Latitude': latlng.lat(),
             'Longitude': latlng.lng()
         };
-        checkpointsArray.push(checkpoint);
+        routeModel.Checkpoints.push(Checkpoint);
     }
-    return checkpointsArray;
+    return JSON.stringify(routeModel);
 }
 function clearRoute() {
     for (var key in markers) {
@@ -245,4 +254,8 @@ function loadDistanceCoords(marker) {
 function getCheckpointLength() {
     return markersOrders.length;
 }
+//**************End Map HUD************************//
+//Load Route
+
+
 //**************End Map HUD************************//
