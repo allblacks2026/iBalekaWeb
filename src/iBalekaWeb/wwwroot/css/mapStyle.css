@@ -4,6 +4,7 @@
 }
 /*End Saved Routes*/
 /*Stats Panel*/
+
 #toolBoxWrapper {
     background-color: dodgerblue;
     border: 1px solid black;
@@ -16,7 +17,9 @@
 #statisticsWrapper {
     font-size: 13px;
 }
-
+#statisticsWrapper>p{
+    margin-bottom:auto;
+}
 #buttonsWrapper {
     border-radius: 2px;
     margin: 5px;

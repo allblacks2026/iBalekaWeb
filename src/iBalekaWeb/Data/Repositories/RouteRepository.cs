@@ -60,7 +60,6 @@ namespace iBalekaWeb.Data.Repositories
             {
                 Checkpoint check = new Checkpoint(chp.Latitude, chp.Longitude);
                 check.RouteId = updatedRoute.RouteId;
-                check.Deleted = false;
                 DbContext.Checkpoint.Add(check);
                 route.Checkpoint.Add(check);            
                 

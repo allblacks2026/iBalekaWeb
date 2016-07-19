@@ -60,19 +60,8 @@ namespace iBalekaWeb.Controllers
                 return BadRequest(ModelState);
             }
         }
-        // GET: Map/GetRoute/5
-        [HttpGet(Name = "GetRoute")]
-        public IActionResult GetRoute([FromBody]int id)
-        {
-            Route route = _context.GetRouteByID(id);
-            if (route == null)
-            {
-                return NotFound();
-            }
-            RouteViewModel routeView = _context.GetRouteByIDView(route.RouteId);
+ 
 
-            return Json(new { route = routeView});
-        }
         // GET: Map/Edit/5
         [HttpGet(Name = "EditRoute")]
         public IActionResult EditRoute(int id)
@@ -99,7 +88,10 @@ namespace iBalekaWeb.Controllers
                 _context.SaveRoute();
                 return RedirectToAction("SavedRoutes");
             }
-            return RedirectToAction("SavedRoutes");
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         ////// GET: Map/GetRoute/5
