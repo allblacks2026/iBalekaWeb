@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace iBalekaWeb.Controllers
 {
     public class HomeController : Controller
     {
-
+        static ILogger _logger;
         [Authorize]
         public IActionResult Index()
         {
@@ -29,10 +31,23 @@ namespace iBalekaWeb.Controllers
 
             return View();
         }
-        [Authorize]
+
+        public HomeController(ILoggerFactory factory)
+        {
+            if (_logger == null)
+            {
+                _logger = factory.CreateLogger("Unhandled Error");
+            }
+        }
+       
         public IActionResult Error()
         {
-            return View();
+            var feature = HttpContext.Features.Get<IExceptionHandlerFeature>();
+            var error = feature?.Error;
+            _logger.LogError("Opps", error);
+            return View("~/Views/Shared/Error.cshtml",error);
         }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace iBalekaWeb.Models
 {
@@ -12,6 +13,7 @@ namespace iBalekaWeb.Models
             Run = new HashSet<Run>();
         }
 
+        [Key]
         public int EventId { get; set; }
         public int ClubId { get; set; }
         public DateTime DateAndTime { get; set; }
