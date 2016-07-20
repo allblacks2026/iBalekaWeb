@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using iBalekaWeb.Data.HelperMethods;
+using Microsoft.AspNetCore.Http;
 
 //using prototypeWeb.Models;
 
@@ -93,49 +94,38 @@ namespace iBalekaWeb.Controllers
                 return BadRequest(ModelState);
             }
         }
+        [HttpGet]
+        public IActionResult DeleteRoute(int id)
+        {
+            Route route = _context.GetRouteByID(id);
+            if (route == null)
+            {
+                return NotFound();
+            }
+            RouteViewModel routeView = _context.GetRouteByIDView(route.RouteId);
 
-        ////// GET: Map/GetRoute/5
-        //[HttpGet("{id}", Name = "GetRoute")]
-        //public IActionResult GetRoute(int id)
-        //{
-        //    Route route = _context.GetRouteByID(id);
-        //    if (route == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return View(routeView);
 
-        //    return View(route);
-        //}
-
-
-
-        //// GET: Map/Delete/5
-        //[ActionName("Delete")]
-        //public IActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    route route = _context.route.Single(m => m.RouteID == id);
-        //    if (route == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View(route);
-        //}
-
-        //// POST: Map/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult DeleteConfirmed(int id)
-        //{
-        //    route route = _context.route.Single(m => m.RouteID == id);
-        //    _context.route.Remove(route);
-        //    _context.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        }
+        // POST: Map/DeleteRoute/5
+        [HttpPost, ActionName("Delete")]
+        public IActionResult Delete([FromBody]int id)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                Route route = _context.GetRouteByID(id);
+                _context.DeleteRoute(route);
+                _context.SaveRoute();
+                return RedirectToAction("SavedRoutes"); 
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                Debug.WriteLine("Errors found: " + errors + "\nEnd Errors found");
+                return BadRequest(ModelState);
+            }
+        }
+       
     }
 }

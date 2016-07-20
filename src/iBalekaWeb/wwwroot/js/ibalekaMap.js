@@ -5,6 +5,7 @@ function initMap() {
         zoom: 15,
         center: { lat: -33.9913503, lng: 25.6568993 },
         zoomControl: true,
+        streetViewControl:false,
         scaleControl: true
     });
     getLocation();
@@ -194,9 +195,8 @@ function saveRoute() {
     });
 }
 function createObject() {
-
     var title = prompt("Enter the Route Title");
-    var routeModel = { Title: title, Checkpoints: [], TotalDistance: convertTotalDistanceToKm() };
+    var routeModel = {Title: title,Checkpoints: [] ,TotalDistance:totalDistance};
     for (var i = 0; i < markersOrders.length; i++) {
         var latlng = markersOrders[i].getPosition();
         var Checkpoint = {
@@ -259,10 +259,11 @@ function getCheckpointLength() {
 //**************End Map HUD************************//
 
 //Edit Route
+
 //Load Route
 var loadedRoute;
 function loadRoute(route) {    
-    routeTitleText.innerHTML = route.title; 
+    routeTitleText.value = route.title; 
     for (var i = 0; i < route.checkpoints.length; i++) {
         loadCheckpoints(route.checkpoints[i]);
     }
@@ -314,7 +315,7 @@ function updateRoute() {
 }
 function createUpdatedObject() {
 
-    var routeModel = { RouteId: loadedRoute.routeId, Title: loadedRoute.title, Checkpoints: [], TotalDistance: convertTotalDistanceToKm() };
+    var routeModel = { RouteId: loadedRoute.routeId, Title: routeTitleText.value, Checkpoints: [], TotalDistance: totalDistance };
     for (var i = 0; i < markersOrders.length; i++) {
         var latlng = markersOrders[i].getPosition();
         var Checkpoint = {
@@ -325,11 +326,30 @@ function createUpdatedObject() {
     }
     return JSON.stringify(routeModel);
 }
-function convertTotalDistanceToKm() {
-    var distanceInKm = 0;
-    if (totalDistance > 999) {
-        distanceInKm = totalDistance/1000;
-    }
-    return distanceInKm;
-}
+
 //**************End Edit Route************************//
+
+//delete route
+var loadedRouteId;
+function loadDeletedRouteId(routeId) {
+    if (routeId !== null) {
+        loadedRouteId = routeId;
+    }
+}
+function deleteRoute() {
+    var apiUrl = location.origin + "/map/Delete";
+    $.ajax({
+        method: "POST",
+        url: apiUrl,
+        contentType: "application/json;charset=utf-8",
+        processData: false,
+        data: JSON.stringify(loadedRouteId),
+        success: function (response) {
+            window.location.href = location.origin + "/map/SavedRoutes";
+        },
+        error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
+            console.log("Error: " + textStatus.toString() + " " + errorThrown.toString() + " " + httpRequest.toString());
+        }
+    });
+}
+//**************End delete rout************************//

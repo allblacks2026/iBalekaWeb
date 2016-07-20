@@ -11,10 +11,25 @@
 <p>
     <a>Saved Routes</a>
 </p>
-<ul class="list-group" id="routeList">
-    @foreach (var route in Model) { 
-        
-        <li class="list-group-item"><span class="badge">@Html.DisplayFor(distance=>route.Distance)km</span>@Html.ActionLink(route.Title,"EditRoute",new { id=route.RouteId})</li>
+<form asp-action="DeleteRoute">
+    <ul class="list-group" id="routeList">
+        @foreach (var route in Model)
+        {
+            string totalDistance = "";
 
-    }
-</ul>
+            if (route.Distance > 999) { totalDistance = Math.Round((route.Distance / 1000),2).ToString() + "km"; } else { totalDistance = route.Distance.ToString() + "m"; }
+
+            <li class="list-group-item">
+                <span class="badge">
+                        @Html.ActionLink("Delete", "DeleteRoute", new { id = route.RouteId })
+                  
+                </span>
+                <span class="badge">@totalDistance</span>
+                @Html.ActionLink(route.Title, "EditRoute", new { id = route.RouteId })
+            </li>
+        }
+    </ul>
+</form>
+@section Scripts {
+    <script src=@Url.Content("~/js/ibalekaMap.js")></script>
+}

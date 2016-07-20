@@ -84,7 +84,7 @@ namespace iBalekaWeb.Data.Repositories
             {
                 checkViews.Add(new CheckpointViewModel(check.Latitude, check.Longitude));
             }
-            RouteViewModel viewRoute = new RouteViewModel(route.RouteId, route.Title, route.UserID, route.Distance, checkViews);
+            RouteViewModel viewRoute = new RouteViewModel(route.RouteId, route.Title, route.UserID, route.Distance, checkViews,route.DateRecorded,route.DateModified);
 
             return viewRoute;
         }
