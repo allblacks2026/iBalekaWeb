@@ -12,5 +12,6 @@ namespace iBalekaWeb.Models.ManageViewModels
         [Phone]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
+        
     }
 }

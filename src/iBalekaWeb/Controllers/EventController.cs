@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using iBalekaWeb.Models;
 using iBalekaWeb.Data.Configurations;
 using iBalekaWeb.Services;
+using iBalekaWeb.Models.EventViewModels;
 
 namespace iBalekaWeb.Controllers
 {
