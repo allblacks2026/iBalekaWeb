@@ -1,3 +1,4 @@
+@using iBalekaWeb.Models
 @model iBalekaWeb.Models.MapViewModels.RouteViewModel
 
 @section AddToHead {
@@ -7,17 +8,16 @@
     ViewData["Title"] = "EditRoute";
 }
 
-<h2>EditRoute</h2>
-
 <form asp-action="EditRoute">
     <div id="map"></div><br />
     <div id="toolBoxWrapper">
         <div id="statisticsWrapper">
+            <p ><input type="text" id="routeTitle" value="Untitled Route"></p>
             <p id="totalDistance">Total Distance: 0</p>
             <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
         </div>
         <div id="buttonsWrapper">
-            <input type="button" id="btnSaveRoute" onclick="saveRoute()" value="Save Route" />
+            <input type="button" id="btnUpdateRoute" onclick="updateRoute()" value="Update Route" />
             <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
             <input type="button" id="btnCancelRoute" onclick="cancelRoute()" value="Cancel Route" />
         </div>
@@ -28,10 +28,12 @@
 @section Scripts {
     <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDR4BBX8Is0UhU2sYIv3HbpycxS0Vp1JdY&libraries=drawing,geometry&callback=initMap") async defer></script>
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
-    <script src=@Url.Content("~/js/loadMap.js")></script>
-<script>
-    $(document).ready(loadMap(@Model.RouteId));
-    //window.onload();
-</script>
 }
+<script>
+    var routeObject = @Html.Raw(Json.Serialize(Model));
+    window.onload=(function(){
+        loadRoute(routeObject);
+    });
+</script>
+
 
