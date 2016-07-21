@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="js/eventsajax.js" />
 /// <reference path="js/ibalekamap.js" />
 /// <reference path="js/loadmap.js" />
 /// <reference path="js/site.js" />

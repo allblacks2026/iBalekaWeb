@@ -5,6 +5,14 @@ namespace iBalekaWeb.Models
 {
     public partial class EventRoute
     {
+        public EventRoute(string descript,int evntId,int routeId,DateTime dateAdded)
+        {
+            Description = descript;
+            EventId = evntId;
+            RouteId = routeId;
+            DateAdded = dateAdded;
+            Deleted = false;
+        }
         public int EventRouteId { get; set; }
         public DateTime DateAdded { get; set; }
         public bool Deleted { get; set; }

@@ -11,13 +11,18 @@ namespace iBalekaWeb.Models
             EventRegistration = new HashSet<EventRegistration>();
             EventRoute = new HashSet<EventRoute>();
             Run = new HashSet<Run>();
+            DateCreated = DateTime.Now;
+            Deleted = false;
         }
 
         [Key]
         public int EventId { get; set; }
         public int ClubId { get; set; }
-        public DateTime DateAndTime { get; set; }
+        public string UserID { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
         public DateTime DateCreated { get; set; }
+        public DateTime DateModified { get; set; }
         public bool Deleted { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }

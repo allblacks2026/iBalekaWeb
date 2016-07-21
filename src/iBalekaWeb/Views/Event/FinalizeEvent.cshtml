@@ -1,0 +1,90 @@
+@model iBalekaWeb.Models.EventViewModels.EventViewModel
+
+<form asp-action="SaveEvent" method="post">
+    <div class="form-horizontal">
+        <h4>Finalize Event</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelFor(model => model.EventId, "Event ID", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EventId)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.UserID, "User ID", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserID)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.Title, "Title", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.Description, "Description", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.Date, new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.Time, new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Time)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.Location, "Location", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.UserID, "User ID", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserID)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.DateCreated, "Date Created", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateCreated)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.DateModified, "Date Modified", new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DateModified)
+            </dd>
+        </dl>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-default" value="Back" id="btnBack" onclick="back('toAddRoute')">Back</button>
+                <button class="btn btn-default" value="Save" id="btnSave" onclick="saveRoute()">Finalize</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    <script src="~/js/eventsAjax.js"></script>
+}
+<script>
+    var eventObject = @Html.Raw(Json.Serialize(Model));
+    window.onload=(function(){
+        loadEvent(eventObject);
+    });
+</script>

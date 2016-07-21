@@ -7,8 +7,6 @@ using iBalekaWeb.Models.MapViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
-using iBalekaWeb.Data.HelperMethods;
-using Microsoft.AspNetCore.Http;
 
 //using prototypeWeb.Models;
 

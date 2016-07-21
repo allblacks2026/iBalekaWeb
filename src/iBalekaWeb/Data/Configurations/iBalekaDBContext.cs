@@ -10,6 +10,7 @@ namespace iBalekaWeb.Data.Configurations
 {
     public partial class iBalekaDBContext : IdentityDbContext<ApplicationUser>
     {
+        iBalekaDBContext() : base() { }
         public iBalekaDBContext(DbContextOptions options) : base(options)
         {
         }
