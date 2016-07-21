@@ -313,8 +313,7 @@ function updateRoute() {
         }
     });
 }
-<<<<<<< HEAD
-=======
+
 function cancelRoute() {
     var apiUrl = location.origin + "/map/SavedRoutes";
     $.ajax({
@@ -329,7 +328,7 @@ function cancelRoute() {
         }
     });
 }
->>>>>>> 98ce1eb1e0152adaa9eca35db9e22e320e307c53
+
 function createUpdatedObject() {
 
     var routeModel = { RouteId: loadedRoute.routeId, Title: routeTitleText.value, Checkpoints: [], TotalDistance: totalDistance };
