@@ -313,6 +313,20 @@ function updateRoute() {
         }
     });
 }
+function cancelRoute() {
+    var apiUrl = location.origin + "/map/SavedRoutes";
+    $.ajax({
+        method: "GET",
+        url: apiUrl,
+        processData: false,
+        success: function (response) {
+            window.location.href = location.origin + "/map/SavedRoutes";
+        },
+        error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
+            alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
+        }
+    });
+}
 function createUpdatedObject() {
 
     var routeModel = { RouteId: loadedRoute.routeId, Title: routeTitleText.value, Checkpoints: [], TotalDistance: totalDistance };
