@@ -313,6 +313,7 @@ function updateRoute() {
         }
     });
 }
+
 function cancelRoute() {
     var apiUrl = location.origin + "/map/SavedRoutes";
     $.ajax({
@@ -327,6 +328,7 @@ function cancelRoute() {
         }
     });
 }
+
 function createUpdatedObject() {
 
     var routeModel = { RouteId: loadedRoute.routeId, Title: routeTitleText.value, Checkpoints: [], TotalDistance: totalDistance };
