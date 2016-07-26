@@ -169,7 +169,7 @@ namespace iBalekaWeb.Controllers
             if (_routeContext.GetRoutes(_userManager.GetUserId(User)).Any())
             {
                 string[] selectedValues = new string[evnt.EventRoutes.Count];
-                for (int i = 0; i > evnt.EventRoutes.Count; i++)
+                for (int i = 0; i < evnt.EventRoutes.Count; i++)
                 {
                     selectedValues[i] = evnt.EventRoutes[i].RouteId.ToString();
                 }
@@ -186,8 +186,8 @@ namespace iBalekaWeb.Controllers
 
         // POST: Event/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(EventViewModel evnt)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit([FromBody]EventViewModel evnt)
         {
 
             if (ModelState.IsValid)
@@ -216,12 +216,12 @@ namespace iBalekaWeb.Controllers
 
         // POST: Event/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(EventViewModel evnt)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Delete([FromBody]int id)
         {
             if (ModelState.IsValid)
             {
-                Event deleteEvent = _context.GetEventByID(evnt.EventId);
+                Event deleteEvent = _context.GetEventByID(id);
                 _context.Delete(deleteEvent);
                 _context.SaveEvent();
                 return RedirectToAction("Events");

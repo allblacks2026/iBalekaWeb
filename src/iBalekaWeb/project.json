@@ -60,7 +60,10 @@
       "imports": [
         "dotnet5.6",
         "portable-net45+win8"
-      ]
+      ],
+      "dependencies": {
+        "System.Runtime": "4.1.0"
+      }
     }
   },
   "publishOptions": {
