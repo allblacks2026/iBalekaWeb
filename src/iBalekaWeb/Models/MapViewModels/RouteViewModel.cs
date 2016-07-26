@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace iBalekaWeb.Models.MapViewModels
 {
+   
     public class RouteViewModel
     {
         public RouteViewModel() { }

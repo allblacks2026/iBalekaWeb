@@ -1,7 +1,7 @@
 @model IEnumerable<iBalekaWeb.Models.Event>
 
 <p>
-    <a asp-action="CreateNewEvent">Create New Event</a>
+    <a asp-action="CreateEvent">Create New Event</a>
 </p>
 
 <ul class="list-group" id="routeList">
@@ -12,12 +12,12 @@
 
             <li class="list-group-item">
                 <span class="badge">
-                    @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventId })
+                    @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventID })
 
                 </span>
                 @* get event route nrs and put in badge
                     <span class="badge">@totalDistance</span>*@
-                @Html.ActionLink(evnt.Title + " " + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventID })
             </li>
         }
     }

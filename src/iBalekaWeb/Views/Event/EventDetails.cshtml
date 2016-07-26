@@ -61,6 +61,22 @@
             @Html.DisplayFor(model => model.DateModified)
         </dd>
     </dl>
+    <hr/>
+    <ul class="list-group" id="eventRouteList">
+        @foreach (var item in Model.EventRoutes)
+            {
+                string totalDistance = "";
+                //total distance conversion
+                if (item.Distance > 999) { totalDistance = Math.Round((item.Distance / 1000), 2).ToString() + "km"; } else { totalDistance = item.Distance.ToString() + "m"; }
+                <li class="list-group-item">
+                    <span class="badge">
+                        @totalDistance
+                    </span>
+                    @item.Title
+                </li>
+
+        }
+    </ul>
 </div>
 <div>
     @Html.ActionLink("Edit", "EditEvent", new {  id = Model.EventId }) |

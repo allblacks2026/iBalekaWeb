@@ -276,7 +276,7 @@ namespace iBalekaWeb.Migrations
                 {
                     EventID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ClubID = table.Column<int>(nullable: false),
+                   
                     DateAndTime = table.Column<DateTime>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false),
@@ -287,12 +287,7 @@ namespace iBalekaWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Event", x => x.EventID);
-                    table.ForeignKey(
-                        name: "FK_Event_Club_ClubID",
-                        column: x => x.ClubID,
-                        principalTable: "Club",
-                        principalColumn: "ClubID",
-                        onDelete: ReferentialAction.Cascade);
+                    
                 });
 
             migrationBuilder.CreateTable(
@@ -484,10 +479,7 @@ namespace iBalekaWeb.Migrations
                 table: "ClubMember",
                 column: "ClubID");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Event_ClubID",
-                table: "Event",
-                column: "ClubID");
+           
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventRegistration_AthleteID",

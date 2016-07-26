@@ -94,20 +94,12 @@ namespace iBalekaWeb.Data.Configurations
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.HasIndex(e => e.ClubId)
-                    .HasName("IX_Event_ClubID");
-
-                entity.Property(e => e.EventId).HasColumnName("EventID");
-
-                entity.Property(e => e.ClubId).HasColumnName("ClubID");
-                entity.Property<int>("ClubId");
+                
                 
 
                 entity.Property(e => e.Title).IsRequired();
 
-                //entity.HasOne(d => d.Club)
-                //    .WithMany(p => p.Event)
-                //    .HasForeignKey(d => d.ClubId);
+                
             });
 
             modelBuilder.Entity<EventRegistration>(entity =>
@@ -142,19 +134,19 @@ namespace iBalekaWeb.Data.Configurations
 
             modelBuilder.Entity<EventRoute>(entity =>
             {
-                entity.HasIndex(e => e.EventId)
+                entity.HasIndex(e => e.EventID)
                     .HasName("IX_EventRoute_EventID");
 
-                entity.HasIndex(e => e.RouteId)
+                entity.HasIndex(e => e.RouteID)
                     .HasName("IX_EventRoute_RouteID");
 
-                entity.Property(e => e.EventRouteId).HasColumnName("EventRouteID");
+                entity.Property(e => e.EventRouteID).HasColumnName("EventRouteID");
 
-                entity.Property(e => e.EventId).HasColumnName("EventID");
+                entity.Property(e => e.EventID).HasColumnName("EventID");
                 entity.Property<int>("EventID");
                 
 
-                entity.Property(e => e.RouteId).HasColumnName("RouteID");
+                entity.Property(e => e.RouteID).HasColumnName("RouteID");
                 entity.Property<int>("RouteID");
                
 
@@ -249,7 +241,7 @@ namespace iBalekaWeb.Data.Configurations
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<Route> Route { get; set; }
         public virtual DbSet<Run> Run { get; set; }
-        //public virtual DbSet<User> User { get; set; }
+        
 
         public virtual void Commit()
         {

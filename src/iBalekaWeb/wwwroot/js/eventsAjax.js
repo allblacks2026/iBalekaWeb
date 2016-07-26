@@ -3,87 +3,47 @@ function loadEventObject(loadEvent) {
     if (loadEvent !== null)
         eventObject = loadEvent;
 }
-function addDetails() {
-    var apiUrl = location.origin + "/Event/AddDetails";
-    $.ajax({
-        method: "POST",
-        url: apiUrl,
-        contentType: "application/json;charset=utf-8",
-        processData: false,
-        data: event,
-        success: function (response) {
-            window.location.href = location.origin + "/Event/AddRoutes";
-        },
-        error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
-            alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
-        }
-    });
-}
-function addRoutes() {
-    var apiUrl = location.origin + "/Event/SaveRoutes";
-    $.ajax({
-        method: "POST",
-        url: apiUrl,
-        contentType: "application/json;charset=utf-8",
-        processData: false,
-        data: event,
-        success: function (response) {
-            window.location.href = location.origin + "/Event/FinalizeEvent";
-        },
-        error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
-            alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
-        }
-    });
+function createEventObject() {
+    var eventModel = { Date: eventObject.date, Description: eventObject.description, EventRoutes: [], Location: eventObject.location, Time: eventObject.time, Title: eventObject.title };
+    for(var i=0; i < eventObject.eventRoutes.length; i++){
+        var EventRoute = { RouteId: eventObject.eventRoutes[i].routeId, Distance: eventObject.eventRoutes[i].distance, Title: eventObject.eventRoutes[i].title };
+        eventModel.EventRoutes.push(EventRoute);
+    }
+    return JSON.stringify(eventModel);
 }
 function saveEvent() {
-    var apiUrl = location.origin + "/Event/SaveEvent";
+    var apiUrl = location.origin + "/Event/FinalizeEvent";
     $.ajax({
         method: "POST",
         url: apiUrl,
         contentType: "application/json;charset=utf-8",
         processData: false,
-        data: event,
+        data: createEventObject(),
         success: function (response) {
-            window.location.href = location.origin + "/map/Events";
+            window.location.href = location.origin + "/Event/Events";
         },
         error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
             alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
         }
     });
 }
-function back(page) {
+function back() {
     var apiUrl;
-    if (page === "toCreateEvent") {
-        apiUrl = location.origin + "/Event/CreateEvent";
-        $.ajax({
-            method: "GET",
-            url: apiUrl,
-            contentType: "application/json;charset=utf-8",
-            processData: false,
-            data: event,
-            //success: function (response) {
-            //    window.location.href = location.origin + "/map/SavedRoutes";
-            //},
-            error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
-                alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
-            }
-        });
-    }
-    if (page === "toAddRoute") {
-        apiUrl = location.origin + "/Event/AddRoutes";
-        $.ajax({
-            method: "GET",
-            url: apiUrl,
-            contentType: "application/json;charset=utf-8",
-            processData: false,
-            data: event,
-            //success: function (response) {
-            //    window.location.href = location.origin + "/map/SavedRoutes";
-            //},
-            error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
-                alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
-            }
-        });
-    }
-
+ 
+    apiUrl = location.origin + "/Event/CreateEventReload";
+    $.ajax({
+        method: "POST",
+        url: apiUrl,
+        contentType: "application/json;charset=utf-8",
+        processData: false,
+        data: createEventObject(),
+        success: function (response) {
+            window.location.href = location.origin + "/Event/CreateEventReload";
+        },
+        error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
+            alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
+        }
+    });
 }
+
+

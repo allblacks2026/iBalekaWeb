@@ -50,8 +50,12 @@ namespace iBalekaWeb
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<iBalekaDBContext>()
                 .AddDefaultTokenProviders();
-            
-            services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.AddMvc().AddJsonOptions(jsonOptions =>
+            {
+                jsonOptions.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            }); ;
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -104,6 +108,7 @@ namespace iBalekaWeb
             }
 
             app.UseStaticFiles();
+            app.UseSession();
             //app.UseIISPlatformHandler();
             app.UseIdentity();
 

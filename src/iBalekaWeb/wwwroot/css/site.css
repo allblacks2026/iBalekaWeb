@@ -12,7 +12,16 @@
     border: 1px solid black;
 }
 
-
+.routeddList{
+    color:aquamarine;
+}
+#routeList{
+    margin-right: 25%;
+}
+#eventRouteList{
+        margin-right: 25%;
+    margin-left: 10%;
+}
 
 #mainLogo {
         padding-left: 5%;

@@ -8,17 +8,22 @@ using iBalekaWeb.Models;
 using iBalekaWeb.Services;
 using iBalekaWeb.Models.EventViewModels;
 using Microsoft.AspNetCore.Identity;
+using iBalekaWeb.Models.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace iBalekaWeb.Controllers
 {
     public class EventController : Controller
     {
         private IEventService _context;
+        private IRouteService _routeContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        public EventController(IEventService _repo, UserManager<ApplicationUser> _user)
+        public EventController(IEventService _repo, UserManager<ApplicationUser> _user, IRouteService _rContext)
         {
             _context = _repo;
+            _routeContext = _rContext;
             _userManager = _user;
         }
 
@@ -43,72 +48,108 @@ namespace iBalekaWeb.Controllers
             return View(evntView);
         }
 
-        // GET: Event/Create
+        //create event
         [HttpGet]
-        public ActionResult CreateEvent()
-        {
-            return View();
-        }
-        
-        [ValidateAntiForgeryToken]
-        public IActionResult AddDetails()
+        public IActionResult CreateEvent()
         {
 
-            if (ModelState.IsValid)
+            if (_routeContext.GetRoutes(_userManager.GetUserId(User)).Any())
             {
-                //return Json(newEvent);
-
-                return RedirectToAction("AddRoutes");
+                ViewBag.UserRoutes = GetRoutes(null);
             }
             else
             {
-                return BadRequest();
+                ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
             }
 
-
-        }
-
-        [HttpGet(Name = "AddRoutes")]
-        public ActionResult AddRoutes()
-        {
-            return View();
-        }
-        
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveRoutes()
-        {
-            if (ModelState.IsValid)
-            {
-                //return Json(newEvent);
-                return RedirectToAction("SaveRoutes");
-
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
-
-        
-        public ActionResult FinalizeEvent()
-        {
-            return View();
+            EventViewModel model = new EventViewModel();
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveEvent([FromBody] EventViewModel newEvent)
+        public IActionResult CreateEventReload([FromBody]EventViewModel eventModel)
+        {
+
+            if (_routeContext.GetRoutes(_userManager.GetUserId(User)).Any())
+            {
+                string[] selectedValues = new string[eventModel.EventRoutes.Count];
+                for (int i = 0; i > eventModel.EventRoutes.Count; i++)
+                {
+                    selectedValues[i] = eventModel.EventRoutes[i].RouteId.ToString();
+                }
+                ViewBag.UserRoutes = GetRoutes(selectedValues);
+            }
+            else
+            {
+                ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
+            }
+
+            return View("CreateEvent", eventModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateEvent(EventViewModel model, int[] RouteId)
         {
             if (ModelState.IsValid)
             {
+                if (model.EventRoutes == null)
+                {
+                    model.EventRoutes = new List<EventRouteViewModel>();
+                }
+                foreach (int id in RouteId)
+                {
 
-                string userId = _userManager.GetUserId(User);
-                newEvent.UserID = userId;
-                _context.AddEvent(newEvent);
-                _context.SaveEvent();
-                Event savedEvent = _context.GetEvents(userId).Single(x => x.UserID == newEvent.UserID && x.Title == newEvent.Title && x.DateCreated == DateTime.Now.Date && x.Deleted == false);
-                //return Json(newEvent);
-                return RedirectToAction("EventDetails", new { id = savedEvent.EventId });
+                    model.EventRoutes.Add(new EventRouteViewModel(_routeContext.GetRouteByID(id)));
+                }
 
+                TempData["currentModel"] = model.ToJson();
+
+                TempData.Keep();
+                return RedirectToAction("FinalizeEvent");
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+
+        }
+        private MultiSelectList GetRoutes(string[] selectedValues)
+        {
+            IEnumerable<Route> routes = _routeContext.GetRoutes(_userManager.GetUserId(User)).ToList();
+            return new MultiSelectList(routes, "RouteId", "Title", selectedValues);
+        }
+
+
+        //save event
+        [HttpGet]
+        public ActionResult FinalizeEvent()
+        {
+
+            if (TempData["currentModel"] != null)
+            {
+                string currentModelJson = TempData.Peek("currentModel") as string;
+                EventViewModel currentModel = new EventViewModel(currentModelJson.ToString().FromJson<EventViewModel>());
+                return View(currentModel);
+            }
+            else
+            {
+                return RedirectToAction("CreateEvent");
+            }
+
+
+        }
+        [HttpPost]
+       
+        public ActionResult FinalizeEvent([FromBody]EventViewModel currentModel)
+        {
+            if (ModelState.IsValid)            {
+                
+                    string userId = _userManager.GetUserId(User);
+                    currentModel.UserID = userId;
+                    _context.AddEvent(currentModel);                   
+                    return RedirectToAction("Events");
+                
             }
             else
             {
@@ -125,6 +166,21 @@ namespace iBalekaWeb.Controllers
             {
                 return NotFound();
             }
+            if (_routeContext.GetRoutes(_userManager.GetUserId(User)).Any())
+            {
+                string[] selectedValues = new string[evnt.EventRoutes.Count];
+                for (int i = 0; i > evnt.EventRoutes.Count; i++)
+                {
+                    selectedValues[i] = evnt.EventRoutes[i].RouteId.ToString();
+                }
+                ViewBag.UserRoutes = GetRoutes(selectedValues);
+            }
+            else
+            {
+                ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
+            }
+
+            
             return View(evnt);
         }
 
