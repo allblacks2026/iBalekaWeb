@@ -1,6 +1,7 @@
 ﻿using iBalekaWeb.Data.Infastructure;
 using iBalekaWeb.Data.Repositories;
 using iBalekaWeb.Models;
+using iBalekaWeb.Models.EventViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,15 @@ namespace iBalekaWeb.Services
 {
     public interface IEventService
     {
-        void AddEventRoute(EventRoute route);
         Event GetEventByID(int id);
-        IEnumerable<EventRoute> GetEventRoute(int id);
-        IEnumerable<Event> GetAll();
-        void AddEvent(Event evnt);
-        void UpdateEvent(Event evnt);
+        EventViewModel GetEventByIDView(int id);
+        IEnumerable<EventRoute> GetEventRoutes(int id);
+        IEnumerable<Event> GetEvents(string userId);
+        void AddEvent(EventViewModel evnt);
+
+        void UpdateEvent(EventViewModel evnt);
         void Delete(Event evnt);
+        void DeleteEventRoutes(IEnumerable<EventRoute> evntRoute);
         void SaveEvent();
     }
     public class EventService:IEventService
@@ -34,30 +37,36 @@ namespace iBalekaWeb.Services
         {
             return _eventRepo.GetEventByID(id);
         }
-        public IEnumerable<Event> GetAll()
+        public EventViewModel GetEventByIDView(int id)
         {
-            return _eventRepo.GetAll();
+            return _eventRepo.GetEventByIDView(id);
         }
-        public IEnumerable<EventRoute> GetEventRoute(int id)
+        public IEnumerable<Event> GetEvents(string userId)
         {
-            return _eventRepo.GetEventRoute(id);
+            return _eventRepo.GetEvents(userId);
         }
-        public void AddEventRoute(EventRoute route)
+        public IEnumerable<EventRoute> GetEventRoutes(int id)
         {
-            _eventRepo.AddEventRoute(route);
+            return _eventRepo.GetEventRoutes(id);
         }
-        public void AddEvent(Event evnt)
+        public void AddEvent(EventViewModel evnt)
         {
-            _eventRepo.Add(evnt);
+            _eventRepo.AddEvent(evnt);
         }
-        public void UpdateEvent(Event evnt)
+       
+        public void UpdateEvent(EventViewModel evnt)
         {
-            _eventRepo.Update(evnt);
+            _eventRepo.UpdateEvent(evnt);
         }
         public void Delete(Event evnt)
         {
             _eventRepo.Delete(evnt);
         }
+        public void DeleteEventRoutes(IEnumerable<EventRoute> evntRoute)
+        {
+            _eventRepo.DeleteEventRoutes(evntRoute);
+        }
+
         public void SaveEvent()
         {
             unitOfWork.Commit();

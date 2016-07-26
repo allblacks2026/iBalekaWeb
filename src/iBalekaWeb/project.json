@@ -10,6 +10,9 @@
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+    "Microsoft.AspNetCore.Session": "1.0.0",
+    "Microsoft.Extensions.Caching.Memory": "1.0.0",
+    "Newtonsoft.Json": "9.0.1",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Razor.Tools": {
       "type": "build",
@@ -48,7 +51,9 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "Harvest.Chosen": "1.4.2",
+    "Microsoft.jQuery.Unobtrusive.Ajax": "3.2.3"
   },
   "frameworks": {
     "netcoreapp1.0": {

@@ -5,40 +5,124 @@ using System.Text;
 using System.Threading.Tasks;
 using iBalekaWeb.Data.Infastructure;
 using iBalekaWeb.Models;
+using iBalekaWeb.Models.EventViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace iBalekaWeb.Data.Repositories
 {
     public interface IEventRepository : IRepository<Event>
     {
-        void AddEventRoute(EventRoute route);
+        void AddEvent(EventViewModel evnt);
+        void UpdateEvent(EventViewModel evnt);
+        void DeleteEventRoutes(IEnumerable<EventRoute> evntRoute);
         Event GetEventByID(int id);
-        IEnumerable<EventRoute> GetEventRoute(int id);
+        EventViewModel GetEventByIDView(int id);
+        IEnumerable<EventRoute> GetEventRoutes(int id);
+        IEnumerable<Event> GetEvents(string userId);
     }
     public class EventRepository : RepositoryBase<Event>, IEventRepository
     {
-        public EventRepository(IDbFactory dbFactory)
-            : base(dbFactory) { }
-        //add addEvent
-        public void AddEventRoute(EventRoute route)
+        private IRouteRepository _routeRepo;
+        public EventRepository(IDbFactory dbFactory, IRouteRepository repo)
+            : base(dbFactory)
         {
-            DbContext.EventRoute.Add(route);
+            _routeRepo = repo;
         }
-        public IEnumerable<EventRoute> GetEventRoute(int id)
+        //add addEvent
+        public void AddEvent(EventViewModel evnt)
         {
-            return DbContext.EventRoute.Where(m => m.EventId == id && m.Deleted == false).ToList();
+            Event newEvent = new Event();
+            newEvent.Title = evnt.Title;
+            newEvent.Description = evnt.Description;
+            newEvent.Date = evnt.Date;
+            newEvent.Time = evnt.Time;
+            newEvent.Location = evnt.Location;
+            newEvent.UserID = evnt.UserID;
+            
+            
+            //Event savedEvent = DbContext.Event.Single(x => x.UserID == newEvent.UserID && x.Title == newEvent.Title && x.DateCreated == newEvent.DateCreated && x.Deleted == false);
+            foreach (EventRouteViewModel evntRoute in evnt.EventRoutes)
+            {
+                EventRoute route = new EventRoute(DateTime.Now.ToString());
+                //DbContext.EventRoute.Add(route);
+                //DbContext.SaveChanges();
+                route.RouteID = evntRoute.RouteId;
+                newEvent.EventRoute.Add(route);
+            }
+            DbContext.Event.Add(newEvent);
+            DbContext.SaveChanges();
+        }
+
+        public void UpdateEvent(EventViewModel evnt)
+        {
+            IEnumerable<EventRoute> evntRoutes = GetEventRoutes(evnt.EventId);
+            DeleteEventRoutes(evntRoutes);
+            Event newEvent = GetEventByID(evnt.EventId);
+            newEvent.Title = evnt.Title;
+            newEvent.Description = evnt.Description;
+            newEvent.Date = evnt.Date;
+            newEvent.Time = evnt.Time;
+            newEvent.Location = evnt.Location;
+            newEvent.DateModified = DateTime.Now.ToString();
+            newEvent.EventRoute = null;
+            foreach (EventRouteViewModel evntRoute in evnt.EventRoutes)
+            {
+                EventRoute route = new EventRoute(evntRoute.DateAdded);
+                DbContext.EventRoute.Add(route);
+                newEvent.EventRoute.Add(route);
+            }
+            DbContext.Event.Update(newEvent);
+        }
+        public void DeleteEventRoutes(IEnumerable<EventRoute> evntRoute)
+        {
+            foreach (EventRoute route in evntRoute)
+            {
+                route.Deleted = true;
+                DbContext.Entry(route).State = EntityState.Modified;
+            }
+        }
+        public IEnumerable<EventRoute> GetEventRoutes(int id)
+        {
+            return DbContext.EventRoute.Where(m => m.EventID == id && m.Deleted == false).ToList();
         }
         public Event GetEventByID(int id)
         {
-            return DbContext.Event.Where(m => m.EventId == id && m.Deleted == false).FirstOrDefault();
+            return DbContext.Event.Single(m => m.EventID == id && m.Deleted == false);
         }
-        public override IEnumerable<Event> GetAll()
+        public EventViewModel GetEventByIDView(int id)
         {
-            return DbContext.Event.Where(a => a.Deleted == false).ToList();
+            Event loadEvent = GetEventByID(id);
+            List<EventRoute> loadEventRoutes = GetEventRoutes(id).ToList();
+            List<EventRouteViewModel> eventRoutes = new List<EventRouteViewModel>();
+            foreach (EventRoute evntRoute in loadEventRoutes)
+            {
+                Route route = _routeRepo.GetRouteByID(evntRoute.RouteID);                
+                eventRoutes.Add(new EventRouteViewModel(evntRoute.EventRouteID, evntRoute.EventID, evntRoute.RouteID, evntRoute.DateAdded,route.Distance));
+            }
+            EventViewModel eventViewModel = new EventViewModel(loadEvent.EventID, loadEvent.UserID, loadEvent.Description, loadEvent.Title, loadEvent.Location, eventRoutes, loadEvent.Date, loadEvent.Time, loadEvent.DateCreated, loadEvent.DateModified);
+            return eventViewModel;
         }
-        public override void Delete(Event entity)
+        public IEnumerable<Event> GetEvents(string id)
         {
-            entity.Deleted = true;
-            Update(entity);
+            return DbContext.Event.Where(a => a.Deleted == false && a.UserID == id);
+        }
+        public override void Delete(Event evnt)
+        {
+            IEnumerable<EventRoute> evntRoutes = GetEventRoutes(evnt.EventID);
+            if (evntRoutes != null)
+            {
+                foreach (EventRoute route in evnt.EventRoute)
+                {
+                    route.Deleted = true;
+                    DbContext.Entry(route).State = EntityState.Modified;
+                }
+            }
+            Event deletedEvent = DbContext.Event.Single(x => x.EventID == evnt.EventID);
+            if (deletedEvent != null)
+            {
+                deletedEvent.Deleted = true;
+                DbContext.Entry(deletedEvent).State = EntityState.Modified;
+            }
         }
     }
 }

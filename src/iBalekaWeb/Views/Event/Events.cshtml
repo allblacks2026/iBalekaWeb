@@ -1,0 +1,28 @@
+@model IEnumerable<iBalekaWeb.Models.Event>
+
+<p>
+    <a asp-action="CreateEvent">Create New Event</a>
+</p>
+
+<ul class="list-group" id="routeList">
+    @if (Model.Count() > 0)
+    {
+        foreach (Event evnt in Model)
+        {
+
+            <li class="list-group-item">
+                <span class="badge">
+                    @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventID })
+
+                </span>
+                @* get event route nrs and put in badge
+                    <span class="badge">@totalDistance</span>*@
+                @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventID })
+            </li>
+        }
+    }
+    else
+    {
+        <li><h2>There are no Events to Display</h2></li>
+    }
+</ul>

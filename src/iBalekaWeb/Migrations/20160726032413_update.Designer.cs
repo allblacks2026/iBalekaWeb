@@ -8,9 +8,10 @@ using iBalekaWeb.Data.Configurations;
 namespace iBalekaWeb.Migrations
 {
     [DbContext(typeof(iBalekaDBContext))]
-    partial class iBalekaDBContextModelSnapshot : ModelSnapshot
+    [Migration("20160726032413_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -258,17 +259,20 @@ namespace iBalekaWeb.Migrations
 
                     b.Property<int>("EventID");
 
-                   
+                    b.Property<int>("EventId")
+                        .HasColumnName("EventID");
 
                     b.Property<int>("RouteID");
 
+                    b.Property<int>("RouteId")
+                        .HasColumnName("RouteID");
 
-                    b.HasKey("EventRouteID");
+                    b.HasKey("EventRouteId");
 
-                    b.HasIndex("EventID")
+                    b.HasIndex("EventId")
                         .HasName("IX_EventRoute_EventID");
 
-                    b.HasIndex("RouteID")
+                    b.HasIndex("RouteId")
                         .HasName("IX_EventRoute_RouteID");
 
                     b.ToTable("EventRoute");
@@ -531,12 +535,12 @@ namespace iBalekaWeb.Migrations
                 {
                     b.HasOne("iBalekaWeb.Models.Event", "Event")
                         .WithMany("EventRoute")
-                        .HasForeignKey("EventID")
+                        .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("iBalekaWeb.Models.Route", "Route")
                         .WithMany("EventRoute")
-                        .HasForeignKey("RouteID")
+                        .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -64,10 +64,10 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="active"><a class="btn btn-primary">Events</a></li>
+                <li class="active"><a asp-controller="Home" asp-action="Index" class="btn btn-primary">Profile</a></li>
+                <li><a asp-controller="Event" asp-action="Events" class="btn btn-primary">Events</a></li>
                 <li><a asp-controller="Map" asp-action="Map" class="btn btn-primary">Map a Route</a></li>
                 <li><a asp-controller="Map" asp-action="SavedRoutes" class="btn btn-primary">Saved Routes</a></li>
-                <li><a class="btn btn-primary">..</a></li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

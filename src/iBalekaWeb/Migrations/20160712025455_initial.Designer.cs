@@ -185,8 +185,7 @@ namespace iBalekaWeb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("EventID");
 
-                    b.Property<int>("ClubId")
-                        .HasColumnName("ClubID");
+                   
 
                     b.Property<DateTime>("DateAndTime");
 
@@ -203,8 +202,7 @@ namespace iBalekaWeb.Migrations
 
                     b.HasKey("EventId");
 
-                    b.HasIndex("ClubId")
-                        .HasName("IX_Event_ClubID");
+                   
 
                     b.ToTable("Event");
                 });
