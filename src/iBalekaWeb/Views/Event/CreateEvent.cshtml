@@ -2,11 +2,7 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
 @section AddToHead {
     <link href="~/css/chosen.css" rel="stylesheet" />
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> e1ffa31c5b4b257153c5a8d2d08ab9e177f821ba
     <link href="~/lib/datedropper/datedropper.css" rel="stylesheet" />
     <link href="~/lib/timedropper/timedropper.css" rel="stylesheet" />
 }
@@ -46,41 +42,6 @@
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             @Html.LabelFor(model => model.Time, new { @class = "col-md-2 mdl-textfield__label ", @style = "text-align:center" })<br/><br/>
 
-<<<<<<< HEAD
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Title, new { @class = "col-md-2 " })
-                <span asp-validation-for="Title" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Description, new { @class = "col-md-2 " })
-                <span asp-validation-for="Description" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="datepicker" asp-for="Date">
-                <span asp-validation-for="Date" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Time, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.TextBoxFor(model => model.Time)*@
-                <input type="text" id="timepicker" asp-for="Time">
-                <span asp-validation-for="Time" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Location, new { @class = " col-md-2" })
-=======
                             @*@Html.TextBoxFor(model => model.Time)*@
                             <input type="text" id="timepicker" asp-for="Time" style="text-align:center">
                             <span asp-validation-for="Time" class="text-danger" />
@@ -88,7 +49,6 @@
                         </div>
                     </div>
                     <div class="form-group">
->>>>>>> e1ffa31c5b4b257153c5a8d2d08ab9e177f821ba
 
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
@@ -133,20 +93,12 @@
     <script src="~/js/chosen.jquery.js"></script>
     <script src="~/js/eventsAjax.js"></script>
     <script src="~/lib/timedropper/timedropper.js"></script>
-<<<<<<< HEAD
-   
-=======
 
->>>>>>> e1ffa31c5b4b257153c5a8d2d08ab9e177f821ba
     <script>
         $(".chzn-select").chosen();
         var options = {
             format: "Y/m/d",
-<<<<<<< HEAD
-            placeholder: "Choose date...",
-=======
             placeholder: "Choose date",
->>>>>>> e1ffa31c5b4b257153c5a8d2d08ab9e177f821ba
             lock: "from",
             maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
             minYear:@DateTime.Now.ToString("yyyy")
