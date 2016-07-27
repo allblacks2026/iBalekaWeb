@@ -31,13 +31,15 @@ namespace iBalekaWeb.Models.EventViewModels
 
         }
 
-        public EventRouteViewModel(int eventRouteId, int eventId, int routeId, string dateAdded, double distance)
+        public EventRouteViewModel(int eventRouteId, int eventId, int routeId, string dateAdded, double distance,string title,string description)
         {
             EventRouteId = eventRouteId;
             EventId = eventId;
             RouteId = routeId;
             DateAdded = dateAdded;
             Distance = distance;
+            Title = title;
+            Description = description;
         }
 
         public EventRouteViewModel(Route evntRoute)

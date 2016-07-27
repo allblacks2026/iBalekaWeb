@@ -83,10 +83,19 @@
 
         }
     </ul>
+    <button class="btn btn-default" onclick="DeleteEvent()">Delete</button>
     <form asp-action="Delete">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
             <a asp-action="Events">Back to List</a>
         </div>
     </form>
 </div>
+<script>
+    var eventId = @Html.Raw(Json.Serialize(Model.EventId));
+    window.onload=(function(){
+        loadDeletedEventId(eventId);
+    });
+</script>
+@section Scripts {
+    <script src="~/js/eventsAjax.js"></script>
+}

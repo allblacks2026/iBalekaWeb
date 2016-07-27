@@ -12,6 +12,7 @@ namespace iBalekaWeb.Models
             DateAdded = dateAdded;
             Deleted = false;
         }
+        public string Title { get; set; }
         public int EventRouteID { get; set; }
         public string DateAdded { get; set; }
         public bool Deleted { get; set; }

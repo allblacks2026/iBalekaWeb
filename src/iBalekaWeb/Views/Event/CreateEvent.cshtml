@@ -2,6 +2,9 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
 @section AddToHead {
     <link href="~/css/chosen.css" rel="stylesheet" />
+    
+    <link href="~/lib/datedropper/datedropper.css" rel="stylesheet" />
+    <link href="~/lib/timedropper/timedropper.css" rel="stylesheet" />
 }
 
 <form asp-action="CreateEvent" method="post">
@@ -27,15 +30,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Date, new { @class = " col-md-2" })
+                <input type="text" id="datepicker" asp-for="Date">
                 <span asp-validation-for="Date" class="text-danger" />
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Time, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Time, new { @class = "col-md-2 " })
+                @*@Html.TextBoxFor(model => model.Time)*@
+                <input type="text" id="timepicker" asp-for="Time">
                 <span asp-validation-for="Time" class="text-danger" />
             </div>
         </div>
@@ -66,9 +69,24 @@
 </div>
 
 @section Scripts {
+    <script src="~/lib/datedropper/datedropper.js"></script>
     <script src="~/js/chosen.jquery.js"></script>
     <script src="~/js/eventsAjax.js"></script>
-    <script>$(".chzn-select").chosen(); </script> @*Hookup Chosen Plugin*@
+    <script src="~/lib/timedropper/timedropper.js"></script>
+   
+    <script>
+        $(".chzn-select").chosen();
+        var options = {
+            format: "Y/m/d",
+            placeholder: "Choose date...",
+            lock: "from",
+            maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
+            minYear:@DateTime.Now.ToString("yyyy")
+            };
+        $("#datepicker").dateDropper(options);
+        $("#timepicker").timeDropper();
+    </script> @*Hookup Chosen Plugin*@
+
 }
 @*<script>
         var eventObject = @Html.Raw(Json.Serialize(Model));

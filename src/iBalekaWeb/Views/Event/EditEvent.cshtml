@@ -1,4 +1,10 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
+@section AddToHead {
+    <link href="~/css/chosen.css" rel="stylesheet" />
+    
+    <link href="~/css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+}
+
 
 <form asp-action="Edit" method="post">
     <div class="form-horizontal">
@@ -22,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Date)
+                <input type="text" id="datepicker" asp-for="Date">
                 <span asp-validation-for="Date" class="text-danger" />
             </div>
         </div>
@@ -30,6 +36,7 @@
             @Html.LabelFor(model => model.Time, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Time)
+                <input type="text" id="timepicker" asp-for="Time">
                 <span asp-validation-for="Time" class="text-danger" />
             </div>
         </div>
@@ -45,22 +52,41 @@
             <div class="editor-field">
                 @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "chzn-select", data_placeholder = "Choose  Routes..." })
             </div><br />
+
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+
     </div>
 </form>
-
-<div>
+<div class="col-md-offset-2 col-md-10">
+    <button class="btn btn-default" onclick="EditEvent()">Save</button><br />
     @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }) |
     <a asp-action="Events">Back to List</a>
 </div>
 
+
 @section Scripts {
+    <script src="~/lib/datedropper/datedropper.js"></script>
     <script src="~/js/chosen.jquery.js"></script>
     <script src="~/js/eventsAjax.js"></script>
-    <script>$(".chzn-select").chosen(); </script> @*Hookup Chosen Plugin*@
-}
+    <script src="~/lib/timedropper/timedropper.js"></script>
+    
+    <script>
+        $(".chzn-select").chosen();
+        var options = {
+            format: "Y/m/d",
+            placeholder: "Choose date...",
+            lock: "from",
+            maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
+            minYear:@DateTime.Now.ToString("yyyy")
+            };
+        $("#datepicker").dateDropper(options);
+        $("#timepicker").timeDropper();
+    </script> @*Hookup Chosen Plugin*@
+
+}<script>
+    var eventObject = @Html.Raw(Json.Serialize(Model));
+    window.onload=(function(){
+        loadEventObject(eventObject);
+    });
+
+</script>
