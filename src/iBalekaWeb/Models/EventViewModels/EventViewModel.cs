@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,12 +41,17 @@ namespace iBalekaWeb.Models.EventViewModels
         public int[] RouteId { get; set; }
         public int EventId { get; set; }
         public string UserID { get; set; }
+        [Required(ErrorMessage = "*")]
         public string Date { get; set; }
+        [Required(ErrorMessage = "*")]
         public string Time { get; set; }
         public string DateModified { get; set; }
         public string DateCreated { get; set; }
+        [Required(ErrorMessage = "*")]
         public string Description { get; set; }
+        [Required(ErrorMessage = "*")]
         public string Location { get; set; }
+        [Required(ErrorMessage = "*")]
         public string Title { get; set; }
         public List<EventRouteViewModel> EventRoutes { get; set; }
 

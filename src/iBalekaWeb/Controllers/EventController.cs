@@ -109,7 +109,7 @@ namespace iBalekaWeb.Controllers
             }
             else
             {
-                return BadRequest();
+                return View(model);
             }
 
 
@@ -214,7 +214,7 @@ namespace iBalekaWeb.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
         }
 
