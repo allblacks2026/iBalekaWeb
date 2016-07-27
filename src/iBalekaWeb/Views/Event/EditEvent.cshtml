@@ -47,14 +47,15 @@
         <div class="form-group routeddList">
             @Html.LabelFor(model => model.EventRoutes, new { @class = "control-label col-md-2" })
             <div class="editor-field">
-                @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "chzn-select", data_placeholder = "Choose  Routes..." })
+                @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "chzn-select", data_placeholder = "Choose  Routes..."  })
             </div><br />
+            
         </div>
         
     </div>
 </form>
 <div class="col-md-offset-2 col-md-10">
-    <button class="btn btn-default" onclick="EditEvent()">Save</button>
+    <button class="btn btn-default" onclick="EditEvent()">Save</button><br />
     @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }) |
     <a asp-action="Events">Back to List</a>
 </div>

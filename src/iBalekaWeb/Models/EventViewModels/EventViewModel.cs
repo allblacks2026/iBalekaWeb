@@ -37,7 +37,7 @@ namespace iBalekaWeb.Models.EventViewModels
         public EventViewModel()
         {
         }
-
+        public int[] RouteId { get; set; }
         public int EventId { get; set; }
         public string UserID { get; set; }
         public string Date { get; set; }

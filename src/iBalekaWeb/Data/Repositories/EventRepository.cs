@@ -66,15 +66,19 @@ namespace iBalekaWeb.Data.Repositories
             newEvent.DateModified = DateTime.Now.ToString();
 
 
-            bool changed = false;
-            
-
             //DeleteEventRoutes(evntRoutes);
+            foreach(EventRoute route in evntRoutes)
+            {
+                DbContext.Entry(route).State = EntityState.Deleted;
+            }
+            DbContext.SaveChanges();
             newEvent.EventRoute = new List<EventRoute>();
             foreach (EventRouteViewModel evntRoute in evnt.EventRoutes)
             {
                 EventRoute route = new EventRoute(evntRoute.DateAdded);
-                DbContext.EventRoute.Add(route);
+                route.Title = evntRoute.Title;
+                route.Description = evnt.Description; 
+                route.RouteID = evntRoute.RouteId;
                 newEvent.EventRoute.Add(route);
             }
 

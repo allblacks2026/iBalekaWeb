@@ -159,6 +159,7 @@ namespace iBalekaWeb.Controllers
 
 
         // GET: Event/Edit/5
+        [HttpGet]
         public ActionResult EditEvent(int id)
         {
             EventViewModel evnt = _context.GetEventByIDView(id);
@@ -183,7 +184,14 @@ namespace iBalekaWeb.Controllers
             
             return View(evnt);
         }
+        [HttpPost]
+        public ActionResult UpdatedEditEvent([FromBody]int id)
+        {
 
+            return RedirectToAction("EventDetails", new { Id = id });
+
+
+        }
         // POST: Event/Edit/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
@@ -192,9 +200,17 @@ namespace iBalekaWeb.Controllers
 
             if (ModelState.IsValid)
             {
+                evnt.EventRoutes = new List<EventRouteViewModel>();
+
+                foreach (int id in evnt.RouteId)
+                {
+                    evnt.EventRoutes.Add(new EventRouteViewModel(_routeContext.GetRouteByID(id)));
+                }
                 _context.UpdateEvent(evnt);
                 _context.SaveEvent();
-                return RedirectToAction("EditEvent", evnt.EventId);
+                var url = Url.Action("EventDetails", "Event", new { id = evnt.EventId });
+                return Json(new { Url = url });
+              
             }
             else
             {
