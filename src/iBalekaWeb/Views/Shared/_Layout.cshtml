@@ -10,11 +10,14 @@
         <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
         <link rel="stylesheet" href="~/css/dashboard.css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="~/lib/material-design-lite/material.css" rel="stylesheet" />
         <link href="~/css/simple-sidebar.css" rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <link href="~/lib/material-design-lite/material.css" rel="stylesheet" />
         @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />*@
@@ -31,10 +34,7 @@
                 <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+                            
                         </button>
                         <div id="brand">
                             <div id="icon"><a href="#menu-toggle"><i id="menu-toggle" class="material-icons">apps</i></a></div>
@@ -88,6 +88,7 @@
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+        <script src="~/lib/material-design-lite/material.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
@@ -99,7 +100,8 @@
         </script>
         <script src="~/lib/jquery-ui/jquery-ui.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/material-design-lite/material.js"></script>
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>

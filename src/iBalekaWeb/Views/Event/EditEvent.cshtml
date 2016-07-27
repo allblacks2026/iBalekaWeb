@@ -1,10 +1,10 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
 @section AddToHead {
     <link href="~/css/chosen.css" rel="stylesheet" />
-    
-    <link href="~/css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
-}
 
+    <link href="~/lib/datedropper/datedropper.css" rel="stylesheet" />
+    <link href="~/lib/timedropper/timedropper.css" rel="stylesheet" />
+}
 
 <form asp-action="Edit" method="post">
     <div class="form-horizontal">
@@ -12,48 +12,60 @@
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Title)
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                @Html.LabelFor(model => model.Title, new { @class = "mdl-textfield__label" })   <br />
+                @Html.TextBoxFor(model => model.Title, new { @class = "mdl-textfield__input" })
                 <span asp-validation-for="Title" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Description)
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                @Html.LabelFor(model => model.Description, new { @class = "mdl-textfield__label" })<br />
+
+                @Html.TextBoxFor(model => model.Description, new { @class = "mdl-textfield__input" })
                 <span asp-validation-for="Description" class="text-danger" />
+
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                @Html.LabelFor(model => model.Date, new { @class = "col-md-4 mdl-textfield__label ", @style = "text-align:center" })<br />
                 <input type="text" id="datepicker" asp-for="Date">
                 <span asp-validation-for="Date" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Time, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Time)
-                <input type="text" id="timepicker" asp-for="Time">
-                <span asp-validation-for="Time" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Location)
-                <span asp-validation-for="Location" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group routeddList">
-            @Html.LabelFor(model => model.EventRoutes, new { @class = "control-label col-md-2" })
-            <div class="editor-field">
-                @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "chzn-select", data_placeholder = "Choose  Routes..." })
-            </div><br />
 
+            </div>
         </div>
+        <div class="form-group">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                @Html.LabelFor(model => model.Time, new { @class = "col-md-2 mdl-textfield__label ", @style = "text-align:center" })<br /><br />
+
+                @*@Html.TextBoxFor(model => model.Time)*@
+                <input type="text" id="timepicker" asp-for="Time" style="text-align:center">
+                <span asp-validation-for="Time" class="text-danger" />
+
+            </div>
+        </div>
+        <div class="form-group">
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                @Html.LabelFor(model => model.Location, new { @class = "mdl-textfield__label" })<br />
+                @Html.TextBoxFor(model => model.Location, new { @class = "mdl-textfield__input" })
+
+                <span asp-validation-for="Location" class="text-danger" />
+
+            </div>
+        </div>
+        <div class="form-group" id="routeddList">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                @Html.LabelFor(model => model.EventRoutes, new { @class = "col-md-2 mdl-textfield__label ", @style = "text-align:center" })<br /><br />
+
+                @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "chzn-select", data_placeholder = "Choose  Routes..." })
+
+            </div>
+        </div>
+
 
     </div>
 </form>
@@ -69,12 +81,12 @@
     <script src="~/js/chosen.jquery.js"></script>
     <script src="~/js/eventsAjax.js"></script>
     <script src="~/lib/timedropper/timedropper.js"></script>
-    
+
     <script>
         $(".chzn-select").chosen();
         var options = {
             format: "Y/m/d",
-            placeholder: "Choose date...",
+            placeholder: "Choose date",
             lock: "from",
             maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
             minYear:@DateTime.Now.ToString("yyyy")
@@ -82,6 +94,7 @@
         $("#datepicker").dateDropper(options);
         $("#timepicker").timeDropper();
     </script> @*Hookup Chosen Plugin*@
+
 
 }<script>
     var eventObject = @Html.Raw(Json.Serialize(Model));
