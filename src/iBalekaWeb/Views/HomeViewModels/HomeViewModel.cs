@@ -17,6 +17,7 @@ namespace iBalekaWeb.Models.HomeViewModels
 
         public HomeViewModel()
         {
+
         }
 
         public int NumberOfEvents { get; set; }

@@ -6,11 +6,6 @@ html, body, .main, #wrapper {
     padding: 0;
     height: 100%;
     width: 100%;
-<<<<<<< HEAD
-    overflow-y:hidden;
-}
-
-=======
  
 }
 .textDisplay{
@@ -20,7 +15,6 @@ html, body, .main, #wrapper {
 .padDisplayLeft{
     float:right;
 }
->>>>>>> be0bccffefdbd00a66ca77bbaece5d18881489c6
 .textInput{
     margin-bottom:-3% !important;
     text-align:center;
