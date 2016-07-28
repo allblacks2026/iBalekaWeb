@@ -127,7 +127,7 @@ html, body {
     }
 }
 
-/* SMARTPHONES LANDSCAPE */
+/*SMARTPHONES LANDSCAPE*/
 @media only screen and (min-width: 480px) {
     #map {
         margin-left: -6%;
@@ -144,7 +144,7 @@ html, body {
     }
 }
 
-/* TABLETS PORTRAIT */
+/*TABLETS PORTRAIT*/
 @media only screen and (min-width: 768px) {
     #map {
         margin-left: -7%;
@@ -160,24 +160,20 @@ html, body {
         margin-right: 5%;
     }
 }
-/* TABLET LANDSCAPE / DESKTOP */
+/*TABLET LANDSCAPE / DESKTOP*/
 @media only screen and (min-width: 1024px) {
     #map {
-        margin-left: -5%;
+        margin-left: 1%;
         height: 92vh;
-        width: 112%;
-    }
-
-    #routeList {
-        margin-right: 5%;
+        width: 100%;
     }
 }
 
 @media only screen and (min-width: 1200px) {
     #map {
-        margin-left: -3%;
-        height: 90vh;
-        width: 108%;
+        margin-left: 1%;
+        height: 88vh;
+        width: 100%;
     }
 
     #routeList {
@@ -199,15 +195,12 @@ html, body {
 
 @media only screen and (min-width: 1400px) {
     #map {
-        margin-left: -3%;
-        height: 93vh;
-        width: 108%;
+        margin-left: 1%;
+        height: 91vh;
+        width: 100%;
     }
 
     #routeList {
         margin-right: 5%;
     }
 }
-/*End Media Queries*/
-/*End Positioning Map*/
-

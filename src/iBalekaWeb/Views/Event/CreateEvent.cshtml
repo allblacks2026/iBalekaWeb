@@ -13,7 +13,7 @@
         <div class="mdl-cell mdl-cell--12-col ">
             <div class="mdl-grid">
                 <div class="mdl-layout-spacer"></div>
-                <div class="mdl-cell mdl-cell mdl-cell--12-col">
+                <div class="mdl-cell mdl-cell--12-col">
                     <div class="mdl-typography--headline" style="text-align:center;">Create Event</div>
                     <hr />
 
@@ -128,8 +128,7 @@
             placeholder: "Choose date",
             lock: "from",
             maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
-            minYear:@DateTime.Now.ToString("yyyy")
-                                        };
+            minYear:@DateTime.Now.ToString("yyyy")};
         $("#datepicker").dateDropper(options);
         $("#timepicker").timeDropper();
     </script> @*Hookup Chosen Plugin*@

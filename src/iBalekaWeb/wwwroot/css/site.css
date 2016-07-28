@@ -1,11 +1,20 @@
-﻿html, body, .main, #wrapper {
+﻿body{
+       overflow-y:hidden;
+}
+html, body, .main, #wrapper {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow-y:hidden;
+ 
+}
+.textDisplay{
+    font-size:15px;
 }
 
+.padDisplayLeft{
+    float:right;
+}
 .textInput{
     margin-bottom:-3% !important;
     text-align:center;
