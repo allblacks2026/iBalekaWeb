@@ -44,23 +44,26 @@ namespace iBalekaWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-           services.AddDbContext<iBalekaDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<iBalekaDBContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<iBalekaDBContext>()
                 .AddDefaultTokenProviders();
             services.AddDistributedMemoryCache();
             services.AddSession();
-            services.AddMvc().AddJsonOptions(jsonOptions =>
-            {
-                jsonOptions.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            }); ;
+            services.AddMvc()
+                .AddJsonOptions(jsonOptions =>
+                    {
+                        jsonOptions.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    })
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            
+
             //repos
             services.AddScoped<IDbFactory, DbFactory>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

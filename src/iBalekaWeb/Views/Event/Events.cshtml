@@ -1,28 +1,43 @@
 @model IEnumerable<iBalekaWeb.Models.Event>
+<div class="mdl-typography--headline" style="text-align:center;">Saved Events</div>
+<div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--12-col ">
+        <div class="mdl-grid">
+            <div class="mdl-layout-spacer"></div>
+            <ul class="list-group mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop mdl-card mdl-shadow--3dp" id="routeList">
+                @if (Model.Count() > 0)
+                {
+                    foreach (Event evnt in Model)
+                    {
 
-<p>
-    <a asp-action="CreateEvent">Create New Event</a>
-</p>
+                        <li class="list-group-item">
+                            <span class="badge">
+                                @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventID })
 
-<ul class="list-group" id="routeList">
-    @if (Model.Count() > 0)
-    {
-        foreach (Event evnt in Model)
-        {
+                            </span>
+                            @* get event route nrs and put in badge
+                                <span class="badge">@totalDistance</span>*@
+                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventID })
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li class="mdl-typography--headline" style="text-align:center;">There are no Events to Display</li>
+                }
 
-            <li class="list-group-item">
-                <span class="badge">
-                    @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventID })
-
-                </span>
-                @* get event route nrs and put in badge
-                    <span class="badge">@totalDistance</span>*@
-                @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventID })
-            </li>
-        }
-    }
-    else
-    {
-        <li><h2>There are no Events to Display</h2></li>
-    }
-</ul>
+            </ul>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+    </div>
+    <div class="mdl-layout-spacer"></div>
+</div>
+<div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
+        <a asp-action="CreateEvent" asp-controller="Event" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Create Event
+        </a>
+    </div>
+</div>

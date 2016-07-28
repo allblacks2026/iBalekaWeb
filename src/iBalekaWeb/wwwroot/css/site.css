@@ -3,8 +3,13 @@
     padding: 0;
     height: 100%;
     width: 100%;
+    overflow-y:hidden;
 }
 
+.textInput{
+    margin-bottom:-3% !important;
+    text-align:center;
+}
 #map {
     margin: 0;
     bottom: 0;
@@ -15,9 +20,7 @@
 .routeddList{
     color:aquamarine;
 }
-#routeList{
-    margin-right: 25%;
-}
+
 #eventRouteList{
         margin-right: 25%;
     margin-left: 10%;
@@ -44,3 +47,8 @@
     margin:-5%;
     
 }
+.android-drawer-separator {
+    height: 1px;
+    background-color: #dcdcdc;
+    margin: 8px 0;
+  }

@@ -7,76 +7,119 @@
 }
 
 <form asp-action="Edit" method="post">
-    <div class="form-horizontal">
-        <h4>Edit Event</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                @Html.LabelFor(model => model.Title, new { @class = "mdl-textfield__label" })   <br />
-                @Html.TextBoxFor(model => model.Title, new { @class = "mdl-textfield__input" })
-                <span asp-validation-for="Title" class="text-danger" />
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col ">
+            <div class="mdl-grid">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-cell mdl-cell mdl-cell--12-col">
+                    <div class="mdl-typography--headline" style="text-align:center;">Edit Event</div>
+                    <hr />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mdl-grid">
+                        <div class="mdl-layout-spacer"></div>
+                        <div class="mdl-cell mdl-cell--3-col textInput" style="margin-top: -2%;">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @Html.LabelFor(model => model.Title, new { @class = "mdl-textfield__label", @style = "text-align:center" })
+                                <input type="text" class="mdl-textfield__input" style = "text-align:center" asp-for="Title">
+                                <span asp-validation-for="Title" class="text-danger" />
+                            </div>
+                        </div>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-layout-spacer"></div>
+                        <div class="form-group mdl-cell mdl-cell--3-col textInput">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @Html.LabelFor(model => model.Description, new { @class = "mdl-textfield__label", @style = "text-align:center" })
+
+                                <input type="text" class="mdl-textfield__input" style = "text-align:center" asp-for="Description">
+                                <span asp-validation-for="Description" class="text-danger" />
+
+                            </div>
+                        </div>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-layout-spacer"></div>
+                        <div class="form-group mdl-cell mdl-cell--3-col textInput">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @Html.LabelFor(model => model.Date, new { @class = "mdl-textfield__label", @style = "text-align:center" })
+                                <input type="text" id="datepicker" class="mdl-textfield__input" style = "text-align:center" asp-for="Date">
+                                <span asp-validation-for="Date" class="text-danger" />
+
+                            </div>
+                        </div>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-layout-spacer"></div>
+                        <div class="form-group mdl-cell mdl-cell--3-col textInput">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                @Html.LabelFor(model => model.Time, new { @class = "mdl-textfield__label", @style = "text-align:center" })
+                                <input type="text" id="timepicker" class="mdl-textfield__input" asp-for="Time" style="text-align:center">
+                                <span asp-validation-for="Time" class="text-danger" />
+
+                            </div>
+                        </div>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-layout-spacer"></div>
+                        <div class="form-group mdl-cell mdl-cell--3-col textInput">
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+                                @Html.LabelFor(model => model.Location, new { @class = "mdl-textfield__label", @style = "text-align:center" })<br />
+                                <input type="text" class="mdl-textfield__input" style = "text-align:center" asp-for="Location">
+                                <span asp-validation-for="Location" class="text-danger" />
+
+                            </div>
+                        </div>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-layout-spacer"></div>
+                        <div class="form-group mdl-cell mdl-cell--3-col textInput" id="routeddList">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="text-align:center;">
+                                @Html.Label("EventRoutes", "Event Routes", new { @class = "mdl-textfield__label", @style = "text-align:center;" })      <br /><br />
+
+                                @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "chzn-select", data_placeholder = "Choose  Routes..." })
+
+                            </div>
+                        </div>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                </div>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+            <div class="mdl-grid evntButtons">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" asp-action="Events">
+                        Back to List
+                    </a>
+                </div>
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId },new { @class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" })
+                </div>
+                <div class="mdl-layout-spacer"></div>
+                <div class="form-group mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                    <button type="submit" onclick="EditEvent()" name="cmdButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        Next
+                    </button>
+                </div>
+
             </div>
         </div>
-        <div class="form-group">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                @Html.LabelFor(model => model.Description, new { @class = "mdl-textfield__label" })<br />
-
-                @Html.TextBoxFor(model => model.Description, new { @class = "mdl-textfield__input" })
-                <span asp-validation-for="Description" class="text-danger" />
-
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                @Html.LabelFor(model => model.Date, new { @class = "col-md-4 mdl-textfield__label ", @style = "text-align:center" })<br />
-                <input type="text" id="datepicker" asp-for="Date">
-                <span asp-validation-for="Date" class="text-danger" />
-
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                @Html.LabelFor(model => model.Time, new { @class = "col-md-2 mdl-textfield__label ", @style = "text-align:center" })<br /><br />
-
-                @*@Html.TextBoxFor(model => model.Time)*@
-                <input type="text" id="timepicker" asp-for="Time" style="text-align:center">
-                <span asp-validation-for="Time" class="text-danger" />
-
-            </div>
-        </div>
-        <div class="form-group">
-
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-                @Html.LabelFor(model => model.Location, new { @class = "mdl-textfield__label" })<br />
-                @Html.TextBoxFor(model => model.Location, new { @class = "mdl-textfield__input" })
-
-                <span asp-validation-for="Location" class="text-danger" />
-
-            </div>
-        </div>
-        <div class="form-group" id="routeddList">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-                @Html.LabelFor(model => model.EventRoutes, new { @class = "col-md-2 mdl-textfield__label ", @style = "text-align:center" })<br /><br />
-
-                @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "chzn-select", data_placeholder = "Choose  Routes..." })
-
-            </div>
-        </div>
-
-
     </div>
 </form>
-<div class="col-md-offset-2 col-md-10">
-    <button class="btn btn-default" onclick="EditEvent()">Save</button><br />
-    @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }) |
-    <a asp-action="Events">Back to List</a>
-</div>
 
 
 @section Scripts {
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/lib/datedropper/datedropper.js"></script>
     <script src="~/js/chosen.jquery.js"></script>
     <script src="~/js/eventsAjax.js"></script>
