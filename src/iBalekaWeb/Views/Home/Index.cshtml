@@ -1,11 +1,59 @@
-﻿@{
+﻿@model iBalekaWeb.Models.HomeViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Homepage";
 }
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col ">
+        <div class="mdl-grid">
 
+            <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-typography--headline" style="text-align:center;">Home Page</div>
+                <hr />
 
+<<<<<<< HEAD
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--12-col" id="profileInfo" style="background-color:palegreen">
 
+=======
+                <div class="mdl-grid">
+                 
+                </div>
+               
+                <div class="mdl-grid">
+                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-cell mdl-cell--6-col">
+                        <div class="mdl-card">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Events</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                You have @Model.NumberOfEvents Events created
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a asp-action="Events" asp-controller="Event">Go To Events</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mdl-layout-spacer"></div>
+                    <div class="mdl-cell mdl-cell--6-col" >
+                        <div class="mdl-card">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Routes</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                You have @Model.NumberOfRoutes Routes created
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a asp-action="SavedRoutes" asp-controller="Map">Go To Routes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </div>
+>>>>>>> be0bccffefdbd00a66ca77bbaece5d18881489c6
     </div>
 </div>
 <div class="mdl-grid">

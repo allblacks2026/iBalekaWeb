@@ -1,11 +1,26 @@
-﻿html, body, .main, #wrapper {
+﻿body{
+       overflow-y:hidden;
+}
+html, body, .main, #wrapper {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
+<<<<<<< HEAD
     overflow-y:hidden;
 }
 
+=======
+ 
+}
+.textDisplay{
+    font-size:15px;
+}
+
+.padDisplayLeft{
+    float:right;
+}
+>>>>>>> be0bccffefdbd00a66ca77bbaece5d18881489c6
 .textInput{
     margin-bottom:-3% !important;
     text-align:center;

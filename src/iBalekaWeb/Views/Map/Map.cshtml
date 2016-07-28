@@ -12,6 +12,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-action="Map">
+        
         <div id="map"></div><br />
         <div id="toolBoxWrapper">
             <div id="statisticsWrapper">
@@ -31,4 +32,10 @@
 @section Scripts {
     <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDR4BBX8Is0UhU2sYIv3HbpycxS0Vp1JdY&libraries=drawing,geometry&callback=initMap") async defer></script>
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
+    <script>
+        $(function () {
+            $("footer").hide(true);
+        });
+    </script>
+});
 }
