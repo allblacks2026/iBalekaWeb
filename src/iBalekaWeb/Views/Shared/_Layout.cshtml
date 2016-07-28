@@ -38,7 +38,11 @@
         <header class="mdl-layout__header">
             <div class="mdl-layout-icon"></div>
             <div class="mdl-layout__header-row">
+<<<<<<< HEAD
                 <span class="mdl-layout__title">iBaleka</span>
+=======
+                <span class="mdl-layout__title"><a asp-controller="Home" asp-action="Index">iBaleka</a></span>
+>>>>>>> be0bccffefdbd00a66ca77bbaece5d18881489c6
                 <div class="mdl-layout-spacer"></div>
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Home" asp-action="About">About</a>
@@ -63,12 +67,32 @@
 
             </nav>
         </div>
+<<<<<<< HEAD
     </div>
     <div class="mdl-grid">
         <main class="mdl-layout__content" style="margin-top: 5%;">
             @RenderBody()
         </main>
     </div>
+=======
+
+
+
+        <main class="mdl-layout__content">
+            @RenderBody()
+
+        </main>
+        <footer class="mdl-mini-footer" style="padding:0;">
+            <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">iBaleka</div>
+            </div>
+        </footer>
+
+
+    </div>
+
+
+>>>>>>> be0bccffefdbd00a66ca77bbaece5d18881489c6
     <environment names="Development,Production">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/jquery-ui/jquery-ui.js"></script>
@@ -92,11 +116,16 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
     @RenderSection("Scripts", required: false)
+<<<<<<< HEAD
     <script>
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
     </script>
+=======
+
+>>>>>>> be0bccffefdbd00a66ca77bbaece5d18881489c6
 </body>
+
 </html>

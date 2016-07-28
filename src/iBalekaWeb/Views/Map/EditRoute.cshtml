@@ -30,6 +30,10 @@
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
 }
 <script>
+        $(function () {
+            $("footer").hide(true);
+        });
+
     var routeObject = @Html.Raw(Json.Serialize(Model));
     window.onload=(function(){
         loadRoute(routeObject);
