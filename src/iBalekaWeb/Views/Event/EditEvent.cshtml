@@ -6,7 +6,7 @@
     <link href="~/lib/timedropper/timedropper.css" rel="stylesheet" />
 }
 
-<form asp-action="Edit" method="post">
+
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col ">
             <div class="mdl-grid">
@@ -21,7 +21,7 @@
                         <div class="mdl-cell mdl-cell--3-col textInput" style="margin-top: -2%;">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @Html.LabelFor(model => model.Title, new { @class = "mdl-textfield__label", @style = "text-align:center" })
-                                <input type="text" class="mdl-textfield__input" style = "text-align:center" asp-for="Title">
+                                <input type="text" class="mdl-textfield__input" style="text-align:center" asp-for="Title">
                                 <span asp-validation-for="Title" class="text-danger" />
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @Html.LabelFor(model => model.Description, new { @class = "mdl-textfield__label", @style = "text-align:center" })
 
-                                <input type="text" class="mdl-textfield__input" style = "text-align:center" asp-for="Description">
+                                <input type="text" class="mdl-textfield__input" style="text-align:center" asp-for="Description">
                                 <span asp-validation-for="Description" class="text-danger" />
 
                             </div>
@@ -45,7 +45,7 @@
                         <div class="form-group mdl-cell mdl-cell--3-col textInput">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @Html.LabelFor(model => model.Date, new { @class = "mdl-textfield__label", @style = "text-align:center" })
-                                <input type="text" id="datepicker" class="mdl-textfield__input" style = "text-align:center" asp-for="Date">
+                                <input type="text" id="datepicker" class="mdl-textfield__input" style="text-align:center" asp-for="Date">
                                 <span asp-validation-for="Date" class="text-danger" />
 
                             </div>
@@ -71,7 +71,7 @@
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
                                 @Html.LabelFor(model => model.Location, new { @class = "mdl-textfield__label", @style = "text-align:center" })<br />
-                                <input type="text" class="mdl-textfield__input" style = "text-align:center" asp-for="Location">
+                                <input type="text" class="mdl-textfield__input" style="text-align:center" asp-for="Location">
                                 <span asp-validation-for="Location" class="text-danger" />
 
                             </div>
@@ -103,11 +103,11 @@
                 <div class="mdl-layout-spacer"></div>
                 <div class="mdl-layout-spacer"></div>
                 <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-                    @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId },new { @class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" })
+                    @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }, new { @class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" })
                 </div>
                 <div class="mdl-layout-spacer"></div>
                 <div class="form-group mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-                    <button type="submit" onclick="EditEvent()" name="cmdButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    <button id="btnSaveEdit"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                         Save
                     </button>
                 </div>
@@ -115,16 +115,15 @@
             </div>
         </div>
     </div>
-</form>
+
 
 
 @section Scripts {
-@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/lib/datedropper/datedropper.js"></script>
     <script src="~/js/chosen.jquery.js"></script>
     <script src="~/js/eventsAjax.js"></script>
     <script src="~/lib/timedropper/timedropper.js"></script>
-
     <script>
         $(".chzn-select").chosen();
         var options = {
@@ -132,17 +131,20 @@
             placeholder: "Choose date",
             lock: "from",
             maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
-            minYear:@DateTime.Now.ToString("yyyy")
+            minYear:@DateTime.Now.ToString("yyyy"),
             };
         $("#datepicker").dateDropper(options);
         $("#timepicker").timeDropper();
+        
     </script> @*Hookup Chosen Plugin*@
+<script>
 
-
-}<script>
-    var eventObject = @Html.Raw(Json.Serialize(Model));
-    window.onload=(function(){
+    $("#btnSaveEdit").click(function(){
+        var eventObject = @Html.Raw(Json.Serialize(Model));
         loadEventObject(eventObject);
-    });
+        EditEvent();
+    })
 
 </script>
+
+}

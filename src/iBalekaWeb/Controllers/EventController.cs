@@ -208,9 +208,9 @@ namespace iBalekaWeb.Controllers
                 }
                 _context.UpdateEvent(evnt);
                 _context.SaveEvent();
-                var url = Url.Action("EventDetails", "Event", new { id = evnt.EventId });
-                return Json(new { Url = url });
-              
+                //return Json(new { id = evnt.EventId });
+                return RedirectToAction("EventDetails", new { id = evnt.EventId });
+                //return Ok();
             }
             else
             {
