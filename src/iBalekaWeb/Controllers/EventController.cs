@@ -61,31 +61,16 @@ namespace iBalekaWeb.Controllers
             {
                 ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
             }
-
+            string eventCookie = HttpContext.Request.Cookies["NewEvent"];
             EventViewModel model = new EventViewModel();
+            if (eventCookie != null)
+            {
+                model = eventCookie.FromJson<EventViewModel>();
+            }
+
             return View(model);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateEventReload([FromBody]EventViewModel eventModel)
-        {
 
-            if (_routeContext.GetRoutes(_userManager.GetUserId(User)).Any())
-            {
-                string[] selectedValues = new string[eventModel.EventRoutes.Count];
-                for (int i = 0; i > eventModel.EventRoutes.Count; i++)
-                {
-                    selectedValues[i] = eventModel.EventRoutes[i].RouteId.ToString();
-                }
-                ViewBag.UserRoutes = GetRoutes(selectedValues);
-            }
-            else
-            {
-                ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
-            }
-
-            return View("CreateEvent", eventModel);
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateEvent(EventViewModel model, int[] RouteId)
@@ -102,9 +87,14 @@ namespace iBalekaWeb.Controllers
                     model.EventRoutes.Add(new EventRouteViewModel(_routeContext.GetRouteByID(id)));
                 }
 
-                TempData["currentModel"] = model.ToJson();
+                //example of using cookie
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(5);
+                CookieOption.HttpOnly = true;
 
-                TempData.Keep();
+                //set cookie
+                HttpContext.Response.Cookies.Append("NewEvent", model.ToJson(), CookieOption);
+
                 return RedirectToAction("FinalizeEvent");
             }
             else
@@ -125,11 +115,10 @@ namespace iBalekaWeb.Controllers
         [HttpGet]
         public ActionResult FinalizeEvent()
         {
-
-            if (TempData["currentModel"] != null)
+            string eventCookie = HttpContext.Request.Cookies["NewEvent"];
+            if (eventCookie != null)
             {
-                string currentModelJson = TempData.Peek("currentModel") as string;
-                EventViewModel currentModel = new EventViewModel(currentModelJson.ToString().FromJson<EventViewModel>());
+                EventViewModel currentModel = eventCookie.FromJson<EventViewModel>();
                 return View(currentModel);
             }
             else
@@ -140,16 +129,24 @@ namespace iBalekaWeb.Controllers
 
         }
         [HttpPost]
-       
+
         public ActionResult FinalizeEvent([FromBody]EventViewModel currentModel)
         {
-            if (ModelState.IsValid)            {
+            if (ModelState.IsValid)
+            {
+
+                string userId = _userManager.GetUserId(User);
+                currentModel.UserID = userId;
+                _context.AddEvent(currentModel);
                 
-                    string userId = _userManager.GetUserId(User);
-                    currentModel.UserID = userId;
-                    _context.AddEvent(currentModel);                   
-                    return RedirectToAction("Events");
-                
+
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddDays(-1);
+                CookieOption.HttpOnly = true;
+
+                //set cookie
+                HttpContext.Response.Cookies.Append("NewEvent", currentModel.ToJson(), CookieOption);
+                return RedirectToAction("Events");
             }
             else
             {
@@ -181,7 +178,7 @@ namespace iBalekaWeb.Controllers
                 ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
             }
 
-            
+
             return View(evnt);
         }
         [HttpPost]
@@ -208,9 +205,9 @@ namespace iBalekaWeb.Controllers
                 }
                 _context.UpdateEvent(evnt);
                 _context.SaveEvent();
-                //return Json(new { id = evnt.EventId });
+
                 return RedirectToAction("EventDetails", new { id = evnt.EventId });
-                //return Ok();
+
             }
             else
             {

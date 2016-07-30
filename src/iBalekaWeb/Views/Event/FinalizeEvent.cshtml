@@ -1,66 +1,105 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
 
-<div class="form-horizontal">
-    <h4>Finalize Event</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.LabelFor(model => model.Title, "Title", new { @class = "control-label" })
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title, new { @class = "col-md-2 " })
-        </dd>
-        <dt>
-            @Html.LabelFor(model => model.Description, "Description", new { @class = "control-label" })
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description, new { @class = "col-md-2 " })
-        </dd>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col ">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--5-col">
+                <div class="mdl-typography--headline" style="text-align:center;">Event Details for @Model.Title</div>
+                <hr />
+                <div class="mdl-grid">
 
-        <dt>
-            @Html.LabelFor(model => model.Date, new { @class = "control-label" })
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Date, new { @class = "col-md-2 " })
-        </dd>
-        <dt>
-            @Html.LabelFor(model => model.Time, new { @class = "control-label" })
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Time, new { @class = "col-md-2 " })
-        </dd>
-        <dt>
-            @Html.LabelFor(model => model.Location, "Location", new { @class = "control-label" })
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Location, new { @class = "col-md-2 " })
-        </dd>
-    </dl>
-    <ul class="list-group" id="eventRouteList">
-        @foreach (var item in Model.EventRoutes)
-            {
-                string totalDistance = "";
-                //total distance conversion
-                if (item.Distance > 999) { totalDistance = Math.Round((item.Distance / 1000), 2).ToString() + "km"; } else { totalDistance = item.Distance.ToString() + "m"; }
-                <li class="list-group-item">
-                    <span class="badge">
-                        @totalDistance
-                    </span>
-                    @item.Title
-                </li>
+                    <div class="mdl-cell mdl-cell--12-col textDisplay" style="margin-top: -2%;">
+                        @Html.LabelFor(model => model.Title, "Title", new { @class = "control-label" }):
+                        <span class="padDisplayLeft">@Html.DisplayFor(model => model.Title)</span>
+                    </div>
 
-        }
-    </ul>
+                </div>
+                <div class="mdl-grid">
 
+                    <div class="mdl-cell mdl-cell--12-col textDisplay" style="margin-top: -2%;">
+                        @Html.LabelFor(model => model.Description, "Description", new { @class = "control-label" }):
+                        <span class="padDisplayLeft">@Html.DisplayFor(model => model.Description)</span>
+                    </div>
 
-</div>
+                </div>
+                <div class="mdl-grid">
 
-<div class="col-md-offset-2 col-md-10">
-    <button class="btn btn-default" name="cmdButton" value="Back" onclick="back()" id="btnBack">Back</button>
-    <button class="btn btn-default" name="cmdButton" value="Save" onclick="saveEvent()" id="btnSave">Finalize</button>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
+                    <div class="mdl-cell mdl-cell--12-col textDisplay" style="margin-top: -2%;">
+                        @Html.LabelFor(model => model.Date, new { @class = "control-label" }):
+                        <span class="padDisplayLeft">@Html.DisplayFor(model => model.Date)</span>
+                    </div>
+
+                </div>
+                <div class="mdl-grid">
+
+                    <div class="mdl-cell mdl-cell--12-col textDisplay" style="margin-top: -2%;">
+                        @Html.LabelFor(model => model.Time, new { @class = "control-label" }):
+                        <span class="padDisplayLeft">@Html.DisplayFor(model => model.Time)</span>
+                    </div>
+
+                </div>
+                <div class="mdl-grid">
+
+                    <div class="mdl-cell mdl-cell--12-col textDisplay" style="margin-top: -2%;">
+                        @Html.LabelFor(model => model.Location, "Location"):
+                        <span class="padDisplayLeft">@Html.DisplayFor(model => model.Location)</span>
+                    </div>
+
+                </div>
+                <div class="mdl-layout-spacer"></div>
+                <br />
+            </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                    <div class="mdl-typography--headline" style="text-align:center;">Event Routes</div>
+                    <hr />
+                    <div class="mdl-grid">
+                        <div class="mdl-layout-spacer"></div>
+                        <ul class="list-group mdl-cell mdl-cell--4-col mdl-cell--8-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone mdl-card mdl-shadow--3dp">
+                            @foreach (var item in Model.EventRoutes)
+                            {
+                                string totalDistance = "";
+                                //total distance conversion
+                                if (item.Distance > 999)
+                                {
+                                    totalDistance = Math.Round((item.Distance / 1000), 2).ToString() + "km";
+                                }
+                                else
+                                {
+                                    totalDistance = item.Distance.ToString() + "m";
+                                }
+                                <li class="list-group-item">
+                                    <span class="badge">
+                                        @totalDistance
+                                    </span>
+
+                                    @item.Title
+                                </li>
+
+                            }
+                        </ul>
+                        <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+
+           
+        </div>
+            <div class="mdl-grid evntButtons">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" asp-action="CreateEvent" id="btnBack">Back</a>
+
+                </div>
+                <div class="mdl-layout-spacer"></div>
+
+                <div class="mdl-layout-spacer"></div>
+                <div class="form-group mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name="cmdButton" value="Save" onclick="saveEvent()" id="btnSave">Finalize</button>
+                </div>
+
+            </div>
+        
+    </div>
 </div>
 <script>
     var eventObject = @Html.Raw(Json.Serialize(Model));
