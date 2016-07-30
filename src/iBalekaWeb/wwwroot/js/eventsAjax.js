@@ -19,24 +19,25 @@ function createEventObject() {
 }
 function createUpdatedEventObject() {
     var title, description, date, time, location;
-    title = document.getElementById("Title").value;
-    description = document.getElementById("Description").value;
-    date = document.getElementById("Date").value;
-    time = document.getElementById("Time").value;
-    location = document.getElementById("Location").value;
-    var eventModel = { EventId: eventObject.eventId, Date: date, Description: description, EventRoutes: [], Location: location, Time: time, Title: title };
+    title = $("#Title").val();
+    description = $("#Description").val();
+    date = $("#datepicker").val();
+    time = $("#timepicker").val();
+    location = $("#Location").val();
+    var routeList = $("#RouteId option");
+    var routeIds = [];
+    
+    var eventModel = { EventId: eventObject.eventId, Date: date, Description: description, EventRoutes: [], Location: location, Time: time, Title: title,RouteId:[] };
     for (var i = 0; i < eventObject.eventRoutes.length; i++) {
         var EventRoute = { RouteId: eventObject.eventRoutes[i].routeId };
         eventModel.EventRoutes.push(EventRoute);
     }
-    var routeList = document.getElementById("RouteId");
-    var routeIds = [];
-    for (var j = 0; j < routeList.options.length; j++) {
-        if (routeList.options[j].selected === true) {
-            routeIds.push(routeList.options[j].value);
+    for (var j = 0; j < routeList.length; j++) {
+        if (routeList[j].selected === true) {
+            var id = routeList[j].value;
+            eventModel.RouteId.push(id);
         }
     }
-    eventModel.RouteId = routeIds
     return JSON.stringify(eventModel);
 }
 function saveEvent() {
@@ -86,7 +87,8 @@ function DeleteEvent() {
             window.location.href = location.origin + "/Event/Events";
         },
         error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
-            alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
+            var err = eval("(" + httpRequest.responseText + ")");
+            alert("Error: " + err);
         }
     });
 }
@@ -99,11 +101,12 @@ function EditEvent() {
         contentType: "application/json;charset=utf-8",
         processData: false,
         data: createUpdatedEventObject(),
-        success: function (responseData) {
-            window.location.href = responseData.url
+        success: function (response) {
+            window.location.href = location.origin + "/Event/EventDetails/"+eventObject.eventId;
         },
         error: function (httpRequest, textStatus, errorThrown) {  // detailed error messsage 
-            alert("Error: " + textStatus + " " + errorThrown + " " + httpRequest);
+            var err = eval("(" + httpRequest.responseText + ")");
+            alert("Error: " + err);
         }
     });
 }

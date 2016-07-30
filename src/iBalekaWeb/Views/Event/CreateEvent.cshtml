@@ -20,7 +20,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="mdl-grid">
                         <div class="mdl-layout-spacer"></div>
-                        <div class="mdl-cell mdl-cell--3-col textInput" style="margin-top: -2%;">
+                        <div class="form-group mdl-cell mdl-cell--3-col textInput" style="margin-top: -2%;">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 @Html.LabelFor(model => model.Title, new { @class = "mdl-textfield__label", @style = "text-align:center" })
                                 <input type="text" class="mdl-textfield__input" asp-for="Title">

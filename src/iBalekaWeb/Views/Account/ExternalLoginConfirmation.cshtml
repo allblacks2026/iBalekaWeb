@@ -5,9 +5,8 @@
 
 <h2>@ViewData["Title"].</h2>
 <h3>Associate your @ViewData["LoginProvider"] account.</h3>
-
+<br /><br /><br />
 <form asp-controller="Account" asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <h4>Association Form</h4>
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -32,4 +31,11 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+            $(function () {
+                $("footer").hide(true);
+                $("header").hide(true);
+            });
+
+    </script>
 }
