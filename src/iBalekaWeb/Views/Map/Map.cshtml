@@ -1,5 +1,12 @@
 @section AddToHead {
     <link rel="stylesheet" href="~/css/mapStyle.css" />
+<style>
+  
+
+    #toolBoxWrapper {
+        display: none;
+    }
+</style>
 }
 @using Microsoft.AspNetCore.Identity
 @using iBalekaWeb.Models
@@ -9,14 +16,16 @@
 @{
     ViewData["Title"] = "iBaleka Route Mapping Tool";
 }
+
 @if (SignInManager.IsSignedIn(User))
 {
+
     <form asp-action="Map">
         
         <div id="map"></div><br />
         <div id="toolBoxWrapper">
             <div id="statisticsWrapper">
-                <p id="routeTitle">Untitled Route</p>
+                <p id="routeTitle" class="">Untitled Route</p>
                 <p id="totalDistance">Total Distance: 0</p>
                 <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
             </div>
@@ -26,7 +35,10 @@
             </div>
         </div>
 
-
+        <div class="preload">
+            <!-- MDL Spinner Component -->
+            <div class="mdl-spinner mdl-js-spinner is-active" id="loader"></div>
+        </div>
     </form>
 }
 @section Scripts {
@@ -34,7 +46,14 @@
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
     <script>
         $(function () {
+            $(".preload").fadeOut(5000, function () {
+                $("#map").fadeIn(1000);
+                $("#toolBoxWrapper").fadeIn(1000);
+            });
+        });
+        $(function () {
             $("footer").hide(true);
         });
+
     </script>
 }
