@@ -1,63 +1,80 @@
 ﻿body{
-       overflow-y:hidden;
+	   overflow-y:hidden;
 }
 html, body, .main, #wrapper {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
  
 }
 .textDisplay{
-    font-size:15px;
+	font-size:15px;
 }
-
+.preload{
+    background: 50% 50% no-repeat rgb(249,249,249);
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+}
+#loader{
+	height:150px;
+	width:150px;position: fixed;
+	left: 45%;
+	top: 35%;
+	width: 150px;
+	height: 150px;
+	z-index: 9999;
+	
+}
 .padDisplayLeft{
-    float:right;
+	float:right;
 }
 .textInput{
-    margin-bottom:-3% !important;
-    text-align:center;
+	margin-bottom:-3% !important;
+	text-align:center;
 }
 #map {
-    margin: 0;
-    bottom: 0;
-    width: 100%;
-    border: 1px solid black;
+	margin: 0;
+	bottom: 0;
+	width: 100%;
+	border: 1px solid black;
 }
 
 .routeddList{
-    color:aquamarine;
+	color:aquamarine;
 }
 
 #eventRouteList{
-        margin-right: 25%;
-    margin-left: 10%;
+		margin-right: 25%;
+	margin-left: 10%;
 }
 
 #mainLogo {
-        padding-left: 5%;
+		padding-left: 5%;
 }
 
 #brand {
-    display: inline-flex;
+	display: inline-flex;
 }
 
 #logo {
-    padding-left: 5%;
-    
+	padding-left: 5%;
+	
 }
 
 #icon {
-    padding-top: 11%;
-    padding-left: 5%;
+	padding-top: 11%;
+	padding-left: 5%;
 }
 .form-group {
-    margin:-5%;
-    
+	margin:-5%;
+	
 }
 .android-drawer-separator {
-    height: 1px;
-    background-color: #dcdcdc;
-    margin: 8px 0;
+	height: 1px;
+	background-color: #dcdcdc;
+	margin: 8px 0;
   }
