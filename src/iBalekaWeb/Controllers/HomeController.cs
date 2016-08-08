@@ -34,6 +34,7 @@ namespace iBalekaWeb.Controllers
         public IActionResult Index()
         {
             HomeViewModel model = new HomeViewModel();
+
             int nrEvents = int.Parse(_context.GetEvents(_userManager.GetUserId(User)).Count().ToString());
             int nrRoutes = int.Parse(_routeContext.GetRoutes(_userManager.GetUserId(User)).Count().ToString());
             model.NumberOfEvents = nrEvents;
