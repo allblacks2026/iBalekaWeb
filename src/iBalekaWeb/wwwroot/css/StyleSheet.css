@@ -1,0 +1,43 @@
+﻿ body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+   
+  }
+
+ 
+
+  main {
+    flex: 1 0 auto;
+  }
+      
+  #hero-title {
+  line-height: 1.5em;
+  margin-top: 10%; }
+
+#hero-title-one {
+  margin: 0px 0px 20px 0px;
+  line-height: 1.5em; }
+
+#hero-title-two {
+  margin: 0px;
+  line-height: 0.5em; }
+
+.hero-btn {
+  margin: 10px; }
+
+#hero{
+     background-position: center;
+    background-size: cover;
+   
+   /*background-image:url("../images/2.jpg")*/
+     background-color: ghostwhite;
+ }
+
+.divider {
+  height: 1px;
+  overflow: hidden;
+  /*opacity:0.5;*/
+ background-color: #e0e0e0;
+}

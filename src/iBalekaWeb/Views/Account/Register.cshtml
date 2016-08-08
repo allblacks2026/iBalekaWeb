@@ -1,122 +1,97 @@
 ﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
+
+
 }
 
-<h2>@ViewData["Title"]</h2>
 
-<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <hr /><br/><br /><br />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
+<div class="container">
+    
+     <div>
+         <h2 class="center-align">@ViewData["Title"]</h2>
+
+     </div>
+
+     <form asp-controller="Account" asp-action="Register" class="col s12" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+
+         <div class="row center-align">
+
+
+             <div asp-validation-summary="All" class="red-text text-darken-2 "></div>
+
+
+
+
+         </div>
+
+         <div class="row">
+             <div class="input-field col s12">
+                 <label asp-for="UserName ">User Name</label>
+
+                 <input asp-for="UserName" class="validate" />
+                 <span asp-validation-for="UserName" class="red-text text-darken-2"></span>
+             </div>
+         </div>
+
+         <div class="row">
+             <div class="input-field col s12">
+                 <label asp-for="Email ">Email</label>
+
+                 <input asp-for="Email" class="validate" />
+                 <span asp-validation-for="Email" class="red-text text-darken-2"></span>
+             </div>
+         </div>
+
+         <div class="row">
+             <div class="input-field col s12">
+                 <label asp-for="Password">Password</label>
+
+                 <input asp-for="Password" placeholder="Password" />
+                 <span asp-validation-for="Password" class="red-text text-darken-2"></span>
+
+             </div>
+         </div>
+
+         <div class="row">
+             <div class="input-field col s12">
+
+                 <input asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                 <label asp-for="ConfirmPassword">Confirm Password</label>
+
+                 <span asp-validation-for="ConfirmPassword" class="red-text text-darken-2"></span>
+             </div>
+         </div>
+
+         <div class="row">
+             <div class="input-field col s12">
+                 <button class="btn waves-effect waves-light" type="submit" name="action">
+                     Submit
+                     <i class="material-icons right">send</i>
+                 </button>
+             </div>
+
+
+         </div>
+
+     </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Register</button>
-<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-    <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col ">
-            <div class="mdl-grid">
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-cell mdl-cell--12-col">
-                    <div class="mdl-typography--display-1" style="text-align:center;">Register with iBaleka</div>
-                    <hr />
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="mdl-grid">
-                        <div class="mdl-layout-spacer"></div>
-                        <div class="form-group mdl-cell mdl-cell--3-col">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <label asp-for="UserName" class="mdl-textfield__label"></label>
 
-                                <input asp-for="UserName" class="mdl-textfield__input" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
-
-                            </div>
-                        </div>
-                        <div class="mdl-layout-spacer"></div>
-                    </div>
-                    
-                    <div class="mdl-grid">
-                        <div class="mdl-layout-spacer"></div>
-                        <div class="form-group mdl-cell mdl-cell--3-col">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <label asp-for="Email" class="mdl-textfield__label"></label>
-
-                                <input asp-for="Email" class="mdl-textfield__input" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-
-                            </div>
-                        </div>
-                        <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <div class="mdl-grid">
-                        <div class="mdl-layout-spacer"></div>
-                        <div class="form-group mdl-cell mdl-cell--3-col">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <label asp-for="Password" class="mdl-textfield__label"></label>
-
-                                <input asp-for="Password" class="mdl-textfield__input" />
-                                <span asp-validation-for="Password" class="text-danger"></span>
-
-                            </div>
-                        </div>
-                        <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <div class="mdl-grid">
-                        <div class="mdl-layout-spacer"></div>
-                        <div class="form-group mdl-cell mdl-cell--3-col">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <label asp-for="ConfirmPassword" class="mdl-textfield__label"></label>
-
-                                <input asp-for="ConfirmPassword" class="mdl-textfield__input" />
-                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-
-                            </div>
-                        </div>
-                        <div class="mdl-layout-spacer"></div>
-                    </div>
-                </div>
-                <div class="mdl-layout-spacer"></div>
-            </div>
-            <div class="mdl-grid">
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-cell mdl-cell--4-col">
-                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Register</button>
-                </div>
+      
+  
 
 
-            </div>
-        </div>
-    </div>
-</form>
+
+
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-    <script>
+    @*<script>
             $(function () {
                 $("footer").hide(true);
                 $("header").hide(true);
             });
 
-    </script>
+    </script>*@
 
 }

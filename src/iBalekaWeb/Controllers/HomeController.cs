@@ -40,13 +40,18 @@ namespace iBalekaWeb.Controllers
             model.NumberOfRoutes = nrRoutes;
             return View(model);
         }
-        [Authorize]
+
+        public IActionResult Default()
+        {
+            return View();
+        }
+     
         public IActionResult About()
         {
 
             return View();
         }
-        [Authorize]
+    
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
