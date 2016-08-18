@@ -31,7 +31,7 @@ namespace iBalekaWeb.Controllers
         }
         static ILogger _logger;
         [Authorize]
-        public IActionResult Index()
+        public IActionResult Default()
         {
             HomeViewModel model = new HomeViewModel();
             int nrEvents = int.Parse(_context.GetEvents(_userManager.GetUserId(User)).Count().ToString());
@@ -41,7 +41,7 @@ namespace iBalekaWeb.Controllers
             return View(model);
         }
 
-        public IActionResult Default()
+        public IActionResult Index()
         {
             return View();
         }

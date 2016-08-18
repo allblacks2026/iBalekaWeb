@@ -1,104 +1,96 @@
-﻿@model iBalekaWeb.Models.HomeViewModels.HomeViewModel
-@{
-    ViewData["Title"] = "Homepage";
+﻿@{
+    ViewData["Title"] = "Welcome Home";
 }
 
+<div id="hero">
+    <div class="container" id="hero-text-container">
+        <div class="row">
+            <div class="col s12 center-align text black-text text-accent-2" >
+                <h1 id="hero-title" itemprop="description">
+                    <strong class="bold">iBaleka</strong>
+                    <span class="thin">
+                        One System<br /> Two Platforms.
+
+                        <br />
+                    </span>
+
+                </h1>
+
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s12">
+                <div class="center-align">
+                    <a href="#create" class="btn waves-effect waves-light btn-large red accent-3">
+
+                        Get Started
 
 
 
+                    </a>
+                    <a href="#learn" class="btn waves-effect waves-light btn-large red accent-3">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+</div>
+
+
+
+
+
+<div class="row center-align" id="getting-started">
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+    <h3 class="thin center">First steps before you begin</h3>
+    <div class="spacer"></div>
     <div class="row">
-        <div class="col s6">
-            <div class="card large">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="~/images/Running Event.jpg">
-                    
-                </div>
 
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Events<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link 1</a></p>
-                    <p><a href="#">This is a link 2</a></p>
-                    <p><a href="#">This is a link 3</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Events<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
+
+        <div class="col s6">
+            <h5>Registration Steps</h5>
+            <ul class="section" id="getting-started-list">
+                <li class="flow-text"><strong class="bold"> Please</strong> input correct details</li>
+                <li class="flow-text"><strong class="bold">Incorrect details</strong> on registration will redirect you to a <br /> page with registration hints</li>
+                <li class="flow-text">You may use the registration option at the top</li>
+            </ul>
         </div>
 
 
         <div class="col s6">
-            <div class="card large">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="~/images/Routes.jpg">
-
-                </div>
-
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Routes<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link 1</a></p>
-                    <p><a href="#">This is a link 2</a></p>
-                    <p><a href="#">This is a link 3</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Routes<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                </div>
-            </div>
-        </div>
-       
-
-    </div>
-
-
-@*<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col ">
-        <div class="mdl-grid">
-
-            <div class="mdl-cell mdl-cell--12-col">
-                <div class="mdl-typography--headline" style="text-align:center;">Home Page</div>
-                <hr />
-
-                <div class="mdl-grid">
-                 
-                </div>
+            <h5>Login Steps</h5>
+            <ul class="section" id="getting-started-list">
                
-                <div class="mdl-grid">
-                    <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <div class="mdl-card">
-                            <div class="mdl-card__title">
-                                <h2 class="mdl-card__title-text">Events</h2>
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                You have @Model.NumberOfEvents Events created
-                            </div>
-                            <div class="mdl-card__actions">
-                                <a asp-action="Events" asp-controller="Event">Go To Events</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-cell mdl-cell--6-col" >
-                        <div class="mdl-card">
-                            <div class="mdl-card__title">
-                                <h2 class="mdl-card__title-text">Routes</h2>
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                You have @Model.NumberOfRoutes Routes created
-                            </div>
-                            <div class="mdl-card__actions">
-                                <a asp-action="SavedRoutes" asp-controller="Map">Go To Routes</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mdl-layout-spacer"></div>
-            </div>
+                <li class="flow-text"><strong class="bold"> Please</strong> select login option</li>
+                <li class="flow-text"><strong class="bold">You may use social media</strong> or email logiin</li>
+               
+                <li class="flow-text">You may use the login option at the top</li>
+            </ul>
         </div>
+    
     </div>
-</div>*@
+
+
+
+
+
+
+    @*<div class="section" id="getting-started-more-list">
+        <p class="flow-text">Customise how members receive emails and how replies are handled.</p>
+        <p class="flow-text">Allow new members to <a href="/online-signup">signup directly</a> from a dedicated web page.</p>
+        <p class="flow-text">View <a href="/delivery-reports">delivery reports</a> to see if messages are getting through.</p>
+        <p class="flow-text">Use a <a href="/custom-domains">custom domains</a> to personalise your messages.</p>
+    </div>*@
+</div>
+
+
+<!-- Create Account -->
+
+<div class="divider"></div>
+
+
+
