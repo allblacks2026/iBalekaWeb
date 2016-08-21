@@ -8,5 +8,5 @@
 /// <reference path="lib/jquery-ui/jquery-ui.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
-/// <reference path="lib/material-design-lite/material.min.js" />
+/// <reference path="lib/materialize/bin/materialize.js" />
 /// <reference path="lib/timedropper/timedropper.js" />

@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - All Blacks</title>
     <environment names="Development">
+        
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
         <link rel="stylesheet"href="~/lib/materialize/dist/css/materialize.css" />
         <link rel="stylesheet" href="~/css/StyleSheet.css" />
+        @*<link rel="stylesheet" href="~/lib/animate.css/animate.css" />*@
+
+
+        
 
         @*<link rel="stylesheet" href="~/lib/bootswatch/paper/bootstrap.min.css" />*@
         @*<link rel="stylesheet" href="~/css/site.css" />
@@ -48,13 +52,14 @@
         
             <nav class="hoverable red">
                 <div class="nav-wrapper red-text">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+
                     <a asp-controller="Home" asp-action="Index" class="brand-logo">iBaleka</a>
 
 
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         <li>
-                            <a asp-controller="Home" asp-action="Default">Help</a>
+                            <a asp-controller="Home" asp-action="Default">Features</a>
 
                         </li>
 
@@ -79,10 +84,15 @@
 
                         </li>
 
-                       
 
                         <li>
-                            <a  asp-controller="Event" asp-action="Events">Events</a>
+
+                            <a asp-controller="Home" asp-action="Default">Features</a>
+
+                        </li>
+
+                        <li>
+                            <a  asp-controller="Event" asp-action="Events">Saved Events</a>
 
                         </li>
 
@@ -91,16 +101,11 @@
 
                         </li>
 
-                        <li>
+                        @*<li>
                             <a asp-controller="Map" asp-action="Map">Map a Route</a>
 
-                        </li>
+                        </li>*@
 
-                        <li>
-
-                            <a asp-controller="Home" asp-action="Default">Help</a>
-
-                        </li>
 
                         @*<li>
                             <a asp-controller="Home" asp-action="About">About</a>

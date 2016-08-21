@@ -27,7 +27,7 @@
 
         <div class="row center-align">
 
-            <div asp-validation-summary="All" class="red-text text-darken-2 "></div>
+            <div asp-validation-summary="All" class="red-text text-darken-2"></div>
 
 
         </div>
@@ -105,7 +105,7 @@
         <div class="row">
             <div class="input-field col s12">
 
-                    @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList)
+                    @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList , new {@class= "checked"})
                     @Html.LabelFor(model => model.RouteId)
 
                 
@@ -133,7 +133,7 @@
         <div class="row">
             <div class="input-field col s6">
 
-                <a asp-action="Events">
+                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
                     Back to List
                 </a>
 

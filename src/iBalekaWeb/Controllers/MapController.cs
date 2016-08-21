@@ -12,6 +12,7 @@ using System.Diagnostics;
 
 namespace iBalekaWeb.Controllers
 {
+    [Authorize]
     public class MapController : Controller
     {
         private IRouteService _context;
