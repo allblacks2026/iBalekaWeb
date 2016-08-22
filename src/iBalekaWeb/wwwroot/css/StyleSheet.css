@@ -41,9 +41,11 @@
 #hero{
      background-position: center;
     background-size: cover;
+    /*width:auto;
+    height:900px;
    
-   /*background-image:url("../images/photo-1462833867037-0f06eab31cc4.jpg")*/
-     /*background-color: ghostwhite;*/
+   background-image:url("http://www.derivcodev.com/wp-content/uploads/2014/09/HEADER1.jpg");*/
+   
  }
 
 .divider {
