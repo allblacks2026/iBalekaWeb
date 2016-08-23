@@ -44,19 +44,19 @@ namespace iBalekaWeb.Models.EventViewModels
         public int EventId { get; set; }
         [DisplayName("User ID")]
         public string UserID { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Event Date is Required")]
         public string Date { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Event Time is Required")]
         public string Time { get; set; }
         [DisplayName("Date Modified")]
         public string DateModified { get; set; }
         [DisplayName("Date Created ")]
         public string DateCreated { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Event Description is Required")]
         public string Description { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Event Location is Required")]
         public string Location { get; set; }
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Event Title is Required")]
         public string Title { get; set; }
         [DisplayName("Event Routes")]
         public List<EventRouteViewModel> EventRoutes { get; set; }

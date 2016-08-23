@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace iBalekaWeb.Models
 {
-    public partial class Route
+    public class Route
     {
         public Route()
         {
@@ -15,7 +15,16 @@ namespace iBalekaWeb.Models
             DateModified = DateTime.Now;
             Deleted = false;
         }
-
+        public Route(int routeId, string title, string userId, double distance, List<Checkpoint> checks, DateTime dateRecorded, DateTime dateModified)
+        {
+            RouteId = routeId;
+            Title = title;
+            UserID = userId;
+            Distance = distance;
+            Checkpoint = checks;
+            DateRecorded = dateRecorded;
+            DateModified = dateModified;
+        }
         public int RouteId { get; set; }
         public string UserID { get; set; }
         public string Title { get; set; }
