@@ -2,7 +2,7 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    font-family: 'Roboto', sans-serif;
+    font-family: Roboto;
    
   }
 
@@ -11,10 +11,21 @@
   main {
     flex: 1 0 auto;
   }
-      
-  #hero-title {
-  line-height: 1.5em;
-  margin-top: 10%; }
+
+ 
+
+#hero-title {
+    line-height: 1.5em;
+    margin-top: 10%;
+     color: #f35626;
+    background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 10s infinite linear;
+    animation: hue 10s infinite linear;
+    
+}
 
 #hero-title-one {
   margin: 0px 0px 20px 0px;
@@ -30,9 +41,11 @@
 #hero{
      background-position: center;
     background-size: cover;
+    /*width:auto;
+    height:900px;
    
-   /*background-image:url("../images/2.jpg")*/
-     background-color: ghostwhite;
+   background-image:url("http://www.derivcodev.com/wp-content/uploads/2014/09/HEADER1.jpg");*/
+   
  }
 
 .divider {
@@ -40,4 +53,35 @@
   overflow: hidden;
   /*opacity:0.5;*/
  background-color: #e0e0e0;
+}
+
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
+
+@-moz-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
 }

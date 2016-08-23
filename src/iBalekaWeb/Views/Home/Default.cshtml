@@ -1,108 +1,58 @@
-﻿@{
-    ViewData["Title"] = "Welcome Home";
+﻿@model iBalekaWeb.Models.HomeViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Homepage";
 }
 
-<div id="hero">
-    <div class="container" id="hero-text-container">
-        <div class="row">
-            <div class="col s12 center-align text black-text text-accent-2" >
-                <h1 id="hero-title" itemprop="description">
-                    <strong class="bold">iBaleka</strong>
-                    <span class="thin">
-                        One System<br /> Two Platforms.
 
-                        <br />
-                    </span>
 
-                </h1>
 
+<div class="row">
+    <div class="col s6">
+        <div class="card large">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="~/images/Running Event.jpg">
 
             </div>
-        </div>
 
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">Events<i class="material-icons right">help</i></span>
+                <p><a asp-controller="Event" asp-action="CreateEvent">Add Event</a></p>
 
-        <div class="row">
-            <div class="col s12">
-                <div class="center-align">
-                    <a href="#create" class="btn waves-effect waves-light btn-large  red accent-3">
-
-                        Get Started
-
-
-
-                    </a>
-                    <a href="#learn" class="btn waves-effect waves-light btn-large  red accent-3">Learn More</a>
-                </div>
+                <p><a asp-controller="Event" asp-action="Events">View List of Events</a></p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Events<i class="material-icons right">close</i></span>
+                <h5>Here you can add events and view a list of events </h5>
+                <h5>On the saved events screen you will be given the option of adding a new event</h5>
             </div>
         </div>
     </div>
-    <div class="divider"></div>
-</div>
 
 
+    <div class="col s6">
+        <div class="card large">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="~/images/Routes.jpg">
 
+            </div>
 
+            <div class="card-content">
+                
+                <span class="card-title activator grey-text text-darken-4">Routes<i class="material-icons right">help</i></span>
+                <p><a asp-controller="Map" asp-action="Map">Add Route</a></p>
 
-<div class="row center-align" id="getting-started">
-    <div class="spacer"></div>
-    <div class="spacer"></div>
-    <h3 class="thin center">First steps before you begin</h3>
-    <div class="spacer"></div>
-    <div class="row">
+                <p><a asp-controller="Map" asp-action="SavedRoutes">View List of Routes</a></p>
 
-
-        <div class="col s6">
-            <h5>Registration Steps</h5>
-            <ul class="section" id="getting-started-list">
-                <li class="flow-text"><strong class="bold"> Please</strong> input correct details</li>
-                <li class="flow-text"><strong class="bold">Incorrect details</strong> on registration will redirect you to a <br /> page with registration hints</li>
-                <li class="flow-text">You may use the registration option at the top</li>
-            </ul>
-        </div>
-
-
-        <div class="col s6">
-            <h5>Login Steps</h5>
-            <ul class="section" id="getting-started-list">
-               
-                <li class="flow-text"><strong class="bold"> Please</strong> select login option</li>
-                <li class="flow-text"><strong class="bold">You may use social media</strong> or email logiin</li>
-               
-                <li class="flow-text">You may use the login option at the top</li>
-            </ul>
-        </div>
-    
-    </div>
-
-
-
-
-
-
-    @*<div class="section" id="getting-started-more-list">
-        <p class="flow-text">Customise how members receive emails and how replies are handled.</p>
-        <p class="flow-text">Allow new members to <a href="/online-signup">signup directly</a> from a dedicated web page.</p>
-        <p class="flow-text">View <a href="/delivery-reports">delivery reports</a> to see if messages are getting through.</p>
-        <p class="flow-text">Use a <a href="/custom-domains">custom domains</a> to personalise your messages.</p>
-    </div>*@
-</div>
-
-
-<!-- Create Account -->
-
-<div class="divider"></div>
-
-
-
-<div class="row" id="create-row">
-    <span id="create" class="scrollspy"></span>
-
-    <div class="row">
-        <div class="section center">
-            <h3 class="thin">Register first <strong class="bold">account now</strong></h3>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Routes<i class="material-icons right">close</i></span>
+                <h5>Here you can add routes and view a list of saved routes </h5>
+                <h5>On the saved route screen you will be given the option of adding a new route</h5>
+            </div>
         </div>
     </div>
+
+
 </div>
 
-@await Html.PartialAsync("_Register")
 

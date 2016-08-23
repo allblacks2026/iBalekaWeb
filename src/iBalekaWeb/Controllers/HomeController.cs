@@ -31,7 +31,7 @@ namespace iBalekaWeb.Controllers
         }
         static ILogger _logger;
         [Authorize]
-        public IActionResult Index()
+        public IActionResult Default()
         {
             HomeViewModel model = new HomeViewModel();
 
@@ -42,7 +42,7 @@ namespace iBalekaWeb.Controllers
             return View(model);
         }
 
-        public IActionResult Default()
+        public IActionResult Index()
         {
             return View();
         }
