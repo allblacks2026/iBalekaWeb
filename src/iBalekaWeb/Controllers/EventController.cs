@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace iBalekaWeb.Controllers
 {
+    [Authorize]
     public class EventController : Controller
     {
         private IEventService _context;
@@ -49,6 +50,7 @@ namespace iBalekaWeb.Controllers
         }
 
         //create event
+        [Authorize]
         [HttpGet]
         public IActionResult CreateEvent()
         {
