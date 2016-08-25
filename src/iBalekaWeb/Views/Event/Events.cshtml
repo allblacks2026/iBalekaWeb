@@ -24,14 +24,14 @@
                     <li class="collection-item avatar">
 
                         <div class="title">
-                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventID })
+                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
 
                         </div>
 
                         <p>
 
                             <a class="badge">
-                                @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventID })
+                                @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventId })
 
                             </a>
                         </p>

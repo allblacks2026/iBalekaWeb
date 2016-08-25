@@ -13,6 +13,7 @@ namespace iBalekaWeb.Models.MapViewModels
             Latitude = lat;
             Longitude = lng;
         }
+        public int CheckpointId;
         public double Latitude { get; set; }
         public double Longitude { get; set; }
     }

@@ -15,6 +15,8 @@ using iBalekaWeb.Services;
 using iBalekaWeb.Data.Configurations;
 using iBalekaWeb.Data.Infastructure;
 using Microsoft.AspNetCore.Mvc;
+using iBalekaWeb.Data.Infrastructure;
+using iBalekaWeb.Data.iBalekaAPI;
 
 namespace iBalekaWeb
 {
@@ -68,6 +70,9 @@ namespace iBalekaWeb
 
             //repos
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IApiClient, ApiClient>();
+            services.AddScoped<IMapClient, MapClient>();
+            services.AddScoped<IEventClient, EventClient>();
             //services
             
 
