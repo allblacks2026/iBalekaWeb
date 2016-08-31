@@ -12,6 +12,13 @@
     flex: 1 0 auto;
   }
 
+  .xabisohila{
+      font-family:monospace;
+      font-size:13px;
+  }
+  p{
+      font-family:monospace;
+  }
  
 
 #hero-title {
