@@ -36,17 +36,25 @@ namespace iBalekaWeb.Controllers
 
         //// GET: Map/SavedRoutes
         [HttpGet(Name = "SavedRoutes")]
-        public async Task<IActionResult> SavedRoutes()
+        public IActionResult SavedRoutes()
         {
-            ListModelResponse<Route> routeResponse = await _context.GetUserRoutes(_userManager.GetUserId(User));
-            if (routeResponse.DidError == true)
+            ListModelResponse<Route> routeResponse = GetRoutesTask();
+            if (routeResponse.DidError == true || routeResponse == null)
             {
+                if (routeResponse == null)
+                    return View("Error");
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
             return View(routeResponse.Model);
-        }
 
+
+
+        }
+        private ListModelResponse<Route> GetRoutesTask()
+        {
+            return _context.GetUserRoutes(_userManager.GetUserId(User));
+        } 
         //// POST: Map/AddRoute
         [HttpPost]
         //[ValidateAntiForgeryToken]
@@ -55,9 +63,11 @@ namespace iBalekaWeb.Controllers
             if (ModelState.IsValid)
             {
                 route.UserID = _userManager.GetUserId(User);
-                SingleModelResponse<Route> routeResponse = await _context.SaveRoute(route);
-                if (routeResponse.DidError == true)
+                SingleModelResponse<Route> routeResponse = await Task.Run(()=> _context.SaveRoute(route));
+                if (routeResponse.DidError == true || routeResponse == null)
                 {
+                    if (routeResponse == null)
+                        return View("Error");
                     Error er = new Error(routeResponse.ErrorMessage);
                     return View("Error");
                 }
@@ -73,14 +83,16 @@ namespace iBalekaWeb.Controllers
             }
         }
 
-
+        
         // GET: Map/Edit/5
         [HttpGet(Name = "EditRoute")]
-        public async Task<IActionResult> EditRoute(int id)
+        public IActionResult EditRoute(int id)
         {
-            SingleModelResponse<Route> routeResponse = await _context.GetRoute(id);
-            if (routeResponse.DidError == true)
+            SingleModelResponse<Route> routeResponse = _context.GetRoute(id);
+            if (routeResponse.DidError == true || routeResponse == null)
             {
+                if (routeResponse == null)
+                    return View("Error");
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
@@ -90,13 +102,15 @@ namespace iBalekaWeb.Controllers
         // POST: Map/Edit/5
         [HttpPost(Name = "Edit")]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([FromBody]RouteViewModel route)
+        public IActionResult Edit([FromBody]RouteViewModel route)
         {
             if (ModelState.IsValid)
             {
-                SingleModelResponse<Route> routeResponse = await _context.UpdateRoute(route);
-                if (routeResponse.DidError == true)
+                SingleModelResponse<Route> routeResponse = _context.UpdateRoute(route);
+                if (routeResponse.DidError == true || routeResponse == null)
                 {
+                    if (routeResponse == null)
+                        return View("Error");
                     Error er = new Error(routeResponse.ErrorMessage);
                     return View("Error");
                 }
@@ -108,11 +122,13 @@ namespace iBalekaWeb.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> DeleteRoute(int id)
+        public IActionResult DeleteRoute(int id)
         {
-            SingleModelResponse<Route> routeResponse = await _context.GetRoute(id);
-            if (routeResponse.DidError == true)
+            SingleModelResponse<Route> routeResponse = _context.GetRoute(id);
+            if (routeResponse.DidError == true || routeResponse == null)
             {
+                if (routeResponse == null)
+                    return View("Error");
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
@@ -121,13 +137,15 @@ namespace iBalekaWeb.Controllers
         }
         // POST: Map/DeleteRoute/5
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> Delete([FromBody]int id)
+        public IActionResult Delete([FromBody]int id)
         {
             if (ModelState.IsValid)
             {
-                SingleModelResponse<Route> routeResponse = await _context.DeleteRoute(id);
-                if (routeResponse.DidError == true)
+                SingleModelResponse<Route> routeResponse = _context.DeleteRoute(id);
+                if (routeResponse.DidError == true || routeResponse == null)
                 {
+                    if (routeResponse == null)
+                        return View("Error");
                     Error er = new Error(routeResponse.ErrorMessage);
                     return View("Error");
                 }

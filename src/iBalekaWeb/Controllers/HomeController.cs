@@ -32,19 +32,23 @@ namespace iBalekaWeb.Controllers
         }
         static ILogger _logger;
         [Authorize]
-        public async Task<IActionResult> Default()
+        public IActionResult Default()
         {
             HomeViewModel model = new HomeViewModel();
-            ListModelResponse<Event> routeResponse = await _context.GetUserEvents(_userManager.GetUserId(User));
-            if (routeResponse.DidError == true)
+            ListModelResponse<Event> routeResponse = _context.GetUserEvents(_userManager.GetUserId(User));
+            if (routeResponse.DidError == true || routeResponse == null)
             {
+                if (routeResponse == null)
+                    return View("Error");
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
-            ListModelResponse<Route> eventResponse = await _routeContext.GetUserRoutes(_userManager.GetUserId(User));
-            if (routeResponse.DidError == true)
+            ListModelResponse<Route> eventResponse = _routeContext.GetUserRoutes(_userManager.GetUserId(User));
+            if (eventResponse.DidError == true || eventResponse == null)
             {
-                Error er = new Error(routeResponse.ErrorMessage);
+                if (eventResponse == null)
+                    return View("Error");
+                Error er = new Error(eventResponse.ErrorMessage);
                 return View("Error");
             }
             int nrEvents = eventResponse.Model.Count();

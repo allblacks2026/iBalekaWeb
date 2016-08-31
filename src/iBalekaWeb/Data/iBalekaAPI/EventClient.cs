@@ -1,4 +1,5 @@
-﻿using iBalekaWeb.Data.Infrastructure;
+﻿using iBalekaWeb.Data.iBalekaAPI;
+using iBalekaWeb.Data.Infrastructure;
 using iBalekaWeb.Models;
 using iBalekaWeb.Models.EventViewModels;
 using iBalekaWeb.Models.Responses;
@@ -11,21 +12,21 @@ namespace iBalekaWeb.Data.iBalekaAPI
 {
     public interface IEventClient
     {
-        Task<SingleModelResponse<Event>> SaveEvent(EventViewModel evnt);
-        Task<SingleModelResponse<Event>> UpdateEvent(EventViewModel evnt);
-        Task<SingleModelResponse<Event>> GetEvent(int eventId);
-        Task<ListModelResponse<Event>> GetEvents();
-        Task<ListModelResponse<Event>> GetUserEvents(string userId);
-        Task<SingleModelResponse<Event>> DeleteEvent(int eventId);
+        SingleModelResponse<Event> SaveEvent(EventViewModel evnt);
+        SingleModelResponse<Event> UpdateEvent(EventViewModel evnt);
+        SingleModelResponse<Event> GetEvent(int eventId);
+        ListModelResponse<Event> GetEvents();
+        ListModelResponse<Event> GetUserEvents(string userId);
+        SingleModelResponse<Event> DeleteEvent(int eventId);
     }
-    public class EventClient : ClientBase,IEventClient
+    public class EventClient : ApiClient,IEventClient
     {
         public const string EventUri = "Event/";
-        public EventClient(IApiClient apiClient) : base(apiClient)
+        public EventClient():base()
         {
         }
 
-        public async Task<SingleModelResponse<Event>> SaveEvent(EventViewModel evnt)
+        public SingleModelResponse<Event> SaveEvent(EventViewModel evnt)
         {
             string saveUrl = EventUri + "SaveEvent";
             List<EventRoute> newRoutes = new List<EventRoute>();
@@ -47,12 +48,12 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 Description = evnt.Description,
                 Location = evnt.Location,
                 Title = evnt.Title,
-                EventRoute = (ICollection<EventRoute>)newRoutes
+                EventRoute = newRoutes
             };
-            var createdEvent = await PostEncodedContentWithResponse<SingleModelResponse<Event>, Event>(saveUrl, newEvent);
+            var createdEvent = PostContent(saveUrl, newEvent);
             return createdEvent;
         }
-        public async Task<SingleModelResponse<Event>> UpdateEvent(EventViewModel evnt)
+        public SingleModelResponse<Event> UpdateEvent(EventViewModel evnt)
         {
             string saveUrl = EventUri + "Update/EditEvent";
             List<EventRoute> newRoutes = new List<EventRoute>();
@@ -74,33 +75,33 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 Description = evnt.Description,
                 Location = evnt.Location,
                 Title = evnt.Title,
-                EventRoute = (ICollection<EventRoute>)newRoutes
+                EventRoute = newRoutes
             };
-            var updatedEvent = await PutEncodedContentWithResponse<SingleModelResponse<Event>, Event>(saveUrl, newEvent);
+            var updatedEvent = PutContent(saveUrl, newEvent);
             return updatedEvent;
         }
-        public async Task<SingleModelResponse<Event>> GetEvent(int eventId)
+        public SingleModelResponse<Event> GetEvent(int eventId)
         {
             string getUrl = EventUri + "DeleteEvent?evnt="+eventId;
-            var evnt = await GetSingleJsonEncodedContent<SingleModelResponse<Event>, Event>(getUrl);
+            var evnt = GetSingleContent<Event>(getUrl);
             return evnt;
         }
-        public async Task<ListModelResponse<Event>> GetEvents()
+        public ListModelResponse<Event> GetEvents()
         {
             string getUrl = EventUri + "GetEvents";
-            var evnt = await GetListJsonEncodedContent<ListModelResponse<Event>, Event>(getUrl);
+            var evnt = GetListContent<Event>(getUrl);
             return evnt;
         }
-        public async Task<ListModelResponse<Event>> GetUserEvents(string userId)
+        public ListModelResponse<Event> GetUserEvents(string userId)
         {
             string getUrl = EventUri + "User/GetUserEvents?userId="+userId;
-            var evnt = await GetListJsonEncodedContent<ListModelResponse<Event>, Event>(getUrl);
+            var evnt = GetListContent<Event>(getUrl);
             return evnt;
         }
-        public async Task<SingleModelResponse<Event>> DeleteEvent(int eventId)
+        public SingleModelResponse<Event> DeleteEvent(int eventId)
         {
-            string getUrl = EventUri + "DeleteEvent?eventId=" + eventId;
-            var devnt = await DeleteEncodedContentWithResponse<SingleModelResponse<Event>,Event>(getUrl);
+            string getUrl = EventUri + "DeleteEvent?eventId="+eventId;
+            var devnt = DeleteContent<Event>(getUrl,eventId);
             return devnt;
         }
     }

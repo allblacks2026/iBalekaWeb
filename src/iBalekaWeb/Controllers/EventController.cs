@@ -32,11 +32,13 @@ namespace iBalekaWeb.Controllers
 
         // GET: Event/Events
         [HttpGet(Name = "Events")]
-        public async Task<IActionResult> Events()
+        public IActionResult Events()
         {
-            ListModelResponse<Event> eventResponse = await _context.GetUserEvents(_userManager.GetUserId(User));
-            if (eventResponse.DidError == true)
+            ListModelResponse<Event> eventResponse = _context.GetUserEvents(_userManager.GetUserId(User));
+            if (eventResponse.DidError == true || eventResponse == null)
             {
+                if(eventResponse == null)
+                    return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
                 return View("Error");
             }
@@ -45,11 +47,13 @@ namespace iBalekaWeb.Controllers
 
         // GET: Event/Details/5
         [HttpGet(Name = "EventDetails")]
-        public async Task<IActionResult> EventDetails(int id)
+        public IActionResult EventDetails(int id)
         {
-            SingleModelResponse<Event> eventResponse = await _context.GetEvent(id);
-            if (eventResponse.DidError == true)
+            SingleModelResponse<Event> eventResponse = _context.GetEvent(id);
+            if (eventResponse.DidError == true || eventResponse == null)
             {
+                if (eventResponse == null)
+                    return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
                 return View("Error");
             }
@@ -59,11 +63,13 @@ namespace iBalekaWeb.Controllers
         //create event
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> CreateEvent()
+        public IActionResult CreateEvent()
         {
-            ListModelResponse<Route> routeResponse = await _routeContext.GetUserRoutes(_userManager.GetUserId(User));
-            if (routeResponse.DidError == true)
+            ListModelResponse<Route> routeResponse = _routeContext.GetUserRoutes(_userManager.GetUserId(User));
+            if (routeResponse.DidError == true || routeResponse == null)
             {
+                if (routeResponse == null)
+                    return View("Error");
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
@@ -87,7 +93,7 @@ namespace iBalekaWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateEvent(EventViewModel model, int[] RouteId)
+        public IActionResult CreateEvent(EventViewModel model, int[] RouteId)
         {
             if (ModelState.IsValid)
             {
@@ -97,9 +103,11 @@ namespace iBalekaWeb.Controllers
                 }
                 foreach (int id in RouteId)
                 {
-                    SingleModelResponse<Route> routeResponse = await _routeContext.GetRoute(id);
-                    if (routeResponse.DidError == true)
+                    SingleModelResponse<Route> routeResponse = _routeContext.GetRoute(id);
+                    if (routeResponse.DidError == true || routeResponse == null)
                     {
+                        if (routeResponse == null)
+                            return View("Error");
                         Error er = new Error(routeResponse.ErrorMessage);
                         return View("Error");
                     }
@@ -123,9 +131,10 @@ namespace iBalekaWeb.Controllers
 
 
         }
-        private async Task<MultiSelectList> GetRoutes(string[] selectedValues)
+        private MultiSelectList GetRoutes(string[] selectedValues)
         {
-            ListModelResponse<Route> routeResponse = await _routeContext.GetUserRoutes(_userManager.GetUserId(User));
+            ListModelResponse<Route> routeResponse = _routeContext.GetUserRoutes(_userManager.GetUserId(User));
+
             //Get suitable error message
             //if (routeResponse.DidError == true)
             //{
@@ -154,14 +163,16 @@ namespace iBalekaWeb.Controllers
 
         }
         [HttpPost]
-        public async Task<ActionResult> FinalizeEvent([FromBody]EventViewModel currentModel)
+        public ActionResult FinalizeEvent([FromBody]EventViewModel currentModel)
         {
             if (ModelState.IsValid)
             {
 
-                SingleModelResponse<Event> eventResponse = await _context.SaveEvent(currentModel);
-                if (eventResponse.DidError == true)
+                SingleModelResponse<Event> eventResponse = _context.SaveEvent(currentModel);
+                if (eventResponse.DidError == true || eventResponse == null)
                 {
+                    if (eventResponse == null)
+                        return View("Error");
                     Error er = new Error(eventResponse.ErrorMessage);
                     return View("Error");
                 }
@@ -185,11 +196,13 @@ namespace iBalekaWeb.Controllers
 
         // GET: Event/Edit/5
         [HttpGet]
-        public async Task<ActionResult> EditEvent([FromBody]EventViewModel currentModel)
+        public ActionResult EditEvent([FromBody]EventViewModel currentModel)
         {
-            SingleModelResponse<Event> eventResponse = await _context.UpdateEvent(currentModel);
-            if (eventResponse.DidError == true)
+            SingleModelResponse<Event> eventResponse = _context.UpdateEvent(currentModel);
+            if (eventResponse.DidError == true || eventResponse == null)
             {
+                if (eventResponse == null)
+                    return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
                 return View("Error");
             }
@@ -217,12 +230,12 @@ namespace iBalekaWeb.Controllers
         // POST: Event/Edit/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([FromBody]EventViewModel evnt)
+        public ActionResult Edit([FromBody]EventViewModel evnt)
         {
 
             if (ModelState.IsValid)
             {
-                SingleModelResponse<Event> eventResponse = await _context.UpdateEvent(evnt);
+                SingleModelResponse<Event> eventResponse = _context.UpdateEvent(evnt);
                 if (eventResponse.DidError == true)
                 {
                     Error er = new Error(eventResponse.ErrorMessage);
@@ -240,13 +253,15 @@ namespace iBalekaWeb.Controllers
 
         // GET: Event/Delete/5
         [HttpGet]
-        public async Task<ActionResult> DeleteEvent(int id)
+        public ActionResult DeleteEvent(int id)
         {
             if (ModelState.IsValid)
             {
-                SingleModelResponse<Event> eventResponse = await _context.GetEvent(id);
-                if (eventResponse.DidError == true)
+                SingleModelResponse<Event> eventResponse = _context.GetEvent(id);
+                if (eventResponse.DidError == true || eventResponse == null)
                 {
+                    if (eventResponse == null)
+                        return View("Error");
                     Error er = new Error(eventResponse.ErrorMessage);
                     return View("Error");
                 }
@@ -263,13 +278,15 @@ namespace iBalekaWeb.Controllers
         // POST: Event/Delete/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id)
+        public ActionResult Delete(int id)
         {
             if (ModelState.IsValid)
             {
-                SingleModelResponse<Event> eventResponse = await _context.DeleteEvent(id);
-                if (eventResponse.DidError == true)
+                SingleModelResponse<Event> eventResponse = _context.DeleteEvent(id);
+                if (eventResponse.DidError == true || eventResponse == null)
                 {
+                    if (eventResponse == null)
+                        return View("Error");
                     Error er = new Error(eventResponse.ErrorMessage);
                     return View("Error");
                 }

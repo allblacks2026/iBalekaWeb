@@ -51,6 +51,7 @@ namespace iBalekaWeb
                 })
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
+            services.AddCors();
             // Add framework services.
             services.AddDbContext<iBalekaDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ServerConnection")));
@@ -98,7 +99,10 @@ namespace iBalekaWeb
             {
                 app.UseExceptionHandler("/Shared/Error");
             }
-
+            app.UseCors(builder =>
+                builder.WithOrigins("http://https://ibalekaapi.azurewebsites.net/")
+                    .AllowAnyHeader()
+                );
             app.UseStaticFiles();
             app.UseSession();
             //app.UseIISPlatformHandler();
