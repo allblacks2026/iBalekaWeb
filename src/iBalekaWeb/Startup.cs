@@ -45,7 +45,7 @@ namespace iBalekaWeb
         {
             // Add framework services.
             services.AddDbContext<iBalekaDBContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                 options.UseSqlServer(Configuration.GetConnectionString("ServerConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(i => {
                      i.SecurityStampValidationInterval = TimeSpan.FromDays(7);

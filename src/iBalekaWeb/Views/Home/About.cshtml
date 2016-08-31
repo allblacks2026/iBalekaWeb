@@ -1,107 +1,166 @@
 ﻿@{
-    ViewData["Title"] = "Team";
+    ViewData["Title"] = "About";
 }
-
-
-
-   <div class="card-group">
-    <div class="card">
-        @*<img class="card-img-top img-fluid" data-src="..." src="~/images/Members/Lincoln.jpg" alt="Lincoln">*@
-        <div class="card-block">
-            <h4 class="card-title">Project Leader</h4>
-            <p class="card-text"><small class="text-muted">Lincoln</small></p>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            
-        </div>
-    </div>
-    <div class="card">
-        @*<img class="card-img-top img-fluid" data-src="..." src="~/images/Members/Okuhle.jpg" alt="Okuhle">*@
-        <div class="card-block">
-            <h4 class="card-title">Backend Developer</h4>
-            <p class="card-text"><small class="text-muted">Okuhle</small></p>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            
-        </div>
-    </div>
-    <div class="card">  
-        @*<img class="card-img-top img-fluid"  data-src="..." src="~/images/Members/Tulonga.jpg" alt="Tulonga">*@
-        <div class="card-block">
-            <h4 class="card-title">Backend Developer</h4>
-            <p class="card-text"><small class="text-muted">Tulonga</small></p>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-           
-        </div>
-    </div>
-       <div class="card">
-           @*<img class="card-img-top img-fluid"  data-src="..." src="~/images/Members/Xabiso.jpg" alt="Xabiso">*@
-           <div class="card-block">
-               <h4 class="card-title">Frontend Developer</h4>
-               <p class="card-text"><small class="text-muted">Xabiso</small></p>
-               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-               
-           </div>
-       </div>
+<div>
+    <div class="spacer"></div>
+    <h5><strong>What is iBaleka?</strong></h5>
+    <div class="divider"></div>
 </div>
+<div>
+    <p>
+        <strong class="Bold">iBaleka </strong> is a health and fitness application focused hugely on running.
+        It grew from the need for users to better manage their marathons and triathlon in a cleaner manner, something more modern,
+        responsive, and sophisticated. The existing solutions that are currently in place do provide the services that our application offers,
+        but they don’t provide all the functions in one solution.
+    </p>
+    <p>
+        The category as a whole is considered as a grey area in applications
+        development, especially in our own local environment, so the market still requires more innovation. We wanted to make iBaleka's
+        focus be wider than most of these applications.
+    </p>
+    <p>
+        The system allows the user to plot running routes,which will allow our mobile users to access created routes via our android application
+        and use them to run.
+        The system let users organize running events which allow other users to participate.
+    </p>
+    <p>
+        That’s where our system comes into effect. The interface that we provide supports all the mentioned functions and as a benefit
+        will reduce the need for many assorted applications.
+        It is catered to people who run/jog whether it is professionally or casually and is accessible anytime they find need of it
+        anywhere they are.
+    </p>
+    <p>
+        The current user will be able to use the application to record their running activities and provide them with a usable
+        interface that will show them reports on their past runs,routes that they ran and events created.
+        It will also allow them to plot their routes in advance, which will show the total distance, and will be saveable
+        for future reference. Users are able to create running events which allow other users to participate and reflect on each
+        other’s running history. Lastly the user will be able to manage their profile and upload a minimal amount of pictures to
+        brag about their running progress.
+    </p>
 
-        @*<div class="col-md-5">
-            <div class="testimonial-card z-depth-1">
-                <div class="card-up default-color-dark">
-                </div>
-                <div class="avatar">
-                    <img src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
-                </div>
-                    <div class="card-content">
-                        <h5>Lincoln Gachagua</h5>
-                        <h6>Project Leader</h6>
-                        <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
+</div>
+<div class="spacer"></div>
+<h5><strong>Getting Started</strong></h5>
+<h5>Fequently Asked Questions?</h5>
+
+@*NOTE TO MYSELF*@
+@*Do the javascript collapse button some other time*@
+
+
+<ul class="collapsible" data-collapsible="accordion">
+    <li>
+        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Accounts</strong></div>
+        <div class="collapsible-body">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Register with iBaleka?</div>
+                    <div class="collapsible-body">
+                        <p>
+                            To register as a user <a asp-controller="Account" asp-action="Register">create a profile.</a>
+                            we will need your username, email address and a password.
+                        </p>
                     </div>
+                </li>
+            </ul>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Login with iBaleka?</div>
+                    <div class="collapsible-body">
+                        <p>
+                            Go to the login tab at the right hand corner of your screen or <a asp-controller="Account" asp-action="Login">click here to Login.</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Change Password with iBaleka?</div>
+                    <div class="collapsible-body">
+                        <p>
+                            Go to the <a asp-controller="Account" asp-action="Login">Login page.</a> and click on the <a asp-controller="Account" asp-action="ForgotPassword">Forgot password link</a>
+                            after that you can put your email address and click submit button. Then we will email you your new password.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Events</strong></div>
+        <div class="collapsible-body">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to create an event with iBaleka?</div>
+                    <div class="collapsible-body">
+                        <p>
+                            To create an event you need to click on the <a asp-controller="Event" asp-action="CreateEvent">create event.</a> button.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Login with iBaleka?</div>
+                    <div class="collapsible-body">
+                        <p>
+                            Go to the login tab at the right hand corner of your screen or <a asp-controller="Account" asp-action="Login">click here to Login.</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    <li>
+        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Routes</strong></div>
+        <div class="collapsible-body">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Map a route in iBaleka?</div>
+                    <div class="collapsible-body">
+                        <p>
+                            <small>
+                                <strong>To map a route as an Athlete</strong> in iBaleka you must be a registered athlete first in ibaleka application. You can map a route by going
+                                on the <a asp-controller="Map" asp-action="Map">Map route </a> and click your startpoint and endpoint. After you've finished running you can save your
+                                route and give it a route name so that if you want to run the same route route again you do not have to go and map it again.<br /><br />
+                            </small>
+                            <strong>To map a route as an Event Organizer</strong> in iBaleka
+                        </p>
+
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <li>
+        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Have a Question?</strong></div>
+        <div class="collapsible-body"><p>Get in touch email us at allblacks@gmail.com.</p></div>
+    </li>
+</ul>
+
+@*Footer here*@
+
+@*<footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    </ul>
                 </div>
             </div>
-
-                    <div class="col-md-5">
-                        <div class="testimonial-card z-depth-1">
-                            <div class="card-up default-color-dark">
-                            </div>
-                            <div class="avatar">
-                                <img src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
-                            </div>
-                            <div class="card-content">
-                                <h5>Tulonga Hishiko</h5>
-                                <h6>Backend Developer</h6>
-                                <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
-                            </div>  
-                            </div>
-                        </div>
-
-                            <div class="col-md-5">
-                                <div class="testimonial-card z-depth-1">
-                                    <div class="card-up default-color-dark">
-                                    </div>
-                                    <div class="avatar">
-                                        <img src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
-                                    </div>
-                                    <div class="card-content">
-                                        <h5>Okuhle Ngada</h5>
-                                        <h6>Backend Developer</h6>
-                                        <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
-                                    </div>
-                                    </div>
-                                </div>
-                                    
-                                <div class="col-md-5">
-                                            <div class="testimonial-card z-depth-1">
-                                                <div class="card-up default-color-dark">
-                                                </div>
-                                                <div class="avatar">
-                                                    <img src="http://mdbootstrap.com/wp-content/uploads/2015/10/avatar-2.jpg" class="img-circle img-responsive">
-                                                    </div>
-                                                <div class="card-content">
-                                                        <h5>Xabiso Hila</h5>
-                                                        <h6>Frontend Developer</h6>
-                                                        <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci, voluptatum placeat ducimus vero commodi provident culpa accusamus nostrum dolor, labore ratione eius.</p>
-                                                    </div>
-                                                </div>
-                                            </div>*@
-                              
-                       
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>*@
 
