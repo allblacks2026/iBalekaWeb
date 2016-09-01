@@ -11,7 +11,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
 {
     public interface IMapClient
     {
-        SingleModelResponse<Route> SaveRoute(RouteViewModel mapRoute);
+        SingleModelResponse<Route> SaveRoute(RouteViewModel mapRoute, string userId);
         SingleModelResponse<Route> UpdateRoute(RouteViewModel mapRoute);
         SingleModelResponse<Route> GetRoute(int routeId);
         ListModelResponse<Route> GetRoutes();
@@ -25,9 +25,9 @@ namespace iBalekaWeb.Data.iBalekaAPI
         {
         }
 
-        public SingleModelResponse<Route> SaveRoute(RouteViewModel mapRoute)
+        public SingleModelResponse<Route> SaveRoute(RouteViewModel mapRoute,string userId)
         {
-            string MapUrl = MapUri + "AddRoute";
+            string MapUrl = MapUri + "AddRoute?userId="+userId;
             List<Checkpoint> newCheckPoints = new List<Checkpoint>();
             foreach (CheckpointViewModel check in mapRoute.Checkpoints)
             {
@@ -71,7 +71,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
         }
         public SingleModelResponse<Route> GetRoute(int routeId)
         {
-            string getUrl = MapUri + "User/GetRoute?routeId=" + routeId;
+            string getUrl = MapUri + "GetRoute?routeId=" + routeId;
             var routes = GetSingleContent<Route>(getUrl);
             return routes;
         }

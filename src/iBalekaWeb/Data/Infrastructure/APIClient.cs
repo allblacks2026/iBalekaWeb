@@ -25,7 +25,7 @@ namespace iBalekaWeb.Data.Infrastructure
     public class ApiClient : IApiClient
     {
         private HttpClient httpClient;
-        private const string BaseUri = "http://ibalekaapi.azurewebsites.net/";
+        private const string BaseUri = "https://ibalekaapi.azurewebsites.net/";
         public ApiClient()
         {
 
@@ -131,7 +131,7 @@ namespace iBalekaWeb.Data.Infrastructure
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
 
-                var response = httpClient.PostAsync(requestUri, new StringContent(JsonConvert.SerializeObject(content), System.Text.Encoding.UTF8, "application/json"))
+                var response = httpClient.PutAsync(requestUri, new StringContent(JsonConvert.SerializeObject(content), System.Text.Encoding.UTF8, "application/json"))
                     .ContinueWith((taskwithresponse) =>
                     {
                         var resp = taskwithresponse.Result.Content.ReadAsStringAsync();

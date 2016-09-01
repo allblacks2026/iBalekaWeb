@@ -4,6 +4,7 @@
     "preserveCompilationContext": true
   },
   "dependencies": {
+
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
@@ -62,10 +63,7 @@
       "imports": [
         "dotnet5.6",
         "portable-net45+win8"
-      ],
-      "dependencies": {
-        "System.Runtime": "4.1.0"
-      }
+      ]
     }
   },
   "publishOptions": {

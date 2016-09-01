@@ -49,7 +49,7 @@ namespace iBalekaWeb.Controllers
         [HttpGet(Name = "EventDetails")]
         public IActionResult EventDetails(int id)
         {
-            SingleModelResponse<Event> eventResponse = _context.GetEvent(id);
+            SingleModelResponse<EventViewModel> eventResponse = _context.GetEvent(id);
             if (eventResponse.DidError == true || eventResponse == null)
             {
                 if (eventResponse == null)
@@ -196,9 +196,9 @@ namespace iBalekaWeb.Controllers
 
         // GET: Event/Edit/5
         [HttpGet]
-        public ActionResult EditEvent([FromBody]EventViewModel currentModel)
+        public ActionResult EditEvent(int id)
         {
-            SingleModelResponse<Event> eventResponse = _context.UpdateEvent(currentModel);
+            SingleModelResponse<EventViewModel> eventResponse = _context.GetEvent(id);
             if (eventResponse.DidError == true || eventResponse == null)
             {
                 if (eventResponse == null)
@@ -207,14 +207,22 @@ namespace iBalekaWeb.Controllers
                 return View("Error");
             }
 
-            string[] selectedValues = new string[eventResponse.Model.EventRoute.Count];
-            int count = 0;
-            foreach (EventRoute route in eventResponse.Model.EventRoute)
+            if (eventResponse.Model.EventRoutes.Count>0)
             {
-                selectedValues[count] = route.RouteID.ToString();
-                count++;
+                string[] selectedValues = new string[eventResponse.Model.EventRoutes.Count];
+                int count = 0;
+                foreach (EventRouteViewModel route in eventResponse.Model.EventRoutes)
+                {
+                    selectedValues[count] = route.RouteId.ToString();
+                    count++;
+                }
+                ViewBag.UserRoutes = GetRoutes(selectedValues);
             }
-            ViewBag.UserRoutes = GetRoutes(selectedValues);
+            else
+            {
+                ViewBag.UserRoutes = GetRoutes(null);
+            }
+            
 
 
             return View(eventResponse.Model);
@@ -257,7 +265,7 @@ namespace iBalekaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                SingleModelResponse<Event> eventResponse = _context.GetEvent(id);
+                SingleModelResponse<EventViewModel> eventResponse = _context.GetEvent(id);
                 if (eventResponse.DidError == true || eventResponse == null)
                 {
                     if (eventResponse == null)
@@ -278,7 +286,7 @@ namespace iBalekaWeb.Controllers
         // POST: Event/Delete/5
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
+        public ActionResult Delete([FromBody]int id)
         {
             if (ModelState.IsValid)
             {

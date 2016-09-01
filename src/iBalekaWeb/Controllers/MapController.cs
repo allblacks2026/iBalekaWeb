@@ -62,8 +62,8 @@ namespace iBalekaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                route.UserID = _userManager.GetUserId(User);
-                SingleModelResponse<Route> routeResponse = await Task.Run(()=> _context.SaveRoute(route));
+                string userID = _userManager.GetUserId(User);
+                SingleModelResponse<Route> routeResponse = await Task.Run(()=> _context.SaveRoute(route,userID));
                 if (routeResponse.DidError == true || routeResponse == null)
                 {
                     if (routeResponse == null)
