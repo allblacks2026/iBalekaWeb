@@ -1,0 +1,76 @@
+@model iBalekaWeb.Models.Event
+
+@{
+    ViewData["Title"] = "Help";
+}
+
+<h4 class="center-align">Need Help?</h4>
+
+<br />
+
+<div class="row2">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">Full Name</label>
+            </div>
+
+            <div class="input-field col s12">
+                <i class="material-icons prefix">phone</i>
+                <input id="icon_telephone" type="tel" class="validate">
+                <label for="icon_telephone">Email</label>
+            </div>
+
+            <div class="input-field col s12">
+                <i class="material-icons prefix">phone</i>
+                <input id="icon_telephone" type="tel" class="validate">
+                <label for="icon_telephone">Contact</label>
+            </div>
+        </div>
+    </form>
+
+    <form action="#">
+        <p>
+            <input name="group1" type="radio" id="test1" />
+            <label for="test1">Red</label>
+        </p>
+        <p>
+            <input name="group1" type="radio" id="test2" />
+            <label for="test2">Yellow</label>
+        </p>
+        <p>
+            <input class="with-gap" name="group1" type="radio" id="test3" />
+            <label for="test3">Green</label>
+        </p>
+        <p>
+            <input name="group1" type="radio" id="test4" disabled="disabled" />
+            <label for="test4">Brown</label>
+        </p>
+    </form>
+
+    <div class="row2">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                    <label for="icon_prefix2">Please describe your problem</label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

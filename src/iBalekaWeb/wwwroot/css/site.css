@@ -29,6 +29,9 @@ html, body, .main, #wrapper {
 	z-index: 9999;
 	
 }
+ .xabisohila{
+      font-family:monospace;
+      font-size:15px;
 
 .padDisplayLeft{
 	float:right;
@@ -52,7 +55,10 @@ html, body, .main, #wrapper {
 		margin-right: 25%;
 	margin-left: 10%;
 }
-
+.row{
+    font-family:monospace;
+}
+    
 #mainLogo {
 		padding-left: 5%;
 }

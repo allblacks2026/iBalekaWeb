@@ -18,7 +18,7 @@ namespace iBalekaWeb.Data.Infastructure
         public iBalekaDBContext Create(DbContextFactoryOptions opt)
         {
             var builder = new DbContextOptionsBuilder<iBalekaDBContext>();
-            builder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=iBalekaDB;Integrated Security=True;");
+            builder.UseSqlServer("Data Source = tcp:ibaleka.database.windows.net, 1433; Initial Catalog = iBalekaDB; User Id = iBalekaAdmin@ibaleka; Password = AllBlacks2026; MultipleActiveResultSets = true;");
             return new iBalekaDBContext(builder.Options);
         }
         public iBalekaDBContext Init(DbContextFactoryOptions opt)

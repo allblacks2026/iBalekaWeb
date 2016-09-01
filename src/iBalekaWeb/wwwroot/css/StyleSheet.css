@@ -5,8 +5,9 @@
     font-family: Roboto;
    
   }
-
- 
+ .row{
+     font-family:monospace;
+ }
 
   main {
     flex: 1 0 auto;
@@ -14,7 +15,15 @@
 
   .xabisohila{
       font-family:monospace;
-      font-size:13px;
+      font-size:15px;
+
+  }
+  .row2{
+      margin-left:25%;
+      margin-right: 25%
+  }
+  .mynig{
+      padding-left:12%;
   }
   p{
       font-family:monospace;
