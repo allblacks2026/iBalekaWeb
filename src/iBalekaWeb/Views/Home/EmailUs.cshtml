@@ -14,42 +14,48 @@
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
                 <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Full Name</label>
+                <label for="icon_prefix">Full Name *</label>
             </div>
 
             <div class="input-field col s12">
-                <i class="material-icons prefix">phone</i>
+                <i class="material-icons prefix">email</i>
                 <input id="icon_telephone" type="tel" class="validate">
-                <label for="icon_telephone">Email</label>
+                <label for="icon_telephone">Email *</label>
             </div>
-
+            
             <div class="input-field col s12">
                 <i class="material-icons prefix">phone</i>
                 <input id="icon_telephone" type="tel" class="validate">
-                <label for="icon_telephone">Contact</label>
+                <label for="icon_telephone">Contact *</label>
             </div>
         </div>
     </form>
-
-    <form action="#">
+    </div>
+    <div class="form2">
+        <p>My issue related to *</p>
         <p>
-            <input name="group1" type="radio" id="test1" />
-            <label for="test1">Red</label>
-        </p>
-        <p>
-            <input name="group1" type="radio" id="test2" />
-            <label for="test2">Yellow</label>
-        </p>
-        <p>
+            <input class="with-gap" name="group1" type="radio" id="test1" />
+            <label for="test1">Accounts</label>
+        
+            <input class="with-gap" name="group1" type="radio" id="test2" />
+            <label for="test2">Events</label>
+       
             <input class="with-gap" name="group1" type="radio" id="test3" />
-            <label for="test3">Green</label>
-        </p>
-        <p>
-            <input name="group1" type="radio" id="test4" disabled="disabled" />
-            <label for="test4">Brown</label>
-        </p>
-    </form>
+            <label for="test3">Routes</label>
 
+            <input class="with-gap" name="group1" value="Other" type="radio" id="test4"/>
+            <label for="test4">Other</label>
+        </p>
+    </div>
+<div class="chooseoption">
+    <label><large>Tell us more about your issue *</large> </label>
+    <select class="browser-default">
+        <option value="" disabled selected>Choose your option</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+    </select>
+</div>
     <div class="row2">
         <form class="col s12">
             <div class="row">
@@ -62,13 +68,11 @@
         </form>
     </div>
 
-    <div class="form-group">
+    <div class="row4">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Submit" class="btn btn-default" />
+            <a href="mailto:okxabisohila@gmail.com?Subject=Need help" class="btn btn-default">Submit</a>
+           @*<a href="mailto:okxabisohila@gmail.com?Subject=Challenge yourself">Send</a>*@
         </div>
-    </div>
-    <div>
-        <a asp-action="Index">Back to List</a>
     </div>
 
     @section Scripts {

@@ -51,8 +51,9 @@ namespace iBalekaWeb.Controllers
 
             return View();
         }
-        public IActionResult Help()
+        public IActionResult EmailUs()
         {
+           
             return View();
         }
     
