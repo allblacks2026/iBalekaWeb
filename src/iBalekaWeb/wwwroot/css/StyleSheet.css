@@ -53,6 +53,12 @@
     animation: hue 10s infinite linear;
     
 }
+.flow-text1{
+    padding-right:50%; 
+}
+.center1{
+    margin-right:50%;
+}
 
 #hero-title-one {
   margin: 0px 0px 20px 0px;
