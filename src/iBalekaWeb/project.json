@@ -4,7 +4,6 @@
     "preserveCompilationContext": true
   },
   "dependencies": {
-
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
@@ -19,6 +18,7 @@
       "type": "build",
       "version": "1.0.0-preview2-final"
     },
+    "Microsoft.DotNet.ProjectModel": "1.0.0-rc3-003121",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
@@ -41,8 +41,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.NETCore.App": {
-      "version": "1.0.0",
-      "type": "platform"
+      "version": "1.0.0"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Microsoft.VisualStudio.Web.CodeGeneration.Tools": {
@@ -62,7 +61,7 @@
     "netcoreapp1.0": {
       "imports": [
         "dotnet5.6",
-        "portable-net45+win8"
+        "portable-net45+win81"
       ]
     }
   },
@@ -79,6 +78,9 @@
     "configProperties": {
       "System.GC.Server": true
     }
+  },
+  "runtimes": {
+    "win10-x64": {}
   },
   "scripts": {
     "prepublish": [ "bower install", "dotnet bundle" ],
