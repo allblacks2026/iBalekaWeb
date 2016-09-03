@@ -25,7 +25,6 @@
                 <div>
 
 
-
                     @{
                         var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
                         if (loginProviders.Count == 0)
@@ -52,13 +51,10 @@
                         }
                     }
 
-
-
                 </div>
             </div>
 
         </div>
-
 
         <div class="col s12 m6 l6 create-list-login-right">
             <div class="create-list-login-panel center">
@@ -129,7 +125,10 @@
                         <div class="row">
 
                             <div class="input-field col s12">
-                                <button type="submit" class="btn waves-effect waves-light btn-small red accent-3">Log in</button>
+                                <button type="submit" class="btn waves-effect waves-light btn-small red accent-3">Log in
+                                   <i class="material-icons right">send</i>
+                                </button>
+                               
 
                             </div>
 

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<div>
+<div class="xabisohila" font-family="monospace" margin-left:2%>
     <div class="spacer"></div>
     <h5><strong>What is iBaleka?</strong></h5>
     <div class="divider"></div>
@@ -39,102 +39,124 @@
     </p>
 
 </div>
-<div class="spacer"></div>
-<h5><strong>Getting Started</strong></h5>
-<h5>Fequently Asked Questions?</h5>
+<div class="div1">
+    <div class="spacer"></div>
+    <h5>Fequently Asked Questions?</h5>
 
-@*NOTE TO MYSELF*@
-@*Do the javascript collapse button some other time*@
-
-
-<ul class="collapsible" data-collapsible="accordion">
-    <li>
-        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Accounts</strong></div>
-        <div class="collapsible-body">
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Register with iBaleka?</div>
-                    <div class="collapsible-body">
-                        <p>
-                            To register as a user <a asp-controller="Account" asp-action="Register">create a profile.</a>
-                            we will need your username, email address and a password.
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Login with iBaleka?</div>
-                    <div class="collapsible-body">
-                        <p>
-                            Go to the login tab at the right hand corner of your screen or <a asp-controller="Account" asp-action="Login">click here to Login.</a>
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Change Password with iBaleka?</div>
-                    <div class="collapsible-body">
-                        <p>
-                            Go to the <a asp-controller="Account" asp-action="Login">Login page.</a> and click on the <a asp-controller="Account" asp-action="ForgotPassword">Forgot password link</a>
-                            after that you can put your email address and click submit button. Then we will email you your new password.
-                        </p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    <li>
-        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Events</strong></div>
-        <div class="collapsible-body">
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to create an event with iBaleka?</div>
-                    <div class="collapsible-body">
-                        <p>
-                            To create an event you need to click on the <a asp-controller="Event" asp-action="CreateEvent">create event.</a> button.
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Login with iBaleka?</div>
-                    <div class="collapsible-body">
-                        <p>
-                            Go to the login tab at the right hand corner of your screen or <a asp-controller="Account" asp-action="Login">click here to Login.</a>
-                        </p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-    <li>
-        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Routes</strong></div>
-        <div class="collapsible-body">
-            <ul class="collapsible" data-collapsible="accordion">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Map a route in iBaleka?</div>
-                    <div class="collapsible-body">
-                        <p>
-                            <small>
-                                <strong>To map a route as an Athlete</strong> in iBaleka you must be a registered athlete first in ibaleka application. You can map a route by going
-                                on the <a asp-controller="Map" asp-action="Map">Map route </a> and click your startpoint and endpoint. After you've finished running you can save your
-                                route and give it a route name so that if you want to run the same route route again you do not have to go and map it again.<br /><br />
-                            </small>
-                            <strong>To map a route as an Event Organizer</strong> in iBaleka
-                        </p>
+    @*NOTE TO MYSELF*@
+    @*Do the javascript collapse button some other time*@
 
 
-                    </div>
-                </li>
-            </ul>
-        </div>
-    <li>
-        <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Have a Question?</strong></div>
-        <div class="collapsible-body"><p>Get in touch email us at allblacks@gmail.com.</p></div>
-    </li>
-</ul>
+    <ul class="collapsible" data-collapsible="accordion">
+        <li>
+            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Accounts</div>
+            <div class="collapsible-body">
+                <div class="div2">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Register with iBaleka?</div>
+                            <div class="collapsible-body">
+                                <div class="div3">
+                                    <p>
+                                        To register as a user <a asp-controller="Account" asp-action="Register">create a profile.</a>
+                                        we will need your username, email address and a password.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Login with iBaleka?</div>
+                            <div class="collapsible-body">
+                                <div class="div3">
+                                    <p>
+                                        Go to the login tab at the right hand corner of your screen or <a asp-controller="Account" asp-action="Login">click here to Login.</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Change Password with iBaleka?</div>
+                            <div class="collapsible-body">
+                                <div class="div3">
+                                    <p>
+                                        Go to the <a asp-controller="Account" asp-action="Login">Login page.</a> and click on the <a asp-controller="Account" asp-action="ForgotPassword">Forgot password link</a>
+                                        after that you can put your email address and click submit button. Then we will email you your new password.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Events</strong></div>
+            <div class="collapsible-body">
+                <div class="div2">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to create an event with iBaleka?</div>
+                            <div class="collapsible-body">
+                                <div class="div3">
+                                    <p>
+                                        To create an event you need to click on the <a asp-controller="Event" asp-action="CreateEvent">create event.</a> button.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Login with iBaleka?</div>
+                            <div class="collapsible-body">
+                                <div class="div3">
+                                    <p>
+                                        Go to the login tab at the right hand corner of your screen or <a asp-controller="Account" asp-action="Login">click here to Login.</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <li>
+            <div class="collapsible-header"><i class="material-icons">chevron_right</i><strong>Routes</strong></div>
+            <div class="collapsible-body">
+                <div class="div2">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Map a route in iBaleka?</div>
+                            <div class="collapsible-body">
+                                <div class="div3">
+                                    <p>
+                                        <small>
+                                            <strong>To map a route as an Athlete</strong> in iBaleka you must be a registered athlete first in ibaleka application. You can map a route by going
+                                            on the <a asp-controller="Map" asp-action="Map">Map route </a> and click your startpoint and endpoint. After you've finished running you can save your
+                                            route and give it a route name so that if you want to run the same route route again you do not have to go and map it again.<br /><br />
+                                        </small>
+                                        <strong>To map a route as an Event Organizer</strong> in iBaleka
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <li>
+
+            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Have a Question?</div>
+
+            <div class="collapsible-body"><p>Get in touch email us at allblacks@gmail.com.</p></div>
+
+        </li>
+    </ul>
+</div>
+
 
 @*Footer here*@
 
