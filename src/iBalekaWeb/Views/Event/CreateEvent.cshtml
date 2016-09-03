@@ -19,7 +19,7 @@
 <div class="container">
 
     <div>
-        <h2 class="center-align">@ViewData["Title"]</h2>
+        <h2 class="center-align" font-family="monospace">@ViewData["Title"]</h2>
 
     </div>
 
@@ -32,7 +32,7 @@
 
         </div>
 
-        <div class="row">
+        <div class="row8">
             <div class="input-field col s12">
 
                 @Html.LabelFor(model => model.Title)
@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="row">
+        <div class="row8">
             <div class="input-field col s12">
 
                 @Html.LabelFor(model => model.Description)
@@ -57,7 +57,7 @@
 
         </div>
 
-        <div class="row">
+        <div class="row8">
             <div class="input-field col s12">
 
                 @Html.LabelFor(model => model.Date)
@@ -71,7 +71,7 @@
         </div>
 
 
-        <div class="row">
+        <div class="row8">
             <div class="input-field col s12">
 
                 @Html.LabelFor(model => model.Time)
@@ -86,7 +86,7 @@
         </div>
 
 
-        <div class="row">
+        <div class="row8">
             <div class="input-field col s12">
 
                 @Html.LabelFor(model => model.Location)
@@ -102,19 +102,19 @@
         </div>
 
 
-        <div class="row">
+        <div class="row8">
             <div class="input-field col s12">
 
-                    @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList , new {@class= "checked"})
-                    @Html.LabelFor(model => model.RouteId)
+                @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
+                @Html.LabelFor(model => model.RouteId)
 
-                
+
 
                 @*else
-                {
+                    {
 
-                    <label>No Route Set</label>
-                }*@
+                        <label>No Route Set</label>
+                    }*@
 
 
 
@@ -131,23 +131,26 @@
 
 
         <div class="row">
-            <div class="input-field col s6">
 
-                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
-                    Back to List
-                </a>
+            <div class="row9">
+                <div class="input-field col s6">
 
+                    <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
+                        Back to List
+                        <i class="material-icons right">send</i>
+                    </a>
+
+                </div>
+
+                <div class="input-field col s6">
+
+
+                    <button type="submit" name="cmdButton" class="btn waves-effect waves-light btn-large red accent-3">
+                        Save
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
             </div>
-
-            <div class="input-field col s6">
-
-
-                <button type="submit" name="cmdButton" class="btn waves-effect waves-light btn-large red accent-3">
-                    Next
-                </button>
-            </div>
-
-
         </div>
 
     </form>
@@ -160,10 +163,10 @@
 
 
 
-                        @*<div class="mdl-grid">
-                           
-                                    
-                            
+@*<div class="mdl-grid">
+
+
+
                     <div class="mdl-layout-spacer"></div>
                     <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                         <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" asp-action="Events">

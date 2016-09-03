@@ -46,10 +46,11 @@
     @*NOTE TO MYSELF*@
     @*Do the javascript collapse button some other time*@
 
+    @*class="btn waves-effect waves-light btn-large red accent-3"*@
 
     <ul class="collapsible" data-collapsible="accordion">
         <li>
-            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Accounts</div>
+            <div class="collapsible-header waves-green large"><i class="material-icons">chevron_right</i>Accounts</div>
             <div class="collapsible-body">
                 <div class="div2">
                     <ul class="collapsible" data-collapsible="accordion">
@@ -110,7 +111,7 @@
                             </div>
                         </li>
                     </ul>
-                    <ul class="collapsible" data-collapsible="accordion">
+                    @*<ul class="collapsible" data-collapsible="accordion">
                         <li>
                             <div class="collapsible-header"><i class="material-icons">chevron_right</i>How to Login with iBaleka?</div>
                             <div class="collapsible-body">
@@ -121,7 +122,7 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
+                    </ul>*@
                 </div>
             </div>
         <li>
@@ -134,12 +135,11 @@
                             <div class="collapsible-body">
                                 <div class="div3">
                                     <p>
-                                        <small>
+                                       
                                             <strong>To map a route as an Athlete</strong> in iBaleka you must be a registered athlete first in ibaleka application. You can map a route by going
                                             on the <a asp-controller="Map" asp-action="Map">Map route </a> and click your startpoint and endpoint. After you've finished running you can save your
                                             route and give it a route name so that if you want to run the same route route again you do not have to go and map it again.<br /><br />
-                                        </small>
-                                        <strong>To map a route as an Event Organizer</strong> in iBaleka
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -147,13 +147,13 @@
                     </ul>
                 </div>
             </div>
-        <li>
+        @*<li>
 
             <div class="collapsible-header"><i class="material-icons">chevron_right</i>Have a Question?</div>
 
             <div class="collapsible-body"><p>Get in touch email us at allblacks@gmail.com.</p></div>
 
-        </li>
+        </li>*@
     </ul>
 </div>
 
