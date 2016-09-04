@@ -80,7 +80,8 @@
     }
   },
   "runtimes": {
-    "win10-x64": {}
+    "win10-x64": {},
+    "win8-x86": {}
   },
   "scripts": {
     "precompile": [ "dotnet bundle" ],
