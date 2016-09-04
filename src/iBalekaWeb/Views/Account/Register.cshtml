@@ -8,7 +8,7 @@
 
 
 
-<div class="container">
+<div class="container1">
     
      <div>
          <h2 class="center-align">@ViewData["Title"]</h2>
@@ -20,54 +20,51 @@
          <div class="row center-align">
 
 
-             <div asp-validation-summary="All" class="red-text text-darken-2 "></div>
-
-
-
+             <div asp-validation-summary="All" class="red-text text-darken-2 "></div>   
 
          </div>
 
          <div class="row">
              <div class="input-field col s12">
-                 <label asp-for="UserName ">User Name</label>
-
+                 <i class="material-icons prefix">perm_identity</i> 
                  <input asp-for="UserName" class="validate" />
+                 <label for="icon_telephone">Username *</label>
                  <span asp-validation-for="UserName" class="red-text text-darken-2"></span>
              </div>
          </div>
 
          <div class="row">
              <div class="input-field col s12">
-                 <label asp-for="Email ">Email</label>
-
+                 <i class="material-icons prefix">email</i>
                  <input asp-for="Email" class="validate" />
+                 <label for="Email">Email *</label>
                  <span asp-validation-for="Email" class="red-text text-darken-2"></span>
              </div>
          </div>
 
          <div class="row">
              <div class="input-field col s12">
-                 <label asp-for="Password">Password</label>
+                     <i class="material-icons prefix">lock</i>
+                     <input asp-for="Password" class="validate" />
+                     <label for="icon_telephone">Password *</label>
+                     <span asp-validation-for="Password" class="red-text text-darken-2"></span>
 
-                 <input asp-for="Password" placeholder="Password" />
-                 <span asp-validation-for="Password" class="red-text text-darken-2"></span>
-
-             </div>
+                 </div>
          </div>
 
          <div class="row">
              <div class="input-field col s12">
-
-                 <input asp-for="ConfirmPassword" placeholder="Confirm Password" />
-                 <label asp-for="ConfirmPassword">Confirm Password</label>
-
+                 <i class="material-icons prefix">lock_open</i>
+                 <input asp-for="ConfirmPassword" class="validate" />
+                 <label for="icon_telephone">Confirm Password *</label>
                  <span asp-validation-for="ConfirmPassword" class="red-text text-darken-2"></span>
+
              </div>
          </div>
 
-         <div class="row">
+         <div class="row4">
              <div class="input-field col s12">
-                 <button class="btn waves-effect waves-light" type="submit" name="action">
+                 <button class="btn waves-effect waves-light btn-small red accent-3" type="submit" name="action">
                      Submit
                      <i class="material-icons right">send</i>
                  </button>

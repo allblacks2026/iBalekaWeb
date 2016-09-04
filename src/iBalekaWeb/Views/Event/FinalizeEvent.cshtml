@@ -9,7 +9,7 @@
 <div class="container">
 
     <div>
-        <h2 class="center-align">@ViewData["Title"]</h2>
+        <h3 class="center-align">@ViewData["Title"]</h3>
 
     </div>
     <div class="row">
@@ -101,12 +101,17 @@
 
             <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="CreateEvent">
                 Back
+                <i class="material-icons right">send</i>
             </a>
         </div>
+        <div class="row10">
         <div class="col s6 right-align ">
-            <button class="btn waves-effect waves-light btn-large red accent-3" name="cmdButton" value="Save" onclick="saveEvent()" id="btnSave">Save</button>
+            <button class="btn waves-effect waves-light btn-large red accent-3" name="cmdButton" value="Save" onclick="saveEvent()" id="btnSave">
+            Save
+                <i class="material-icons right">send</i>
+            </button>
 
-
+            </div>
         </div>
     </div>
 

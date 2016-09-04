@@ -5,13 +5,106 @@
     font-family: Roboto;
    
   }
-
- 
+ .row{
+     font-family:monospace;
+ }
+ .container1{
+     margin-left:25%;
+     margin-right:25%;
+ }
 
   main {
     flex: 1 0 auto;
   }
+.extra {
+    display: none;
+}
+a:hover .extra{
+   /*position:absolute;*/
+   position:inherit;
+   /*margin-top:5px;
+   margin-left:-35px;
+   text-decoration:none;
+   color:grey;*/
+}
+  .div1{
+     padding-left:2%;
+     margin-right:50%;
+     font-family:monospace;
+     font-style:10%;
+  }
+  .div2{
+      padding-left:4%;
+      font-family:monospace;
+  }
+  .div3{
+      padding-left:6%;
+  }
+  .row8{
+      margin-left:20%;
+      margin-right:20%;
+  }
+  .row14{
+      margin-left:20%;
+      margin-right:20%;
+  }
+  .row13{
+      font-family:monospace;
+  }
+  .row20{
+      font-family:monospace;
+  }
+  .row21{
+      padding-right:2%;
+      padding-top:2%;
+  }
+  .row18{
+      margin-left:25%;
+      margin-right:25%;
+  }
+  h2{
+      font-family:monospace;
+  }
+  h3{
+      font-family:monospace;
+  }
+  .row9{
+      padding-left:5%;
+  }
+  .row10{
+      margin-left:50%;
+      padding-right:50%;
+  }
 
+  .xabisohila{
+      font-family:monospace;
+      font-size:15px;
+      padding-left:2%;
+      padding-right:3%;
+
+  }
+  .form2{
+      margin-left:27%;
+  }
+  .row2{
+      margin-left:25%;
+      margin-right: 25%
+  }
+  .row4{
+      margin-left:50%;
+     
+  }
+  .chooseoption{
+      margin-left:27%;
+      margin-right:50%;
+      font-family:monospace;
+  }
+  .mynig{
+      padding-left:12%;
+  }
+  p{
+      font-family:monospace;
+  }
  
 
 #hero-title {
@@ -25,6 +118,12 @@
     -webkit-animation: hue 10s infinite linear;
     animation: hue 10s infinite linear;
     
+}
+.flow-text1{
+    padding-right:50%; 
+}
+.center1{
+    margin-right:50%;
 }
 
 #hero-title-one {

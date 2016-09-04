@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using iBalekaWeb.Models;
 using iBalekaWeb.Models.HomeViewModels;
 
+
 namespace iBalekaWeb.Controllers
 {
 
@@ -51,6 +52,21 @@ namespace iBalekaWeb.Controllers
 
             return View();
         }
+
+        //
+        //GET: EmailUs
+        [HttpGet]
+        [AllowAnonymous]
+
+        public IActionResult EmailUs(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        //
+        //POST: EmailUs
+
     
         public IActionResult Contact()
         {

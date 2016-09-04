@@ -1,7 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Welcome Home";
 }
-
+<div class="row21">
+    <div class="right-align">
+        <i class="material-icons">help_outline</i>
+    </div>
+</div>
 <div id="hero">
     <div class="container" id="hero-text-container">
         <div class="animated bounceInRight row">
@@ -14,25 +18,17 @@
 
                         <br />
                     </span>
-
                 </h1>
-
-
             </div>
         </div>
-
 
         <div class="row">
             <div class="col s12">
                 <div class="center-align">
-                    <a href="#create" class="btn waves-effect waves-light btn-large red accent-3">
-
+                    <a class="btn waves-effect waves-light btn-large red accent-3" asp-controller="Home" asp-action="Default">
                         Get Started
-
-
-
                     </a>
-                    <a href="#learn" class="btn waves-effect waves-light btn-large red accent-3">Learn More</a>
+                    <a class="btn waves-effect waves-light btn-large red accent-3" asp-controller="Home" asp-action="About">Learn More</a>
                 </div>
             </div>
         </div>
@@ -40,11 +36,7 @@
     <br />
 </div>
 
-
-
-
-
-<div class="row center-align" id="getting-started">
+@*<div class="row center-align" id="getting-started">
     <div class="spacer"></div>
     <div class="spacer"></div>
     <h3 class="thin center">First steps before you begin</h3>
@@ -76,18 +68,13 @@
     
     </div>
 
-
-
-
-
-
     @*<div class="section" id="getting-started-more-list">
         <p class="flow-text">Customise how members receive emails and how replies are handled.</p>
         <p class="flow-text">Allow new members to <a href="/online-signup">signup directly</a> from a dedicated web page.</p>
         <p class="flow-text">View <a href="/delivery-reports">delivery reports</a> to see if messages are getting through.</p>
         <p class="flow-text">Use a <a href="/custom-domains">custom domains</a> to personalise your messages.</p>
-    </div>*@
-</div>
+    </div>
+</div>*@
 
 
 <!-- Create Account -->
