@@ -21,16 +21,16 @@
     </div>
 
 
-    <div class="row">
+    <div class="row8">
 
         <div class="input-field col s12">
             <input disabled value=@Html.DisplayFor(model => model.RouteId) id="disabled" type="text" class="validate red-text text-darken-2">
-            <label for="disabled" class="red-text text-darken-2">Route ID</label>
+            <label for="disabled" class="text-darken-1">Route ID</label>
         </div>
 
         <div class="input-field col s12">
             <input disabled value=@Html.DisplayFor(model => model.Title) id="disabled" type="text" class="validate red-text text-darken-2">
-            <label for="disabled" class="red-text text-darken-2">Title</label>
+            <label for="disabled" class="text-darken-1">Title</label>
         </div>
 
         <div class="input-field col s12">
@@ -39,39 +39,44 @@
             }
 
             <input disabled value=@Html.Raw(totalDistance) id="disabled" type="text" class="validate red-text text-darken-2">
-            <label for="disabled" class="red-text text-darken-2">Total Distance</label>
+            <label for="disabled" class="text-darken-1">Total Distance</label>
         </div>
 
         <div class="input-field col s12">
             <input disabled value=@Html.DisplayFor(model => model.UserID) id="disabled" type="text" class="validate red-text text-darken-2">
-            <label for="disabled" class="red-text text-darken-2">User ID</label>
+            <label for="disabled" class="text-darken-1">User ID</label>
         </div>
 
         <div class="input-field col s12">
             <input disabled value=@Html.DisplayFor(model => model.DateRecorded) id="disabled" type="text" class="validate red-text text-darken-2">
-            <label for="disabled" class="red-text text-darken-2">Date Recorded</label>
+            <label for="disabled" class="text-darken-1">Date Recorded</label>
         </div>
 
         <div class="input-field col s12">
             <input disabled value=@Html.DisplayFor(model => model.DateModified) id="disabled" type="text" class="validate red-text text-darken-2">
-            <label for="disabled" class="red-text text-darken-2">Date Modified</label>
+            <label for="disabled" class="text-darken-1">Date Modified</label>
         </div>
     </div>
     <div class="row">
+    <div class="row14">
         <div class="input-field col s6 left-align">
 
             <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="SavedRoutes">
-                Back to Save Routes
+                No! Go Back
+                <i class="material-icons right">send</i>
             </a>
 
         </div>
 
         <div class="input-field col s6 right-align">
 
-            <button class="btn waves-effect waves-light btn-large red accent-3" onclick="deleteRoute()">Delete Routes</button>
+            <button class="btn waves-effect waves-light btn-large red accent-3" onclick="deleteRoute()">
+                Yes! Delete
+                <i class="material-icons right">send</i>
+            </button>
 
-          
 
+        </div>
         </div>
     </div>
 

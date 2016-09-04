@@ -16,6 +16,17 @@
   main {
     flex: 1 0 auto;
   }
+.extra {
+    display: none;
+}
+a:hover .extra{
+   /*position:absolute;*/
+   position:inherit;
+   /*margin-top:5px;
+   margin-left:-35px;
+   text-decoration:none;
+   color:grey;*/
+}
   .div1{
      padding-left:2%;
      margin-right:50%;
@@ -32,6 +43,30 @@
   .row8{
       margin-left:20%;
       margin-right:20%;
+  }
+  .row14{
+      margin-left:20%;
+      margin-right:20%;
+  }
+  .row13{
+      font-family:monospace;
+  }
+  .row20{
+      font-family:monospace;
+  }
+  .row21{
+      padding-right:2%;
+      padding-top:2%;
+  }
+  .row18{
+      margin-left:25%;
+      margin-right:25%;
+  }
+  h2{
+      font-family:monospace;
+  }
+  h3{
+      font-family:monospace;
   }
   .row9{
       padding-left:5%;
