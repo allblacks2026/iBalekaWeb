@@ -106,8 +106,7 @@ namespace iBalekaWeb
             app.UseStaticFiles();
             app.UseSession();
             //app.UseIISPlatformHandler();
-            app.UseIdentity();
-
+            app.UseIdentity();            
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseFacebookAuthentication(new FacebookOptions()
