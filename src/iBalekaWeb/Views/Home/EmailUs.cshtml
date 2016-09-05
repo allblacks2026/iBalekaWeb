@@ -1,0 +1,116 @@
+@model iBalekaWeb.Models.HomeViewModels.EmailUsViewModels
+
+@{
+    ViewData["Title"] = "EmailUs";
+}
+<h4 class="center-align">Need Help?</h4>
+
+<br />
+
+<div class="row2">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input asp-for="name" class="validate" />
+                <label for="icon_prefix">Full Name *</label>
+                <span asp-validation-for="name" class="red-text text-darken-2"></span>
+            </div>
+
+            <!--This is just an example-->
+            @*div class="input-field col s12">
+            <i class="material-icons prefix">perm_identity</i>
+            <input asp-for="UserName" class="validate" />
+            <label for="icon_telephone">Username *</label>
+            <span asp-validation-for="UserName" class="red-text text-darken-2"></span>
+        </div>*@
+
+        <!--Example ends-->
+
+            <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input asp-for="email" class="validate"/>             
+                <label for="icon_telephone">Email *</label>
+                <span asp-validation-for="email" class="red-text text-darken-2"></span>
+            </div>
+
+            <div class="input-field col s12">
+                <i class="material-icons prefix">phone</i>
+                <input asp-for="contact" class="validate"/>
+                <label for="icon_telephone">Contact *</label>
+                <span asp-validation-for="contact" class="red-text text-darken-2"></span>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="form2">
+        @*<input asp-for="radio" class="validate" />
+        <span asp-validation-for="radio" class="red-text text-darken-2"></span>*@
+        <p>My issue related to *</p>
+        <p>
+            <input class="with-gap" name="group1" type="radio" id="test1" />
+            <label for="test1">Accounts</label>
+
+            <input class="with-gap" name="group1" type="radio" id="test2" />
+            <label for="test2">Events</label>
+
+            <input class="with-gap" name="group1" type="radio" id="test3" />
+            <label for="test3">Routes</label>
+
+            <input class="with-gap" name="group1" value="Other" type="radio" id="test4" />
+            <label for="test4">Other</label>
+        </p>
+    </div>
+
+@*<div class="chooseoption">
+        <input asp-for="dropdwon" class="validate" />
+        <span asp-validation-for="dropdwon" class="red-text text-darken-2"></span>
+        <label><large>Tell us more about your issue *</large> </label>
+        <select class="test1">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+    </div>*@
+
+
+    <!--Test 2 comes here-->
+@*<div class="input-field col s12">
+    <i class="material-icons prefix">phone</i>
+    <input asp-for="contact" class="validate" />
+    <label for="icon_telephone">Contact *</label>
+    <span asp-validation-for="contact" class="red-text text-darken-2"></span>
+</div>*@
+
+
+<div class="row2">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i> 
+                <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                <label for="icon_prefix2">Please describe your problem *</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row4">
+
+    <div class="input-field col s12">
+        @*<a href="mailto:okxabisohila@gmail.com?Subject=Need help" class="btn btn-default">Submit</a>*@
+
+        <button type="submit" class="btn waves-effect waves-light btn-small red accent-3">
+            Submit
+            <i class="material-icons right">send</i>
+        </button>
+            @*<a href="mailto:okxabisohila@gmail.com?Subject=Challenge yourself">Send</a>*@
+        </div>
+    </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
