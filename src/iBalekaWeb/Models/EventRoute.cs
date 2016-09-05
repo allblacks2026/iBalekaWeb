@@ -3,14 +3,37 @@ using System.Collections.Generic;
 
 namespace iBalekaWeb.Models
 {
-    public partial class EventRoute
+    public class EventRoute
     {
         public EventRoute() { }
         public EventRoute(string dateAdded)
-        {            
-            
+        {
+
             DateAdded = dateAdded;
             Deleted = false;
+        }
+        public EventRoute(int routeId, string dateAdd, string title)
+        {
+            Title = title;
+            RouteID = routeId;
+            DateAdded = dateAdd;
+
+
+        }
+        public EventRoute(int eventRouteId, int eventId, int routeId, string dateAdded, string title, string description)
+        {
+            EventRouteID = eventRouteId;
+            EventID = eventId;
+            RouteID = routeId;
+            DateAdded = dateAdded;
+            Title = title;
+            Description = description;
+        }
+        public EventRoute(Route evntRoute)
+        {
+            Title = evntRoute.Title;
+            RouteID = evntRoute.RouteId;
+            DateAdded = DateTime.Now.Date.ToString();
         }
         public string Title { get; set; }
         public int EventRouteID { get; set; }
@@ -19,8 +42,7 @@ namespace iBalekaWeb.Models
         public string Description { get; set; }
         public int EventID { get; set; }
         public int RouteID { get; set; }
-
-        public virtual Event Event { get; set; }
+        //[JsonIgnore]
         public virtual Route Route { get; set; }
     }
 }

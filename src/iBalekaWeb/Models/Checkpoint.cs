@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace iBalekaWeb.Models
 {
-    public partial class Checkpoint
+    public class Checkpoint
     {
         public Checkpoint() { }
         public Checkpoint(double lat, double lng)
@@ -19,7 +19,6 @@ namespace iBalekaWeb.Models
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public int RouteId { get; set; }
-
         public virtual Route Route { get; set; }
     }
 }

@@ -99,6 +99,7 @@
 
         <div class="row8">
             <div class="input-field col s12">
+<<<<<<< HEAD
 
                 @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
                 @Html.LabelFor(model => model.RouteId)
@@ -110,6 +111,17 @@
 
                         <label>No Route Set</label>
                     }*@
+=======
+                @if (ViewBag.UserRoutes != null)
+                {
+                    @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
+                    @Html.LabelFor(model => model.RouteId)
+                }
+                else
+                {
+                    <label>No Route Set</label>
+                }
+>>>>>>> c31a8830d543b60d84969d4e6e929686e147b1c4
 
 
 

@@ -5,23 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using iBalekaWeb.Models;
-using iBalekaWeb.Services;
+using iBalekaWeb.Data.iBalekaAPI;
 using iBalekaWeb.Models.EventViewModels;
 using Microsoft.AspNetCore.Identity;
 using iBalekaWeb.Models.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using iBalekaWeb.Models.Responses;
+using iBalekaWeb.Data.Extensions;
 
 namespace iBalekaWeb.Controllers
 {
     [Authorize]
     public class EventController : Controller
     {
-        private IEventService _context;
-        private IRouteService _routeContext;
+        private IEventClient _context;
+        private IMapClient _routeContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        public EventController(IEventService _repo, UserManager<ApplicationUser> _user, IRouteService _rContext)
+        public EventController(IEventClient _repo, UserManager<ApplicationUser> _user, IMapClient _rContext)
         {
             _context = _repo;
             _routeContext = _rContext;
@@ -32,21 +34,30 @@ namespace iBalekaWeb.Controllers
         [HttpGet(Name = "Events")]
         public IActionResult Events()
         {
-            IEnumerable<Event> events = _context.GetEvents(_userManager.GetUserId(User));
-            return View(events);
+            ListModelResponse<Event> eventResponse = _context.GetUserEvents(_userManager.GetUserId(User));
+            if (eventResponse.DidError == true || eventResponse == null)
+            {
+                if(eventResponse == null)
+                    return View("Error");
+                Error er = new Error(eventResponse.ErrorMessage);
+                return View("Error");
+            }
+            return View(eventResponse.Model);
         }
 
         // GET: Event/Details/5
         [HttpGet(Name = "EventDetails")]
-        public ActionResult EventDetails(int id)
+        public IActionResult EventDetails(int id)
         {
-            Event evnt = _context.GetEventByID(id);
-            if (evnt == null)
+            SingleModelResponse<EventViewModel> eventResponse = _context.GetEvent(id);
+            if (eventResponse.DidError == true || eventResponse == null)
             {
-                return NotFound();
+                if (eventResponse == null)
+                    return View("Error");
+                Error er = new Error(eventResponse.ErrorMessage);
+                return View("Error");
             }
-            EventViewModel evntView = _context.GetEventByIDView(id);
-            return View(evntView);
+            return View(eventResponse.Model);
         }
 
         //create event
@@ -54,14 +65,21 @@ namespace iBalekaWeb.Controllers
         [HttpGet]
         public IActionResult CreateEvent()
         {
-
-            if (_routeContext.GetRoutes(_userManager.GetUserId(User)).Any())
+            ListModelResponse<Route> routeResponse = _routeContext.GetUserRoutes(_userManager.GetUserId(User));
+            if (routeResponse.DidError == true || routeResponse == null)
+            {
+                if (routeResponse == null)
+                    return View("Error");
+                Error er = new Error(routeResponse.ErrorMessage);
+                return View("Error");
+            }
+            if (routeResponse.Model.Any())
             {
                 ViewBag.UserRoutes = GetRoutes(null);
             }
             else
             {
-                ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
+                ViewBag.UserRoutes = null;
             }
             string eventCookie = HttpContext.Request.Cookies["NewEvent"];
             EventViewModel model = new EventViewModel();
@@ -85,8 +103,15 @@ namespace iBalekaWeb.Controllers
                 }
                 foreach (int id in RouteId)
                 {
-
-                    model.EventRoutes.Add(new EventRouteViewModel(_routeContext.GetRouteByID(id)));
+                    SingleModelResponse<Route> routeResponse = _routeContext.GetRoute(id);
+                    if (routeResponse.DidError == true || routeResponse == null)
+                    {
+                        if (routeResponse == null)
+                            return View("Error");
+                        Error er = new Error(routeResponse.ErrorMessage);
+                        return View("Error");
+                    }
+                    model.EventRoutes.Add(routeResponse.Model.ToEventRouteViewModel());
                 }
 
                 //example of using cookie
@@ -108,8 +133,15 @@ namespace iBalekaWeb.Controllers
         }
         private MultiSelectList GetRoutes(string[] selectedValues)
         {
-            IEnumerable<Route> routes = _routeContext.GetRoutes(_userManager.GetUserId(User)).ToList();
-            return new MultiSelectList(routes, "RouteId", "Title", selectedValues);
+            ListModelResponse<Route> routeResponse = _routeContext.GetUserRoutes(_userManager.GetUserId(User));
+
+            //Get suitable error message
+            //if (routeResponse.DidError == true)
+            //{
+            //    Error er = new Error(routeResponse.ErrorMessage);
+            //    return View("Error");
+            //}
+            return new MultiSelectList(routeResponse.Model, "RouteId", "Title", selectedValues);
         }
 
 
@@ -131,16 +163,21 @@ namespace iBalekaWeb.Controllers
 
         }
         [HttpPost]
-
         public ActionResult FinalizeEvent([FromBody]EventViewModel currentModel)
         {
             if (ModelState.IsValid)
             {
 
-                string userId = _userManager.GetUserId(User);
-                currentModel.UserID = userId;
-                _context.AddEvent(currentModel);
-                
+                SingleModelResponse<Event> eventResponse = _context.SaveEvent(currentModel);
+                if (eventResponse.DidError == true || eventResponse == null)
+                {
+                    if (eventResponse == null)
+                        return View("Error");
+                    Error er = new Error(eventResponse.ErrorMessage);
+                    return View("Error");
+                }
+
+
 
                 var CookieOption = new CookieOptions();
                 CookieOption.Expires = DateTime.Now.AddDays(-1);
@@ -161,27 +198,34 @@ namespace iBalekaWeb.Controllers
         [HttpGet]
         public ActionResult EditEvent(int id)
         {
-            EventViewModel evnt = _context.GetEventByIDView(id);
-            if (evnt == null)
+            SingleModelResponse<EventViewModel> eventResponse = _context.GetEvent(id);
+            if (eventResponse.DidError == true || eventResponse == null)
             {
-                return NotFound();
+                if (eventResponse == null)
+                    return View("Error");
+                Error er = new Error(eventResponse.ErrorMessage);
+                return View("Error");
             }
-            if (_routeContext.GetRoutes(_userManager.GetUserId(User)).Any())
+
+            if (eventResponse.Model.EventRoutes.Count>0)
             {
-                string[] selectedValues = new string[evnt.EventRoutes.Count];
-                for (int i = 0; i < evnt.EventRoutes.Count; i++)
+                string[] selectedValues = new string[eventResponse.Model.EventRoutes.Count];
+                int count = 0;
+                foreach (EventRouteViewModel route in eventResponse.Model.EventRoutes)
                 {
-                    selectedValues[i] = evnt.EventRoutes[i].RouteId.ToString();
+                    selectedValues[count] = route.RouteId.ToString();
+                    count++;
                 }
                 ViewBag.UserRoutes = GetRoutes(selectedValues);
             }
             else
             {
-                ViewBag.UserRoutes = new SelectListItem { Text = "No Routes Created", Value = "0" };
+                ViewBag.UserRoutes = GetRoutes(null);
             }
+            
 
 
-            return View(evnt);
+            return View(eventResponse.Model);
         }
         [HttpPost]
         public ActionResult UpdatedEditEvent([FromBody]int id)
@@ -199,14 +243,12 @@ namespace iBalekaWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                evnt.EventRoutes = new List<EventRouteViewModel>();
-
-                foreach (int id in evnt.RouteId)
+                SingleModelResponse<Event> eventResponse = _context.UpdateEvent(evnt);
+                if (eventResponse.DidError == true)
                 {
-                    evnt.EventRoutes.Add(new EventRouteViewModel(_routeContext.GetRouteByID(id)));
+                    Error er = new Error(eventResponse.ErrorMessage);
+                    return View("Error");
                 }
-                _context.UpdateEvent(evnt);
-                _context.SaveEvent();
 
                 return RedirectToAction("EventDetails", new { id = evnt.EventId });
 
@@ -221,12 +263,24 @@ namespace iBalekaWeb.Controllers
         [HttpGet]
         public ActionResult DeleteEvent(int id)
         {
-            EventViewModel evnt = _context.GetEventByIDView(id);
-            if (evnt == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                SingleModelResponse<EventViewModel> eventResponse = _context.GetEvent(id);
+                if (eventResponse.DidError == true || eventResponse == null)
+                {
+                    if (eventResponse == null)
+                        return View("Error");
+                    Error er = new Error(eventResponse.ErrorMessage);
+                    return View("Error");
+                }
+
+                return View(eventResponse.Model);
+
             }
-            return View(evnt);
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // POST: Event/Delete/5
@@ -236,9 +290,14 @@ namespace iBalekaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                Event deleteEvent = _context.GetEventByID(id);
-                _context.Delete(deleteEvent);
-                _context.SaveEvent();
+                SingleModelResponse<Event> eventResponse = _context.DeleteEvent(id);
+                if (eventResponse.DidError == true || eventResponse == null)
+                {
+                    if (eventResponse == null)
+                        return View("Error");
+                    Error er = new Error(eventResponse.ErrorMessage);
+                    return View("Error");
+                }
                 return RedirectToAction("Events");
             }
             else

@@ -4,7 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace iBalekaWeb.Models
 {
-    public partial class ClubMember
+    public enum ClubStatus
+    {
+        Joined,
+        Left
+    }
+    public class ClubMember
     {
         [Key]
         public int MemberId { get; set; }
@@ -12,8 +17,7 @@ namespace iBalekaWeb.Models
         public int ClubId { get; set; }
         public DateTime DateJoined { get; set; }
         public DateTime? DateLeft { get; set; }
-        public bool IsaMember { get; set; }
-
+        public ClubStatus Status { get; set; }
         public virtual Athlete Athlete { get; set; }
         public virtual Club Club { get; set; }
     }
