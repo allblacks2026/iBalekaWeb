@@ -24,7 +24,7 @@ function createUpdatedEventObject() {
     date = $("#datepicker").val();
     time = $("#timepicker").val();
     location = $("#Location").val();
-    var routeList = $("#RouteId option");
+    var routeList = $("#RouteId option:selected").val();
     var routeIds = [];
     
     var eventModel = { EventId: eventObject.eventId, Date: date, Description: description, EventRoutes: [], Location: location, Time: time, Title: title,RouteId:[] };

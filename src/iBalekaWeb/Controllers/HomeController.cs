@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Diagnostics;
-using iBalekaWeb.Services;
 using Microsoft.AspNetCore.Identity;
 using iBalekaWeb.Models;
 using iBalekaWeb.Models.HomeViewModels;
+using iBalekaWeb.Data.iBalekaAPI;
+using iBalekaWeb.Models.Responses;
 
 
 namespace iBalekaWeb.Controllers
@@ -17,10 +18,10 @@ namespace iBalekaWeb.Controllers
 
     public class HomeController : Controller
     {
-        private IEventService _context;
-        private IRouteService _routeContext;
+        private IEventClient _context;
+        private IMapClient _routeContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        public HomeController(IEventService _repo, UserManager<ApplicationUser> _user, IRouteService _rContext, ILoggerFactory factory)
+        public HomeController(IEventClient _repo, UserManager<ApplicationUser> _user, IMapClient _rContext, ILoggerFactory factory)
         {
             if (_logger == null)
             {
@@ -35,8 +36,24 @@ namespace iBalekaWeb.Controllers
         public IActionResult Default()
         {
             HomeViewModel model = new HomeViewModel();
-            int nrEvents = int.Parse(_context.GetEvents(_userManager.GetUserId(User)).Count().ToString());
-            int nrRoutes = int.Parse(_routeContext.GetRoutes(_userManager.GetUserId(User)).Count().ToString());
+            ListModelResponse<Event> routeResponse = _context.GetUserEvents(_userManager.GetUserId(User));
+            if (routeResponse.DidError == true || routeResponse == null)
+            {
+                if (routeResponse == null)
+                    return View("Error");
+                Error er = new Error(routeResponse.ErrorMessage);
+                return View("Error");
+            }
+            ListModelResponse<Route> eventResponse = _routeContext.GetUserRoutes(_userManager.GetUserId(User));
+            if (eventResponse.DidError == true || eventResponse == null)
+            {
+                if (eventResponse == null)
+                    return View("Error");
+                Error er = new Error(eventResponse.ErrorMessage);
+                return View("Error");
+            }
+            int nrEvents = eventResponse.Model.Count();
+            int nrRoutes = routeResponse.Model.Count();
             model.NumberOfEvents = nrEvents;
             model.NumberOfRoutes = nrRoutes;
             return View(model);

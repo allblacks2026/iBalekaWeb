@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace iBalekaWeb.Models
 {
-    public partial class Club
+    public class Club
     {
         public Club()
         {
@@ -19,7 +19,6 @@ namespace iBalekaWeb.Models
         public string Description { get; set; }
         public string Location { get; set; }
         public string Name { get; set; }
-        [Column(TypeName = "varchar(MAX)")]
 
         public string UserId { get; set; }
 
