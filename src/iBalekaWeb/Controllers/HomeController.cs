@@ -12,7 +12,6 @@ using iBalekaWeb.Models.HomeViewModels;
 using iBalekaWeb.Data.iBalekaAPI;
 using iBalekaWeb.Models.Responses;
 
-
 namespace iBalekaWeb.Controllers
 {
 
@@ -69,21 +68,6 @@ namespace iBalekaWeb.Controllers
 
             return View();
         }
-
-        //
-        //GET: EmailUs
-        [HttpGet]
-        [AllowAnonymous]
-
-        public IActionResult EmailUs(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        //
-        //POST: EmailUs
-
     
         public IActionResult Contact()
         {
