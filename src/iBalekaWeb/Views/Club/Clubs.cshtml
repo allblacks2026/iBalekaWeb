@@ -1,0 +1,46 @@
+@model IEnumerable<iBalekaWeb.Models.Club>
+@{
+    ViewData["Title"] = "Saved Clubs";
+
+
+}
+
+<div class="container">
+    <div>
+        <h2 class="center-align">@ViewData["Title"]</h2>
+
+    </div>
+    <div class="row">
+        <ul class="collection">
+            @if (Model.Count() > 0)
+            {
+                foreach (Club club in Model)
+                {
+                    <li class="collection-item avatar">
+                        <div class="title">
+                             @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+                        </div>
+                        <p>
+                            <a class="badge">
+                                @Html.ActionLink("Delete", "DeleteClub", new { id = club.ClubId })
+                            </a>
+                        </p>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="mdl-typography--headline" style="text-align:center;">There are no Clubs to Display</li>
+            }
+
+        </ul>
+
+    </div>
+
+    <div>
+        <a asp-action="AddClub" asp-controller="Club" class="btn waves-effect waves-light btn-large red accent-3">
+            Create Club
+            <i class="material-icons right">send</i>
+        </a>
+    </div>
+</div>

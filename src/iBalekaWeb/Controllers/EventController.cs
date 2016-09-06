@@ -204,7 +204,7 @@ namespace iBalekaWeb.Controllers
                 if (eventResponse == null)
                     return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
-                return View("Error");
+                return View("Error",er);
             }
 
             if (eventResponse.Model.EventRoutes.Count>0)
@@ -255,7 +255,7 @@ namespace iBalekaWeb.Controllers
             }
             else
             {
-                return BadRequest(ModelState);
+                return View("EditEvent", evnt);
             }
         }
 

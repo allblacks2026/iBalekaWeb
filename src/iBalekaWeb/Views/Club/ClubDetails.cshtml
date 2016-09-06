@@ -1,0 +1,61 @@
+@model iBalekaWeb.Models.Club
+@using iBalekaWeb.Models
+<style>
+    body {
+        overflow-y: visible;
+    }
+</style>
+
+@{
+    ViewData["Title"] = "Event Details";
+
+
+}
+
+<div class="container">
+    <div>
+        <h2 class="center-align">@ViewData["Title"]</h2>
+    </div>
+
+    <div class="row">
+        <div class="col s6 left-align">
+            <h5 class="left-align">Club Details</h5>
+            <div class="row">
+                @Html.LabelFor(model => model.ClubId, "Club ID", new { @class = "right-align flow-text" }):
+                <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubId)</span>
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.Name, "User ID", new { @class = "right-align flow-text" }):
+                <span class="left-align flow-text">@Html.DisplayFor(model => model.Name)</span>
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.Description, "Title", new { @class = "right-align flow-text" }):
+                <span class="left-align flow-text">@Html.DisplayFor(model => model.Description)</span>
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.Location, "Description", new { @class = "right-align flow-text" }):
+                <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.DateCreated, "Date", new { @class = "right-align flow-text" }):
+                <span class="left-align flow-text">@Html.DisplayFor(model => model.DateCreated)</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4 left-align ">
+            <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Clubs">
+                Back to List
+            </a>
+        </div>
+        <div class="col s4 center-align ">
+            @Html.ActionLink("Edit", "EditClub", new { id = Model.ClubId }, new { @class = "btn waves-effect waves-light btn-large red accent-3" })
+
+        </div>
+        <div class="col s4 right-align ">
+            @Html.ActionLink("Delete", "DeleteClub", new { id = Model.ClubId }, new { @class = "btn waves-effect waves-light btn-large red accent-3" })
+        </div>
+    </div>
+</div>
+
+

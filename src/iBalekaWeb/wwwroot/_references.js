@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="js/chosen.jquery.js" />
+/// <reference path="js/clubajax.js" />
 /// <reference path="js/eventsajax.js" />
 /// <reference path="js/ibalekamap.js" />
 /// <reference path="js/site.js" />

@@ -12,10 +12,10 @@ namespace iBalekaWeb.Models.AccountViewModels
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        //[Required]
+        //[EmailAddress]
+        //[Display(Name = "Email")]
+        //public string Email { get; set; }
 
         [Required]
         [StringLength(20, ErrorMessage = "The {0} must be at least {1} and at max {2} characters long.", MinimumLength = 6)]
