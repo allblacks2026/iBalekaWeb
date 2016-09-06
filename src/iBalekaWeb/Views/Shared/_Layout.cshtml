@@ -47,7 +47,6 @@
 <body>
     <!-- /#wrapper -->
     <header>
-        <div class="row20">
             <nav class="hoverable red">
                 <div class="nav-wrapper red-text">
                     <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
@@ -65,15 +64,17 @@
                         </li>
 
                         <li><a asp-controller="Home" asp-action="EmailUs"><small>Email Us</small></a></li>
-                        <li><a>|</a></li>
-                        <li><a><small>+778 141 8589</small></a></li>
-                        <li><a>|</a></li>
+                       
+                      
+                       
                         <li><a><small>Help<i class="material-icons right md-18 ">help</i></small><span class="extra">Help and Support!!</span> </a></li>
-                        <li><a>|</a></li>
+                        <li>
+                            <a>|</a>
+                        </li>
 
                         @*<li>
-                                <a asp-controller="Home" asp-action="About">About</a>
-                            </li>*@
+                <a asp-controller="Home" asp-action="About">About</a>
+            </li>*@
                         <li>
                             <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
 
@@ -124,7 +125,7 @@
 
                 </ul>
             </nav>
-        </div>
+        
 
     </header>
 
