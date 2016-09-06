@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - All Blacks</title>
     <environment names="Development">
 
- 
+
         <link rel="stylesheet" href="~/lib/materialize/dist/css/materialize.css" />
         <link rel="stylesheet" href="~/css/StyleSheet.css" />
         <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
@@ -48,43 +48,42 @@
     <!-- /#wrapper -->
     <header>
         <div class="row20">
-        <nav class="hoverable red">
-            <div class="nav-wrapper red-text">
-                <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+            <nav class="hoverable red">
+                <div class="nav-wrapper red-text">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
 
-                <a asp-controller="Home" asp-action="Index" class="brand-logo">iBaleka</a>
+                    <a asp-controller="Home" asp-action="Index" class="brand-logo">iBaleka</a>
 
-                <ul class="mynig">
 
-                    <li><a asp-controller="Home" asp-action="EmailUs"><small>Email Us</small></a></li>
-                    <li><a>|</a></li>
-                    <li><a><small>+778 141 8589</small></a></li>
-                    <li><a>|</a></li>
-                    <li><a><small>Help<i class="material-icons right">help</i></small><span class="extra">Help and Support!!</span> </a></li>
-                    <li><a>|</a></li>
-                </ul>
 
-                <ul class="right hide-on-med-and-down">
+                    <ul class="right hide-on-med-and-down">
 
-                    <li>
-                        <a asp-controller="Home" asp-action="Default">Features</a>
 
-                    </li>
+                        <li>
+                            <a asp-controller="Home" asp-action="Default">Features</a>
 
-                    @*<li>
-                    <a asp-controller="Home" asp-action="About">About</a>
-                </li>*@
-                    <li>
-                        <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
+                        </li>
 
-                    </li>
-                    <li>
-                        @await Html.PartialAsync("_LoginPartial")
+                        <li><a asp-controller="Home" asp-action="EmailUs"><small>Email Us</small></a></li>
+                        <li><a>|</a></li>
+                        <li><a><small>+778 141 8589</small></a></li>
+                        <li><a>|</a></li>
+                        <li><a><small>Help<i class="material-icons right md-18 ">help</i></small><span class="extra">Help and Support!!</span> </a></li>
+                        <li><a>|</a></li>
 
-                    </li>
-                </ul>
-            </div>
-                <div class="row13">
+                        @*<li>
+                                <a asp-controller="Home" asp-action="About">About</a>
+                            </li>*@
+                        <li>
+                            <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
+
+                        </li>
+                        <li>
+                            @await Html.PartialAsync("_LoginPartial")
+
+                        </li>
+                    </ul>
+                </div>
 
                 <ul class="side-nav" id="mobile-demo">
 
@@ -124,44 +123,12 @@
                     </li>
 
                 </ul>
-            </div>
-        </nav>
+            </nav>
         </div>
 
     </header>
 
 
-    @*<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout-icon"></div>
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout__title"><a asp-controller="Home" asp-action="Index">iBaleka</a></span>
-                <div class="mdl-layout-spacer"></div>
-                <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Home" asp-action="About">About</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Home" asp-action="Contact">Contact</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
-                    @await Html.PartialAsync("_LoginPartial")
-                </nav>
-            </div>
-        </header>*@
-
-
-    @*<div class="mdl-layout__drawer">
-            <span class="mdl-layout__title">iBaleka</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Home" asp-action="Index">Home</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Event" asp-action="Events">Events</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Map" asp-action="SavedRoutes">Saved Routes</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Map" asp-action="Map">Map a Route</a>
-                <div class="android-drawer-separator mdl-layout--small-screen-only"></div>
-                <span class="mdl-layout--small-screen-only"><a class="mdl-navigation__link mdl-typography--text-uppercase mdl-layout--small-screen-only" asp-controller="Home" asp-action="About">About</a></span>
-                <span class="mdl-layout--small-screen-only"><a class="mdl-navigation__link mdl-typography--text-uppercase mdl-layout--small-screen-only" asp-controller="Home" asp-action="Contact">Contact</a></span>
-                <span class="mdl-layout--small-screen-only"><a class="mdl-navigation__link mdl-typography--text-uppercase mdl-layout--small-screen-only" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a></span>
-                <span class="mdl-typography--text-uppercase mdl-layout--small-screen-only">@await Html.PartialAsync("_LoginPartial")</span>
-
-            </nav>
-        </div>*@
 
 
 

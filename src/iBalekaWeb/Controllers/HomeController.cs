@@ -68,7 +68,18 @@ namespace iBalekaWeb.Controllers
 
             return View();
         }
-    
+
+        public IActionResult Help()
+         {
+             return View();
+         }
+
+        public IActionResult EmailUs()
+        {
+            
+              return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
