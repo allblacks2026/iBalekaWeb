@@ -73,13 +73,13 @@ namespace iBalekaWeb.Controllers
          {
              return View();
          }
-
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult EmailUs()
         {
             
               return View();
         }
-
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

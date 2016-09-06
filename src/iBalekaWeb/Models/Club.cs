@@ -14,7 +14,7 @@ namespace iBalekaWeb.Models
         }
         [Key]
         public int ClubId { get; set; }
-        public DateTime DateCreated { get; set; }
+        public string DateCreated { get; set; }
         public bool Deleted { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }

@@ -69,7 +69,7 @@ namespace iBalekaWeb.Controllers
                     if (routeResponse == null)
                         return View("Error");
                     Error er = new Error(routeResponse.ErrorMessage);
-                    return View("Error");
+                    return View("Error",er);
                 }
                 string url = Url.Action("SavedRoutes", "Map");
                 return Json(new { Url = url });
@@ -106,6 +106,7 @@ namespace iBalekaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                route.UserID = _userManager.GetUserId(User);
                 SingleModelResponse<Route> routeResponse = _context.UpdateRoute(route);
                 if (routeResponse.DidError == true || routeResponse == null)
                 {
