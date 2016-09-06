@@ -62,7 +62,15 @@ namespace iBalekaWeb.Controllers
         {
             return View();
         }
-     
+        [HttpGet]
+        [AllowAnonymous]
+
+        public IActionResult EmailUs(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
         public IActionResult About()
         {
 

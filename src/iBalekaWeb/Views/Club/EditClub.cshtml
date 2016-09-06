@@ -1,0 +1,72 @@
+@model iBalekaWeb.Models.Club
+@section AddToHead {
+    
+}
+
+@{
+    ViewData["Title"] = "Edit Event";
+
+
+}
+<div class="container">
+    <div>
+        <h2 class="center-align">@ViewData["Title"]</h2>
+    </div>
+    <form asp-action="Edit" method="put" role="form" class="center-align">
+        <div class="row center-align">
+            <div asp-validation-summary="All" class="red-text text-darken-2"></div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.ClubId, "Club ID", new { @class = "right-align flow-text" }):
+                <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubId)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.Name)
+                <input type="text" class="validate" asp-for="Name">
+                <span asp-validation-for="Name" class="red-text text-darken-2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+
+                @Html.LabelFor(model => model.Description)
+
+                <input type="text" class="validate" asp-for="Description">
+                <span asp-validation-for="Description" class="red-text text-darken-2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.Location)
+                <input type="text" id="location" class="black-text text-darken-2" asp-for="Location">
+                <span asp-validation-for="Location" class="red-text text-darken-2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.DateCreated, "Date", new { @class = "right-align flow-text" }):
+                <span class="left-align flow-text">@Html.DisplayFor(model => model.DateCreated)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Clubs">
+                    Back to List
+                </a>
+            </div>
+            <div class="input-field col s6">
+                <button type="submit" name="cmdButton" class="btn waves-effect waves-light btn-large red accent-3">
+                    Finalize
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    
+}

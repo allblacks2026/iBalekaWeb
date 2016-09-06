@@ -1,0 +1,53 @@
+@model iBalekaWeb.Models.Club
+
+@{
+    ViewData["Title"] = "FinalizeClub";
+}
+<form asp-action="CreateClub" method="post" role="form" class="center-align">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row center-align">
+            <div asp-validation-summary="All" class="red-text text-darken-2"></div>
+        </div>
+    <div class="col s6 left-align">
+        <h5 class="left-align">Finalize Club</h5>
+        <div class="row">
+            @Html.LabelFor(model => model.Name, "Club Name", new { @class = "right-align flow-text" }):
+            <span class="left-align flow-text">@Html.DisplayFor(model => model.Name)</span>
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.Description, "Title", new { @class = "right-align flow-text" }):
+            <span class="left-align flow-text">@Html.DisplayFor(model => model.Description)</span>
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.Location, "Description", new { @class = "right-align flow-text" }):
+            <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
+        </div>
+    </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="AddClub">
+                    Back
+                </a>
+            </div>
+            <div class="input-field col s6">
+                <button type="submit" name="cmdButton" class="btn waves-effect waves-light btn-large red accent-3">
+                    Create Club
+                </button>
+            </div>
+        </div>
+</form>
+
+<div>
+    <a asp-action="Clubs">Back to List</a>
+</div>
+<script>
+    var clubObject = @Html.Raw(Json.Serialize(Model));
+    window.onload=(function(){
+        loadClubObject(clubObject);
+    });
+</script>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/eventsAjax.js"></script>
+}
+

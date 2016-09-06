@@ -263,7 +263,7 @@ function getCheckpointLength() {
 //Load Route
 var loadedRoute;
 function loadRoute(route) {    
-    routeTitleText.value = route.title; 
+    routeTitleText.value = route.title;
     for (var i = 0; i < route.checkpoints.length; i++) {
         loadCheckpoints(route.checkpoints[i]);
     }
