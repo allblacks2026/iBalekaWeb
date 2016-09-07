@@ -167,7 +167,8 @@ namespace iBalekaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                currentModel.UserID = _userManager.GetUserId(User);
+                currentModel.DateCreated = DateTime.Now.ToString();
                 SingleModelResponse<Event> eventResponse = _context.SaveEvent(currentModel);
                 if (eventResponse.DidError == true || eventResponse == null)
                 {
@@ -227,29 +228,33 @@ namespace iBalekaWeb.Controllers
 
             return View(eventResponse.Model);
         }
-        [HttpPost]
-        public ActionResult UpdatedEditEvent([FromBody]int id)
-        {
-
-            return RedirectToAction("EventDetails", new { Id = id });
-
-
-        }
         // POST: Event/Edit/5
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Edit([FromBody]EventViewModel evnt)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(EventViewModel evnt,int[] RouteId)
         {
 
             if (ModelState.IsValid)
             {
+                evnt.EventRoutes = new List<EventRouteViewModel>();
+                foreach (int id in RouteId)
+                {
+                    SingleModelResponse<Route> routeResponse = _routeContext.GetRoute(id);
+                    if (routeResponse.DidError == true || routeResponse == null)
+                    {
+                        if (routeResponse == null)
+                            return View("Error");
+                        Error er = new Error(routeResponse.ErrorMessage);
+                        return View("Error");
+                    }
+                    evnt.EventRoutes.Add(routeResponse.Model.ToEventRouteViewModel());
+                }
                 SingleModelResponse<Event> eventResponse = _context.UpdateEvent(evnt);
                 if (eventResponse.DidError == true)
                 {
                     Error er = new Error(eventResponse.ErrorMessage);
                     return View("Error");
                 }
-
                 return RedirectToAction("EventDetails", new { id = evnt.EventId });
 
             }

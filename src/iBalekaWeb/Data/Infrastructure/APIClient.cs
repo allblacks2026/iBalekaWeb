@@ -25,7 +25,8 @@ namespace iBalekaWeb.Data.Infrastructure
     public class ApiClient : IApiClient
     {
         private HttpClient httpClient;
-        private const string BaseUri = "https://ibalekaapi.azurewebsites.net/";
+        private const string BaseUri = "https://localhost:44349/";
+        //private const string BaseUri = "https://ibalekaapi.azurewebsites.net/";
         public ApiClient()
         {
 

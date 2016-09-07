@@ -38,6 +38,7 @@ namespace iBalekaWeb.Models
         public string Title { get; set; }
         public int EventRouteID { get; set; }
         public string DateAdded { get; set; }
+        public double Distance { get; set; }
         public bool Deleted { get; set; }
         public string Description { get; set; }
         public int EventID { get; set; }

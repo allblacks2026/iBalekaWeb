@@ -22,6 +22,7 @@ namespace iBalekaWeb.Data.Extensions
                     Description = route.Description,
                     RouteId = route.RouteID,
                     EventId = evnt.EventId,
+                    
                     DateAdded = route.DateAdded                    
                 });
             }
@@ -97,6 +98,7 @@ namespace iBalekaWeb.Data.Extensions
                         Description = route.Description,
                         RouteId = route.RouteID,
                         EventId = evnt.EventId,
+                        Distance = route.Distance,
                         DateAdded = route.DateAdded
                     });
                 }

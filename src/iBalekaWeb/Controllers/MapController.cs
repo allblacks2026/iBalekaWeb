@@ -38,7 +38,7 @@ namespace iBalekaWeb.Controllers
         [HttpGet(Name = "SavedRoutes")]
         public IActionResult SavedRoutes()
         {
-            ListModelResponse<Route> routeResponse = GetRoutesTask();
+            ListModelResponse<Route> routeResponse = _context.GetUserRoutes(_userManager.GetUserId(User));
             if (routeResponse.DidError == true || routeResponse == null)
             {
                 if (routeResponse == null)
@@ -47,14 +47,8 @@ namespace iBalekaWeb.Controllers
                 return View("Error");
             }
             return View(routeResponse.Model);
-
-
-
         }
-        private ListModelResponse<Route> GetRoutesTask()
-        {
-            return _context.GetUserRoutes(_userManager.GetUserId(User));
-        } 
+
         //// POST: Map/AddRoute
         [HttpPost]
         //[ValidateAntiForgeryToken]
