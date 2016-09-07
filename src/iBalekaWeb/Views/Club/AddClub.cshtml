@@ -43,7 +43,7 @@
         <div class="row">
             <div class="input-field col s12">
                 @Html.LabelFor(model => model.Location)
-                <input type="text" id="location" class="black-text text-darken-2" asp-for="Location">
+                <input type="text" class="autocomplete" asp-for="Location" id="autocomplete">
                 <span asp-validation-for="Location" class="red-text text-darken-2" />
             </div>
         </div>

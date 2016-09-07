@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,12 +20,29 @@ namespace iBalekaWeb.Models.MapViewModels
             DateRecorded = dateRecorded;
             DateModified = dateModified;
         }
+        [DisplayName("Route")]
+
         public int RouteId { get; set; }
+        [DisplayName("Date Modified")]
+
         public string DateModified { get; set; }
+
+        [DisplayName("Date Recorded")]
+
         public string DateRecorded { get; set; }
+        [DisplayName("Title")]
+
         public string Title { get; set; }
+
+        [DisplayName("User ID")]
+
         public string UserID {get;set;}
+
+        [DisplayName("Checkpoints")]
+
         public List<CheckpointViewModel> Checkpoints { get; set; }
+
+        [DisplayName("Total Distance")]
         public double TotalDistance { get; set; }
     }
 }

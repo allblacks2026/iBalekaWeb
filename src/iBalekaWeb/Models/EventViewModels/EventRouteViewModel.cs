@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,14 +50,21 @@ namespace iBalekaWeb.Models.EventViewModels
             Distance = evntRoute.Distance;
             DateAdded = DateTime.Now.Date.ToString();
         }
-
+        [DisplayName("Event Route")]
         public int EventRouteId { get; set; }
+        [DisplayName("Title")]
         public string Title { get; set; }
+        [DisplayName("Distance")]
         public double Distance { get; set; }
+        [DisplayName("Date Added")]
         public string DateAdded { get; set; }
+        [DisplayName("Date Modified")]
         public string DateModified { get; set; }
+        [DisplayName("Description")]
         public string Description { get; set; }
+        [DisplayName("Event")]
         public int EventId { get; set; }
+        [DisplayName("Route")]
         public int RouteId { get; set; }
 
     }
