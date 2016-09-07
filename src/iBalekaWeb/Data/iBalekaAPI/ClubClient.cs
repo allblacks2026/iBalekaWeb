@@ -29,8 +29,6 @@ namespace iBalekaWeb.Data.iBalekaAPI
             var newClub = new Club
             {
                 Name = club.Name,
-                DateCreated = DateTime.Now.ToString(),
-                Deleted= false,
                 Description = club.Description,
                 Location = club.Location,
                 UserId = club.UserId

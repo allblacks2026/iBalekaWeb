@@ -36,6 +36,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 route.Title = evntRoute.Title;
                 route.Description = evntRoute.Description;
                 route.RouteID = evntRoute.RouteId;
+                route.Distance = evntRoute.Distance;
                 route.EventID = evnt.EventId;
                 newRoutes.Add(route);
             }
@@ -57,11 +58,14 @@ namespace iBalekaWeb.Data.iBalekaAPI
         {
             string saveUrl = EventUri + "Update/EditEvent";
             List<EventRoute> newRoutes = new List<EventRoute>();
+            char numLet = 'A';
             foreach (EventRouteViewModel evntRoute in evnt.EventRoutes)
             {
                 EventRoute route = new EventRoute(DateTime.Now.ToString());
-                route.Title = evnt.Title;
+                route.Title = evnt.Title+' '+numLet;
+                numLet++;
                 route.Description = evnt.Description;
+                route.Distance = evntRoute.Distance;
                 route.RouteID = evntRoute.RouteId;
                 route.EventID = evnt.EventId;
                 newRoutes.Add(route);
@@ -96,6 +100,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
                         RouteId = rou.RouteID,
                         EventRouteId = rou.EventRouteID,
                         DateModified = rou.DateAdded,
+                        Distance = rou.Distance,
                         Description = rou.Description,
                         EventId = rou.EventID
                     };

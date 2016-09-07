@@ -1,137 +1,87 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
+@using iBalekaWeb.Models.EventViewModels
 @section AddToHead {
     <link href="~/css/chosen.css" rel="stylesheet" />
-
     <link href="~/lib/datedropper/datedropper.css" rel="stylesheet" />
     <link href="~/lib/timedropper/timedropper.css" rel="stylesheet" />
 }
-
 
 @{
     ViewData["Title"] = "Edit Event";
 
 
 }
-
 <div class="container">
-
     <div>
         <h2 class="center-align">@ViewData["Title"]</h2>
-
     </div>
-    <div class="row center-align">
-
-        <div asp-validation-summary="All" class="red-text text-darken-2"></div>
-
-
-    </div>
-
-    <div class="row">
-        <div class="input-field col s12">
-            @Html.LabelFor(model => model.Title)
-            <input type="text" class="validate" asp-for="Title">
-            <span asp-validation-for="Title" class="red-text text-darken-2" />
+    <form asp-action="Edit" asp-controller="Event" method="post" role="form" class="center-align">
+        <div class="row center-align">
+            <div asp-validation-summary="All" class="red-text text-darken-2"></div>
 
         </div>
-
-        <div class="input-field col s12">
-            @Html.LabelFor(model => model.Description)
-
-            <input type="text" class="validate" asp-for="Description">
-            <span asp-validation-for="Description" class="red-text text-darken-2" />
-        </div>
-
-        <div class="input-field col s12">
-            @Html.LabelFor(model => model.Date)
-            <input type="text" id="datepicker" class="black-text text-darken-2" asp-for="Date">
-            <span asp-validation-for="Date" class="red-text text-darken-2" />
-
-        </div>
-        <div class="input-field col s12">
-            @Html.LabelFor(model => model.Time)
-            <input type="text" id="timepicker" class="black-text text-darken-2" asp-for="Time">
-            <span asp-validation-for="Time" class="red-text text-darken-2" />
-
-        </div>
-        <div class="input-field col s12">
-            @Html.LabelFor(model => model.Location)
-            <input type="text" class="validate" asp-for="Location">
-            <span asp-validation-for="Location" class="red-text text-darken-2" />
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="input-field col s12">
-
-            @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList)
-            @Html.Label("Event Routes")
-
-
-
-            @*else
-                {
-
-                    <label>No Route Set</label>
-                }*@
-
-
-
-
-            <span asp-validation-for="RouteId" class="red-text text-darken-2" />
-
-
-        </div>
-
-
-    </div>
-
-    <div class="row">
-        <div class="input-field col s4 left-align">
-            <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
-                Back to List
-            </a>
-           
-
-        </div>
-
-        <div class="input-field col s4 center-align">
-            @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }, new { @class = "btn waves-effect waves-light btn-large red accent-3" })
-
-        </div>
-
-        <div class="input-field col s4 right-align">
-
-            <button id="btnSaveEdit" class="btn waves-effect waves-light btn-large red accent-3">
-                Save
-            </button>
-
-           
-        </div>
-
-
-    </div>
-
-</div>
-
-@*<div class="mdl-grid">
-
-            
-                <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-                    @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }, new { @class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" })
-                </div>
-                <div class="mdl-layout-spacer"></div>
-                <div class="form-group mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-                    <button id="btnSaveEdit"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                        Save
-                    </button>
-                </div>
-
+        <div class="row">
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.Title)
+                <input type="text" class="validate" asp-for="Title">
+                <span asp-validation-for="Title" class="red-text text-darken-2" />
+            </div>
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.Description)
+                <input type="text" class="validate" asp-for="Description">
+                <span asp-validation-for="Description" class="red-text text-darken-2" />
+            </div>
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.Date)
+                <input type="text" id="datepicker" class="black-text text-darken-2" asp-for="Date">
+                <span asp-validation-for="Date" class="red-text text-darken-2" />
+            </div>
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.Time)
+                <input type="text" id="timepicker" class="black-text text-darken-2" asp-for="Time">
+                <span asp-validation-for="Time" class="red-text text-darken-2" />
+            </div>
+            <div class="input-field col s12">
+                @Html.LabelFor(model => model.Location)
+                <input type="text" class="validate" asp-for="Location">
+                <span asp-validation-for="Location" class="red-text text-darken-2" />
             </div>
         </div>
-    </div>*@
+        <div class="row">
+            <div class="input-field col s12">
+                @if (ViewBag.UserRoutes != null)
+            {
+                    @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
+                    @Html.LabelFor(model => model.RouteId)
+                }
+                else
+                {
+                    <label>No Route Set</label>
+                }
+                <span asp-validation-for="RouteId" class="red-text text-darken-2" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4 left-align">
+                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
+                    Back to List
+                </a>
 
+            </div>
+            <div class="input-field col s4 center-align">
+                @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }, new { @class = "btn waves-effect waves-light btn-large red accent-3" })
+            </div>
+            <div class="input-field col s4 right-align">
+                <input type="hidden" asp-for="EventId" value="@Model.EventId">
+                <button type="submit" id="btnSaveE" class="btn waves-effect waves-light btn-large red accent-3">
+                    Save
+                </button>
 
+            </div>
+
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
@@ -152,14 +102,5 @@
         $("#timepicker").timeDropper();
 
     </script> @*Hookup Chosen Plugin*@
-    <script>
-
-        $("#btnSaveEdit").click(function(){
-            var eventObject = @Html.Raw(Json.Serialize(Model));
-            loadEventObject(eventObject);
-            EditEvent();
-        })
-
-    </script>
 
 }

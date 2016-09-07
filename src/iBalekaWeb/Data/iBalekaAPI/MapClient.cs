@@ -61,6 +61,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
 
             var newRoute = new Route
             {
+                RouteId = mapRoute.RouteId,
                 UserID = mapRoute.UserID,
                 Title = mapRoute.Title,
                 Distance = mapRoute.TotalDistance,

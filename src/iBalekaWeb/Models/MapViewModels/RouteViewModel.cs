@@ -9,7 +9,7 @@ namespace iBalekaWeb.Models.MapViewModels
     public class RouteViewModel
     {
         public RouteViewModel() { }
-        public RouteViewModel(int routeId,string title,string userId,double distance,List<CheckpointViewModel> checks, DateTime dateRecorded, DateTime dateModified)
+        public RouteViewModel(int routeId,string title,string userId,double distance,List<CheckpointViewModel> checks, string dateRecorded, string dateModified)
         {
             RouteId = routeId;
             Title = title;
@@ -20,8 +20,8 @@ namespace iBalekaWeb.Models.MapViewModels
             DateModified = dateModified;
         }
         public int RouteId { get; set; }
-        public DateTime DateModified { get; set; }
-        public DateTime DateRecorded { get; set; }
+        public string DateModified { get; set; }
+        public string DateRecorded { get; set; }
         public string Title { get; set; }
         public string UserID {get;set;}
         public List<CheckpointViewModel> Checkpoints { get; set; }

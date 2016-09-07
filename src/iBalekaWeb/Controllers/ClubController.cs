@@ -208,7 +208,7 @@ namespace iBalekaWeb.Controllers
             }
             else
             {
-                return RedirectToAction("CreateEvent");
+                return RedirectToAction("AddClub");
             }
         }
         [HttpPost]
