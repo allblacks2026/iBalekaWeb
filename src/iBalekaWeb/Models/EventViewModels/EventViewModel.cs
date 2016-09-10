@@ -39,10 +39,12 @@ namespace iBalekaWeb.Models.EventViewModels
         public EventViewModel()
         {
         }
+        [DisplayName("Route")]
+
         public int[] RouteId { get; set; }
-        [DisplayName("Event ID")]
+        [DisplayName("Event")]
         public int EventId { get; set; }
-        [DisplayName("User ID")]
+        [DisplayName("User")]
         public string UserID { get; set; }
         [Required(ErrorMessage = "Event Date is Required")]
         public string Date { get; set; }

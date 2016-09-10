@@ -89,11 +89,14 @@
         <div class="row">
             <div class="input-field col s12">
 
+   
+
+                
                 @Html.LabelFor(model => model.Location)
-                <input type="text" class="validate" asp-for="Location">
+               
+
+                <input type="text" class="autocomplete" asp-for="Location" id="autocomplete">
                 <span asp-validation-for="Location" class="red-text text-darken-2" />
-
-
 
 
             </div>
@@ -112,6 +115,13 @@
                 else
                 {
                     <label>No Route Set</label>
+
+                    <div class="col s6 center">
+                        <a asp-action="Map" asp-controller="Map" class="btn waves-effect waves-light btn-large red accent-3">
+                            Create Route
+                            <i class="material-icons right">send</i>
+                        </a>
+                    </div>
                 }
 
 
@@ -158,10 +168,10 @@
 
 
 
-@*<div class="mdl-grid">
-
-
-
+                        @*<div class="mdl-grid">
+                           
+                                    
+                            
                     <div class="mdl-layout-spacer"></div>
                     <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
                         <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" asp-action="Events">

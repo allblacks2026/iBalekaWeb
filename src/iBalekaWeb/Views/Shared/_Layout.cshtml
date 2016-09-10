@@ -6,13 +6,12 @@
     <title>@ViewData["Title"] - All Blacks</title>
     <environment names="Development">
 
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <link rel="stylesheet" href="~/lib/materialize/dist/css/materialize.css" />
         <link rel="stylesheet" href="~/css/StyleSheet.css" />
         <link rel="stylesheet" href="~/lib/animate.css/animate.css" />
-
-
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="~/lib/iconfont/material-icons.css" />
 
 
         @*<link rel="stylesheet" href="~/lib/bootswatch/paper/bootstrap.min.css" />*@
@@ -48,33 +47,34 @@
 <body>
     <!-- /#wrapper -->
     <header>
-        <div class="row20">
         <nav class="hoverable red">
             <div class="nav-wrapper red-text">
                 <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
 
                 <a asp-controller="Home" asp-action="Index" class="brand-logo">iBaleka</a>
 
-                <ul class="mynig">
 
-                    <li><a asp-controller="Home" asp-action="EmailUs"><small>Email Us</small></a></li>
-                    <li><a>|</a></li>
-                    <li><a><small>+778 141 8589</small></a></li>
-                    <li><a>|</a></li>
-                    <li><a><small>Help<i class="material-icons right">help</i></small><span class="extra">Help and Support!!</span> </a></li>
-                    <li><a>|</a></li>
-                </ul>
 
                 <ul class="right hide-on-med-and-down">
+
 
                     <li>
                         <a asp-controller="Home" asp-action="Default">Features</a>
 
                     </li>
 
+                    <li><a asp-controller="Home" asp-action="EmailUs"><small>Email Us</small></a></li>
+
+
+
+                    <li><a><small>Help<i class="material-icons right md-18 ">help</i></small><span class="extra">Help and Support!!</span> </a></li>
+                    <li>
+                        <a>|</a>
+                    </li>
+
                     @*<li>
-                    <a asp-controller="Home" asp-action="About">About</a>
-                </li>*@
+                            <a asp-controller="Home" asp-action="About">About</a>
+                        </li>*@
                     <li>
                         <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
 
@@ -85,79 +85,46 @@
                     </li>
                 </ul>
             </div>
-                <div class="row13">
 
-                <ul class="side-nav" id="mobile-demo">
+            <ul class="side-nav" id="mobile-demo">
 
 
-                    <li>
-                        <a asp-controller="Home" asp-action="Index">Home</a>
+                <li>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
 
-                    </li>
+                </li>
 
-                    <li>
-                        <a asp-controller="Home" asp-action="Default">Features</a>
+                <li>
+                    <a asp-controller="Home" asp-action="Default">Features</a>
 
-                    </li>
+                </li>
 
-                    <li>
-                        <a asp-controller="Event" asp-action="Events">My Events</a>
+                <li>
+                    <a asp-controller="Event" asp-action="Events">My Events</a>
 
-                    </li>
+                </li>
 
-                    <li>
-                        <a asp-controller="Map" asp-action="SavedRoutes">My Routes</a>
+                <li>
+                    <a asp-controller="Map" asp-action="SavedRoutes">My Routes</a>
 
-                    </li>
-                    <li>
-                        <a asp-controller="Club" asp-action="Clubs">My Clubs</a>
+                </li>
+                <li>
+                    <a asp-controller="Club" asp-action="Clubs">My Clubs</a>
 
-                    </li>
-                    
-                    <li>
-                        <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
+                </li>
 
-                    </li>
+                <li>
+                    <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
 
-                </ul>
-            </div>
+                </li>
+
+            </ul>
         </nav>
-        </div>
+
 
     </header>
 
 
-    @*<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout-icon"></div>
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout__title"><a asp-controller="Home" asp-action="Index">iBaleka</a></span>
-                <div class="mdl-layout-spacer"></div>
-                <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Home" asp-action="About">About</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Home" asp-action="Contact">Contact</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
-                    @await Html.PartialAsync("_LoginPartial")
-                </nav>
-            </div>
-        </header>*@
-
-
-    @*<div class="mdl-layout__drawer">
-            <span class="mdl-layout__title">iBaleka</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Home" asp-action="Index">Home</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Event" asp-action="Events">Events</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Map" asp-action="SavedRoutes">Saved Routes</a>
-                <a class="mdl-navigation__link mdl-typography--text-uppercase" asp-controller="Map" asp-action="Map">Map a Route</a>
-                <div class="android-drawer-separator mdl-layout--small-screen-only"></div>
-                <span class="mdl-layout--small-screen-only"><a class="mdl-navigation__link mdl-typography--text-uppercase mdl-layout--small-screen-only" asp-controller="Home" asp-action="About">About</a></span>
-                <span class="mdl-layout--small-screen-only"><a class="mdl-navigation__link mdl-typography--text-uppercase mdl-layout--small-screen-only" asp-controller="Home" asp-action="Contact">Contact</a></span>
-                <span class="mdl-layout--small-screen-only"><a class="mdl-navigation__link mdl-typography--text-uppercase mdl-layout--small-screen-only" asp-controller="Manage" asp-action="Index" title="Manage">Settings</a></span>
-                <span class="mdl-typography--text-uppercase mdl-layout--small-screen-only">@await Html.PartialAsync("_LoginPartial")</span>
-
-            </nav>
-        </div>*@
 
 
 
@@ -188,8 +155,12 @@
     <environment names="Development,Production">
 
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/materialize/dist/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
+                async defer></script>
+
         @*<script src="~/lib/jquery-ui/jquery-ui.js"></script>*@
         @*<script src="~/lib/material-design-lite/material.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
@@ -214,7 +185,8 @@
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>*@
         <script src="~/js/site.js" asp-append-version="true"></script>
 
-
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
+                async defer></script>
 
     </environment>
     @RenderSection("Scripts", required: false)
