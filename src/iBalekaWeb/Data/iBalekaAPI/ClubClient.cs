@@ -41,6 +41,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
             string saveUrl = ClubUri + "Update/UpdateClub";
             var newClub = new Club
             {
+                ClubId = club.ClubId,
                 Name = club.Name,
                 DateCreated = DateTime.Now.ToString(),
                 Deleted = false,

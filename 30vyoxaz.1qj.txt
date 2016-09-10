@@ -1,0 +1,55 @@
+﻿Merge remote-tracking branch 'refs/remotes/allblacks2026/master'
+
+# Conflicts:
+#	src/iBalekaWeb/Data/Infrastructure/APIClient.cs
+#	src/iBalekaWeb/Models/MapViewModels/RouteViewModel.cs
+#	src/iBalekaWeb/Views/Event/EditEvent.cshtml
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#   (use "git push" to publish your local commits)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   src/iBalekaWeb/Controllers/HomeController.cs
+#	modified:   src/iBalekaWeb/Data/Infrastructure/APIClient.cs
+#	modified:   src/iBalekaWeb/Models/EventViewModels/EventRouteViewModel.cs
+#	modified:   src/iBalekaWeb/Models/EventViewModels/EventViewModel.cs
+#	modified:   src/iBalekaWeb/Models/MapViewModels/RouteViewModel.cs
+#	modified:   src/iBalekaWeb/Views/Club/AddClub.cshtml
+#	modified:   src/iBalekaWeb/Views/Club/EditClub.cshtml
+#	modified:   src/iBalekaWeb/Views/Event/CreateEvent.cshtml
+#	modified:   src/iBalekaWeb/Views/Event/DeleteEvent.cshtml
+#	modified:   src/iBalekaWeb/Views/Event/EditEvent.cshtml
+#	modified:   src/iBalekaWeb/Views/Event/Events.cshtml
+#	modified:   src/iBalekaWeb/Views/Home/About.cshtml
+#	modified:   src/iBalekaWeb/Views/Home/Index.cshtml
+#	modified:   src/iBalekaWeb/Views/Map/SavedRoutes.cshtml
+#	modified:   src/iBalekaWeb/Views/Shared/Error.cshtml
+#	modified:   src/iBalekaWeb/Views/Shared/_Layout.cshtml
+#	modified:   src/iBalekaWeb/appsettings.json
+#	modified:   src/iBalekaWeb/web.config
+#	modified:   src/iBalekaWeb/wwwroot/css/StyleSheet.css
+#	modified:   src/iBalekaWeb/wwwroot/css/site.css
+#	modified:   src/iBalekaWeb/wwwroot/css/site.min.css
+#	modified:   src/iBalekaWeb/wwwroot/js/site.js
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/MaterialIcons-Regular.eot
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/MaterialIcons-Regular.ijmap
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/MaterialIcons-Regular.svg
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/MaterialIcons-Regular.ttf
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/MaterialIcons-Regular.woff
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/MaterialIcons-Regular.woff2
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/README.md
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/codepoints
+#	new file:   src/iBalekaWeb/wwwroot/lib/iconfont/material-icons.css
+#
+

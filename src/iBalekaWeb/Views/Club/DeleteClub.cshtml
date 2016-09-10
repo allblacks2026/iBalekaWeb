@@ -51,8 +51,8 @@
             </a>
         </div>
         <div class="col s6 right-align ">
-            <form asp-action="Delete" method="put" role="form" class="center-align">
-                <input type="hidden" id="ClubId" value="@Model.ClubId" />
+            <form asp-action="Delete" method="post" role="form" class="center-align">
+                <input type="hidden" id="ClubId" asp-for="ClubId" />
                 <button class="btn waves-effect waves-light btn-large red accent-3" type="submit">Delete</button>
             </form>
         </div>
