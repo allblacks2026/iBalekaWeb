@@ -60,15 +60,26 @@
             <div class="input-field col s6">
                 <input type="hidden" id="clubId"  asp-for="ClubId">
                 <input type="hidden" id="dateCreated" asp-for="DateCreated">
-                <button type="submit" name="cmdButton" class="btn waves-effect waves-light btn-large red accent-3">
+                <button type="submit" id="btnSave" class="btn modal-trigger waves-effect waves-light btn-large red accent-3">
                     Finalize
                 </button>
             </div>
         </div>
     </form>
 </div>
-
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Awesome! Club is now being updated..</h4>
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-    
+    $(document).ready(function(){
+            $("btnSave").click(function(){
+                $('#modal1').openModal();
+            });
+        });
 }

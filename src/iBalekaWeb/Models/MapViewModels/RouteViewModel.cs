@@ -23,28 +23,18 @@ namespace iBalekaWeb.Models.MapViewModels
         [DisplayName("Route")]
 
         public int RouteId { get; set; }
-<<<<<<< HEAD
-        public string DateModified { get; set; }
-        public string DateRecorded { get; set; }
-=======
         [DisplayName("Date Modified")]
-
         public string DateModified { get; set; }
 
         [DisplayName("Date Recorded")]
-
         public string DateRecorded { get; set; }
         [DisplayName("Title")]
-
->>>>>>> refs/remotes/allblacks2026/master
         public string Title { get; set; }
 
         [DisplayName("User ID")]
-
         public string UserID {get;set;}
 
         [DisplayName("Checkpoints")]
-
         public List<CheckpointViewModel> Checkpoints { get; set; }
 
         [DisplayName("Total Distance")]

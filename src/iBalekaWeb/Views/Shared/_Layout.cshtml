@@ -148,10 +148,6 @@
     </footer>
 
 
-
-
-
-
     <environment names="Development,Production">
 
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -189,6 +185,15 @@
                 async defer></script>
 
     </environment>
+    <script>
+        $(document).ready(function () {
+            $('.modal-trigger').leanModal({
+                dismissible: false,
+                starting_top: '10%', // Starting top style attribute
+                ending_top: '30%', // Ending top style attribute
+            });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 
 </body>
