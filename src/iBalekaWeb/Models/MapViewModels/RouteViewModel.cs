@@ -23,10 +23,7 @@ namespace iBalekaWeb.Models.MapViewModels
         [DisplayName("Route")]
 
         public int RouteId { get; set; }
-<<<<<<< HEAD
-        public string DateModified { get; set; }
-        public string DateRecorded { get; set; }
-=======
+
         [DisplayName("Date Modified")]
 
         public string DateModified { get; set; }
@@ -36,7 +33,6 @@ namespace iBalekaWeb.Models.MapViewModels
         public string DateRecorded { get; set; }
         [DisplayName("Title")]
 
->>>>>>> refs/remotes/allblacks2026/master
         public string Title { get; set; }
 
         [DisplayName("User ID")]
