@@ -61,15 +61,15 @@
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
-        var source = '@(ViewBag.SourcePage)';
+        var source = '@(ViewBag.SourcePageClub)';
         if  (source!= null) {
-                if (source == "Edit") {
-                    var $toastContent = $('<span>Club was successfully Updated...</span>');
-                    Materialize.toast($toastContent, 5000);
-                    @ViewBag.SourcePage = null;
-                }
+            if (source == "Edit") {
+                var $toastContent = $('<span>Club was successfully Updated...</span>');
+                Materialize.toast($toastContent, 5000);
+                source = null;
             }
-        });
+        }
+    });
 </script>
 
 

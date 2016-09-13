@@ -84,6 +84,7 @@
                     @*<li>
                             <a asp-controller="Home" asp-action="About">About</a>
                         </li>*@
+                    @*add logo*@
                     <li>
                         <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
 
@@ -163,8 +164,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
-                async defer></script>
+
 
         @*<script src="~/lib/jquery-ui/jquery-ui.js"></script>*@
         @*<script src="~/lib/material-design-lite/material.js"></script>
@@ -190,8 +190,6 @@
                     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>*@
         <script src="~/js/site.js" asp-append-version="true"></script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
-                async defer></script>
 
     </environment>
     @RenderSection("Scripts", required: false)
