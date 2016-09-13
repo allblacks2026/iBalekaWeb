@@ -48,8 +48,10 @@
         $(document).ready(function(){
             var clubObject = @Html.Raw(Json.Serialize(Model));
             loadClubObject(clubObject);
-            $("btnSave").click(function(){
-
+            $("#btnSave").click(function(){
+                $('#btnSave').prop('disabled', true);
+                var $toastContent = $('<span>Saving Club...</span>');
+                Materialize.toast($toastContent, 9000);
             });
         });
     </script>

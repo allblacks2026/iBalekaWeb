@@ -39,15 +39,19 @@ namespace iBalekaWeb.Controllers
             ListModelResponse<Event> eventResponse = _context.GetUserEvents(_userManager.GetUserId(User));
             if (eventResponse.DidError == true || eventResponse == null)
             {
-                if(eventResponse == null)
+                if (eventResponse == null)
                     return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
                 return View("Error");
             }
+            string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
+            if (sourceCookie != null)
+            {
+                ViewData["SourcePage"] = sourceCookie;
+            }
             return View(eventResponse.Model);
         }
-
-        // GET: Event/Details/5
+       // GET: Event/Details/5
         [HttpGet(Name = "EventDetails")]
         public IActionResult EventDetails(int id)
         {
@@ -57,8 +61,14 @@ namespace iBalekaWeb.Controllers
                 if (eventResponse == null)
                     return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
+                string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
+                if (sourceCookie != null)
+                {
+                    ViewData["SourcePage"] = sourceCookie;
+                }
                 return View("Error");
             }
+            
             return View(eventResponse.Model);
         }
 
@@ -78,7 +88,7 @@ namespace iBalekaWeb.Controllers
             if (routeResponse.Model.Any())
             {
                 ViewBag.UserRoutes = GetRoutes(null);
-                
+
             }
             else
             {
@@ -92,7 +102,7 @@ namespace iBalekaWeb.Controllers
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
-            if(clubResponse.Model.Any())
+            if (clubResponse.Model.Any())
             {
                 ViewBag.UserClubs = GetClubs(null);
             }
@@ -132,7 +142,7 @@ namespace iBalekaWeb.Controllers
                     }
                     model.EventRoutes.Add(routeResponse.Model.ToEventRouteViewModel());
                 }
-                if(model.ClubId!=0)
+                if (model.ClubId != 0)
                 {
                     SingleModelResponse<Club> clubResponse = _clubContext.GetClub(model.ClubId);
                     if (clubResponse.DidError == true || clubResponse == null)
@@ -202,11 +212,11 @@ namespace iBalekaWeb.Controllers
                     {
                         currentModel.ClubId = memoryModel.ClubId;
                         currentModel.UserID = _userManager.GetUserId(User);
-                    }                        
+                    }
                     else
                         currentModel.UserID = _userManager.GetUserId(User);
                 }
-                
+
                 currentModel.DateCreated = DateTime.Now.ToString();
                 SingleModelResponse<Event> eventResponse = _context.SaveEvent(currentModel);
                 if (eventResponse.DidError == true || eventResponse == null)
@@ -225,6 +235,14 @@ namespace iBalekaWeb.Controllers
 
                 //set cookie
                 HttpContext.Response.Cookies.Append("NewEvent", currentModel.ToJson(), CookieOption);
+                CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Add";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePage", source.ToJson(), CookieOption);
+
                 return RedirectToAction("Events");
             }
             else
@@ -244,10 +262,10 @@ namespace iBalekaWeb.Controllers
                 if (eventResponse == null)
                     return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
-                return View("Error",er);
+                return View("Error", er);
             }
 
-            if (eventResponse.Model.EventRoutes.Count>0)
+            if (eventResponse.Model.EventRoutes.Count > 0)
             {
                 string[] selectedValues = new string[eventResponse.Model.EventRoutes.Count];
                 int count = 0;
@@ -262,7 +280,7 @@ namespace iBalekaWeb.Controllers
             {
                 ViewBag.UserRoutes = GetRoutes(null);
             }
-            
+
 
 
             return View(eventResponse.Model);
@@ -292,6 +310,14 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(eventResponse.ErrorMessage);
                     return View("Error");
                 }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Edit";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePage", source.ToJson(), CookieOption);
+
                 return RedirectToAction("EventDetails", new { id = evnt.EventId });
 
             }
@@ -340,6 +366,14 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(eventResponse.ErrorMessage);
                     return View("Error");
                 }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Delete";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePage", source.ToJson(), CookieOption);
+
                 return RedirectToAction("Events");
             }
             else

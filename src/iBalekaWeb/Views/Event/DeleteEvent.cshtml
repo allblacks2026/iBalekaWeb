@@ -142,8 +142,10 @@
     $(document).ready(function(){
         var eventId = @Html.Raw(Json.Serialize(Model.EventId));
         loadDeletedEventId(eventId);;
-        $("btnDelete").click(function(){
-            
+        $("#btnDelete").click(function(){
+            $('#btnDelete').prop('disabled', true);
+            var $toastContent = $('<span>Deleting Event...</span>');
+            Materialize.toast($toastContent, 9000);
         });
     });
 </script>

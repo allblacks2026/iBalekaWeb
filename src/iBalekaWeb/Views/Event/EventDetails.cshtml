@@ -20,25 +20,12 @@
     <div class="row">
         <div class="col s6 left-align">
             <h5 class="left-align">Event Details</h5>
-            <div class="row">
-                @Html.LabelFor(model => model.EventId, "Event ID", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.EventId)</span>
-            </div>
-            @if (Model.ClubName == null)
-            {
-                <div class="row">
-                    @Html.LabelFor(model => model.UserID, "User ID", new { @class = "right-align flow-text" }):
-                    <span class="left-align flow-text">@Html.DisplayFor(model => model.UserID)</span>
-                </div>
-
-            }
-            else
+            @if (Model.ClubName != null)
             {
                 <div class="row">
                     @Html.LabelFor(model => model.ClubName, "Club Name", new { @class = "right-align flow-text" }):
                     <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubName)</span>
                 </div>
-
             }
             <div class="row">
                 @Html.LabelFor(model => model.Title, "Title", new { @class = "right-align flow-text" }):
@@ -87,19 +74,19 @@
                             {
                                 totalDistance = item.Distance.ToString() + "m";
                             }
-                            <li class="collection-item avatar">
-                                <div class="title">
-                                    @Html.ActionLink(item.Title, "EditRoute", new { id = item.RouteId }, new { @class = "red-text text-darken-2" })
+                    <li class="collection-item avatar">
+                        <div class="title">
+                            @Html.ActionLink(item.Title, "EditRoute", new { id = item.RouteId }, new { @class = "red-text text-darken-2" })
 
-                                </div>
-                                <p>
-                                    <a class="badge">
-                                        @totalDistance
+                        </div>
+                        <p>
+                            <a class="badge">
+                                @totalDistance
 
 
-                                    </a>
-                                </p>
-                            </li>
+                            </a>
+                        </p>
+                    </li>
                         }
                     }
 
@@ -122,4 +109,17 @@
         </div>
     </div>
 </div>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var source = '@(ViewBag.SourcePage)';
+        if  (source!= null) {
+                if (source == "Edit") {
+                    var $toastContent = $('<span>Event was successfully Updated...</span>');
+                    Materialize.toast($toastContent, 5000);
+                    @ViewBag.SourcePage = null;
+                }
+            }
+        });
+</script>
 

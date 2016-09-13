@@ -131,8 +131,10 @@
     $(document).ready(function(){
         var eventObject = @Html.Raw(Json.Serialize(Model));
         loadEventObject(eventObject);
-        $("btnSave").click(function(){
-            
+        $("#btnSave").click(function(){
+            $('#btnSave').prop('disabled', true);
+            var $toastContent = $('<span>Saving Event...</span>');
+            Materialize.toast($toastContent, 9000);
         });
     });
 </script>

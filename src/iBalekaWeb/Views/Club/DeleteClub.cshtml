@@ -22,10 +22,6 @@
         <div class="col s6 left-align">
             <h5 class="left-align">Event Details</h5>
             <div class="row">
-                @Html.LabelFor(model => model.ClubId, "Club ID", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubId)</span>
-            </div>
-            <div class="row">
                 @Html.LabelFor(model => model.Name, "Name", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Name)</span>
             </div>
@@ -65,8 +61,10 @@
         var clubId = @Html.Raw(Json.Serialize(Model.ClubId));
         loadDeletedClubId(clubId);
         $(document).ready(function () {
-            $("btnDelete").click(function () {
-
+            $("#btnDelete").click(function () {
+                $('#btnDelete').prop('disabled', true);
+                var $toastContent = $('<span>Deleting Club...</span>');
+                Materialize.toast($toastContent, 9000);
             });
         });
     </script>
