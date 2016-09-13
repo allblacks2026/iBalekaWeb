@@ -56,6 +56,7 @@ namespace iBalekaWeb.Models
         public EventType EventStatus { get; set; }
         public bool Deleted { get; set; }
         public int ClubID { get; set; }
+        public virtual Club Club { get; set; }
         public virtual ICollection<EventRegistration> EventRegistration { get; set; }
         public virtual ICollection<EventRoute> EventRoute { get; set; }
 

@@ -24,10 +24,22 @@
                 @Html.LabelFor(model => model.EventId, "Event ID", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.EventId)</span>
             </div>
-            <div class="row">
-                @Html.LabelFor(model => model.UserID, "User ID", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.UserID)</span>
-            </div>
+            @if (Model.ClubName == null)
+            {
+                <div class="row">
+                    @Html.LabelFor(model => model.UserID, "User ID", new { @class = "right-align flow-text" }):
+                    <span class="left-align flow-text">@Html.DisplayFor(model => model.UserID)</span>
+                </div>
+
+            }
+            else
+            {
+                <div class="row">
+                    @Html.LabelFor(model => model.ClubName, "Club Name", new { @class = "right-align flow-text" }):
+                    <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubName)</span>
+                </div>
+
+            }
             <div class="row">
                 @Html.LabelFor(model => model.Title, "Title", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Title)</span>

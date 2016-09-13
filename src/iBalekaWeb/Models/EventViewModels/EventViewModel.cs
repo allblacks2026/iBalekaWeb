@@ -43,7 +43,10 @@ namespace iBalekaWeb.Models.EventViewModels
         public int[] RouteId { get; set; }
         [DisplayName("Event")]
         public int EventId { get; set; }
-        [DisplayName("User")]
+        [DisplayName("Club Name")]
+        public int ClubId { get; set; }
+        public string ClubName { get; set; }
+        [DisplayName("User ID")]
         public string UserID { get; set; }
         [Required(ErrorMessage = "Event Date is Required")]
         public string Date { get; set; }
@@ -61,6 +64,6 @@ namespace iBalekaWeb.Models.EventViewModels
         public string Title { get; set; }
         [DisplayName("Event Routes")]
         public List<EventRouteViewModel> EventRoutes { get; set; }
-
+        
     }
 }

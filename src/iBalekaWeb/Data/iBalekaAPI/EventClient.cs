@@ -45,6 +45,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
             {
                 UserID = evnt.UserID,
                 Date = evnt.Date,
+                ClubID = evnt.ClubId,
                 Time = evnt.Time,
                 Description = evnt.Description,
                 Location = evnt.Location,
@@ -118,8 +119,14 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 Location = evnt.Model.Location,
                 Time = evnt.Model.Time,
                 Title = evnt.Model.Title,
-                EventRoutes = routes
+                EventRoutes = routes,
+               
             };
+            if(evnt.Model.ClubID>0)
+            {
+                ConvertedEvent.ClubId = evnt.Model.ClubID;
+                ConvertedEvent.ClubName = evnt.Model.Club.Name;
+            }
             SingleModelResponse<EventViewModel> model = new SingleModelResponse<EventViewModel>
             {
                 DidError = evnt.DidError,

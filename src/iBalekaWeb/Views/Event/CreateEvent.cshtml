@@ -111,34 +111,37 @@
                 {
                     @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
                     @Html.LabelFor(model => model.RouteId, "Available Routes")
+                    <span asp-validation-for="RouteId" class="red-text text-darken-2" />
                 }
                 else
                 {
                     <label>No Route Set</label>
-
-                    <div class="col s6 center">
-                        <a asp-action="Map" asp-controller="Map" class="btn waves-effect waves-light btn-large red accent-3">
-                            Create Route
-                            <i class="material-icons right">send</i>
-                        </a>
-                    </div>
+                }
+                <div class="col s6 center">
+                    <a asp-action="Map" asp-controller="Map" class="btn waves-effect waves-light btn-large red accent-3">
+                        Create Route
+                        <i class="material-icons right">send</i>
+                    </a>
+                </div>   
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                @if (ViewBag.UserClubs != null)
+                {
+                    @Html.LabelFor(model => model.ClubId, "Event Owner")
+                    @Html.DropDownList("ClubId", ViewBag.UserClubs as SelectList, new { @class = "checked" })
+                    <span asp-validation-for="ClubId" class="red-text text-darken-2" />
+                }
+                else
+                {
+                    <label>No Clubs Created</label>
                 }
 
-
-
-
-                <span asp-validation-for="RouteId" class="red-text text-darken-2" />
-
-
             </div>
-
-
         </div>
-
-
-
-
         <div class="row">
+            
             <div class="input-field col s6">
 
                 <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
