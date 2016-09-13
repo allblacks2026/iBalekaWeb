@@ -12,7 +12,8 @@
     <div>
         <h2 class="center-align">@ViewData["Title"]</h2>
     </div>
-    @*<form asp-action="Edit" method="post" role="form" class="center-align">*@
+    <form asp-action="Edit" method="post" role="form" class="center-align">
+
         <div class="row center-align">
             <div asp-validation-summary="All" class="red-text text-darken-2"></div>
         </div>
@@ -46,6 +47,7 @@
                 </a>
             </div>
             <div class="input-field col s6">
+
                 <input type="hidden" asp-for="ClubId" value="@Model.ClubId">
                 <input type="hidden" asp-for="DateCreated" value="@Model.DateCreated">
                 <button onclick="EditClub()" id="btnSave" class="btn waves-effect waves-light btn-large red accent-3">

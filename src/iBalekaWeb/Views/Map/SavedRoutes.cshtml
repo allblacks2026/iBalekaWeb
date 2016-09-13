@@ -29,7 +29,33 @@
                         totalDistance = route.Distance.ToString() + "m";
                     }
 
-                    <li class="collection-item avatar">
+
+
+                    <li class="collection-item">
+                        @*<div class="title">
+                                 @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+                            </div>
+                            <p>
+                                <a class="badge">
+                                    @Html.ActionLink("Delete", "DeleteClub", new { id = club.ClubId })
+                                </a>
+                            </p>*@
+
+                        <div>
+                            @Html.ActionLink(route.Title, "EditRoute", new { id = route.RouteId })
+
+
+                            <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
+                                <i class="material-icons">
+                                    delete
+
+                                </i>
+                            </a>
+
+                        </div>
+                    </li>
+
+                    @*<li class="collection-item avatar">
                        
 
                         <p>
@@ -50,7 +76,7 @@
 
                         </div>
 
-                    </li>
+                    </li>*@
 
                 }
 

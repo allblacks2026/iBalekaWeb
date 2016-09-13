@@ -23,6 +23,7 @@ namespace iBalekaWeb.Models.MapViewModels
         [DisplayName("Route")]
 
         public int RouteId { get; set; }
+
         [DisplayName("Date Modified")]
         public string DateModified { get; set; }
 
