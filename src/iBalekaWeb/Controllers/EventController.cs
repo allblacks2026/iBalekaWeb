@@ -62,11 +62,7 @@ namespace iBalekaWeb.Controllers
                 if (eventResponse == null)
                     return View("Error");
                 Error er = new Error(eventResponse.ErrorMessage);
-                string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
-                if (sourceCookie != null)
-                {
-                    ViewData["SourcePage"] = sourceCookie;
-                }
+              
                 return View("Error");
             }
 
