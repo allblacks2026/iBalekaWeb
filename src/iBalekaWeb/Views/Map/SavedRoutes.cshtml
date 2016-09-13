@@ -42,7 +42,9 @@
                             </p>*@
 
                         <div>
-                            @Html.ActionLink(route.Title, "EditRoute", new { id = route.RouteId })
+                            @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
+
+
 
 
                             <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
