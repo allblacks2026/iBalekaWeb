@@ -25,22 +25,17 @@ namespace iBalekaWeb.Models.MapViewModels
         public int RouteId { get; set; }
 
         [DisplayName("Date Modified")]
-
         public string DateModified { get; set; }
 
         [DisplayName("Date Recorded")]
-
         public string DateRecorded { get; set; }
         [DisplayName("Title")]
-
         public string Title { get; set; }
 
         [DisplayName("User ID")]
-
         public string UserID {get;set;}
 
         [DisplayName("Checkpoints")]
-
         public List<CheckpointViewModel> Checkpoints { get; set; }
 
         [DisplayName("Total Distance")]

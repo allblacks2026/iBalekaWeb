@@ -82,61 +82,6 @@
 
 </div>
 
-
-@*<h3>Are you sure you want to delete this route?</h3>
-    <div>
-        <h4>Route: @Model.Title</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Route ID
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.RouteId)
-            </dd>
-            <dt>
-                Route Title
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-            <dt>
-                Total Distance
-            </dt>
-            <dd>
-                @{string totalDistance = "";
-                    if (Model.TotalDistance > 999) { totalDistance = Math.Round((Model.TotalDistance / 1000),2).ToString() + "km"; } else { totalDistance = Model.TotalDistance.ToString() + "m"; }
-                }
-                @Html.Raw(totalDistance)
-            </dd>
-            <dt>
-                User ID
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.UserID)
-            </dd>
-            <dt>
-                Date Recorded
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.DateRecorded)
-            </dd>
-            <dt>
-                Date Modified
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.DateModified)
-            </dd>
-
-        </dl>
-        <button class="btn btn-default" onclick="deleteRoute()">Delete</button>
-        |
-        <form asp-antiforgery="false">
-            <div class="form-actions no-color">
-                <a asp-action="SavedRoutes">Back to List</a>
-            </div>
-        </form>
-    </div>*@
 <script>
     var routeId = @Html.Raw(Json.Serialize(Model.RouteId));
     window.onload=(function(){

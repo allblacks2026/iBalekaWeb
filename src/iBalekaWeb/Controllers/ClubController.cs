@@ -88,7 +88,7 @@ namespace iBalekaWeb.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Edit([FromForm]Club ClubForm)
+        public IActionResult Edit([FromBody]Club ClubForm)
         {
             if (ModelState.IsValid)
             {
@@ -98,6 +98,7 @@ namespace iBalekaWeb.Controllers
                     Description = ClubForm.Description,
                     Name = ClubForm.Name,
                     Location = ClubForm.Location,
+                    DateCreated=ClubForm.DateCreated,
                     UserId = _userManager.GetUserId(User)
                 };
                 SingleModelResponse<Club> clubResponse = _context.UpdateClub(club);
@@ -137,7 +138,7 @@ namespace iBalekaWeb.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Delete([FromForm]int ClubId)
+        public IActionResult Delete([FromBody]int ClubId)
         {
             if (ModelState.IsValid)
             {
