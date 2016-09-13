@@ -51,25 +51,23 @@
             </a>
         </div>
         <div class="col s6 right-align ">
-            <form asp-action="Delete" method="post" role="form" class="center-align">
-                <input type="hidden" id="ClubId" asp-for="ClubId" />
-                <button id="btnDelete"class="btn modal-trigger waves-effect waves-light btn-large red accent-3" type="submit">Delete</button>
-            </form>
+            @*<form asp-action="Delete" method="post" role="form" class="center-align">*@
+            <input type="hidden" asp-for="ClubId" value="@Model.ClubId">
+            <button id="btnDelete" onclick="DeleteClub()" class="btn waves-effect waves-light btn-large red accent-3">Delete</button>
+
         </div>
     </div>
 </div>
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Club is now being deleted..</h4>
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
-</div>
+
 @section Scripts {
-    $(document).ready(function(){
-            $("btnDelete").click(function(){
-                $('#modal1').openModal();
+    <script src="~/js/siteAjax.js"></script>
+    <script>
+        var clubId = @Html.Raw(Json.Serialize(Model.ClubId));
+        loadDeletedClubId(clubId);
+        $(document).ready(function () {
+            $("btnDelete").click(function () {
+
             });
         });
+    </script>
 }

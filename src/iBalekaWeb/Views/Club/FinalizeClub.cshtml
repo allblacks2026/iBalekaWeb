@@ -3,62 +3,56 @@
 @{
     ViewData["Title"] = "FinalizeClub";
 }
-<form asp-action="CreateClub" method="post" role="form" class="center-align">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="row center-align">
-        <div asp-validation-summary="All" class="red-text text-darken-2"></div>
-    </div>
-    <div class="col s6 left-align">
-        <h5 class="left-align">Finalize Club</h5>
-        <div class="row">
-            @Html.LabelFor(model => model.Name, "Club Name", new { @class = "right-align flow-text" }):
-            <span class="left-align flow-text">@Html.DisplayFor(model => model.Name)</span>
-        </div>
-        <div class="row">
-            @Html.LabelFor(model => model.Description, "Title", new { @class = "right-align flow-text" }):
-            <span class="left-align flow-text">@Html.DisplayFor(model => model.Description)</span>
-        </div>
-        <div class="row">
-            @Html.LabelFor(model => model.Location, "Description", new { @class = "right-align flow-text" }):
-            <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
-        </div>
+@*<form asp-action="CreateClub" method="post" role="form" class="center-align">*@
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row center-align">
+    <div asp-validation-summary="All" class="red-text text-darken-2"></div>
+</div>
+<div class="col s6 left-align">
+    <h5 class="left-align">Finalize Club</h5>
+    <div class="row">
+        @Html.LabelFor(model => model.Name, "Club Name", new { @class = "right-align flow-text" }):
+        <span class="left-align flow-text">@Html.DisplayFor(model => model.Name)</span>
     </div>
     <div class="row">
-        <div class="input-field col s6">
-            <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="AddClub">
-                Back
-            </a>
-        </div>
-        <div class="input-field col s6">
-            <button type="submit" id="btnSave" class="btn modal-trigger waves-effect waves-light btn-large red accent-3">
-                Create Club
-            </button>
-        </div>
+        @Html.LabelFor(model => model.Description, "Description", new { @class = "right-align flow-text" }):
+        <span class="left-align flow-text">@Html.DisplayFor(model => model.Description)</span>
     </div>
-</form>
+    <div class="row">
+        @Html.LabelFor(model => model.Location, "Location", new { @class = "right-align flow-text" }):
+        <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s6">
+        <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="AddClub">
+            Back
+        </a>
+    </div>
+    <div class="input-field col s6">
+        <button id="btnSave" onclick="SaveClub()" class="btn waves-effect waves-light btn-large red accent-3">
+            Create Club
+        </button>
+    </div>
+</div>
+
 
 <div>
     <a asp-action="Clubs">Back to List</a>
 </div>
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Awesome! Club is now being created..</h4>
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
-</div>
+
 @section Scripts {
+    <script src="~/js/siteAjax.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
         $(document).ready(function(){
             var clubObject = @Html.Raw(Json.Serialize(Model));
             loadClubObject(clubObject);
             $("btnSave").click(function(){
-                $('#modal1').openModal();
+
             });
         });
     </script>
-    <script src="~/js/eventsAjax.js"></script>
+
 }
 

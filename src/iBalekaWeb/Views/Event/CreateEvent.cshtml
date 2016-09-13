@@ -110,7 +110,7 @@
                 @if (ViewBag.UserRoutes != null)
                 {
                     @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
-                    @Html.LabelFor(model => model.RouteId)
+                    @Html.LabelFor(model => model.RouteId, "Available Routes")
                 }
                 else
                 {

@@ -135,27 +135,20 @@
             </a>
         </div>
         <div class="col s6 right-align ">
-            <button class="btn modal-trigger waves-effect waves-light btn-large red accent-3" id="btnDelete" onclick="DeleteEvent()">Delete</button>
-        </div>
-    </div>
-</div>
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Event is now being deleted..</h4>
-        <div class="progress">
-            <div class="indeterminate"></div>
+            <button class="btn waves-effect waves-light btn-large red accent-3" id="btnDelete" onclick="DeleteEvent()">Delete</button>
         </div>
     </div>
 </div>
 @section Scripts {
+<script src="~/js/siteAjax.js"></script>
 <script>
     $(document).ready(function(){
         var eventId = @Html.Raw(Json.Serialize(Model.EventId));
         loadDeletedEventId(eventId);;
         $("btnDelete").click(function(){
-            $('#modal1').openModal();
+            
         });
     });
 </script>
-    <script src="~/js/eventsAjax.js"></script>
+    
 }

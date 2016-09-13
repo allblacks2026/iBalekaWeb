@@ -15,7 +15,7 @@
     <div>
         <h2 class="center-align">@ViewData["Title"]</h2>
     </div>
-    <form asp-action="Edit" asp-controller="Event" method="post" role="form" class="center-align">
+    @*<form asp-action="Edit" asp-controller="Event" method="post" role="form" class="center-align">*@
         <div class="row center-align">
             <div asp-validation-summary="All" class="red-text text-darken-2"></div>
 
@@ -52,7 +52,7 @@
                 @if (ViewBag.UserRoutes != null)
             {
                     @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
-                    @Html.LabelFor(model => model.RouteId)
+                    @Html.LabelFor(model => model.RouteId,"Available Routes")
                 }
                 else
                 {
@@ -73,44 +73,38 @@
             </div>
             <div class="input-field col s4 right-align">
                 <input type="hidden" asp-for="EventId" value="@Model.EventId">
-                <button type="submit" id="btnSaveE" class="btn modal-trigger waves-effect waves-light btn-large red accent-3">
+                <button id="btnSaveE" onclick="EditEvent()" class="btn waves-effect waves-light btn-large red accent-3">
                     Save
                 </button>
 
             </div>
 
         </div>
-    </form>
-</div>
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Awesome! Event is now being updated..</h4>
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
+    
 </div>
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+<script src="~/js/siteAjax.js"></script>
     <script src="~/lib/datedropper/datedropper.js"></script>
     <script src="~/js/eventsAjax.js"></script>
     <script src="~/lib/timedropper/timedropper.js"></script>
     <script>
         $(document).ready(function(){
+            var eventObject = @Html.Raw(Json.Serialize(Model));
+            loadEventObject(eventObject);
             $("btnSaveE").click(function(){
-                $('#modal1').openModal();
+               
             });
+            var options = {
+                format: "Y/m/d",
+                placeholder: "Choose date",
+                lock: "from",
+                maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
+                minYear:@DateTime.Now.ToString("yyyy"),
+            };
+            $("#datepicker").dateDropper(options);
+            $("#timepicker").timeDropper();
         });
-        var options = {
-            format: "Y/m/d",
-            placeholder: "Choose date",
-            lock: "from",
-            maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
-            minYear:@DateTime.Now.ToString("yyyy"),
-        };
-        $("#datepicker").dateDropper(options);
-        $("#timepicker").timeDropper();
-
-    </script> 
+    </script>
 
 }

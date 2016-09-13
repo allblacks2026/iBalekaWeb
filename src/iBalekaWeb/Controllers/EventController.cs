@@ -230,14 +230,12 @@ namespace iBalekaWeb.Controllers
         }
         // POST: Event/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(EventViewModel evnt,int[] RouteId)
+        public IActionResult Edit([FromBody]EventViewModel evnt)
         {
-
             if (ModelState.IsValid)
             {
                 evnt.EventRoutes = new List<EventRouteViewModel>();
-                foreach (int id in RouteId)
+                foreach (int id in evnt.RouteId)
                 {
                     SingleModelResponse<Route> routeResponse = _routeContext.GetRoute(id);
                     if (routeResponse.DidError == true || routeResponse == null)

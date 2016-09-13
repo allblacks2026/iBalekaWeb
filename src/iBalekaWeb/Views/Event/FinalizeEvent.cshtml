@@ -106,7 +106,7 @@
         </div>
         <div class="row10">
         <div class="col s6 right-align ">
-            <button data-target="modal1" class="btn modal-trigger waves-effect waves-light btn-large red accent-3" onclick="saveEvent()" id="btnSave">
+            <button class="btn waves-effect waves-light btn-large red accent-3" onclick="saveEvent()" id="btnSave">
             Save
                 <i class="material-icons right">send</i>
             </button>
@@ -117,25 +117,18 @@
 
 </div>
 
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h4>Awesome! Event is now being created..</h4>
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
-</div>
 
 @section Scripts {
+<script src="~/js/siteAjax.js"></script>
 <script>
     $(document).ready(function(){
         var eventObject = @Html.Raw(Json.Serialize(Model));
         loadEventObject(eventObject);
         $("btnSave").click(function(){
-            $('#modal1').openModal();
+            
         });
     });
 </script>
-    <script src="~/js/eventsAjax.js"></script>
+   
 }
 
