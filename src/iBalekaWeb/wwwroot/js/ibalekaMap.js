@@ -261,9 +261,11 @@ function getCheckpointLength() {
 //Edit Route
 
 //Load Route
+
 var loadedRoute;
 function loadRoute(route) {    
     routeTitleText.value = route.title;
+    map.setCenter(new google.maps.LatLng(route.checkpoints[0].latitude, route.checkpoints[0].longitude));
     for (var i = 0; i < route.checkpoints.length; i++) {
         loadCheckpoints(route.checkpoints[i]);
     }

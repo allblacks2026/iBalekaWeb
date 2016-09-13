@@ -37,10 +37,11 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
                 }
-                string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
+
+                string sourceCookie = HttpContext.Request.Cookies["SourcePageClub"];
                 if (sourceCookie != null)
                 {
-                    ViewBag.SourcePage = sourceCookie;
+                    ViewBag.SourcePageClub = sourceCookie;
                  }
                 return View(clubResponse.Model);
             }
@@ -63,10 +64,11 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
                 }
-                string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
+
+                string sourceCookie = HttpContext.Request.Cookies["SourcePageClub"];
                 if (sourceCookie != null)
                 {
-                    ViewBag.SourcePage = sourceCookie;
+                    ViewBag.SourcePageClub = sourceCookie;
                 }
                 return View(clubResponse.Model);
             }
@@ -125,7 +127,8 @@ namespace iBalekaWeb.Controllers
 
                 string source = "Edit";
                 //set cookie
-                HttpContext.Response.Cookies.Append("SourcePage", source, CookieOption);
+
+                HttpContext.Response.Cookies.Append("SourcePageClub", source, CookieOption);
 
                 return RedirectToAction("ClubDetails", new { id = clubResponse.Model.ClubId });
             }
@@ -174,7 +177,8 @@ namespace iBalekaWeb.Controllers
 
                 string source = "Delete";
                 //set cookie
-                HttpContext.Response.Cookies.Append("SourcePage", source, CookieOption);
+
+                HttpContext.Response.Cookies.Append("SourcePageClub", source, CookieOption);
 
                 return RedirectToAction("Clubs");
             }
@@ -273,7 +277,8 @@ namespace iBalekaWeb.Controllers
 
                 string source = "Add";
                 //set cookie
-                HttpContext.Response.Cookies.Append("SourcePage", source, CookieOption);
+
+                HttpContext.Response.Cookies.Append("SourcePageClub", source, CookieOption);
 
                 return RedirectToAction("Clubs");
             }

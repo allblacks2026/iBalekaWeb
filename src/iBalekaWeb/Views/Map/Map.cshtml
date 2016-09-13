@@ -33,6 +33,25 @@
     <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&libraries=drawing,geometry&callback=initMap") async defer></script>
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
     <script>
+        $(function () {
+            $("footer").hide(true);
+        });
+        $(document).ready(function(){
+            $("#btnSaveRoute").click(function () {
+                $('#btnSaveRoute').prop('disabled', true);
+                var $toastContent = $('<span>Saving Route...</span>');
+                Materialize.toast($toastContent, 9000);
+            });
+            //$('#modal1').openModal({
+            //    dismissible: false, // Modal can be dismissed by clicking outside of the modal
+            //    starting_top: '5%', // Starting top style attribute
+            //    ending_top: '15%', // Ending top style attribute
+            //    ready: function() {
+            //
+            //        $('#modal1').closeModal();
+            //    }
+            //});
 
-    </script>
+        });
+</script>
 }

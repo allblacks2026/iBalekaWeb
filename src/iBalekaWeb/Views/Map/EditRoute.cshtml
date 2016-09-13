@@ -8,36 +8,61 @@
     ViewData["Title"] = "EditRoute";
 }
 
-<form asp-action="EditRoute">
-    <div id="map"></div><br />
-    <div id="toolBoxWrapper">
-        <div id="statisticsWrapper">
-            <p ><input type="text" class="mdl-textfield__input" style="text-align:center" id="routeTitle" value="Untitled Route"></p>
-            <p id="totalDistance">Total Distance: 0</p>
-            <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
-        </div>
-        <div id="buttonsWrapper">
-            <input type="button" id="btnUpdateRoute" onclick="updateRoute()" value="Update Route" />
-            <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
-            <input type="button" id="btnCancelRoute" onclick="cancelRoute()" value="Cancel Route" />
+
+<div id="map"></div><br />
+<div id="toolBoxWrapper">
+    <div id="statisticsWrapper">
+        <p><input type="text" class="mdl-textfield__input" style="text-align:center" id="routeTitle" value="Untitled Route"></p>
+        <p id="totalDistance">Total Distance: 0</p>
+        <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
+    </div>
+    <div id="buttonsWrapper">
+        <input type="button" id="btnUpdateRoute" onclick="updateRoute()" value="Update Route" />
+        <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
+        <input type="button" id="btnCancelRoute" onclick="cancelRoute()" value="Cancel Route" />
+    </div>
+</div>
+
+<div id="modal1" class="modal modal-trigger">
+    <div class="modal-content">
+        <h4>iBaleka is Currently loading your route. Please Wait</h4>
+        <div class="progress">
+            <div class="indeterminate"></div>
         </div>
     </div>
-</form>
-
+</div>
 
 @section Scripts {
-    <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&libraries=drawing,geometry&callback=initMap") async defer></script>
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
-<script>
+    <script>
         $(function () {
             $("footer").hide(true);
         });
+        var routeObject = @Html.Raw(Json.Serialize(Model));
+        $(document).ready(function(){
+            $("#btnUpdateRoute").click(function(){
+                $('#btnUpdateRoute').prop('disabled', true);
+                var $toastContent = $('<span>Updating Route...</span>');
+                Materialize.toast($toastContent, 9000);
+            });
+            
+            //$('#modal1').openModal({
+            //    dismissible: false, // Modal can be dismissed by clicking outside of the modal
+            //    starting_top: '5%', // Starting top style attribute
+            //    ending_top: '15%', // Ending top style attribute
+            //    ready: function() { 
+            //        
+            //        $('#modal1').closeModal();
+            //    }
+            //});
+            
+        });
+        window.onload = function(){
+            loadRoute(routeObject);        
+        };
+    </script>
+    <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&libraries=drawing,geometry&callback=initMap") async defer></script>
 
-    var routeObject = @Html.Raw(Json.Serialize(Model));
-    window.onload=(function(){
-        loadRoute(routeObject);
-    });
-</script>
 }
 
 
