@@ -32,14 +32,7 @@
 
 
                     <li class="collection-item">
-                        @*<div class="title">
-                                 @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
-                            </div>
-                            <p>
-                                <a class="badge">
-                                    @Html.ActionLink("Delete", "DeleteClub", new { id = club.ClubId })
-                                </a>
-                            </p>*@
+                       
 
                         <div>
                             @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
@@ -57,28 +50,7 @@
                         </div>
                     </li>
 
-                    @*<li class="collection-item avatar">
-                       
-
-                        <p>
-
-                            <a class="badge">
-                                @Html.ActionLink(route.Title, "EditRoute", new { id = route.RouteId })
-
-
-                            </a>
-                        </p>
-
-                        <div class="title">
-
-
-                            @Html.ActionLink("Delete", "DeleteRoute", new { id = route.RouteId })
-
-
-
-                        </div>
-
-                    </li>*@
+                   
 
                 }
 
@@ -112,50 +84,30 @@
 
 
 
-@*<div class="mdl-typography--headline" style="text-align:center;">Saved Routes</div>
-    <div class="mdl-grid">
-        <div class="mdl-layout-spacer"></div>
-        <div class="mdl-cell mdl-cell--12-col ">
-            <div class="mdl-grid">
-                <div class="mdl-layout-spacer"></div>
-                <ul class="list-group mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop mdl-card mdl-shadow--3dp" id="routeList">
-                    @if (Model.Count() > 0)
-                    {
-                     foreach (var route in Model)
-                        {
-                            string totalDistance = "";
 
-                            if (route.Distance > 999) { totalDistance = Math.Round((route.Distance / 1000), 2).ToString() + "km"; } else { totalDistance = route.Distance.ToString() + "m"; }
-
-                            <li class="list-group-item">
-                                <span class="badge">
-                                    @Html.ActionLink("Delete", "DeleteRoute", new { id = route.RouteId })
-
-                                </span>
-                                <span class="badge">@totalDistance</span>
-                                @Html.ActionLink(route.Title, "EditRoute", new { id = route.RouteId })
-                            </li>
-                        }
-                    }
-                    else
-                    {
-
-                        <li class="mdl-typography--headline" style="text-align:center;">There are no Routes to Display</li>
-                    }
-                    </ul>
-                <div class="mdl-layout-spacer"></div>
-            </div>
-        </div>
-        <div class="mdl-layout-spacer"></div>
-    </div>
-    <div class="mdl-grid">
-        <div class="mdl-layout-spacer"></div>
-        <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-            <a asp-action="Map" asp-controller="Map" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                Create Route
-            </a>
-        </div>
-    </div>*@
 @section Scripts {
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
+<script>
+    $(document).ready(function () {
+        var source = '@(ViewBag.SourcePageMap)';
+        if(source=="Edit")
+        {
+            var $toastContent = $('<span>Route was successfully Updated...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+        else if(source=="Add")
+        {
+            var $toastContent = $('<span>Route was successfully Added...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+        else if(source=="Delete")
+        {
+            var $toastContent = $('<span>Route was successfully Deleted...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+    });
+</script>
 }

@@ -168,36 +168,9 @@
 </div>
 
 
-
-
-
-
-
-
-                        @*<div class="mdl-grid">
-                           
-                                    
-                            
-                    <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" asp-action="Events">
-                            Back to List
-                        </a>
-                    </div>
-                    <div class="mdl-layout-spacer"></div>
-                    <div class="form-group mdl-cell mdl-cell--4-col mdl-cell--2-col-tablet mdl-cell--1-col-phone">
-                        <button type="submit" name="cmdButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                            Next
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </form>*@
-
-
 @section Scripts {
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
+        async defer></script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/lib/datedropper/datedropper.js"></script>
     <script src="~/js/chosen.jquery.js"></script>

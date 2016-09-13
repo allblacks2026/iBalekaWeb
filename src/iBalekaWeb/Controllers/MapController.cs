@@ -11,6 +11,9 @@ using iBalekaWeb.Data.iBalekaAPI;
 using iBalekaWeb.Models.Responses;
 using System.Threading.Tasks;
 using iBalekaWeb.Data.Extensions;
+using Microsoft.AspNetCore.Http;
+using System;
+using iBalekaWeb.Models.Extensions;
 
 //using prototypeWeb.Models;
 
@@ -46,6 +49,11 @@ namespace iBalekaWeb.Controllers
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
+            string sourceCookie = HttpContext.Request.Cookies["SourcePageMap"];
+            if (sourceCookie != null)
+            {
+                ViewBag.SourcePageMap = sourceCookie;
+            }
             return View(routeResponse.Model);
         }
 
@@ -65,6 +73,13 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(routeResponse.ErrorMessage);
                     return View("Error",er);
                 }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Add";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePageMap", source, CookieOption);
                 string url = Url.Action("SavedRoutes", "Map");
                 return Json(new { Url = url });
 
@@ -109,6 +124,13 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(routeResponse.ErrorMessage);
                     return View("Error");
                 }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Edit";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePageMap", source, CookieOption);
                 return RedirectToAction("SavedRoutes");
             }
             else
@@ -144,6 +166,14 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(routeResponse.ErrorMessage);
                     return View("Error");
                 }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Delete";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePageMap", source, CookieOption);
+
                 return RedirectToAction("SavedRoutes");
             }
             else

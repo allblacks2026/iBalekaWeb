@@ -44,10 +44,11 @@ namespace iBalekaWeb.Controllers
                 Error er = new Error(eventResponse.ErrorMessage);
                 return View("Error");
             }
-            string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
+
+            string sourceCookie = HttpContext.Request.Cookies["SourcePageEvent"];
             if (sourceCookie != null)
             {
-                ViewData["SourcePage"] = sourceCookie;
+                ViewBag.SourcePageEvent = sourceCookie;
             }
             return View(eventResponse.Model);
         }
@@ -68,7 +69,12 @@ namespace iBalekaWeb.Controllers
                 }
                 return View("Error");
             }
-            
+
+            string sourceCookie = HttpContext.Request.Cookies["SourcePageEvent"];
+            if (sourceCookie != null)
+            {
+                ViewBag.SourcePageEvent = sourceCookie;
+            }
             return View(eventResponse.Model);
         }
 
@@ -241,7 +247,8 @@ namespace iBalekaWeb.Controllers
 
                 string source = "Add";
                 //set cookie
-                HttpContext.Response.Cookies.Append("SourcePage", source.ToJson(), CookieOption);
+
+                HttpContext.Response.Cookies.Append("SourcePageEvent", source, CookieOption);
 
                 return RedirectToAction("Events");
             }
@@ -316,7 +323,8 @@ namespace iBalekaWeb.Controllers
 
                 string source = "Edit";
                 //set cookie
-                HttpContext.Response.Cookies.Append("SourcePage", source.ToJson(), CookieOption);
+
+                HttpContext.Response.Cookies.Append("SourcePageEvent", source, CookieOption);
 
                 return RedirectToAction("EventDetails", new { id = evnt.EventId });
 
@@ -372,7 +380,8 @@ namespace iBalekaWeb.Controllers
 
                 string source = "Delete";
                 //set cookie
-                HttpContext.Response.Cookies.Append("SourcePage", source.ToJson(), CookieOption);
+
+                HttpContext.Response.Cookies.Append("SourcePageEvent", source, CookieOption);
 
                 return RedirectToAction("Events");
             }

@@ -112,12 +112,14 @@
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
-        var source = '@(ViewBag.SourcePage)';
+
+        var source = '@(ViewBag.SourcePageEvent)';
         if  (source!= null) {
                 if (source == "Edit") {
                     var $toastContent = $('<span>Event was successfully Updated...</span>');
                     Materialize.toast($toastContent, 5000);
-                    @ViewBag.SourcePage = null;
+
+                    source = null;
                 }
             }
         });

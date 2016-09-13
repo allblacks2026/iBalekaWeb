@@ -57,6 +57,9 @@
 </div>
 
 @section Scripts {
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
+        async defer></script>
 <script src="~/js/siteAjax.js"></script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script>
