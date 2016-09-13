@@ -21,13 +21,15 @@ namespace iBalekaWeb.Controllers
     public class EventController : Controller
     {
         private IEventClient _context;
+        private IClubClient _clubContext;
         private IMapClient _routeContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        public EventController(IEventClient _repo, UserManager<ApplicationUser> _user, IMapClient _rContext)
+        public EventController(IClubClient _club, IEventClient _repo, UserManager<ApplicationUser> _user, IMapClient _rContext)
         {
             _context = _repo;
             _routeContext = _rContext;
             _userManager = _user;
+            _clubContext = _club;
         }
 
         // GET: Event/Events
@@ -76,10 +78,27 @@ namespace iBalekaWeb.Controllers
             if (routeResponse.Model.Any())
             {
                 ViewBag.UserRoutes = GetRoutes(null);
+                
             }
             else
             {
                 ViewBag.UserRoutes = null;
+            }
+            ListModelResponse<Club> clubResponse = _clubContext.GetUserClubs(_userManager.GetUserId(User));
+            if (clubResponse.DidError == true || routeResponse == null)
+            {
+                if (routeResponse == null)
+                    return View("Error");
+                Error er = new Error(routeResponse.ErrorMessage);
+                return View("Error");
+            }
+            if(clubResponse.Model.Any())
+            {
+                ViewBag.UserClubs = GetClubs(null);
+            }
+            else
+            {
+                ViewBag.UserClubs = null;
             }
             string eventCookie = HttpContext.Request.Cookies["NewEvent"];
             EventViewModel model = new EventViewModel();
@@ -113,7 +132,18 @@ namespace iBalekaWeb.Controllers
                     }
                     model.EventRoutes.Add(routeResponse.Model.ToEventRouteViewModel());
                 }
-
+                if(model.ClubId!=0)
+                {
+                    SingleModelResponse<Club> clubResponse = _clubContext.GetClub(model.ClubId);
+                    if (clubResponse.DidError == true || clubResponse == null)
+                    {
+                        if (clubResponse == null)
+                            return View("Error");
+                        Error er = new Error(clubResponse.ErrorMessage);
+                        return View("Error");
+                    }
+                    model.ClubName = clubResponse.Model.Name;
+                }
                 //example of using cookie
                 var CookieOption = new CookieOptions();
                 CookieOption.Expires = DateTime.Now.AddMinutes(5);
@@ -134,16 +164,13 @@ namespace iBalekaWeb.Controllers
         private MultiSelectList GetRoutes(string[] selectedValues)
         {
             ListModelResponse<Route> routeResponse = _routeContext.GetUserRoutes(_userManager.GetUserId(User));
-
-            //Get suitable error message
-            //if (routeResponse.DidError == true)
-            //{
-            //    Error er = new Error(routeResponse.ErrorMessage);
-            //    return View("Error");
-            //}
             return new MultiSelectList(routeResponse.Model, "RouteId", "Title", selectedValues);
         }
-
+        private SelectList GetClubs(string selectedValue)
+        {
+            ListModelResponse<Club> clubResponse = _clubContext.GetUserClubs(_userManager.GetUserId(User));
+            return new SelectList(clubResponse.Model, "ClubId", "Name", selectedValue);
+        }
 
         //save event
         [HttpGet]
@@ -167,7 +194,19 @@ namespace iBalekaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                currentModel.UserID = _userManager.GetUserId(User);
+                string eventCookie = HttpContext.Request.Cookies["NewEvent"];
+                if (eventCookie != null)
+                {
+                    EventViewModel memoryModel = eventCookie.FromJson<EventViewModel>();
+                    if (memoryModel.ClubId != 0)
+                    {
+                        currentModel.ClubId = memoryModel.ClubId;
+                        currentModel.UserID = _userManager.GetUserId(User);
+                    }                        
+                    else
+                        currentModel.UserID = _userManager.GetUserId(User);
+                }
+                
                 currentModel.DateCreated = DateTime.Now.ToString();
                 SingleModelResponse<Event> eventResponse = _context.SaveEvent(currentModel);
                 if (eventResponse.DidError == true || eventResponse == null)

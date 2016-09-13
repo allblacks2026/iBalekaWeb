@@ -29,16 +29,6 @@
 
         <div class="col s6 left-align">
             <h5 class="left-align">Event Details</h5>
-
-            <div class="row">
-                @Html.LabelFor(model => model.EventId, "Event ID", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.EventId)</span>
-            </div>
-            <div class="row">
-                @Html.LabelFor(model => model.UserID, "User ID", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.UserID)</span>
-
-            </div>
             <div class="row">
                 @Html.LabelFor(model => model.Title, "Title", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Title)</span>
@@ -68,13 +58,20 @@
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
 
             </div>
+            @if (Model.ClubId != 0)
+            {
+                <div class="row">
+                    @Html.LabelFor(model => model.ClubName, "Club Name", new { @class = "right-align flow-text" }):
+                    <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubName)</span>
 
+                </div>
+
+            }
             <div class="row">
                 @Html.LabelFor(model => model.DateCreated, "DateCreated", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.DateCreated)</span>
 
             </div>
-
             <div class="row">
                 @Html.LabelFor(model => model.DateModified, "DateModified", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.DateModified)</span>

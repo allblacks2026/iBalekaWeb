@@ -47,8 +47,16 @@
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
 
             </div>
+            @if (Model.ClubId != 0)
+            {
+                <div class="row">
+                    @Html.LabelFor(model => model.ClubName, "Club Name", new { @class = "right-align flow-text" }):
+                    <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubName)</span>
 
-      
+                </div>
+
+            }
+
         </div>
 
         <div class="col s6 center-align">
@@ -110,7 +118,6 @@
             Save
                 <i class="material-icons right">send</i>
             </button>
-
             </div>
         </div>
     </div>

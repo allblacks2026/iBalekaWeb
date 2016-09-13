@@ -12,7 +12,7 @@ function loadEventObject(loadEvent) {
         eventObject = loadEvent;
 }
 function createEventObject() {
-    var eventModel = { EventId: eventObject.eventId, Date: eventObject.date, Description: eventObject.description, EventRoutes: [], Location: eventObject.location, Time: eventObject.time, Title: eventObject.title };
+    var eventModel = { EventId: eventObject.eventId, Date: eventObject.date, Description: eventObject.description, EventRoutes: [], Location: eventObject.location, Time: eventObject.time, Title: eventObject.title,ClubId:eventObject.clubId };
     for (var i = 0; i < eventObject.eventRoutes.length; i++) {
         var EventRoute = { RouteId: eventObject.eventRoutes[i].routeId, Distance: eventObject.eventRoutes[i].distance, Title: eventObject.eventRoutes[i].title, DateAdded: eventObject.eventRoutes[i].dateAdded };
         eventModel.EventRoutes.push(EventRoute);
@@ -21,11 +21,12 @@ function createEventObject() {
 }
 function createUpdatedEventObject() {
     var routeIds = [];
-    var title, description, date, time, location;
+    var title, description, date, time, location,club;
     title = $("#Title").val();
     description = $("#Description").val();
     date = $("#datepicker").val();
     time = $("#timepicker").val();
+    club = $("#ClubId option:selected").val();
     location = $("#autocomplete").val();
     $("#RouteId option:selected").each(function () {
         var $this = $(this);
