@@ -1,10 +1,10 @@
 @model iBalekaWeb.Models.Club
 @section AddToHead {
-    
+
 }
 
 @{
-    ViewData["Title"] = "Edit Event";
+    ViewData["Title"] = "Edit Club";
 
 
 }
@@ -13,14 +13,9 @@
         <h2 class="center-align">@ViewData["Title"]</h2>
     </div>
     <form asp-action="Edit" method="post" role="form" class="center-align">
+
         <div class="row center-align">
             <div asp-validation-summary="All" class="red-text text-darken-2"></div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                @Html.LabelFor(model => model.ClubId, "Club ID", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubId)</span>
-            </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
@@ -41,14 +36,8 @@
         <div class="row">
             <div class="input-field col s12">
                 @Html.LabelFor(model => model.Location)
-                <input type="text" class="autocomplete" asp-for="Location" id="autocomplete">
+                <input type="text" class="autocomplete" id="autocomplete" asp-for="Location">
                 <span asp-validation-for="Location" class="red-text text-darken-2" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                @Html.LabelFor(model => model.DateCreated, "Date", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.DateCreated)</span>
             </div>
         </div>
         <div class="row">
@@ -58,17 +47,27 @@
                 </a>
             </div>
             <div class="input-field col s6">
-                <input type="hidden" id="clubId"  asp-for="ClubId">
-                <input type="hidden" id="dateCreated" asp-for="DateCreated">
-                <button type="submit" name="cmdButton" class="btn waves-effect waves-light btn-large red accent-3">
+
+                <input type="hidden" asp-for="ClubId" value="@Model.ClubId">
+                <input type="hidden" asp-for="DateCreated" value="@Model.DateCreated">
+                <button onclick="EditClub()" id="btnSave" class="btn waves-effect waves-light btn-large red accent-3">
                     Finalize
                 </button>
             </div>
         </div>
-    </form>
+    
 </div>
 
 @section Scripts {
+<script src="~/js/siteAjax.js"></script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-    
+    <script>
+        $(document).ready(function () {
+            var clubObject = @Html.Raw(Json.Serialize(Model));
+            loadClubObject(clubObject);
+            $("btnSave").click(function () {
+
+            });
+        });
+    </script>
 }

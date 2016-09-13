@@ -1,4 +1,9 @@
-﻿body{
+﻿/*Modal styles*/
+#model1.modal.open{
+    top:30%;
+}
+
+body{
 	   overflow-y:hidden;
 }
 html, body, .main, #wrapper {

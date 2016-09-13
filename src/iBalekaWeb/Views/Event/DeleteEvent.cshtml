@@ -1,9 +1,9 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
 @*<style>
-    body {
-        overflow-y: visible;
-    }
-</style>*@
+        body {
+            overflow-y: visible;
+        }
+    </style>*@
 
 
 @{
@@ -101,10 +101,10 @@
                         }
 
                         <li class="collection-item avatar">
-                          
+
                             <div class="title">
-                                
-                                @Html.ActionLink(@item.Title, "EditRoute", new { id = @item.RouteId } ,new { @class = "red-text text-darken-2" })
+
+                                @Html.ActionLink(@item.Title, "EditRoute", new { id = @item.RouteId }, new { @class = "red-text text-darken-2" })
 
 
                             </div>
@@ -121,38 +121,34 @@
                     }
 
 
-                    </ul>
-                </div>
-
+                </ul>
             </div>
+
         </div>
+    </div>
 
     <div class="row">
         <div class="col s6 left-align ">
-         
+
             <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
                 Back to List
             </a>
         </div>
         <div class="col s6 right-align ">
-           
-
-            <button class="btn waves-effect waves-light btn-large red accent-3" onclick="DeleteEvent()">Delete</button>
-
+            <button class="btn waves-effect waves-light btn-large red accent-3" id="btnDelete" onclick="DeleteEvent()">Delete</button>
         </div>
     </div>
-    </div>
-
-
-  
-
-
-                        <script>
-                            var eventId = @Html.Raw(Json.Serialize(Model.EventId));
-                            window.onload=(function(){
-                                loadDeletedEventId(eventId);
-                            });
-                        </script>
-                        @section Scripts {
-                            <script src="~/js/eventsAjax.js"></script>
-                        }
+</div>
+@section Scripts {
+<script src="~/js/siteAjax.js"></script>
+<script>
+    $(document).ready(function(){
+        var eventId = @Html.Raw(Json.Serialize(Model.EventId));
+        loadDeletedEventId(eventId);;
+        $("btnDelete").click(function(){
+            
+        });
+    });
+</script>
+    
+}

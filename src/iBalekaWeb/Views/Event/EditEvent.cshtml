@@ -15,7 +15,7 @@
     <div>
         <h2 class="center-align">@ViewData["Title"]</h2>
     </div>
-    <form asp-action="Edit" asp-controller="Event" method="post" role="form" class="center-align">
+    @*<form asp-action="Edit" asp-controller="Event" method="post" role="form" class="center-align">*@
         <div class="row center-align">
             <div asp-validation-summary="All" class="red-text text-darken-2"></div>
 
@@ -56,7 +56,7 @@
                 @if (ViewBag.UserRoutes != null)
             {
                     @Html.ListBox("RouteId", ViewBag.UserRoutes as MultiSelectList, new { @class = "checked" })
-                    @Html.LabelFor(model => model.RouteId)
+                    @Html.LabelFor(model => model.RouteId,"Available Routes")
                 }
                 else
                 {
@@ -77,34 +77,38 @@
             </div>
             <div class="input-field col s4 right-align">
                 <input type="hidden" asp-for="EventId" value="@Model.EventId">
-                <button type="submit" id="btnSaveE" class="btn waves-effect waves-light btn-large red accent-3">
+                <button id="btnSaveE" onclick="EditEvent()" class="btn waves-effect waves-light btn-large red accent-3">
                     Save
                 </button>
 
             </div>
 
         </div>
-    </form>
+    
 </div>
-
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+<script src="~/js/siteAjax.js"></script>
     <script src="~/lib/datedropper/datedropper.js"></script>
-    <script src="~/js/chosen.jquery.js"></script>
     <script src="~/js/eventsAjax.js"></script>
     <script src="~/lib/timedropper/timedropper.js"></script>
     <script>
-        $(".chzn-select").chosen();
-        var options = {
-            format: "Y/m/d",
-            placeholder: "Choose date",
-            lock: "from",
-            maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
-            minYear:@DateTime.Now.ToString("yyyy"),
-        };
-        $("#datepicker").dateDropper(options);
-        $("#timepicker").timeDropper();
-
-    </script> @*Hookup Chosen Plugin*@
+        $(document).ready(function(){
+            var eventObject = @Html.Raw(Json.Serialize(Model));
+            loadEventObject(eventObject);
+            $("btnSaveE").click(function(){
+               
+            });
+            var options = {
+                format: "Y/m/d",
+                placeholder: "Choose date",
+                lock: "from",
+                maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
+                minYear:@DateTime.Now.ToString("yyyy"),
+            };
+            $("#datepicker").dateDropper(options);
+            $("#timepicker").timeDropper();
+        });
+    </script>
 
 }

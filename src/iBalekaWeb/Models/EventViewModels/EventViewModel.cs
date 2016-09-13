@@ -40,7 +40,6 @@ namespace iBalekaWeb.Models.EventViewModels
         {
         }
         [DisplayName("Route")]
-
         public int[] RouteId { get; set; }
         [DisplayName("Event")]
         public int EventId { get; set; }

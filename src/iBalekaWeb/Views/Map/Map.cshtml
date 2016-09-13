@@ -1,12 +1,5 @@
 @section AddToHead {
     <link rel="stylesheet" href="~/css/mapStyle.css" />
-<style>
-  
-
-    #toolBoxWrapper {
-        display: none;
-    }
-</style>
 }
 @using Microsoft.AspNetCore.Identity
 @using iBalekaWeb.Models
@@ -34,23 +27,12 @@
                 <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
             </div>
         </div>
-
-        <div class="preload">
-            <!-- MDL Spinner Component -->
-            <div class="mdl-spinner mdl-js-spinner is-active" id="loader"></div>
-        </div>
     </form>
 }
 @section Scripts {
     <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&libraries=drawing,geometry&callback=initMap") async defer></script>
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
     <script>
-        $(function () {
-            $(".preload").fadeOut(5000, function () {
-                $("#map").fadeIn(1000);
-                $("#toolBoxWrapper").fadeIn(1000);
-            });
-        });
-        
+
     </script>
 }
