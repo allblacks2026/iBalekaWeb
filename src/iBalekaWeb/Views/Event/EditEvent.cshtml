@@ -93,8 +93,10 @@
         $(document).ready(function(){
             var eventObject = @Html.Raw(Json.Serialize(Model));
             loadEventObject(eventObject);
-            $("btnSaveE").click(function(){
-               
+            $("#btnSaveE").click(function(){
+                $('#btnSaveE').prop('disabled', true);
+                var $toastContent = $('<span>Updating Event...</span>');
+                Materialize.toast($toastContent, 9000);
             });
             var options = {
                 format: "Y/m/d",

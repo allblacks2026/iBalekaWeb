@@ -7,7 +7,8 @@
 </style>
 
 @{
-    ViewData["Title"] = "Event Details";
+    ViewData["Title"] = "Club Details";
+    
 
 
 }
@@ -29,11 +30,11 @@
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Name)</span>
             </div>
             <div class="row">
-                @Html.LabelFor(model => model.Description, "Title", new { @class = "right-align flow-text" }):
+                @Html.LabelFor(model => model.Description, "Description", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Description)</span>
             </div>
             <div class="row">
-                @Html.LabelFor(model => model.Location, "Description", new { @class = "right-align flow-text" }):
+                @Html.LabelFor(model => model.Location, "Location", new { @class = "right-align flow-text" }):
                 <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
             </div>
             <div class="row">
@@ -57,5 +58,19 @@
         </div>
     </div>
 </div>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var source = '@(ViewBag.SourcePage)';
+        if  (source!= null) {
+                if (source == "Edit") {
+                    var $toastContent = $('<span>Club was successfully Updated...</span>');
+                    Materialize.toast($toastContent, 5000);
+                    @ViewBag.SourcePage = null;
+                }
+            }
+        });
+</script>
+
 
 

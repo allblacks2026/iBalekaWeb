@@ -37,6 +37,11 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
                 }
+                string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
+                if (sourceCookie != null)
+                {
+                    ViewBag.SourcePage = sourceCookie;
+                 }
                 return View(clubResponse.Model);
             }
             else
@@ -57,6 +62,11 @@ namespace iBalekaWeb.Controllers
                         return View("Error");
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
+                }
+                string sourceCookie = HttpContext.Request.Cookies["SourcePage"];
+                if (sourceCookie != null)
+                {
+                    ViewBag.SourcePage = sourceCookie;
                 }
                 return View(clubResponse.Model);
             }
@@ -98,7 +108,7 @@ namespace iBalekaWeb.Controllers
                     Description = ClubForm.Description,
                     Name = ClubForm.Name,
                     Location = ClubForm.Location,
-                    DateCreated=ClubForm.DateCreated,
+                    DateCreated = ClubForm.DateCreated,
                     UserId = _userManager.GetUserId(User)
                 };
                 SingleModelResponse<Club> clubResponse = _context.UpdateClub(club);
@@ -109,6 +119,14 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
                 }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Edit";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePage", source, CookieOption);
+
                 return RedirectToAction("ClubDetails", new { id = clubResponse.Model.ClubId });
             }
             else
@@ -150,6 +168,14 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
                 }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Delete";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePage", source, CookieOption);
+
                 return RedirectToAction("Clubs");
             }
             else
@@ -241,6 +267,14 @@ namespace iBalekaWeb.Controllers
 
                 //set cookie
                 HttpContext.Response.Cookies.Append("NewEvent", saveClub.ToJson(), CookieOption);
+                var CookieOption2 = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Add";
+                //set cookie
+                HttpContext.Response.Cookies.Append("SourcePage", source, CookieOption);
+
                 return RedirectToAction("Clubs");
             }
             else

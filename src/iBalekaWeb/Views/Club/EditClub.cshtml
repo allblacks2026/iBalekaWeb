@@ -12,8 +12,6 @@
     <div>
         <h2 class="center-align">@ViewData["Title"]</h2>
     </div>
-    <form asp-action="Edit" method="post" role="form" class="center-align">
-
         <div class="row center-align">
             <div asp-validation-summary="All" class="red-text text-darken-2"></div>
         </div>
@@ -36,7 +34,7 @@
         <div class="row">
             <div class="input-field col s12">
                 @Html.LabelFor(model => model.Location)
-                <input type="text" class="autocomplete" asp-for="Location">
+                <input type="text" class="autocomplete" asp-for="Location" id="autocomplete">
                 <span asp-validation-for="Location" class="red-text text-darken-2" />
             </div>
         </div>
@@ -65,8 +63,10 @@
         $(document).ready(function () {
             var clubObject = @Html.Raw(Json.Serialize(Model));
             loadClubObject(clubObject);
-            $("btnSave").click(function () {
-
+            $("#btnSave").click(function () {
+                $('#btnSave').prop('disabled', true);
+                var $toastContent = $('<span>Updating Club...</span>');
+                Materialize.toast($toastContent, 9000);
             });
         });
     </script>

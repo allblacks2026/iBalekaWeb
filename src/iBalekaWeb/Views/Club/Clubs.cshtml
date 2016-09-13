@@ -2,13 +2,11 @@
 @{
     ViewData["Title"] = "Saved Clubs";
 
-
+    
 }
-
 <div class="container">
     <div>
         <h2 class="center-align">@ViewData["Title"]</h2>
-
     </div>
     <div class="row">
         <ul class="collection">
@@ -17,40 +15,26 @@
                 foreach (Club club in Model)
                 {
                     <li class="collection-item">
-                        @*<div class="title">
-                             @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
-                        </div>
-                        <p>
-                            <a class="badge">
-                                @Html.ActionLink("Delete", "DeleteClub", new { id = club.ClubId })
-                            </a>
-                        </p>*@
-
                         <div>
                             @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
-
                             <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
                                 <i class="material-icons">
                                     delete
 
                                 </i>
                             </a>
-
                         </div>
                     </li>
 
-                  
+
                 }
             }
             else
             {
                 <li class="mdl-typography--headline" style="text-align:center;">There are no Clubs to Display</li>
             }
-
         </ul>
-
     </div>
-
     <div>
         <a asp-action="AddClub" asp-controller="Club" class="btn waves-effect waves-light btn-large red accent-3">
             Create Club
@@ -58,3 +42,27 @@
         </a>
     </div>
 </div>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var source = '@(ViewBag.SourcePage)';
+        if(source=="Edit")
+        {
+            var $toastContent = $('<span>Club was successfully Updated...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+        else if(source=="Add")
+        {
+            var $toastContent = $('<span>Club was successfully Added...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+        else if(source=="Delete")
+        {
+            var $toastContent = $('<span>Club was successfully Deleted...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+    });
+</script>

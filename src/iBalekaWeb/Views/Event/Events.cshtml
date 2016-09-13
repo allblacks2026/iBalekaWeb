@@ -19,15 +19,7 @@
                 foreach (Event evnt in Model)
                 {
 
-                    <li class="collection-item">
-                        @*<div class="title">
-                                 @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
-                            </div>
-                            <p>
-                                <a class="badge">
-                                    @Html.ActionLink("Delete", "DeleteClub", new { id = club.ClubId })
-                                </a>
-                            </p>*@
+                    <li class="collection-item">                      
 
                         <div>
                             @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
@@ -42,27 +34,6 @@
 
                         </div>
                     </li>
-
-
-                    @*<li class="collection-item avatar">
-
-                        <div class="title">
-                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
-
-                        </div>
-
-                        <p>
-
-                            <a class="badge">
-                                @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventId })
-
-                            </a>
-                        </p>
-
-                  
-
-                       
-                    </li>*@
                 }
             }
             else
@@ -91,51 +62,31 @@
         </div>
     </div>
 </div>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var source = '@(ViewBag.SourcePage)';
+        if(source=="Edit")
+        {
+            var $toastContent = $('<span>Event was successfully Updated...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+        else if(source=="Add")
+        {
+            var $toastContent = $('<span>Event was successfully Added...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+        else if(source=="Delete")
+        {
+            var $toastContent = $('<span>Event was successfully Deleted...</span>');
+            Materialize.toast($toastContent, 5000);
+            source = null;
+        }
+    });
+</script>
 
 
 
 
-
-
-@*<div class="mdl-typography--headline" style="text-align:center;">Saved Events</div>
-<div class="mdl-grid">
-    <div class="mdl-layout-spacer"></div>
-    <div class="mdl-cell mdl-cell--12-col ">
-        <div class="mdl-grid">
-            <div class="mdl-layout-spacer"></div>
-            <ul class="list-group mdl-cell mdl-cell--12-col mdl-cell--8-col-desktop mdl-card mdl-shadow--3dp" id="routeList">
-                @if (Model.Count() > 0)
-                {
-                    foreach (Event evnt in Model)
-                    {
-
-                        <li class="list-group-item">
-                            <span class="badge">
-                                @Html.ActionLink("Delete", "DeleteEvent", new { id = evnt.EventID })
-
-                            </span>
-                             get event route nrs and put in badge
-                                <span class="badge">totalDistance</span>
-                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventID })
-                       </li>
-                    }
-                }
-                else
-                {
-                    <li class="mdl-typography--headline" style="text-align:center;">There are no Events to Display</li>
-                }
-
-            </ul>
-            <div class="mdl-layout-spacer"></div>
-        </div>
-    </div>
-    <div class="mdl-layout-spacer"></div>
-</div>
-<div class="mdl-grid">
-    <div class="mdl-layout-spacer"></div>
-    <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
-        <a asp-action="CreateEvent" asp-controller="Event" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Create Event
-        </a>
-    </div>
-</div>*@
