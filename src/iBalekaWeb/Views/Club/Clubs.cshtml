@@ -16,16 +16,30 @@
             {
                 foreach (Club club in Model)
                 {
-                    <li class="collection-item avatar">
-                        <div class="title">
+                    <li class="collection-item">
+                        @*<div class="title">
                              @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
                         </div>
                         <p>
                             <a class="badge">
                                 @Html.ActionLink("Delete", "DeleteClub", new { id = club.ClubId })
                             </a>
-                        </p>
+                        </p>*@
+
+                        <div>
+                            @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+
+                            <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
+                                <i class="material-icons">
+                                    delete
+
+                                </i>
+                            </a>
+
+                        </div>
                     </li>
+
+                  
                 }
             }
             else
