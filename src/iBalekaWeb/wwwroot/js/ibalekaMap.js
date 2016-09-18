@@ -9,9 +9,10 @@ function initMap() {
         scaleControl: true
     });
     getLocation();
-    var toolBox = document.getElementById('toolBoxWrapper');
+    var toolBox = document.getElementById('toolBoxWrapper');    
     toolBox.index = 1;
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(toolBox);
+   
     // Add a listener for the click event
     map.addListener('click', addCheckPoint);
 }
@@ -110,7 +111,6 @@ function getRoutePath() {
 
     });
     return routePath;
-
 }
 //marker events
 function bindMarkerPolylineEvents(marker) {
