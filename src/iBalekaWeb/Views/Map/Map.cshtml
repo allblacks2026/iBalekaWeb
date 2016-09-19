@@ -5,55 +5,55 @@
 @using iBalekaWeb.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "iBaleka Route Mapping Tool";
 }
 
 @if (SignInManager.IsSignedIn(User))
 {
-
-    <form asp-action="Map">
-        
-        <div id="map"></div><br />
-        <div id="toolBoxWrapper">
-            <div id="statisticsWrapper">
-                <p id="routeTitle" class="">Untitled Route</p>
-                <p id="totalDistance">Total Distance: 0</p>
-                <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
+    <div class="loadingScreen">
+        <div class="fullMessage">
+            <div class="loadingText">
+                <h4>Please wait while map is loading...</h4>
             </div>
-            <div id="buttonsWrapper">
-                <input type="button" id="btnSaveRoute" onclick="saveRoute()" value="Save Route" />
-                <input type="button" id="btnCancelRoute" onclick="cancelRoute()" value="Cancel Route" />
-
-                <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
+            <div class="progress preloading">
+                <div class="indeterminate"></div>
             </div>
         </div>
-    </form>
+    </div>
+    <div class="wrapper">
+        <form asp-action="Map">
+            <div id="map"></div><br />
+            <div id="toolBoxWrapper">
+                <div id="statisticsWrapper">
+                    <p id="routeTitle" class="">Untitled Route</p>
+                    <p id="totalDistance">Total Distance: 0</p>
+                    <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
+                </div>
+                <div id="buttonsWrapper">
+                    <input type="button" id="btnSaveRoute" onclick="saveRoute()" value="Save Route" />
+                    <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
+                    <input type="button" id="btnCancelRoute" onclick="cancelRoute()" value="Cancel Route" />
+                </div>
+            </div>
+        </form>
+    </div>
 }
 @section Scripts {
-    <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&libraries=drawing,geometry&callback=initMap") async defer></script>
+    <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&libraries=places,drawing,geometry&callback=initMap") async defer></script>
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
     <script>
         $(function () {
             $("footer").hide(true);
         });
-        $(document).ready(function(){
+        $(document).ready(function () {
+            $('.loadingScreen').delay(3000).fadeOut(2000);
+            $('.wrapper').fadeIn(2000);
             $("#btnSaveRoute").click(function () {
                 $('#btnSaveRoute').prop('disabled', true);
                 var $toastContent = $('<span>Saving Route...</span>');
                 Materialize.toast($toastContent, 9000);
             });
-            //$('#modal1').openModal({
-            //    dismissible: false, // Modal can be dismissed by clicking outside of the modal
-            //    starting_top: '5%', // Starting top style attribute
-            //    ending_top: '15%', // Ending top style attribute
-            //    ready: function() {
-            //
-            //        $('#modal1').closeModal();
-            //    }
-            //});
-
         });
 </script>
 }

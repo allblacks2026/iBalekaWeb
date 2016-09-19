@@ -1,4 +1,40 @@
-﻿/*Saved Routes*/
+﻿/*Loading Screen*/
+.fullMessage {
+    margin-top: 15%;
+}
+
+.loadingText {
+    margin-left: 27%;
+}
+
+.preloading {
+    width: 70%;
+    margin-left: 18%;
+    height: 10px;
+}
+
+.progress {
+    background-color: #FF8E76;
+}
+
+    .progress .indeterminate {
+        background-color: #FF5733;
+    }
+
+.loadingScreen {
+    z-index: 99999999999;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    background-image: url('../images/green_cup.png');
+    background-color: #BCA8A4;
+}
+
+.wrapper {
+    display: none;
+}
+
+/*Saved Routes*/
 #routeList {
     margin-right: 5%;
 }
@@ -54,7 +90,7 @@ html, body {
 
 #map {
     margin-left: -4%;
-    height: 90vh;
+    height: 95vh;
     left: -1%;
     width: 109%;
 }
@@ -184,7 +220,7 @@ html, body {
 @media only screen and (min-width: 1300px) {
     #map {
         margin-left: 1%;
-        height: 88vh;
+        height: 90vh;
         width: 100%;
     }
 
