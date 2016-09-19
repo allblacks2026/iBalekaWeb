@@ -76,7 +76,8 @@
                             }
                     <li class="collection-item avatar">
                         <div class="title">
-                            @Html.ActionLink(item.Title, "EditRoute", new { id = item.RouteId }, new { @class = "red-text text-darken-2" })
+                            @Html.ActionLink(item.Title, "EditRoute", "Map", new { id = item.RouteId }, new { @class = "red-text text-darken-2" })
+
 
                         </div>
                         <p>
@@ -112,11 +113,13 @@
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
+
         var source = '@(ViewBag.SourcePageEvent)';
         if  (source!= null) {
                 if (source == "Edit") {
                     var $toastContent = $('<span>Event was successfully Updated...</span>');
                     Materialize.toast($toastContent, 5000);
+
                     source = null;
                 }
             }

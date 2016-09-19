@@ -81,13 +81,13 @@
 
                             <div class="title">
 
-                                @Html.ActionLink(@item.Title, "EditRoute", new { id = @item.RouteId }, new { @class = "red-text text-darken-2" })
+                                @Html.ActionLink(@item.Title, "EditRoute", "Map", new { id = @item.RouteId }, new { @class = "red-text text-darken-2" })
 
 
                             </div>
 
                             <p>
-                                <a class="badge">
+                                <a class="badge">Total Distance 
                                     @totalDistance
 
 
@@ -109,14 +109,14 @@
 
             <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="CreateEvent">
                 Back
-                <i class="material-icons right">send</i>
+                
             </a>
         </div>
         <div class="row10">
         <div class="col s6 right-align ">
             <button class="btn waves-effect waves-light btn-large red accent-3" onclick="saveEvent()" id="btnSave">
             Save
-                <i class="material-icons right">send</i>
+                
             </button>
             </div>
         </div>
