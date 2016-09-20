@@ -1,4 +1,7 @@
-﻿/*Loading Screen*/
+﻿
+
+
+/*Loading Screen*/
 .fullMessage {
     margin-top: 15%;
 }
@@ -40,44 +43,47 @@
 }
 /*End Saved Routes*/
 /*Stats Panel*/
+#settingsPanel{
+    left:30% !important;
+}
+#statsPanel{
+    right:1% !important;
+}
+#statsPanel:hover{
+    cursor:pointer;
+}
+#btnCloseSettingsPanel {
+    float: right;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+
+#setTitle {
+    margin-left: 40%;
+}
+
+#routeLabel {
+    margin-left: 37%;
+    font-size: 16px;
+    text-align: center;
+}
+
+.statsMenu {
+    right: auto !important;
+    left: 1% !important;
+    text-align: left !important;
+}
+#editButton{
+    margin-left:1%;
+}
 #routeTitle {
-    width: 132px;
+    width: 80%;
     height: 17px;
     text-align: center;
-    font-size: 15px;
-    padding-left: 14%;
+    font-size: 17px;
+    margin-left: 11%;
 }
 
-#toolBoxWrapper {
-    background-color: dodgerblue;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 1%;
-    cursor: pointer;
-    text-align: center;
-}
-
-#statisticsWrapper {
-    font-size: 13px;
-}
-
-    #statisticsWrapper > p {
-        margin-bottom: auto;
-    }
-
-#buttonsWrapper {
-    border-radius: 2px;
-    margin: 5px;
-    text-align: left;
-}
-
-#btnSaveRoute {
-    color: #3366ff;
-}
-
-#btnClearRoute {
-    color: #3366ff;
-}
 /*End Toolbox Panel*/
 
 

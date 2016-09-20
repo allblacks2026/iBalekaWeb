@@ -1,5 +1,5 @@
 ﻿//Load Google Maps
-var map;
+var map, editButton, statsPanel, settingsPanel;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
@@ -9,12 +9,61 @@ function initMap() {
         scaleControl: true
     });
     getLocation();
-    var toolBox = document.getElementById('toolBoxWrapper');    
-    toolBox.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(toolBox);
-   
+    editButton = document.getElementById('editButton');
+    statsPanel = document.getElementById('statsPanel');
+    settingsPanel = document.getElementById('settingsPanel');
+    settingsPanel.index = 1;
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(editButton);
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(statsPanel);      
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(settingsPanel);
+    settingsPanel.style.display = "none";
+    statsPanel.style.display = "none";
     // Add a listener for the click event
     map.addListener('click', addCheckPoint);
+}
+//Map UI
+function toastMessage() {
+    if (settingsPanel.style.display == "none") {
+        Materialize.toast('Map Click Enabled', 3000);
+    } else {
+        Materialize.toast('Map Click Suspended', 3000);
+    }
+}
+function settingsPanelToggle() {
+    if (settingsPanel.style.display == "none") {
+        openSettingsPanel();
+    } else {
+        closeSettingsPanel();
+    }
+    
+}
+function openSettingsPanel() {
+    google.maps.event.clearListeners(map, 'click');
+    settingsPanel.style.display = "block";
+    toastMessage();
+}
+function closeSettingsPanel() {
+    map.addListener('click', addCheckPoint);
+    settingsPanel.style.display = "none";
+    toastMessage();
+}
+
+var routeTitleText = document.getElementById('routeTitle');
+var routeTitleStat = document.getElementById('routeTitleStat');
+function updateRouteTitle() {
+    routeTitleText = document.getElementById('routeTitle');
+    routeTitleStat.innerHTML = routeTitleText.value;
+}
+
+function statsPanelToggle() {
+    if (statsPanel.style.display == "none") {
+        statsPanel.style.display = "block";
+    } else {
+        statsPanel.style.display = "none";
+    }
+}
+function closeStatsPanel() {
+    statsPanel.style.display = "none";
 }
 //**************End Load Google Maps************************//
 
@@ -42,7 +91,6 @@ var markersOrders = [];
 var routePoints = [];
 var nrCheckpointsText = document.getElementById('nrCheckpoints');
 var totalDistanceText = document.getElementById('totalDistance');
-var routeTitleText = document.getElementById('routeTitle');
 var totalDistance = 0;
 var distanceCoords = [];
 //get unique marker methods
@@ -51,7 +99,6 @@ var getMarkerUniqueId = function (lat, lng) {
 };
 //Add Markers and Polylines
 function addCheckPoint(event) {
-    
     routePoints.push(event.latLng);
     if (!(routePath === undefined)) {
         routePath.setMap(null);
@@ -75,6 +122,9 @@ function addCheckPoint(event) {
     updateToolboxStats();
     //totalDistanceText.innerHTML = "Total Distance: ";
     bindMarkerPolylineEvents(marker);
+    if (routePoints[1] == null) {
+        statsPanel.style.display = "block";
+    }
 }
 function dragMarkerEvent(marker) {
     google.maps.event.addListener(marker, 'dragstart', function (event) {
@@ -178,14 +228,38 @@ function createToolbox(toolboxDiv, map) {
 }
 //save route
 function saveRoute() {
+    var title;
+    if (routePoints[2]!=null) {
+        if (routeTitleText.value == "") {
+            $('#routeTitleModal').openModal();
 
+        } else {
+            title = routeTitleText.value;
+            saveRouteAJAX(title)
+        }
+    } else {
+        Materialize.toast('Not Enough Checkpoints to Save Route', 3000);
+    }
+    
+    
+}
+function saveRouteModal() {
+    var title = document.getElementById('routeTitleTextModal');
+    routeTitleText.value = title.value;
+    updateRouteTitle();
+    saveRouteAJAX(title.value);
+}
+function saveRouteAJAX(title) {
+    $('#btnSaveRoute').prop('disabled', true);
+    var $toastContent = $('<span>Saving Route...</span>');
+    Materialize.toast($toastContent, 9000);
     var apiUrl = location.origin + "/map/AddRoute";
     $.ajax({
         method: "POST",
         url: apiUrl,
         contentType: "application/json;charset=utf-8",
         processData: false,
-        data: createObject(),
+        data: createObject(title),
         success: function (response) {
             window.location.href = location.origin + "/map/SavedRoutes";
         },
@@ -194,8 +268,7 @@ function saveRoute() {
         }
     });
 }
-function createObject() {
-    var title = prompt("Enter the Route Title");
+function createObject(title) {    
     var routeModel = {Title: title,Checkpoints: [] ,TotalDistance:totalDistance};
     for (var i = 0; i < markersOrders.length; i++) {
         var latlng = markersOrders[i].getPosition();
@@ -265,11 +338,13 @@ function getCheckpointLength() {
 var loadedRoute;
 function loadRoute(route) {    
     routeTitleText.value = route.title;
+    updateRouteTitle();
     map.setCenter(new google.maps.LatLng(route.checkpoints[0].latitude, route.checkpoints[0].longitude));
     for (var i = 0; i < route.checkpoints.length; i++) {
         loadCheckpoints(route.checkpoints[i]);
     }
     loadedRoute = route;
+    statsPanel.style.display = "block";
 }
 function loadCheckpoints(coOrds) {
     var point = new google.maps.LatLng(coOrds.latitude, coOrds.longitude);
@@ -299,7 +374,27 @@ function loadCheckpoints(coOrds) {
 }
 
 //update Route
+function updateRouteModal(){
+    var title = document.getElementById('routeTitleTextModal');
+    routeTitleText.value = title.value;
+    updateRouteTitle();
+    updateRouteAJAX();
+}
 function updateRoute() {
+    if (routePoints[2]!=null) {
+        if (routeTitleText.value != "") {            
+            $('#btnUpdateRoute').prop('disabled', true);
+            var $toastContent = $('<span>Updating Route...</span>');
+            Materialize.toast($toastContent, 9000);
+            updateRouteAJAX();
+        } else {
+            $('#routeTitleModal').openModal();
+        }
+    } else {
+        Materialize.toast('Not Enough Checkpoints to Save Route', 3000);
+    }
+}
+function updateRouteAJAX() {
     var apiUrl = location.origin + "/map/Edit";
     $.ajax({
         method: "POST",
@@ -315,7 +410,6 @@ function updateRoute() {
         }
     });
 }
-
 function cancelRoute() {
     var apiUrl = location.origin + "/map/SavedRoutes";
     $.ajax({

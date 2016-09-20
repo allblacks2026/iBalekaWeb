@@ -22,18 +22,59 @@
     </div>
     <div class="wrapper">
         <div id="map"></div><br />
-        <div id="toolBoxWrapper">
-            <div id="statisticsWrapper">
-                <p><input type="text" class="mdl-textfield__input" style="text-align:center" id="routeTitle" value="Untitled Route"></p>
-                <p id="totalDistance">Total Distance: 0</p>
-                <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
-            </div>
-            <div id="buttonsWrapper">
-                <input type="button" id="btnUpdateRoute" onclick="updateRoute()" value="Update Route" />
-                <input type="button" id="btnClearRoute" onclick="clearRoute()" value="Clear Route" />
-                <input type="button" id="btnCancelRoute" onclick="cancelRoute()" value="Cancel Route" />
+        <div id="editButton" class="fixed-action-btn vertical click-to-toggle">
+            <a class="btn-floating btn-large red">
+                <i class="material-icons">mode_edit</i>
+            </a>
+            <ul class="statsMenu">
+                <li><a class="btn-floating tooltipped yellow" data-position="right" data-delay="150" data-tooltip="Search Location"><i class="material-icons">search</i></a></li>
+                <li><a class="btn-floating tooltipped green darken-1" data-position="right" data-delay="150" data-tooltip="Save Route" onclick="updateRoute()"><i class="material-icons">save</i></a></li>
+                <li><a class="btn-floating tooltipped blue" data-position="right" data-delay="150" data-tooltip="Settings" onclick="settingsPanelToggle()"><i class="material-icons">settings</i></a></li>
+                <li><a class="btn-floating tooltipped red" data-position="right" data-delay="150" data-tooltip="Statistics"><i class="material-icons" onclick="statsPanelToggle()">description</i></a></li>
+            </ul>
+        </div>
+        <div id="statsPanel" class="card red accent-2" onclick="closeStatsPanel()">
+            <div class="card-content black-text">
+                <span class="card-title">Statistics</span>
+                <div id="statistic">
+                    <p id="routeTitleStat">Untitled Route</p>
+                    <p id="totalDistance">Total Distance: 0</p>
+                    <p id="nrCheckpoints">Nr of Checkpoints: 0</p>
+                </div>
             </div>
         </div>
+        <div id="settingsPanel" class="card red accent-2">
+            <span id="btnCloseSettingsPanel" class="btn-floating btn-small waves-effect waves-light red accent-2" onclick="closeSettingsPanel()"><i class="material-icons">close</i></span>
+            <div class="card-content black-text">
+                <span class="card-title" id="setTitle">Settings</span>
+                <div id="settings">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Enter Route Title" id="routeTitle" onfocusout="updateRouteTitle()" type="text" class="validate">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-action">
+                    <button class="btn waves-effect waves-light white-text" id="btnSaveRoute" onclick="updateRoute()">Update Route</button>
+                    <button class="btn waves-effect waves-light white-text" id="btnClearRoute" onclick="clearRoute()">Clear Route</button>
+                    <button class="btn waves-effect waves-light white-text" id="btnCancelRoute" onclick="cancelRoute()">Cancel Route</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="routeTitleModal" class="modal">
+            <div class="modal-content">
+                <h4>Please Enter Route Title</h4>
+                <input placeholder="Enter Route Title" id="routeTitleTextModal" onfocusout="updateRouteTitle()" type="text" class="validate">
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action waves-effect waves-green btn-flat" onclick="updateRouteModal()">Update</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+            </div>
+        </div>
+
     </div>
 }
 @section Scripts {
@@ -46,10 +87,12 @@
         $(document).ready(function(){            
             $('.loadingScreen').delay(3000).fadeOut(2000);
             $('.wrapper').fadeIn(2000);
-            $("#btnUpdateRoute").click(function(){
-                $('#btnUpdateRoute').prop('disabled', true);
-                var $toastContent = $('<span>Updating Route...</span>');
-                Materialize.toast($toastContent, 9000);
+            $('routeTitleModal').leanModal({
+                dismissible: false, // Modal can be dismissed by clicking outside of the modal
+                //opacity: .5, // Opacity of modal background
+                //starting_top: '4%', // Starting top style attribute
+                //ending_top: '10%', // Ending top style attribute
+
             });
         });
         window.onload = function(){
