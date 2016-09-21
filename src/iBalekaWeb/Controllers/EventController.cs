@@ -44,7 +44,10 @@ namespace iBalekaWeb.Controllers
                 Error er = new Error(eventResponse.ErrorMessage);
                 return View("Error");
             }
-
+            IEnumerable<Event> events = eventResponse.Model;
+            ViewBag.ActiveEvents = GetActiveEvents(events);
+            ViewBag.OpenEvents = GetOpenEvents(events);
+            ViewBag.ClosedEvents = GetClosedEvents(events);
             string sourceCookie = HttpContext.Request.Cookies["SourcePageEvent"];
             if (sourceCookie != null)
             {
@@ -52,7 +55,21 @@ namespace iBalekaWeb.Controllers
             }
             return View(eventResponse.Model);
         }
-       // GET: Event/Details/5
+
+        private IEnumerable<Event> GetClosedEvents(IEnumerable<Event> events)
+        {
+            return events.Where(p => p.EventStatus == EventType.Closed);
+        }
+        private IEnumerable<Event> GetOpenEvents(IEnumerable<Event> events)
+        {
+            return events.Where(p => p.EventStatus == EventType.Open);
+        }
+        private IEnumerable<Event> GetActiveEvents(IEnumerable<Event> events)
+        {
+            return events.Where(p => p.EventStatus == EventType.Active);
+        }
+
+        // GET: Event/Details/5
         [HttpGet(Name = "EventDetails")]
         public IActionResult EventDetails(int id)
         {

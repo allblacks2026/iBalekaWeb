@@ -43,14 +43,28 @@
 }
 /*End Saved Routes*/
 /*Stats Panel*/
-#settingsPanel{
-    left:30% !important;
+#searchPanel {
+    left: 30% !important;
 }
-#statsPanel{
-    right:1% !important;
+
+#settingsPanel {
+    left: 30% !important;
 }
-#statsPanel:hover{
-    cursor:pointer;
+
+#statsPanel {
+    right: 1% !important;
+}
+
+    #statsPanel:hover {
+        cursor: pointer;
+    }
+#btnCloseSearchPanel {
+    float: right;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+#btnRouteLocation{
+    margin-left: 25%;
 }
 #btnCloseSettingsPanel {
     float: right;
@@ -61,7 +75,9 @@
 #setTitle {
     margin-left: 40%;
 }
-
+#setTitleSearch {
+    margin-left: 26%;
+}
 #routeLabel {
     margin-left: 37%;
     font-size: 16px;
@@ -73,8 +89,16 @@
     left: 1% !important;
     text-align: left !important;
 }
-#editButton{
-    margin-left:1%;
+
+#editButton {
+    margin-left: 1%;
+}
+#autocomplete{
+    width: 80%;
+    height: 17px;
+    text-align: justify;
+    font-size: 17px;
+    margin-left: 11%;
 }
 #routeTitle {
     width: 80%;

@@ -20,20 +20,19 @@
             </div>
         </div>
     </div>
-    <div class="wrapper">
-        <div id="map"></div><br />
+    <div class="wrapper">       
         <div id="editButton" class="fixed-action-btn vertical click-to-toggle">
             <a class="btn-floating btn-large red">
                 <i class="material-icons">mode_edit</i>
             </a>
             <ul class="statsMenu">
-                <li><a class="btn-floating tooltipped yellow" data-position="right" data-delay="150" data-tooltip="Search Location"><i class="material-icons">search</i></a></li>
+                <li><a class="btn-floating tooltipped yellow" data-position="right" data-delay="150" data-tooltip="Search Location"><i class="material-icons" onclick="searchPanelToggle()">search</i></a></li>
                 <li><a class="btn-floating tooltipped green darken-1" data-position="right" data-delay="150" data-tooltip="Save Route" onclick="updateRoute()"><i class="material-icons">save</i></a></li>
                 <li><a class="btn-floating tooltipped blue" data-position="right" data-delay="150" data-tooltip="Settings" onclick="settingsPanelToggle()"><i class="material-icons">settings</i></a></li>
                 <li><a class="btn-floating tooltipped red" data-position="right" data-delay="150" data-tooltip="Statistics"><i class="material-icons" onclick="statsPanelToggle()">description</i></a></li>
             </ul>
         </div>
-        <div id="statsPanel" class="card red accent-2" onclick="closeStatsPanel()">
+        <div id="statsPanel" class="card red" onclick="closeStatsPanel()">
             <div class="card-content black-text">
                 <span class="card-title">Statistics</span>
                 <div id="statistic">
@@ -43,8 +42,28 @@
                 </div>
             </div>
         </div>
-        <div id="settingsPanel" class="card red accent-2">
-            <span id="btnCloseSettingsPanel" class="btn-floating btn-small waves-effect waves-light red accent-2" onclick="closeSettingsPanel()"><i class="material-icons">close</i></span>
+        <div id="searchPanel" class="card red">
+            <span id="btnCloseSearchPanel" class="btn-floating btn-small waves-effect waves-light red" onclick="closeSearchPanel()"><i class="material-icons">close</i></span>
+            <div class="card-content black-text">
+                <span class="card-title" id="setTitleSearch">Search Location</span>
+                <div id="settings" class="col s12">
+                    <div class="row">
+                        <span><i class="material-icons">search</i></span>
+                        <input type="text" class="autocomplete active" id="autocomplete">
+                    </div>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <button class="btn waves-effect waves-light white-text" id="btnSearchRoute" onclick="searchLocation()">Search Location</button>
+                        <button class="btn waves-effect waves-light white-text" id="btnCurrentLocation" onclick="getLocation()">Current Location</button>
+                    </div>
+                    <button class="btn waves-effect waves-light white-text" id="btnRouteLocation" onclick="routeLocation()">Route Location</button>
+                    
+                </div>
+            </div>
+        </div>
+        <div id="settingsPanel" class="card red">
+            <span id="btnCloseSettingsPanel" class="btn-floating btn-small waves-effect waves-light red" onclick="closeSettingsPanel()"><i class="material-icons">close</i></span>
             <div class="card-content black-text">
                 <span class="card-title" id="setTitle">Settings</span>
                 <div id="settings">
@@ -63,8 +82,7 @@
                 </div>
             </div>
         </div>
-
-        <div id="routeTitleModal" class="modal">
+        <div id="routeTitleModal" class="modal red">
             <div class="modal-content">
                 <h4>Please Enter Route Title</h4>
                 <input placeholder="Enter Route Title" id="routeTitleTextModal" onfocusout="updateRouteTitle()" type="text" class="validate">
@@ -74,7 +92,7 @@
                 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
             </div>
         </div>
-
+        <div id="map"></div>
     </div>
 }
 @section Scripts {

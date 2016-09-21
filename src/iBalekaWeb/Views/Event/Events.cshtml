@@ -6,44 +6,137 @@
 }
 
 <div class="container">
-    <div>
-        <h2 class="center-align">@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s4 red-text"><a href="#activeEvents">Active Events</a></li>
+                <li class="tab col s4 red-text"><a class="active" href="#openEvents">Open Events</a></li>
+                <li class="tab col s4 red-text"><a href="#closedEvents">Closed Events</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="activeEvents">
+        <div>
+            <h2 class="center-align">Active Events</h2>
 
+        </div>
+        <div class="row">
+            <ul class="collection" id="activeEventList">
+                @if (Model.Count() > 0)
+                {
+                    if ((ViewBag.ActiveEvents as IEnumerable<Event>).Count() > 0)
+                    {
+                        foreach (Event evnt in ViewBag.ActiveEvents)
+                        {
+                            <li class="collection-item">
+                                <div>
+                                    @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                                    <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
+                                        <i class="material-icons">
+                                            delete
+                                        </i>
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="collection-item" style="text-align:center;"><h5>There are no Active Events</h5></li>
+                    }
+                }
+                else
+                {
+                    <li class="collection-item" style="text-align:center;"><h5>There are no Events to display</h5></li>
+                }
+
+
+            </ul>
+
+        </div>
     </div>
 
+    <div id="openEvents">
+        <div>
+            <h2 class="center-align">Open Events</h2>
 
-    <div class="row">
-        <ul class="collection">
-            @if (Model.Count() > 0)
-            {
-                foreach (Event evnt in Model)
+        </div>
+        <div class="row">
+            <ul class="collection" id="openEventList">
+                @if (Model.Count() > 0)
                 {
+                    if ((ViewBag.OpenEvents as IEnumerable<Event>).Count() > 0)
+                    {
+                        foreach (Event evnt in ViewBag.OpenEvents)
+                        {
 
-                    <li class="collection-item">                      
-
-                        <div>
-                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
-
-
-                            <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
-                                <i class="material-icons">
-                                    delete
-
-                                </i>
-                            </a>
-
-                        </div>
-                    </li>
+                <li class="collection-item">
+                    <div>
+                        @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                        <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
+                            <i class="material-icons">
+                                delete
+                            </i>
+                        </a>
+                    </div>
+                </li>
+                        }
+                    }
+                    else
+                    {
+                <li class="collection-item" style="text-align:center;"><h5>There are no Open Events</h5></li>
+                    }
                 }
-            }
-            else
-            {
-                <li class="mdl-typography--headline" style="text-align:center;">There are no Events to Display</li>
-            }
+                else
+                {
+                <li class="mdl-typography--headline" style="text-align:center;"><h5>There are no Events to display</h5></li>
+                }
 
 
-        </ul>
+            </ul>
 
+        </div>
+    </div>
+
+    <div id="closedEvents">
+        <div>
+            <h2 class="center-align">Closed Events</h2>
+
+        </div>
+        <div class="row">
+            <ul class="collection" id="closedEventList">
+                @if (Model.Count() > 0)
+                {
+                    if ((ViewBag.ClosedEvents as IEnumerable<Event>).Count()>0)
+                    {
+                        foreach (Event evnt in ViewBag.ClosedEvents)
+                        {
+                <li class="collection-item">
+                    <div>
+                        @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                        <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
+                            <i class="material-icons">
+                                delete
+                            </i>
+                        </a>
+                    </div>
+                </li>
+                        }
+                    }
+                    else
+                    {
+                <li class="collection-item" style="text-align:center;"><h5>There are no Closed Events</h5></li>
+                    }
+                }
+                else
+                {
+                <li class="collection-item" style="text-align:center;"><h5>There are no Events to Dislpay</h5></li>
+                }
+
+
+            </ul>
+
+        </div>
     </div>
 
     <div class="row">
@@ -67,20 +160,17 @@
     $(document).ready(function () {
 
         var source = '@(ViewBag.SourcePageEvent)';
-        if(source=="Edit")
-        {
+        if (source == "Edit") {
             var $toastContent = $('<span>Event was successfully Updated...</span>');
             Materialize.toast($toastContent, 5000);
             source = null;
         }
-        else if(source=="Add")
-        {
+        else if (source == "Add") {
             var $toastContent = $('<span>Event was successfully Added...</span>');
             Materialize.toast($toastContent, 5000);
             source = null;
         }
-        else if(source=="Delete")
-        {
+        else if (source == "Delete") {
             var $toastContent = $('<span>Event was successfully Deleted...</span>');
             Materialize.toast($toastContent, 5000);
             source = null;

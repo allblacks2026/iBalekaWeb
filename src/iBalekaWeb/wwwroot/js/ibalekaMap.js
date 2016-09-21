@@ -1,5 +1,5 @@
 ﻿//Load Google Maps
-var map, editButton, statsPanel, settingsPanel;
+var map, editButton, statsPanel, settingsPanel, searchPanel, searchInput, autocomplete;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
@@ -12,25 +12,61 @@ function initMap() {
     editButton = document.getElementById('editButton');
     statsPanel = document.getElementById('statsPanel');
     settingsPanel = document.getElementById('settingsPanel');
-    settingsPanel.index = 1;
+    searchPanel = document.getElementById('searchPanel');
+    
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(editButton);
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(statsPanel);      
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(settingsPanel);
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(settingsPanel);   
+
+    initializeAutocomplete();
+
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(searchPanel);
+    searchPanel.style.display = "none";
     settingsPanel.style.display = "none";
     statsPanel.style.display = "none";
     // Add a listener for the click event
     map.addListener('click', addCheckPoint);
 }
+//method to initalize automcomplete
+function initializeAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{ types: ['geocode'] });
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        fillInAddress();
+    });
+}
+function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+
+    for (var component in componentForm) {
+        document.getElementById(component).value = '';
+        document.getElementById(component).disabled = false;
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+        }
+    }
+}
 //Map UI
+
 function toastMessage() {
-    if (settingsPanel.style.display == "none") {
+    if (settingsPanel.style.display === "none") {
         Materialize.toast('Map Click Enabled', 3000);
     } else {
         Materialize.toast('Map Click Suspended', 3000);
     }
 }
 function settingsPanelToggle() {
-    if (settingsPanel.style.display == "none") {
+    if (settingsPanel.style.display === "none") {
+        if (searchPanel.style.display !== "none") {
+            searchPanel.style.display = "none";
+        }
         openSettingsPanel();
     } else {
         closeSettingsPanel();
@@ -39,24 +75,26 @@ function settingsPanelToggle() {
 }
 function openSettingsPanel() {
     google.maps.event.clearListeners(map, 'click');
+    removeMarkerEvents();
     settingsPanel.style.display = "block";
     toastMessage();
 }
 function closeSettingsPanel() {
     map.addListener('click', addCheckPoint);
+    addMarkerEvents();
     settingsPanel.style.display = "none";
     toastMessage();
 }
-
+//update route title
 var routeTitleText = document.getElementById('routeTitle');
 var routeTitleStat = document.getElementById('routeTitleStat');
 function updateRouteTitle() {
     routeTitleText = document.getElementById('routeTitle');
     routeTitleStat.innerHTML = routeTitleText.value;
 }
-
+//statistics panel
 function statsPanelToggle() {
-    if (statsPanel.style.display == "none") {
+    if (statsPanel.style.display === "none") {
         statsPanel.style.display = "block";
     } else {
         statsPanel.style.display = "none";
@@ -65,13 +103,60 @@ function statsPanelToggle() {
 function closeStatsPanel() {
     statsPanel.style.display = "none";
 }
+//search panel
+function searchLocation() {
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+        window.alert("Autocomplete's returned place contains no geometry");
+        return;
+    }
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+    } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(16);  
+    }
+}
+function searchPanelToggle() {
+    if (searchPanel.style.display === "none") {
+        if (settingsPanel.style.display !== 'none') {
+            settingsPanel.style.display = 'none';
+        }
+        google.maps.event.clearListeners(map, 'click');
+        searchPanel.style.display = "block";
+        removeMarkerEvents()
+        Materialize.toast('Map Click Suspended', 3000);
+    } else {
+        closeSearchPanel();
+    }
+}
+function closeSearchPanel() {
+    map.addListener('click', addCheckPoint);
+    addMarkerEvents();
+    searchPanel.style.display = 'none';
+    Materialize.toast('Map Click Enabled', 3000);
+}
 //**************End Load Google Maps************************//
 
 //Get Current Location
+var routePoints = [];
+function routeLocation() {
+    if (routePoints[0] !== null) {
+        var latlng = markersOrders[0].getPosition();
+        map.setCenter(new google.maps.LatLng(latlng.lat(), latlng.lng()));
+        map.setZoom = 15;
+        Materialize.toast('Positioned at Route Location', 3000);
+    } else {
+        Materialize.toast('No Checkpoints dropped', 3000);
+    }
+}
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
+        Materialize.toast('Positioned at Current Location', 3000);
     } else {
+        Materialize.toast('Current Location could not be determined..', 3000);
         //demoBox.innerHTML = "Geolocation is not supported by this browser.";
         //error message overly
     }
@@ -88,7 +173,7 @@ function showPosition(position) {
 var routePath, marker, totalDistance, prevLocation;
 var markers = [];
 var markersOrders = [];
-var routePoints = [];
+
 var nrCheckpointsText = document.getElementById('nrCheckpoints');
 var totalDistanceText = document.getElementById('totalDistance');
 var totalDistance = 0;
@@ -117,8 +202,8 @@ function addCheckPoint(event) {
     });
     //update toolbox
     markers[markerId] = marker;
-    markersOrders.push(marker);
     dragMarkerEvent(marker);
+    markersOrders.push(marker);
     updateToolboxStats();
     //totalDistanceText.innerHTML = "Total Distance: ";
     bindMarkerPolylineEvents(marker);
@@ -230,7 +315,7 @@ function createToolbox(toolboxDiv, map) {
 function saveRoute() {
     var title;
     if (routePoints[2]!=null) {
-        if (routeTitleText.value == "") {
+        if (routeTitleText.value === "") {
             $('#routeTitleModal').openModal();
 
         } else {
@@ -340,6 +425,7 @@ function loadRoute(route) {
     routeTitleText.value = route.title;
     updateRouteTitle();
     map.setCenter(new google.maps.LatLng(route.checkpoints[0].latitude, route.checkpoints[0].longitude));
+    Materialize.toast('Route Succesfully Loaded', 3000);
     for (var i = 0; i < route.checkpoints.length; i++) {
         loadCheckpoints(route.checkpoints[i]);
     }
@@ -382,7 +468,7 @@ function updateRouteModal(){
 }
 function updateRoute() {
     if (routePoints[2]!=null) {
-        if (routeTitleText.value != "") {            
+        if (routeTitleText.value !== "") {            
             $('#btnUpdateRoute').prop('disabled', true);
             var $toastContent = $('<span>Updating Route...</span>');
             Materialize.toast($toastContent, 9000);
@@ -463,5 +549,24 @@ function deleteRoute() {
             console.log("Error: " + textStatus.toString() + " " + errorThrown.toString() + " " + httpRequest.toString());
         }
     });
+}
+//**************End delete rout************************//
+
+//events
+function removeMarkerEvents() {
+    if (markersOrders!=null) {
+        for (var i = 0; i < markersOrders.length; i++) {
+            google.maps.event.clearListeners(markersOrders[i], 'rightclick');
+            marker.setDraggable(false);
+        }
+    }
+}
+function addMarkerEvents() {
+    if (markersOrders!=null) {
+        for (var i = 0; i < markersOrders.length; i++) {
+            bindMarkerPolylineEvents(markersOrders[i])
+            marker.setDraggable(true);
+        }
+    }
 }
 //**************End delete rout************************//

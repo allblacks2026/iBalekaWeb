@@ -1,4 +1,7 @@
 ﻿/*Modal styles*/
+#eventTiteText{
+        padding-left: 43% !important;
+}
 #model1.modal.open{
     top:30%;
 }
