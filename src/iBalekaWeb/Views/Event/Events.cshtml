@@ -1,11 +1,6 @@
 @model IEnumerable<iBalekaWeb.Models.Event>
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@{
-    ViewData["Title"] = "Saved Event";
-
-
-}
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="row">
