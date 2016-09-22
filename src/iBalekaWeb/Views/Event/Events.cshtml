@@ -34,6 +34,22 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col s12 center">
+            <form asp-controller="Event" asp-action="SearchEvent" method="get">
+                <div class="input-field col s12 center">
+                    <input id="searchEvent" type="text" class="validate" name="SearchLocation" required>
+                    <label for="searchEvents">Search Event</label>
+                    <input type="submit" value="Search" />
+
+                  
+                </div>
+               
+            </form>
+
+        </div>
+    </div>
     <div id="activeEvents">
         <div class="row">
             <ul class="collection" id="activeEventList">
