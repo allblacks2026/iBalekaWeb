@@ -1,7 +1,6 @@
 ﻿@model iBalekaWeb.Models.MapViewModels.RouteViewModel
 
 @{
-    ViewData["Title"] = "Search Route";
 
 
 }
@@ -11,13 +10,13 @@
     <div>
         <h2 class="center-align">@ViewData["Title"]</h2>
     </div>
-</div>
 
-<div class="row">
-    <div class="col s12 center">
-        <ul class="collection">
 
-            @foreach (Route route in ViewBag.SearchRoute)
+    <div class="row">
+        <div class="col s12 center">
+            <ul class="collection">
+
+                @foreach (Route route in ViewBag.SearchRoute)
             {
                 string totalDistance = "";
                 if (route.Distance > 999)
@@ -51,10 +50,20 @@
 
 
 
-            }
+                }
 
-        </ul>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col s12 center">
+                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="SavedRoutes">
+                    Back to List
+                </a>
+            </div>
+        
+        </div>
+
     </div>
-
 
 </div>
