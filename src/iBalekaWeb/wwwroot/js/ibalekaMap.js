@@ -125,11 +125,7 @@ function searchPanelToggle() {
         }
         google.maps.event.clearListeners(map, 'click');
         searchPanel.style.display = "block";
-<<<<<<< HEAD
         removeMarkerEvents()
-=======
-        removeMarkerEvents();
->>>>>>> refs/remotes/allblacks2026/master
         Materialize.toast('Map Click Suspended', 3000);
     } else {
         closeSearchPanel();
@@ -318,11 +314,7 @@ function createToolbox(toolboxDiv, map) {
 //save route
 function saveRoute() {
     var title;
-<<<<<<< HEAD
-    if (routePoints[2]!=null) {
-=======
     if (routePoints[2]!==null) {
->>>>>>> refs/remotes/allblacks2026/master
         if (routeTitleText.value === "") {
             $('#routeTitleModal').openModal();
 
@@ -475,11 +467,7 @@ function updateRouteModal(){
     updateRouteAJAX();
 }
 function updateRoute() {
-<<<<<<< HEAD
-    if (routePoints[2]!=null) {
-=======
     if (routePoints[2]!==null) {
->>>>>>> refs/remotes/allblacks2026/master
         if (routeTitleText.value !== "") {            
             $('#btnUpdateRoute').prop('disabled', true);
             var $toastContent = $('<span>Updating Route...</span>');
@@ -566,11 +554,7 @@ function deleteRoute() {
 
 //events
 function removeMarkerEvents() {
-<<<<<<< HEAD
-    if (markersOrders!=null) {
-=======
     if (markersOrders!==null) {
->>>>>>> refs/remotes/allblacks2026/master
         for (var i = 0; i < markersOrders.length; i++) {
             google.maps.event.clearListeners(markersOrders[i], 'rightclick');
             marker.setDraggable(false);
@@ -578,15 +562,9 @@ function removeMarkerEvents() {
     }
 }
 function addMarkerEvents() {
-<<<<<<< HEAD
-    if (markersOrders!=null) {
-        for (var i = 0; i < markersOrders.length; i++) {
-            bindMarkerPolylineEvents(markersOrders[i])
-=======
     if (markersOrders!==null) {
         for (var i = 0; i < markersOrders.length; i++) {
             bindMarkerPolylineEvents(markersOrders[i]);
->>>>>>> refs/remotes/allblacks2026/master
             marker.setDraggable(true);
         }
     }
