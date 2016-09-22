@@ -97,9 +97,21 @@
     </div>
 }
 @section Scripts {
+@*<script src=/js/ibalekaMap.js></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
+            async defer></script>
+    <script src=https://maps.googleapis.com/maps/api/js?key =AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&amp;libraries =places,drawing,geometry&amp;callback =initMap async defer></script>*@
+
+
+
+
+
     <script src=@Url.Content("~/js/ibalekaMap.js")></script>
-    <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDHxukvC6e2Xu82BYYiUNO-4oiE8kU_ePU&libraries=places,drawing,geometry&callback=initMap") async defer></script>
-    <script>
+
+    <script src=@Url.Content("https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places,drawing,geometry&callback=initMap") async defer></script>
+
+
+     <script>
         $(function () {
             $("footer").hide(true);
         });
