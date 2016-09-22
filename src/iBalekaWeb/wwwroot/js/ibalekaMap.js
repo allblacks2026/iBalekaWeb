@@ -125,7 +125,7 @@ function searchPanelToggle() {
         }
         google.maps.event.clearListeners(map, 'click');
         searchPanel.style.display = "block";
-        removeMarkerEvents();
+        removeMarkerEvents()
         Materialize.toast('Map Click Suspended', 3000);
     } else {
         closeSearchPanel();
