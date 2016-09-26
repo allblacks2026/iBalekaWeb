@@ -32,6 +32,7 @@ namespace iBalekaWeb.Controllers
             _clubContext = _club;
         }
 
+  
         // GET: Event/Events
         [HttpGet(Name = "Events")]
         public IActionResult Events()
@@ -48,6 +49,7 @@ namespace iBalekaWeb.Controllers
             ViewBag.ActiveEvents = GetActiveEvents(events);
             ViewBag.OpenEvents = GetOpenEvents(events);
             ViewBag.ClosedEvents = GetClosedEvents(events);
+           
             string sourceCookie = HttpContext.Request.Cookies["SourcePageEvent"];
             if (sourceCookie != null)
             {
@@ -56,6 +58,23 @@ namespace iBalekaWeb.Controllers
             return View(eventResponse.Model);
         }
 
+   
+
+        [HttpGet(Name = "SearchEvent")]
+        public IActionResult SearchEvent(string SearchLocation)
+        {
+            ListModelResponse<Event> eventResponse = _context.GetUserEvents(_userManager.GetUserId(User));
+
+            var events = from e in eventResponse.Model select e;
+            if (!String.IsNullOrEmpty(SearchLocation))
+            {
+                events = events.Where(e => e.Location.Contains(SearchLocation));
+            }
+            ViewBag.SearchEvents = events;
+            return View();
+
+
+        }
         private IEnumerable<Event> GetClosedEvents(IEnumerable<Event> events)
         {
             return events.Where(p => p.EventStatus == EventType.Closed);

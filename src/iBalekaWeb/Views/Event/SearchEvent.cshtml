@@ -1,0 +1,41 @@
+﻿@model iBalekaWeb.Models.EventViewModels.EventViewModel
+
+
+@{
+    ViewData["Title"] = "List of searched events";
+
+
+}
+
+<div class="container">
+
+    <div>
+        <h2 class="center-align">@ViewData["Title"]</h2>
+
+    </div>
+    <div class="row">
+        <ul class="collection">
+
+            @foreach (Event evnt in ViewBag.SearchEvents)
+            {
+                @if (evnt.Location != null)
+                {
+                    <li class="collection-item">
+                        <div>
+                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                            <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
+                                <i class="material-icons">
+                                    delete
+                                </i>
+                            </a>
+                        </div>
+
+
+
+                    </li>
+                }
+                else
+                {
+                }
+            }
+           

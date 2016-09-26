@@ -1,0 +1,70 @@
+﻿@model iBalekaWeb.Models.MapViewModels.RouteViewModel
+
+@{
+    ViewData["Title"] = "List of searched routes";
+
+
+}
+
+<div class="container">
+
+    <div>
+        <h2 class="center-align">@ViewData["Title"]</h2>
+    </div>
+
+
+    <div class="row">
+        <div class="col s12 center">
+            <ul class="collection">
+
+                @foreach (Route route in ViewBag.SearchRoute)
+            {
+                string totalDistance = "";
+                if (route.Distance > 999)
+                {
+                    totalDistance = Math.Round((route.Distance / 1000), 2).ToString() + "km";
+                }
+                else
+                {
+                    totalDistance = route.Distance.ToString() + "m";
+                }
+
+
+                <li class="collection-item">
+
+
+                    <div>
+                        @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
+
+
+
+
+                        <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
+                            <i class="material-icons">
+                                delete
+
+                            </i>
+                        </a>
+
+                    </div>
+                </li>
+
+
+
+                }
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col s12 center">
+                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="SavedRoutes">
+                    Back to List
+                </a>
+            </div>
+        
+        </div>
+
+    </div>
+
+</div>

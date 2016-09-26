@@ -57,6 +57,22 @@ namespace iBalekaWeb.Controllers
             return View(routeResponse.Model);
         }
 
+
+        [HttpGet(Name = "SearchRoute")]
+        public IActionResult SearchRoute(string SearchTitle)
+        {
+            ListModelResponse<Route> routeResponse = _context.GetUserRoutes(_userManager.GetUserId(User));
+
+            var route = from r in routeResponse.Model select r;
+            if (!String.IsNullOrEmpty(SearchTitle))
+            {
+                route = route.Where(r => r.Title.Contains(SearchTitle));
+            }
+            ViewBag.SearchRoute = route;
+            return View();
+
+
+        }
         //// POST: Map/AddRoute
         [HttpPost]
         //[ValidateAntiForgeryToken]
