@@ -17,10 +17,6 @@ namespace iBalekaWeb.Data.Infrastructure
         SingleModelResponse<TModel> DeleteContent<TModel>(string requestUri, int content) where TModel : class;
         SingleModelResponse<TModel> GetSingleContent<TModel>(string requestUri) where TModel : class;
         ListModelResponse<TModel> GetListContent<TModel>(string requestUri) where TModel : class;
-        //    Task<HttpResponseMessage> GetJsonEncodedContent(string requestUri);
-        //    Task<HttpResponseMessage> PostJsonEncodedContent<T>(string requestUri, T content) where T : class;
-        //    Task<HttpResponseMessage> PutJsonEncodedContent<T>(string requestUri, T content) where T : class;
-        //    Task<HttpResponseMessage> DeleteJsonEncodedContent(string requestUri, int content);
     }
     public class ApiClient : IApiClient
     {
