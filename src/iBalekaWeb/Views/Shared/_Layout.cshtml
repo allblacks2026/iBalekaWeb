@@ -169,7 +169,8 @@
         @*<script src="~/lib/jquery-ui/jquery-ui.js"></script>*@
         @*<script src="~/lib/material-design-lite/material.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
-
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
+                async defer></script>
     </environment>
 
     <environment names="Staging,Production">
@@ -191,6 +192,8 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
 
 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvjnuV3FErwMzDjZjz0zUnAFwWUkU9JiY&libraries=places&callback=initAutocomplete"
+                async defer></script>
     </environment>
     @RenderSection("Scripts", required: false)
 

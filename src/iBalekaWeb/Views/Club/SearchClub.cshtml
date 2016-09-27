@@ -1,0 +1,52 @@
+﻿@model iBalekaWeb.Models.ClubViewModels.ClubViewModel
+
+@{
+    ViewData["Title"] = "List of searched clubs";
+
+
+}
+
+<div class="container">
+
+    <div>
+        <h2 class="center-align">@ViewData["Title"]</h2>
+
+    </div>
+    <div class="row">
+        <ul class="collection">
+
+            @foreach (Club club in ViewBag.SearchClub)
+            {
+            @if (club.Name != null)
+            {
+            <li class="collection-item">
+                <div>
+                    @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+                    <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
+                        <i class="material-icons">
+                            delete
+                        </i>
+                    </a>
+                </div>
+
+
+
+            </li>
+            }
+            else
+            {
+            }
+            }
+        </ul>
+
+    </div>
+
+    <div class="row">
+        <div class="col s12 center">
+            <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Clubs">
+                Back to List
+            </a>
+        </div>
+
+    </div>
+</div>

@@ -16,8 +16,12 @@ namespace iBalekaWeb.Models
         public int ClubId { get; set; }
         public string DateCreated { get; set; }
         public bool Deleted { get; set; }
+        [Required(ErrorMessage = " Description is Required")]
         public string Description { get; set; }
+        [Required(ErrorMessage = " Location is Required")]
         public string Location { get; set; }
+        [Required(ErrorMessage = " Name is Required")]
+
         public string Name { get; set; }
 
         public string UserId { get; set; }

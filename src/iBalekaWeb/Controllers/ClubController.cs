@@ -50,6 +50,21 @@ namespace iBalekaWeb.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet(Name = "SearchClub")]
+        public IActionResult SearchClub(string SearchClub)
+        {
+            ListModelResponse<Club> clubResponse = _context.GetUserClubs(_userManager.GetUserId(User));
+
+            var club = from c in clubResponse.Model select c;
+            if (!String.IsNullOrEmpty(SearchClub))
+            {
+                club = club.Where(c => c.Location.Contains(SearchClub));
+            }
+            ViewBag.SearchClub = club;
+            return View();
+
+
+        }
         // GET: Club/Details/5
         [HttpGet]
         public IActionResult ClubDetails(int id)
@@ -187,7 +202,7 @@ namespace iBalekaWeb.Controllers
                 return BadRequest();
             }
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult AddClub()
         {
