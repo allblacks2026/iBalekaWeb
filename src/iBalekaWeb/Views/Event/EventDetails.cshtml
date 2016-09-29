@@ -83,10 +83,10 @@
             <div class="col s12">
                 @if ((ViewBag.RegisteredAthletes as IEnumerable<EventRegistration>).Count() > 0)
                 {
-                    <ul>
+                    <ul class="collection">
                         @foreach (EventRegistration reg in ViewBag.RegisteredAthletes)
                         {
-                            <li>@Html.ActionLink(reg.Athlete.Name + " " + reg.Athlete.Surname, "AthleteDetails", new { id = reg.Athlete.AthleteId })</li>
+                            <li class="collection-item">@Html.ActionLink(reg.Athlete.Name + " " + reg.Athlete.Surname, "AthleteDetails", new { id = reg.Athlete.AthleteId })</li>
                         }
                     </ul>
                 }
