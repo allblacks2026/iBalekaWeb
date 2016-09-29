@@ -1,18 +1,16 @@
 @model iBalekaWeb.Models.EventViewModels.EventViewModel
 @using iBalekaWeb.Models.EventViewModels
+@using iBalekaWeb.Models
 <style>
     body {
         overflow-y: visible;
     }
 </style>
-
 @{
     ViewData["Title"] = "Event Details";
 
 
 }
-
-
 
 <div class="row">
     <div class="col s12">
@@ -81,86 +79,27 @@
 <div class="row" id="registeredAthletes">
     <div class="col s12">
         <h5 class="center">Registered Athletes</h5>
+        <div class="row">
+            <div class="col s12">
+                @if ((ViewBag.RegisteredAthletes as IEnumerable<EventRegistration>).Count() > 0)
+                {
+                    <ul class="collection">
+                        @foreach (EventRegistration reg in ViewBag.RegisteredAthletes)
+                        {
+                            <li class="collection-item">@Html.ActionLink(reg.Athlete.Name + " " + reg.Athlete.Surname, "AthleteDetails", new { id = reg.Athlete.AthleteId })</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <h4>No Athletes Registered</h4>
+                }
+
+            </div>
+        </div>
     </div>
 </div>
-@*<div class="row">
-        <div class="col s6 left-align">
-            <h5 class="left-align">Event Details</h5>
-            @if (Model.ClubName != null)
-            {
-                <div class="row">
-                    @Html.LabelFor(model => model.ClubName, "Club Name", new { @class = "right-align flow-text" }):
-                    <span class="left-align flow-text">@Html.DisplayFor(model => model.ClubName)</span>
-                </div>
-            }
-            <div class="row">
-                @Html.LabelFor(model => model.Title, "Title", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.Title)</span>
-            </div>
-            <div class="row">
-                @Html.LabelFor(model => model.Description, "Description", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.Description)</span>
-            </div>
-            <div class="row">
-                @Html.LabelFor(model => model.Date, "Date", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.Date)</span>
-            </div>
-            <div class="row">
-                @Html.LabelFor(model => model.Time, "Time", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.Time)</span>
-            </div>
-            <div class="row">
-                @Html.LabelFor(model => model.Location, "Location", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.Location)</span>
-            </div>
-            <div class="row">
-                @Html.LabelFor(model => model.DateCreated, "DateCreated", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.DateCreated)</span>
-            </div>
-            <div class="row">
-                @Html.LabelFor(model => model.DateModified, "DateModified", new { @class = "right-align flow-text" }):
-                <span class="left-align flow-text">@Html.DisplayFor(model => model.DateModified)</span>
-            </div>
-        </div>
-        <div class="col s6 center-align">
-            <h5>Event Routes</h5>
-            <div class="row">
-                <ul class="collection">
-                    @if (Model.EventRoutes.Count > 0)
-                    {
-                        foreach (EventRouteViewModel item in Model.EventRoutes)
-                        {
-                            string totalDistance = "";
-                            //total distance conversion
-                            if (item.Distance > 999)
-                            {
-                                totalDistance = Math.Round((item.Distance / 1000), 2).ToString() + "km";
-                            }
-                            else
-                            {
-                                totalDistance = item.Distance.ToString() + "m";
-                            }
-                    <li class="collection-item avatar">
-                        <div class="title">
-                            @Html.ActionLink(item.Title, "EditRoute", "Map", new { id = item.RouteId }, new { @class = "red-text text-darken-2" })
 
-
-                        </div>
-                        <p>
-                            <a class="badge">
-                                @totalDistance
-
-
-                            </a>
-                        </p>
-                    </li>
-                        }
-                    }
-
-                </ul>
-            </div>
-        </div>
-    </div>*@
 <div class="row">
     <div class="col s4 left-align ">
         <a class="btn waves-effect waves-light btn-large red" asp-action="Events">
@@ -169,13 +108,11 @@
     </div>
     <div class="col s4 center-align ">
         @Html.ActionLink("Edit", "EditEvent", new { id = Model.EventId }, new { @class = "btn waves-effect waves-light btn-large red" })
-
     </div>
     <div class="col s4 right-align ">
         @Html.ActionLink("Delete", "DeleteEvent", new { id = Model.EventId }, new { @class = "btn waves-effect waves-light btn-large red" })
     </div>
 </div>
-
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
@@ -191,4 +128,3 @@
         }
     });
 </script>
-

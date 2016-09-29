@@ -49,6 +49,11 @@ namespace iBalekaWeb.Controllers
                 Error er = new Error(routeResponse.ErrorMessage);
                 return View("Error");
             }
+            if(routeResponse.Model!=null)
+            {
+                ViewBag.DistanceHighest = routeResponse.Model.OrderByDescending(p => p.Distance);
+                ViewBag.DistanceLowest = routeResponse.Model.OrderBy(p => p.Distance);
+            }
             string sourceCookie = HttpContext.Request.Cookies["SourcePageMap"];
             if (sourceCookie != null)
             {

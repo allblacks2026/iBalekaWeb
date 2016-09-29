@@ -30,6 +30,7 @@ namespace iBalekaWeb.Models
         public string Title { get; set; }
         public string DateModified { get; set; }
         public string DateRecorded { get; set; }
+        public string Location { get; set; }
         public bool Deleted { get; set; }
         public double Distance { get; set; }
         public string MapImage { get; set; }

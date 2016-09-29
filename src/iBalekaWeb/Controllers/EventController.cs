@@ -21,15 +21,17 @@ namespace iBalekaWeb.Controllers
     public class EventController : Controller
     {
         private IEventClient _context;
+        private IEventRegistration _evntReg;
         private IClubClient _clubContext;
         private IMapClient _routeContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        public EventController(IClubClient _club, IEventClient _repo, UserManager<ApplicationUser> _user, IMapClient _rContext)
+        public EventController(IClubClient _club, IEventClient _repo,IEventRegistration _reg, UserManager<ApplicationUser> _user, IMapClient _rContext)
         {
             _context = _repo;
             _routeContext = _rContext;
             _userManager = _user;
             _clubContext = _club;
+            _evntReg = _reg;
         }
 
   
@@ -101,11 +103,20 @@ namespace iBalekaWeb.Controllers
               
                 return View("Error");
             }
-
-            string sourceCookie = HttpContext.Request.Cookies["SourcePageEvent"];
-            if (sourceCookie != null)
+            //get registered athletes
+            ListModelResponse<EventRegistration> registredAthletesResponse = _evntReg.GetEventRegistrations(id);
+            if (registredAthletesResponse.DidError == true || registredAthletesResponse == null)
             {
-                ViewBag.SourcePageEvent = sourceCookie;
+                if (registredAthletesResponse == null)
+                    return View("Error");
+                Error er = new Error(registredAthletesResponse.ErrorMessage);
+
+                return View("Error");
+            }
+            
+            if (registredAthletesResponse.Model != null)
+            {
+                ViewBag.RegisteredAthletes = registredAthletesResponse.Model;
             }
             return View(eventResponse.Model);
         }
