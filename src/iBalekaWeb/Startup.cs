@@ -74,6 +74,7 @@ namespace iBalekaWeb
             services.AddScoped<IApiClient, ApiClient>();
             services.AddScoped<IMapClient, MapClient>();
             services.AddScoped<IClubClient, ClubClient>();
+            services.AddScoped<IClubMemberClient, ClubMemberClient>();
             services.AddScoped<IEventClient, EventClient>();
             services.AddScoped<IEventRegistration, EventRegistrationClient>();
             //services

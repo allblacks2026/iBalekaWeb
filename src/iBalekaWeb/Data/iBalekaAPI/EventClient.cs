@@ -17,6 +17,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
         SingleModelResponse<EventViewModel> GetEvent(int eventId);
         ListModelResponse<Event> GetEvents();
         ListModelResponse<Event> GetUserEvents(string userId);
+        ListModelResponse<Event> GetClubEvents(int clubId);
         SingleModelResponse<Event> DeleteEvent(int eventId);
     }
     public class EventClient : ApiClient,IEventClient
@@ -145,6 +146,12 @@ namespace iBalekaWeb.Data.iBalekaAPI
         public ListModelResponse<Event> GetUserEvents(string userId)
         {
             string getUrl = EventUri + "User/GetUserEvents?userId="+userId;
+            var evnt = GetListContent<Event>(getUrl);
+            return evnt;
+        }
+        public ListModelResponse<Event> GetClubEvents(int clubId)
+        {
+            string getUrl = EventUri + "Club/GetClubEvents?clubId=" + clubId;
             var evnt = GetListContent<Event>(getUrl);
             return evnt;
         }

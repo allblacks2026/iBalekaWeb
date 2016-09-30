@@ -1,81 +1,122 @@
 @model IEnumerable<iBalekaWeb.Models.Club>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Saved Clubs";
 
-    
+
 }
-<div class="container">
-    <div>
-        <h2 class="center-align">@ViewData["Title"]</h2>
-    </div>
-    <div class="row">
-        <div class="col s12 center">
-            <form asp-controller="Club" asp-action="SearchClub" method="get">
-                <div class="input-field col s12 center">
-                    <input  id="autocomplete" type="text" class="validate" name="SearchLocation" required>
-                    <label for="searchClubs">Search Club By Location</label>
-                    <input type="submit" value="Search" class="btn waves-effect waves-light btn-large red accent-3" />
-
-
+<div class="row" style="padding-bottom:-5% !important;">
+    <div class="col s12">
+        <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+                <span id="eventTiteText" class="card-title">@UserManager.GetUserName(User)</span>
+                <span class="card-title right">Clubs</span>
+                <div class="row">
+                    <div class="col s6">
+                        Number of Clubs:
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+                <div class="row">
+                    <div class="col s12">
+                        <h6 class="center">Sort Clubs by: </h6>
+                        <ul class="red tabs">
+                            <li class="tab col s4 white-text"><a class="active" href="#titleClubs">Title</a></li>
+                            <li class="tab col s4 white-text"><a href="#locationClubs">Location</a></li>
+                        </ul>
+                        <div class="row">
+                            <div class="col s12 center">
+                                <form asp-controller="Club" asp-action="SearchClub" method="get">
+                                    <div class="input-field col s12 center">
+                                        <input id="autocomplete" type="text" class="validate" name="SearchLocation" required>
+                                        <label for="searchClubs">Search Club By Location</label>
+                                        <input type="submit" value="Search" class="btn waves-effect waves-light btn-large red accent-3" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-            </form>
-
+            </div>
         </div>
     </div>
-    <div class="row">
-        <ul class="collection">
+</div>
+<div class="row">
+    <div class="col s12">
+        <div id="titleClubs">
             @if (Model.Count() > 0)
             {
-                foreach (var club in Model)
-                {
+            <ul class="collection">
+                @foreach (Club club in ViewBag.ClubsByTitle)
+                    {
                     <li class="collection-item">
                         <div>
                             @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
                             <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
                                 <i class="material-icons">
                                     delete
-
                                 </i>
                             </a>
                         </div>
                     </li>
-
-
-                }
+                    }
+            </ul>
             }
             else
             {
-                <li class="mdl-typography--headline" style="text-align:center;">There are no Clubs to Display</li>
+            <h5 class="center">No Clubs to Display</h5>
             }
-        </ul>
-    </div>
-    <div>
-        <a asp-action="AddClub" asp-controller="Club" class="btn waves-effect waves-light btn-large red accent-3">
-            Create Club
-            <i class="material-icons right">send</i>
-        </a>
+        </div>
+        <div id="locationClubs">
+            @if (Model.Count() > 0)
+            {
+            <ul class="collection">
+                @foreach (Club club in ViewBag.ClubsByLocation)
+                    {
+                    <li class="collection-item">
+                        <div>
+                            @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+                            <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
+                                <i class="material-icons">
+                                    delete
+                                </i>
+                            </a>
+                        </div>
+                    </li>
+                    }
+            </ul>
+            }
+            else
+            {
+            <h5 class="center">No Clubs to Display</h5>
+            }
+        </div>
     </div>
 </div>
-
+<div class="row">
+    <a asp-action="AddClub" asp-controller="Club" class="btn waves-effect waves-light btn-large red accent-3">
+        Create Club
+        <i class="material-icons right">send</i>
+    </a>
+</div>
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
         var source = '@(ViewBag.SourcePageClub)';
-        if(source=="Edit")
-        {
+        if (source == "Edit") {
             var $toastContent = $('<span>Club was successfully Updated...</span>');
             Materialize.toast($toastContent, 5000);
             source = null;
         }
-        else if(source=="Add")
-        {
+        else if (source == "Add") {
             var $toastContent = $('<span>Club was successfully Added...</span>');
             Materialize.toast($toastContent, 5000);
             source = null;
         }
-        else if(source=="Delete")
-        {
+        else if (source == "Delete") {
             var $toastContent = $('<span>Club was successfully Deleted...</span>');
             Materialize.toast($toastContent, 5000);
             source = null;

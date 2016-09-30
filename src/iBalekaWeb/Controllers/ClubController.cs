@@ -17,11 +17,15 @@ namespace iBalekaWeb.Controllers
     public class ClubController : Controller
     {
         private IClubClient _context;
+        private IClubMemberClient _memberContext;
+        private IEventClient _eventContext;
         private readonly UserManager<ApplicationUser> _userManager;
-        public ClubController(IClubClient api, UserManager<ApplicationUser> _user)
+        public ClubController(IClubClient api, IEventClient _eContext, IClubMemberClient _member, UserManager<ApplicationUser> _user)
         {
             _context = api;
             _userManager = _user;
+            _memberContext = _member;
+            _eventContext = _eContext;
         }
         // GET: Club
         [HttpGet]
@@ -37,7 +41,11 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
                 }
-
+                if(clubResponse.Model!=null)
+                {
+                    ViewBag.ClubsByTitle = clubResponse.Model.OrderBy(p => p.Name);
+                    ViewBag.ClubsByLocation = clubResponse.Model.OrderBy(p => p.Location);
+                }
                 string sourceCookie = HttpContext.Request.Cookies["SourcePageClub"];
                 if (sourceCookie != null)
                 {
@@ -79,7 +87,24 @@ namespace iBalekaWeb.Controllers
                     Error er = new Error(clubResponse.ErrorMessage);
                     return View("Error", er);
                 }
-
+                ListModelResponse<ClubMember> membersResponse = _memberContext.GetClubMembers(clubResponse.Model.ClubId);
+                if (membersResponse.DidError == true || membersResponse == null)
+                {
+                    if (membersResponse == null)
+                        return View("Error");
+                    Error er = new Error(membersResponse.ErrorMessage);
+                    return View("Error", er);
+                }
+                ListModelResponse<Event> eventResponse = _eventContext.GetClubEvents(clubResponse.Model.ClubId);
+                if (eventResponse.DidError == true || eventResponse == null)
+                {
+                    if (eventResponse == null)
+                        return View("Error");
+                    Error er = new Error(eventResponse.ErrorMessage);
+                    return View("Error", er);
+                }
+                ViewBag.ClubMembers = membersResponse.Model;
+                ViewBag.ClubEvents = eventResponse.Model;
                 string sourceCookie = HttpContext.Request.Cookies["SourcePageClub"];
                 if (sourceCookie != null)
                 {
@@ -243,6 +268,35 @@ namespace iBalekaWeb.Controllers
             }
         }
 
+        [HttpPut]
+        public IActionResult DeRegisterMember(int MemberId)
+        {
+            if (ModelState.IsValid)
+            {
+                SingleModelResponse<ClubMember> clubResponse = _memberContext.DeRegisterMember(MemberId);
+                if (clubResponse.DidError == true || clubResponse == null)
+                {
+                    if (clubResponse == null)
+                        return View("Error");
+                    Error er = new Error(clubResponse.ErrorMessage);
+                    return View("Error", er);
+                }
+                var CookieOption = new CookieOptions();
+                CookieOption.Expires = DateTime.Now.AddMinutes(1);
+                CookieOption.HttpOnly = true;
+
+                string source = "Delete";
+                //set cookie
+
+                HttpContext.Response.Cookies.Append("SourcePageClubMember", source, CookieOption);
+
+                return RedirectToAction("ClubDetails",clubResponse.Model.ClubId);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
         [HttpGet]
         public IActionResult FinalizeClub()
         {

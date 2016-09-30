@@ -6,7 +6,7 @@
 
 
 }
-<div class="row">
+<div class="row" style="padding-bottom:-5% !important;">
     <div class="col s12">
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
@@ -24,17 +24,7 @@
                         <ul class="red tabs">
                             <li class="tab col s4 white-text"><a class="active" href="#allRoutes">All Routes</a></li>
                             <li class="tab col s4 white-text"><a href="#sortRoutes">Sort Routes</a></li>
-                        </ul><br />
-                        <div id="sortRoutes">
-                            <div class="row" style="width:50% !important;">
-                                <div class="col s12">
-                                    <ul class="red accent-3 tabs">
-                                        <li class="tab col s4 white-text"><a class="active" href="#distance">Distance</a></li>
-                                        <li class="tab col s4 white-text"><a href="#location">Location</a></li>
-                                    </ul>
-                                </div>
-                            </div>                            
-                        </div>
+                        </ul>
                         <div class="row">
                             <div class="col s12 center">
                                 <form asp-controller="Map" asp-action="SearchRoute" method="get">
@@ -54,10 +44,10 @@
         </div>
     </div>
 </div>
-<div id="allRoutes">
-    <div class="row">
-        <ul class="collection">
-            @if (Model.Count() > 0)
+<div class="row">
+    <div id="allRoutes">      
+            <ul class="collection">
+                @if (Model.Count() > 0)
             {
                 foreach (var route in Model)
                 {
@@ -70,146 +60,154 @@
                     {
                         totalDistance = route.Distance.ToString() + "m";
                     }
-            <li class="collection-item">
+                    <li class="collection-item">
 
-                <div>
-                    @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
+                        <div>
+                            @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
 
 
-                    <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
-                        <i class="material-icons">
-                            delete
+                            <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
+                                <i class="material-icons">
+                                    delete
 
-                        </i>
-                    </a>
-                </div>
-            </li>
+                                </i>
+                            </a>
+                        </div>
+                    </li>
+                    }
                 }
-            }
-            else
-            {
-            <li class="mdl-typography--headline" style="text-align:center;">There are no Routes to Display</li>
-            }
-        </ul>
-    </div>
-
-</div>
-<div id="distance">
-    <div class="row">
-        <div class="col s12">
-            <ul class="red accent-3 tabs">
-                <li class="tab col s4 white-text"><a class="active" href="#highest">Highest</a></li>
-                <li class="tab col s4 white-text"><a href="#lowest">Lowest</a></li>
+                else
+                {
+                    <li class="mdl-typography--headline" style="text-align:center;">There are no Routes to Display</li>
+                }
             </ul>
-        </div>
     </div>
-    <div id="highest">
-        <div class="row">
-            @if (ViewBag.DistanceHighest != null)
-            {
+    <div id="sortRoutes">
+        <div class="row" style="width:50% !important;">
+            <div class="col s12">
+                <ul class="red accent-3 tabs">
+                    <li class="tab col s4 white-text"><a class="active" href="#distance">Distance</a></li>
+                    <li class="tab col s4 white-text"><a href="#location">Location</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="distance">
+            <div class="col s12">
+                <ul class="red accent-3 tabs">
+                    <li class="tab col s4 white-text"><a class="active" href="#highest">Highest</a></li>
+                    <li class="tab col s4 white-text"><a href="#lowest">Lowest</a></li>
+                </ul>
+            </div>
+            <div id="highest">
                 <div class="row">
-                    <ul class="collection">
-                        @if ((ViewBag.DistanceHighest as IEnumerable<Route>).Count() > 0)
-                        {
-                            foreach (Route route in ViewBag.DistanceHighest)
-                            {
-                                string totalDistance = "";
-                                if (route.Distance > 999)
+                    @if (ViewBag.DistanceHighest != null)
+            {
+                        <div class="row">
+                            <ul class="collection">
+                                @if ((ViewBag.DistanceHighest as IEnumerable<Route>).Count() > 0)
                                 {
-                                    totalDistance = Math.Round((route.Distance / 1000), 2).ToString() + "km";
+                                    foreach (Route route in ViewBag.DistanceHighest)
+                                    {
+                                        string totalDistance = "";
+                                        if (route.Distance > 999)
+                                        {
+                                            totalDistance = Math.Round((route.Distance / 1000), 2).ToString() + "km";
+                                        }
+                                        else
+                                        {
+                                            totalDistance = route.Distance.ToString() + "m";
+                                        }
+                                        <li class="collection-item">
+
+                                            <div>
+                                                @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
+
+
+                                                <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
+                                                    <i class="material-icons">
+                                                        delete
+
+                                                    </i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    }
                                 }
                                 else
                                 {
-                                    totalDistance = route.Distance.ToString() + "m";
+                                    <li class="mdl-typography--headline" style="text-align:center;">There are no Routes to Display</li>
                                 }
-                                <li class="collection-item">
-
-                                    <div>
-                                        @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
-
-
-                                        <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
-                                            <i class="material-icons">
-                                                delete
-
-                                            </i>
-                                        </a>
-                                    </div>
-                                </li>
-                            }
-                        }
-                        else
-                        {
-                            <li class="mdl-typography--headline" style="text-align:center;">There are no Routes to Display</li>
-                        }
-                    </ul>
-                </div>
-            }
-            else
-            {
-                <h6>No Routes To Display</h6>
-            }
-        </div>
-    </div>
-    <div id="lowest">
-        @if (ViewBag.DistanceLowest != null)
-        {
-            <div class="row">
-                <ul class="collection">
-                    @if ((ViewBag.DistanceLowest as IEnumerable<Route>).Count() > 0)
-                    {
-                        foreach (Route route in ViewBag.DistanceLowest)
-                        {
-                            string totalDistance = "";
-                            if (route.Distance > 999)
-                            {
-                                totalDistance = Math.Round((route.Distance / 1000), 2).ToString() + "km";
-                            }
-                            else
-                            {
-                                totalDistance = route.Distance.ToString() + "m";
-                            }
-                            <li class="collection-item">
-
-                                <div>
-                                    @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
-
-
-                                    <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
-                                        <i class="material-icons">
-                                            delete
-
-                                        </i>
-                                    </a>
-                                </div>
-                            </li>
-                        }
+                            </ul>
+                        </div>
                     }
                     else
                     {
-                        <li class="mdl-typography--headline" style="text-align:center;">There are no Routes to Display</li>
+                        <h6>No Routes To Display</h6>
                     }
-                </ul>
+                </div>
             </div>
-        }
-        else
-        {
-            <h6>No Routes To Display</h6>
-        }
+            <div id="lowest">
+                @if (ViewBag.DistanceLowest != null)
+            {
+                    <div class="row">
+                        <ul class="collection">
+                            @if ((ViewBag.DistanceLowest as IEnumerable<Route>).Count() > 0)
+                            {
+                                foreach (Route route in ViewBag.DistanceLowest)
+                                {
+                                    string totalDistance = "";
+                                    if (route.Distance > 999)
+                                    {
+                                        totalDistance = Math.Round((route.Distance / 1000), 2).ToString() + "km";
+                                    }
+                                    else
+                                    {
+                                        totalDistance = route.Distance.ToString() + "m";
+                                    }
+                                    <li class="collection-item">
+
+                                        <div>
+                                            @Html.ActionLink(route.Title + " - " + totalDistance, "EditRoute", new { id = route.RouteId })
+
+
+                                            <a class="secondary-content" href=@Url.Action("DeleteRoute", "Map", new { id = route.RouteId })>
+                                                <i class="material-icons">
+                                                    delete
+
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li class="mdl-typography--headline" style="text-align:center;">There are no Routes to Display</li>
+                            }
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <h6>No Routes To Display</h6>
+                }
+            </div>
+        </div>
+        <div id="location">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="red tabs">
+                        <li class="tab col s4 white-text"><a href="#city">City</a></li>
+                        <li class="tab col s4 white-text"><a href="#country">Country</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="city"></div>
+            <div id="country"></div>
+        </div>
     </div>
 </div>
-<div id="location">
-    <div class="row">
-        <div class="col s12">
-            <ul class="red tabs">
-                <li class="tab col s4 white-text"><a href="#city">City</a></li>
-                <li class="tab col s4 white-text"><a href="#country">Country</a></li>
-            </ul>
-        </div>
-    </div> 
-    <div id="city"></div>
-    <div id="country"></div>         
-</div>
+
 
 <div class="row">
     <div class="col pull-s6 right">
