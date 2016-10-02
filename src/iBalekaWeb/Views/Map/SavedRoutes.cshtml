@@ -13,7 +13,7 @@
 
                 <p id="eventTiteText" class="card-title center-align">
                     @UserManager.GetUserName(User)
-                this is a list of your routes.
+                here is a list of your routes.
                     <br />
                    You currently have : @Model.Count() Routes
                 </p>
@@ -27,6 +27,8 @@
                             <li class="tab col s4"><a class="active black-text" href="#allRoutes">All Routes</a></li>
                             <li class="tab col s4"><a class="black-text" href="#sortRoutes">Sort Routes</a></li>
                         </ul><br />
+
+                       
                         @*<div id="sortRoutes">
                                 <div class="row" style="width:50% !important;">
                                     <div class="col s12">
@@ -339,13 +341,13 @@
 
 <div class="row">
     <div class="col pull-s6 right">
-        <a asp-action="Map" asp-controller="Map" class="btn waves-effect waves-light btn-large red accent-3">
+        <a asp-action="Map" asp-controller="Map" class="btn waves-effect waves-light btn-large teal lighten-1">
             Create Route
             <i class="material-icons right">send</i>
         </a>
     </div>
     <div class="col push-s6 left">
-        <a asp-action="CreateEvent" asp-controller="Event" class="btn waves-effect waves-light btn-large red accent-3">
+        <a asp-action="CreateEvent" asp-controller="Event" class="btn waves-effect waves-light btn-large teal lighten-1">
             Create Event
             <i class="material-icons right">send</i>
         </a>
