@@ -20,18 +20,18 @@
 
                 @if (Model.HasPassword)
             {
-                    <a asp-controller="Manage" asp-action="ChangePassword" class="btn waves-effect waves-light btn-small red accent-3">Change Password</a>
+                    <a asp-controller="Manage" asp-action="ChangePassword" class="btn waves-effect waves-light btn-small teal lighten-1">Change Password</a>
                 }
                 else
                 {
-                    <a asp-controller="Manage" asp-action="SetPassword" class="btn waves-effect waves-light btn-small red accent-3">Create new Password</a>
+                    <a asp-controller="Manage" asp-action="SetPassword" class="btn waves-effect waves-light btn-small teal lighten-1">Create new Password</a>
                 }
 
             </div>
 
 
             <div class="col s6 right-align">
-                <a asp-controller="Manage" asp-action="ManageLogins" class="btn waves-effect waves-light btn-small red accent-3">Manage External Logins</a>
+                <a asp-controller="Manage" asp-action="ManageLogins" class="btn waves-effect waves-light btn-small teal lighten-1">Manage External Logins</a>
             </div>
 
 
