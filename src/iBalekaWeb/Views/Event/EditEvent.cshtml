@@ -64,17 +64,17 @@
         </div>
         <div class="row">
             <div class="input-field col s4 left-align">
-                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Events">
+                <a class="btn waves-effect waves-light btn-large teal lighten-1" asp-action="Events">
                     Back to List
                 </a>
 
             </div>
             <div class="input-field col s4 center-align">
-                @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }, new { @class = "btn waves-effect waves-light btn-large red accent-3" })
+                @Html.ActionLink("Cancel", "EventDetails", new { id = Model.EventId }, new { @class = "btn waves-effect waves-light btn-large teal lighten-1" })
             </div>
             <div class="input-field col s4 right-align">
                 <input type="hidden" asp-for="EventId" value="@Model.EventId">
-                <button id="btnSaveE" onclick="EditEvent()" class="btn waves-effect waves-light btn-large red accent-3">
+                <button id="btnSaveE" onclick="EditEvent()" class="btn waves-effect waves-light btn-large teal lighten-1">
                     Save
                 </button>
 

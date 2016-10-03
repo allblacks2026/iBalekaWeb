@@ -17,25 +17,25 @@
 
             @foreach (Club club in ViewBag.SearchClub)
             {
-            @if (club.Name != null)
-            {
-            <li class="collection-item">
-                <div>
-                    @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
-                    <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
-                        <i class="material-icons">
-                            delete
-                        </i>
-                    </a>
-                </div>
+                @if (club.Name != null)
+                {
+                    <li class="collection-item">
+                        <div>
+                            @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+                            <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
+                                <i class="material-icons">
+                                    delete
+                                </i>
+                            </a>
+                        </div>
 
 
 
-            </li>
-            }
-            else
-            {
-            }
+                    </li>
+                }
+                else
+                {
+                }
             }
         </ul>
 
@@ -43,7 +43,7 @@
 
     <div class="row">
         <div class="col s12 center">
-            <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Clubs">
+            <a class="btn waves-effect waves-light btn-large teal lighten-1" asp-action="Clubs">
                 Back to List
             </a>
         </div>

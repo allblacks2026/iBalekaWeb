@@ -18,7 +18,7 @@
         <div class="row">
             <div class="input-field col s12">
                 @Html.LabelFor(model => model.Name)
-                <input type="text" class="validate" asp-for="Name">
+                <input type="text" class="validate" asp-for="Name" required>
                 <span asp-validation-for="Name" class="red-text text-darken-2" />
             </div>
         </div>
@@ -27,20 +27,20 @@
 
                 @Html.LabelFor(model => model.Description)
 
-                <input type="text" class="validate" asp-for="Description">
+                <input type="text" class="validate" asp-for="Description" required>
                 <span asp-validation-for="Description" class="red-text text-darken-2" />
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
                 @Html.LabelFor(model => model.Location)
-                <input type="text" class="autocomplete" asp-for="Location" id="autocomplete">
+                <input type="text" class="autocomplete" asp-for="Location" id="autocomplete" required>
                 <span asp-validation-for="Location" class="red-text text-darken-2" />
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
-                <a class="btn waves-effect waves-light btn-large red accent-3" asp-action="Clubs">
+                <a class="btn waves-effect waves-light btn-large teal lighten-1" asp-action="Clubs">
                     Back to List
                 </a>
             </div>
@@ -48,7 +48,7 @@
 
                 <input type="hidden" asp-for="ClubId" value="@Model.ClubId">
                 <input type="hidden" asp-for="DateCreated" value="@Model.DateCreated">
-                <button onclick="EditClub()" id="btnSave" class="btn waves-effect waves-light btn-large red accent-3">
+                <button onclick="EditClub()" id="btnSave" class="btn waves-effect waves-light btn-large teal lighten-1">
                     Finalize
                 </button>
             </div>
