@@ -18,8 +18,9 @@
             <div class="card-content black-text">
                 <div class="row">
                     <div class="col s12 center-align">
-                        <span id="eventTiteText" class="card-title">You are the @Html.DisplayFor(model => model.Name) club</span>
+                        <span id="eventTiteText" class="card-title">Club Name: @Html.DisplayFor(model => model.Name)</span>
                         <br />
+<<<<<<< HEAD
                         <span class="center-align flow-text"> Your club description is @Html.DisplayFor(model => model.Description)</span>
                         <br />
                         Club Location: <span class="center-align flow-text">@Html.DisplayFor(model => model.Location)</span>
@@ -56,14 +57,23 @@
                         <li><a asp-action="EditClub" asp-controller="Club" asp-route-id="@Model.ClubId" class="btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Edit Club"><i class="material-icons" style="color:teal">mode_edit</i></a></li>
                         <li><a asp-action="DeleteClub" asp-controller="Club" asp-route-id="@Model.ClubId" class="btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Delete Club"><i class="material-icons" style="color:teal">delete_forever</i></a></li>
                     </ul>
+=======
+                        <span class="center-align flow-text">Club Description: @Html.DisplayFor(model => model.Description)</span>
+                     
+
+
+                    </div>
+>>>>>>> refs/heads/pr/23
                 </div>
 
                 <div class="card-action">
                     <div class="row">
                         <div class="col s12">
                             <ul class="white accent-4 tabs">
-                                <li class="tab col s4 white-text"><a class="active black-text" href="#members">Members</a></li>
-                                <li class="tab col s4 white-text"><a class="black-text" href="#events">Events</a></li>
+                                <li class="tab col s3 white-text"><a class="active black-text" href="#members">Members</a></li>
+                                <li class="tab col s3 white-text"><a class="black-text" href="#events">Events</a></li>
+                                <li class="tab col s3 white-text"><a class="black-text" href="#eventsDetails">Club Details</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -121,6 +131,52 @@
             {
                 <h5 class="center">Currently no events made by club</h5>
             }
+        </div>
+        <div id="eventsDetails">
+
+            <div class="center">
+
+                <span class="center-align flow-text">Club Location: @Html.DisplayFor(model => model.Location)</span>
+                <br />
+                <span class="center-align flow-text">Date Created: @Html.DisplayFor(model => model.DateCreated)</span>
+
+
+                @if (ViewBag.ClubMembers.Count > 0)
+                {
+
+
+                    @foreach (ClubMember club in ViewBag.ClubMembers)
+                    {
+                        totalmember++;
+                    }
+
+
+
+                }
+
+
+
+
+                @if (ViewBag.ClubEvents.Count > 0)
+                {
+
+
+                    @foreach (Event club in ViewBag.ClubEvents)
+                    {
+
+                        totalclub++;
+                    }
+
+
+
+                }
+
+                <br />
+
+                <span class="center-align flow-text">You have @totalmember members in your club and @totalclub events joined</span>
+
+            </div>
+
         </div>
     </div>
 </div>

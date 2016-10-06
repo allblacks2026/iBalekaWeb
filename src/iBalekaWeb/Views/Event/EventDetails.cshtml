@@ -16,17 +16,17 @@
     <div class="col s12">
         <div class="card white black-text">
             <div class="card-content black-text">
-                <span id="eventTiteText" class="card-title">Event Title: @Html.DisplayFor(model => model.Title)</span>
+
                 <div class="row">
-                    <div class="col s6">
-                      Event Description:  @Html.DisplayFor(model => model.Description)
-                    </div>
-                    <div class="col s6">
+                    <div class="col s12 center-align">
+                        <span id="eventTiteText" class="card-title">Event Name: @Html.DisplayFor(model => model.Title)</span>
                         <br />
-                       Event Location: @Html.DisplayFor(model => model.Location)<br />
-                        Time until event starts:
+
+                        <span id="eventTiteText" class="card-title"> Event Description:  @Html.DisplayFor(model => model.Description)</span>
+
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="fixed-action-btn vertical click-to-toggle right" style="position:relative !important; margin-top:-11%;right: 0%;">
                         <a class="btn-floating btn-large white accent-4">
                             <i class="material-icons"style="color:teal">more_vert</i>
@@ -36,6 +36,20 @@
                             <li><a asp-action="DeleteEvent" asp-controller="Event" asp-route-id="@Model.EventId" class="btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Delete Event"><i class="material-icons" style="color:teal">delete_forever</i></a></li>
                         </ul>
                 </div>
+=======
+
+                @*
+                    <div class="row">
+                        <div class="col s6">
+                          Event Description:  @Html.DisplayFor(model => model.Description)
+                        </div>
+                        <div class="col s6">
+                            <br />
+                           Event Location: @Html.DisplayFor(model => model.Location)<br />
+                            Time until event starts:
+                        </div>
+                    </div>*@
+>>>>>>> refs/heads/pr/23
             </div>
             <div class="card-action">
                 <ul class="white accent-4 tabs">
@@ -47,45 +61,79 @@
     </div>
 </div>
 <div class="row" id="eventDetails">
-    <div class="col s12">
-        <h5 class="center">Details</h5>
-        <div class="row">
-            <div class="col s6">
-                <div class="row">
-                    <div class="col s6">
-                        <div class="date">
-                            <span class="day">30</span>
-                            <span class="month">Jun</span>
-                            <span class="year">2009</span>
-                        </div>
-                    </div>
-                    <div class="col s6">
-                        <div class="time">
-                            <span class="hour">12</span>
-                            <span class="">:</span>
-                            <span class="minute">00</span>
-                            <span class="meridiem">PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col s6">
-                @if (Model.EventRoutes.Count() > 0)
-                {
-                    <div class="row">
-                        @foreach (EventRouteViewModel evntRoute in Model.EventRoutes)
-                        {
-                            <div class="col s3">
-                                <i class="material-icons medium">room</i><br />
-                                <span>@evntRoute.Title</span>
+    <div class="col s12 center-align">
+
+                   
+                        <span id="eventTiteText" class="flow-text">  Event Location: @Html.DisplayFor(model => model.Location)</span>
+                        <br />
+                        <span id="eventTiteText" class="flow-text">  Date Created : @Html.DisplayFor(model => model.DateCreated, "{dd/MM/yyyy}")</span>
+                        <br />
+                        <span id="eventTiteText" class="flow-text">  Route :</span>
+                       
+                        <span id="eventTiteText" class="flow-text">
+                           
+
+
+                            @foreach (EventRouteViewModel evntRoute in Model.EventRoutes)
+                            {
+                              
+
+                                    <span class="flow-text">@evntRoute.Title</span>
+                                   <span> </span>
+                            
+                            }
+
+                           
+
+                        </span>
+
+                   
+                    @*<div class="col s6">
+                            <div class="row">
+                                <div class="col s6">
+                                    <div class="date">
+                                        <span class="day">30</span>
+                                        <span class="month">Jun</span>
+                                        <span class="year">2009</span>
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    <div class="time">
+                                        <span class="hour">12</span>
+                                        <span class="">:</span>
+                                        <span class="minute">00</span>
+                                        <span class="meridiem">PM</span>
+                                    </div>
+                                </div>
                             </div>
-                        }
-                    </div>
-                }
-            </div>
-        </div>
+                        </div>
+                        <div class="col s6">
+                            @if (Model.EventRoutes.Count() > 0)
+                            {
+                                <div class="row">
+
+                                    @foreach (EventRouteViewModel evntRoute in Model.EventRoutes)
+                                    {
+                                        <div class="col s3">
+
+                                            <span>@evntRoute.Title</span>
+                                            <br />
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>*@
+             
+      
     </div>
+
 </div>
+
+
+
+
+
+
 <div class="row" id="registeredAthletes">
     <div class="col s12">
         <h5 class="center">Registered Athletes</h5>
