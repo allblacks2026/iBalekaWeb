@@ -16,8 +16,9 @@
                     here is a list of your @ViewData["View"]                   <br />
                     You currently have : @Model.Count() @ViewData["View"]  
                 </p>
-
-             
+                    <a asp-action="AddClub" asp-controller="Club" style="margin-top:-6%;" class="btn-floating btn-large white accent-4 tooltipped right" data-position="left" data-delay="150" data-tooltip="Create Club">
+                        <i class="material-icons" style="color:teal">add</i>
+                    </a>                               
                 
             </div>
             <div class="card-action">
@@ -97,15 +98,6 @@
             }
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col s12 center">
-        <a asp-action="AddClub" asp-controller="Club" class="btn waves-effect waves-light btn-large teal lighten-1">
-            Create Club
-            <i class="material-icons right">send</i>
-        </a>
-    </div>
-
 </div>
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>

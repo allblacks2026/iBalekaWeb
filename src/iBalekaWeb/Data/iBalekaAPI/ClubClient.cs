@@ -31,7 +31,8 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 Name = club.Name,
                 Description = club.Description,
                 Location = club.Location,
-                UserId = club.UserId
+                UserId = club.UserId,
+                DateCreated = DateTime.Now.ToString()
             };
             var createdClub = PostContent(saveUrl, newClub);
             return createdClub;
