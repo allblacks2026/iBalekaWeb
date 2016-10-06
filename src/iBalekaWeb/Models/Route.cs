@@ -34,7 +34,8 @@ namespace iBalekaWeb.Models
         public bool Deleted { get; set; }
         public double Distance { get; set; }
         public string MapImage { get; set; }
-
+        public int EventCount { get; set; }
+        public int RunCount { get; set; }
         public virtual ICollection<Checkpoint> Checkpoint { get; set; }
         public virtual ICollection<EventRoute> EventRoute { get; set; }
         public virtual ICollection<Rating> Rating { get; set; }
