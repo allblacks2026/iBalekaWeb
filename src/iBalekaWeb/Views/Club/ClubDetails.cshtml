@@ -2,7 +2,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @using iBalekaWeb.Models
-@{ 
+@{
     var totalmember = 0;
     var totalclub = 0;
 }
@@ -25,46 +25,38 @@
                         Club Location: <span class="center-align flow-text">@Html.DisplayFor(model => model.Location)</span>
                         <br />
                         Date Created: <span class="center-align flow-text">@Html.DisplayFor(model => model.DateCreated)</span>
-                       
-                        
+
                         @if (ViewBag.ClubMembers.Count > 0)
                         {
-
-                         
                             @foreach (ClubMember club in ViewBag.ClubMembers)
                             {
                                 totalmember++;
                             }
-
-
-
                         }
-                     
-
-
 
                         @if (ViewBag.ClubEvents.Count > 0)
                         {
-
-                           
                             @foreach (Event club in ViewBag.ClubEvents)
                             {
 
                                 totalclub++;
                             }
-
-
-
                         }
-                        
-                      <br />
+
+                        <br />
 
                         <span class="center-align flow-text">You have @totalmember members in your club and @totalclub events joined</span>
-
-
-</div>
+                    </div>
                 </div>
-
+                <div class="fixed-action-btn vertical click-to-toggle right" style="position:relative !important; margin-top:-16%;right: 0%;">
+                    <a class="btn-floating btn-large white accent-4">
+                        <i class="material-icons" style="color:teal">more_vert</i>
+                    </a>
+                    <ul class="statsMenu" style="top:115% !important;">
+                        <li><a asp-action="EditClub" asp-controller="Club" asp-route-id="@Model.ClubId" class="btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Edit Club"><i class="material-icons" style="color:teal">mode_edit</i></a></li>
+                        <li><a asp-action="DeleteClub" asp-controller="Club" asp-route-id="@Model.ClubId" class="btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Delete Club"><i class="material-icons" style="color:teal">delete_forever</i></a></li>
+                    </ul>
+                </div>
 
                 <div class="card-action">
                     <div class="row">
@@ -133,17 +125,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col s4 left-align ">
+    <div class="col s12 center">
         <a class="btn waves-effect waves-light btn-large teal lighten-1" asp-action="Clubs">
             Back to List
         </a>
-    </div>
-    <div class="col s4 center-align ">
-        @Html.ActionLink("Edit", "EditClub", new { id = Model.ClubId }, new { @class = "btn waves-effect waves-light btn-large teal lighten-1" })
-
-    </div>
-    <div class="col s4 right-align ">
-        @Html.ActionLink("Delete", "DeleteClub", new { id = Model.ClubId }, new { @class = "btn waves-effect waves-light btn-large teal lighten-1" })
     </div>
 </div>
 <script src="/lib/jquery/dist/jquery.js"></script>
