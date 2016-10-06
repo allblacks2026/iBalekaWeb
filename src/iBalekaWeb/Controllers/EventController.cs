@@ -189,6 +189,7 @@ namespace iBalekaWeb.Controllers
                         Error er = new Error(routeResponse.ErrorMessage);
                         return View("Error");
                     }
+                    
                     model.EventRoutes.Add(routeResponse.Model.ToEventRouteViewModel());
                 }
                 if (model.ClubId != 0)

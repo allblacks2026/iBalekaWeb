@@ -53,6 +53,8 @@ namespace iBalekaWeb.Controllers
             {
                 ViewBag.DistanceHighest = routeResponse.Model.OrderByDescending(p => p.Distance);
                 ViewBag.DistanceLowest = routeResponse.Model.OrderBy(p => p.Distance);
+                ViewBag.Runs = routeResponse.Model.OrderByDescending(p => p.RunCount);
+                ViewBag.Events = routeResponse.Model.OrderByDescending(p => p.EventCount);
             }
             string sourceCookie = HttpContext.Request.Cookies["SourcePageMap"];
             if (sourceCookie != null)

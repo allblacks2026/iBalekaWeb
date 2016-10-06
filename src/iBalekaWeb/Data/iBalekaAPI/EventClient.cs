@@ -48,6 +48,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 Date = evnt.Date,
                 ClubID = evnt.ClubId,
                 Time = evnt.Time,
+                DateCreated=DateTime.Now.ToString(),
                 Description = evnt.Description,
                 Location = evnt.Location,
                 Title = evnt.Title,
@@ -79,6 +80,8 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 Date = evnt.Date,
                 Time = evnt.Time,
                 Description = evnt.Description,
+                DateCreated = evnt.DateCreated,
+                DateModified = DateTime.Now.ToString(),
                 Location = evnt.Location,
                 Title = evnt.Title,
                 EventRoute = newRoutes
