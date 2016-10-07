@@ -1,106 +1,112 @@
-@model IEnumerable
-<iBalekaWeb.Models.Club>
-	@inject SignInManager
-	<ApplicationUser> SignInManager @inject UserManager
-		<ApplicationUser> UserManager @{ ViewData["Title"] = "Saved Clubs"; ViewData["View"] = "Clubs"; }
-			<div class="row" style="padding-bottom:-5% !important;">
-				<div class="col s12">
-					<div class="card white black-text">
-						<div class="card-content black-text">
-							<div class="row">
-								<div class="col s3 center">
-									<form asp-controller="Club" asp-action="SearchClub" method="get">
-										<div class="input-field col s12 center">
-											<input id="autocomplete" type="text" class="validate" name="SearchLocation" required> @*
-											<label for="searchClubs">Search Club By Location</label>*@
-											<input type="submit" value="Search" class="btn waves-effect waves-light btn-large teal lighten-1" />
-										</div>
-									</form>
-								</div>
-								<div class="list centered" style="padding-right:5%">
-									<p id="clubTitleText" class="card-title center-align">
-										@UserManager.GetUserName(User), here is a list of your @ViewData["View"] <br /> You currently have : @Model.Count()
-										@ViewData["View"]
-									</p>
-									<a asp-action="AddClub" asp-controller="Club" style="margin-top:-6%;" class="btn-floating btn-large white accent-4 tooltipped right"
-										data-position="left" data-delay="150" data-tooltip="Create Club">
-										<i class="material-icons" style="color:teal">add</i>
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-action">
-							<div class="row">
-								<div class="col s12">
-									<h6 class="center">Sort Clubs by: </h6>
-									<ul class="white accent-4 tabs">
-										<li class="tab"><a class="active black-text" href="#titleClubs">Title</a></li>
-										<li class="tab black-text"><a class="black-text" href="#locationClubs">Location</a></li>
-									</ul>
-									<div class="row">
-										<div class="col s12 center">
-											<form asp-controller="Club" asp-action="SearchClub" method="get">
-												<div class="input-field col s12 center">
-													<input id="autocomplete" type="text" class="validate" name="SearchClub" required>
-													<label for="SearchClub">Filter Club By Location</label>
-													<input type="submit" value="Search" class="btn waves-effect waves-light btn-large teal lighten-1" />
-												</div>
-											</form>
-										</div>
-									</div>
+@model IEnumerable<iBalekaWeb.Models.Club>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Saved Clubs";
+    ViewData["View"] = "Clubs";
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s12">
-					<div id="titleClubs">
-						@if (Model.Count() > 0) {
-						<ul class="collection">
-							@foreach (Club club in ViewBag.ClubsByTitle) {
-							<li class="collection-item">
-								<div>
-									@Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
-									<a class="secondary-content" href=@Url.Action( "DeleteClub", "Club", new { id=c lub.ClubId })>
-										<i class="material-icons">
-                                        delete
-                                    </i>
-									</a>
-								</div>
-							</li>
-							}
-						</ul>
-						} else {
-						<h5 class="center">No Clubs to Display</h5>
-						}
-					</div>
-					<div id="locationClubs">
-						@if (Model.Count() > 0) {
-						<ul class="collection">
-							@foreach (Club club in ViewBag.ClubsByLocation) {
-							<li class="collection-item">
-								<div>
-									@Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
-									<a class="secondary-content" href=@Url.Action( "DeleteClub", "Club", new { id=c lub.ClubId })>
-										<i class="material-icons">
-                                        delete
-                                    </i>
-									</a>
-								</div>
-							</li>
-							}
-						</ul>
-						} else {
-						<h5 class="center">No Clubs to Display</h5>
-						}
-					</div>
-				</div>
-			</div>
-			<script src="/lib/jquery/dist/jquery.js"></script>
-			<script>
+}
+
+    <div class="row" style="padding-bottom:-5% !important;">
+        <div class="col s12">
+            <div class="card white black-text">
+                <div class="card-content black-text">
+                    <div class="row">
+                        
+
+                        <div class="list centered" style="padding-right:5%">
+                            <p id="clubTitleText" class="card-title center-align">
+                                @UserManager.GetUserName(User), here is a list of your @ViewData["View"] <br /> You currently have : @Model.Count()
+                                @ViewData["View"]
+                            </p>
+                            <a asp-action="AddClub" asp-controller="Club" style="margin-top:-6%;" class="btn btn-floating btn-large white accent-4 tooltipped right"
+                               data-position="left" data-delay="150" data-tooltip="Create Club">
+                                <i class="material-icons" style="color:teal">add</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <div class="col s12">
+                            <h6 class="center">Sort Clubs by: </h6>
+                            <ul class="white accent-4 tabs">
+                                <li class="tab"><a class="active black-text" href="#titleClubs">Title</a></li>
+                                <li class="tab black-text"><a class="black-text" href="#locationClubs">Location</a></li>
+                            </ul>
+                            <div class="row">
+                                <div class="col s12 center">
+                                    <form asp-controller="Club" asp-action="SearchClub" method="get">
+                                        <div class="input-field col s12 center">
+                                            <input id="autocomplete" type="text" class="validate" name="SearchClub" required>
+                                            <label for="SearchClub">Filter Club By Location</label>
+                                            <input type="submit" value="Search" class="btn waves-effect waves-light btn-large teal lighten-1" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="row">
+                <div class="col s12">
+                    <div id="titleClubs">
+                        @if (Model.Count() > 0)
+                        {
+                            <ul class="collection">
+                                @foreach (Club club in ViewBag.ClubsByTitle)
+                                {
+                                    <li class="collection-item">
+                                        <div>
+                                            @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+                                            <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
+                                                <i class="material-icons">
+                                                    delete
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <h5 class="center">No Clubs to Display</h5>
+                        }
+                    </div>
+                    <div id="locationClubs">
+                        @if (Model.Count() > 0)
+                        {
+                            <ul class="collection">
+                                @foreach (Club club in ViewBag.ClubsByLocation)
+                                {
+                                    <li class="collection-item">
+                                        <div>
+                                            @Html.ActionLink(club.Name + "-" + club.Location, "ClubDetails", new { id = club.ClubId })
+                                            <a class="secondary-content" href=@Url.Action("DeleteClub", "Club", new { id = club.ClubId })>
+                                                <i class="material-icons">
+                                                    delete
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <h5 class="center">No Clubs to Display</h5>
+                        }
+                    </div>
+                </div>
+            </div>
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script>
     $(document).ready(function () {
         var source = '@(ViewBag.SourcePageClub)';
         if (source == "Edit") {
@@ -120,7 +126,7 @@
         }
     });
 </script>
-			<script>
+<script>
     var hours = new Date().getHours();
     var message;
     var morning = ("Morning");
