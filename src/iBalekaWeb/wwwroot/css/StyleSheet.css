@@ -5,6 +5,11 @@
     font-family: monospace;
    
   }
+ .list{
+     padding-right:4%;
+     padding-left:4%;
+     font-family:monospace;
+ }
  .row{
      font-family:monospace;
  }
