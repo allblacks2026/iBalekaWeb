@@ -7,48 +7,55 @@
         <div class="col s12">
             <div class="card white black-text">
                 <div class="card-content black-text">
-
                     <div class="row">
-                            <div class="col s12 left">
+
+                        @*<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                            <a class="btn-floating btn-large red">
+                                <i class="large material-icons">search</i>
+                            </a>
+                            <ul>
+                                <li><a class="btn-floating blue"><i class="material-icons">search</i></a></li>
+                            </ul>
+                            </div>*@
+                            <div class="col s3 left">
                                 <form asp-controller="Event" asp-action="SearchEvent" method="get">
                                     <div class="input-field col s12 center">
                                         <input id="autocomplete" type="text" class="validate" name="SearchLocation" required>
                                         @*<label for="searchEvents">Search Event By Location</label>*@
-                                        <input type="submit" value="Search"class="btn waves-effect waves-light btn-large teal lighten-1" />
-                                    
-                                   
-                                    <p id="eventTitleText" class="card-title center-align">
-                                        @UserManager.GetUserName(User)
-                                        here is a list of your events.
-                                        <br />
-                                        You currently have : @Model.Count() Events
-                                    </p>
-                                   </div>
+                                        <input type="submit" value="Search" class="btn waves-effect waves-light btn-large teal lighten-1" />
+                                    </div>
                                 </form>
-
+                            </div>
+                            <div class="list">
+                                <p id="eventTitleText" class="card-title center-align">
+                                    @UserManager.GetUserName(User),
+                                    here is a list of your events.
+                                    <br />
+                                    You currently have : @Model.Count() Events
+                                </p>
                             </div>
                         </div>
-                    </div>
+                </div>
 
-                    @*<p id="eventTitleText" class="card-title center-align">
+
+                @*<p id="eventTitleText" class="card-title center-align">
                         @UserManager.GetUserName(User)
                         here is a list of your events.
                         <br />
                         You currently have : @Model.Count() Events
                     </p>*@
+                @*<span id="eventTiteText" class="card-title">@UserManager.GetUserName(User)</span>
+                    <span class="card-title right">Events</span>
+                    <div class="row">
+                        <div class="col s6">
+                            Number of Events:
+                        </div>
+                        <div class="col s6">
+                            Upcoming Event:<br />
+                            Time until next event starts:
+                        </div>
+                    </div>*@
 
-                    @*<span id="eventTiteText" class="card-title">@UserManager.GetUserName(User)</span>
-                        <span class="card-title right">Events</span>
-                        <div class="row">
-                            <div class="col s6">
-                                Number of Events:
-                            </div>
-                            <div class="col s6">
-                                Upcoming Event:<br />
-                                Time until next event starts:
-                            </div>
-                        </div>*@
-               
                 <div class="card-action">
                     <div class="row">
                         <div class="col s12">
@@ -79,7 +86,6 @@
 
 
     <div id="activeEvents">
-
         <div class="row">
             <ul class="collection" id="activeEventList">
                 @if (Model.Count() > 0)
@@ -110,11 +116,9 @@
                     <li class="collection-item" style="text-align:center;"><h5>There are no Events to display</h5></li>
                 }
             </ul>
-
         </div>
     </div>
     <div id="openEvents">
-
         <div class="row">
             <ul class="collection" id="openEventList">
                 @if (Model.Count() > 0)
@@ -146,9 +150,7 @@
                     <li class="center"><h5>There are no Events to display</h5></li>
                 }
 
-
             </ul>
-
         </div>
     </div>
     <div id="closedEvents">
@@ -182,9 +184,7 @@
                     <li class="collection-item" style="text-align:center;"><h5>There are no Events to display</h5></li>
                 }
 
-
             </ul>
-
         </div>
     </div>
 
@@ -195,7 +195,6 @@
                 <i class="material-icons right">send</i>
             </a>
         </div>
-
         <div class="col push-s6 left">
             <a asp-action="Map" asp-controller="Map" class="btn waves-effect waves-light btn-large teal lighten-1">
                 Create Route
@@ -226,7 +225,6 @@
         }
     });
 </script>
-
 <script>
     var hours = new Date().getHours();
     var message;
