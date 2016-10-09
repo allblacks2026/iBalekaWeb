@@ -18,12 +18,24 @@
                                     <li><a class="btn-floating blue"><i class="material-icons">search</i></a></li>
                                 </ul>
                             </div>*@
-                   
+
                         <div class="list">
                             <p id="eventTitleText" class="card-title center-align">
                                 @UserManager.GetUserName(User), here is a list of your events.
                                 <br /> You currently have : @Model.Count() Events
                             </p>
+
+                            <div class="fixed-action-btn vertical click-to-toggle right" style="position:relative !important; margin-top:-6%;">
+                                <a class="btn btn-floating btn-large transparent">
+                                    <i class="material-icons" style="color:teal">add</i>
+                                </a>
+                                <ul class="statsMenu" style="top:115% !important;">
+                                    <li><a asp-action="Map" asp-controller="Map" class="btn btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Create Route"><i class="material-icons" style="color:teal">room</i></a></li>
+                                    <li><a asp-action="CreateEvent" asp-controller="Event" class="btn btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Create Event"><i class="material-icons" style="color:teal">event</i></a></li>
+                                    <li><a asp-action="AddClub" asp-controller="Club" class="btn btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Create Club"><i class="material-icons" style="color:teal">people</i></a></li>
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -88,9 +100,9 @@
                                 <div>
                                     @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
                                     <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
-                                    <i class="material-icons">
-                                    delete
-                                    </i>
+                                        <i class="material-icons">
+                                            delete
+                                        </i>
                                     </a>
                                 </div>
                             </li>}
@@ -109,46 +121,46 @@
                 </ul>
             </div>
         </div>
-            <div id="openEvents">
-                <div class="row">
-                    <ul class="collection" id="openEventList">
-                        @if (Model.Count() > 0)
+        <div id="openEvents">
+            <div class="row">
+                <ul class="collection" id="openEventList">
+                    @if (Model.Count() > 0)
+                    {
+                        if ((ViewBag.OpenEvents as IEnumerable
+                <Event>).Count() > 0)
                         {
-                            if ((ViewBag.OpenEvents as IEnumerable
-                    <Event>).Count() > 0)
+                            foreach (Event evnt in ViewBag.OpenEvents)
                             {
-                                foreach (Event evnt in ViewBag.OpenEvents)
-                                {
 
-                                    <li class="collection-item">
-                                        <div>
-                                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
-                                            <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
+                                <li class="collection-item">
+                                    <div>
+                                        @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                                        <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
                                             <i class="material-icons">
-                                            delete
+                                                delete
                                             </i>
-                                            </a>
-                                        </div>
-                                    </li>
-                                }
-                            }
-                            else
-                            {
-                                <li class="collection-item" style="text-align:center;">
-                                    <h5>There are no Open Events</h5>
+                                        </a>
+                                    </div>
                                 </li>
                             }
                         }
                         else
                         {
-                            <li class="center">
-                                <h5>There are no Events to display</h5>
+                            <li class="collection-item" style="text-align:center;">
+                                <h5>There are no Open Events</h5>
                             </li>
                         }
+                    }
+                    else
+                    {
+                        <li class="center">
+                            <h5>There are no Events to display</h5>
+                        </li>
+                    }
 
-                    </ul>
-                </div>
+                </ul>
             </div>
+        </div>
             <div id="closedEvents">
                 <div class="row">
                     <ul class="collection" id="activeEventList">
@@ -163,9 +175,9 @@
                                         <div>
                                             @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
                                             <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
-                                            <i class="material-icons">
-                                            delete
-                                            </i>
+                                                <i class="material-icons">
+                                                    delete
+                                                </i>
                                             </a>
                                         </div>
                                     </li>
@@ -189,7 +201,7 @@
                 </div>
             </div>
 }
-<div class="row">
+@*<div class="row">
     <div class="col pull-s6 right">
         <a asp-action="CreateEvent" asp-controller="Event" class="btn waves-effect waves-light btn-large teal lighten-1">
             Create Event
@@ -202,7 +214,8 @@
             <i class="material-icons right">send</i>
         </a>
     </div>
-</div>}
+</div>*@
+
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
