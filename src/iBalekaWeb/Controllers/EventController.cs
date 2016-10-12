@@ -178,6 +178,10 @@ namespace iBalekaWeb.Controllers
                 if (model.EventRoutes == null)
                 {
                     model.EventRoutes = new List<EventRouteViewModel>();
+                    TimeZoneInfo localZone = TimeZoneInfo.Local;
+                    model.Timezone = localZone.Id;
+                    
+                    //model.EventDateTime
                 }
                 foreach (int id in RouteId)
                 {
