@@ -60,7 +60,11 @@
             <div class="nav-wrapper red-text">
                 <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
 
-                <a asp-controller="Home" asp-action="Index" class="brand-logo">iBaleka</a>
+                <a asp-controller="Home" asp-action="Index" class="brand-logo">
+               
+                    <img class="activator" src="~/images/iBaleka_gr.png" style="width:6%;height:3% ;padding-top:1%" />
+                    @*iBaleka*@
+                </a>
 
 
 
@@ -127,7 +131,11 @@
                     <a asp-controller="Manage" asp-action="Index" title="Manage">Settings</a>
 
                 </li>
-
+                <li>
+                
+                <a asp-action="About" asp-controller="Home">Help and Support<i class="material-icons right" style="margin-right:35%">help_outline</i>
+                    </a>
+               </li>
             </ul>
         </nav>
 
@@ -146,14 +154,13 @@
 
     </main>
 
-    <footer class="page-footer teal lighten-2">
+    <footer class="page-footer teal lighten-2" style="padding-left:1%">
 
 
-        @*<div class="container">
                @{ var mydate = DateTime.Now.Year.ToString();}
 
-                © @mydate All Blacks™
-            </div>*@
+        All Blacks™ © @mydate Version 2.2.0
+          
 
     </footer>
 

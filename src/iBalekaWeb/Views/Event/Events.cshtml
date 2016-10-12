@@ -7,65 +7,92 @@
         <div class="col s12">
             <div class="card white black-text">
                 <div class="card-content black-text">
-
-                    <p id="eventTitleText" class="card-title center-align">
-                        @UserManager.GetUserName(User)
-                        here is a list of your events.
-                        <br />
-                        You currently have : @Model.Count() Events
-                    </p>
-
-                    <div class="fixed-action-btn vertical click-to-toggle right" style="position:relative !important; margin-top:-6%;">
-
-                        <a class="btn-floating btn-large white accent-4">
-                            <i class="material-icons" style="color:teal">add</i>
-                        </a>
-                        <ul class="statsMenu" style="top:115% !important;">
-                            <li><a asp-action="CreateEvent" asp-controller="Event" class="btn-floating tooltipped white accent-4 " data-position="left" data-delay="150" data-tooltip="Create Event"><i class="material-icons" style="color:teal">event</i></a></li>
-                            <li><a asp-action="Map" asp-controller="Map" class="btn-floating tooltipped white accent-4" data-position="left" data-delay="150" data-tooltip="Create Route"><i class="material-icons" style="color:teal">room</i></a></li>
-                        </ul>
-
-                    </div>
-                </div>
-                <div class="card-action">
                     <div class="row">
-                        <div class="col s12">
-                            <ul class="white accent-4 tabs">
-                                <li class="tab col s4"><a class="black-text" href="#activeEvents">Active Events</a></li>
-                                <li class="tab col s4"><a class="active black-text" href="#openEvents">Open Events</a></li>
-                                <li class="tab col s4"><a class="black-text" href="#closedEvents">Closed Events</a></li>
-                            </ul>
+
+                        @*
+                            <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                                <a class="btn-floating btn-large red">
+                                    <i class="large material-icons">search</i>
+                                </a>
+                                <ul>
+                                    <li><a class="btn-floating blue"><i class="material-icons">search</i></a></li>
+                                </ul>
+                            </div>*@
+
+                        <div class="list">
+                            <p id="eventTitleText" class="card-title center-align">
+                                @UserManager.GetUserName(User), here is a list of your events.
+                                <br /> You currently have : @Model.Count() Events
+                            </p>
+
+                            <div class="fixed-action-btn vertical click-to-toggle right" style="position:relative !important; margin-top:-6%;">
+                                <a class="btn btn-floating btn-large transparent">
+                                    <i class="material-icons" style="color:teal">add</i>
+                                </a>
+                                <ul class="statsMenu" style="top:115% !important;">
+                                    <li><a asp-action="Map" asp-controller="Map" class="btn btn-floating tooltipped transparent" data-position="left" data-delay="150" data-tooltip="Create Route"><i class="material-icons" style="color:teal">room</i></a></li>
+                                    <li><a asp-action="CreateEvent" asp-controller="Event" class="btn btn-floating tooltipped transparent" data-position="left" data-delay="150" data-tooltip="Create Event"><i class="material-icons" style="color:teal">event</i></a></li>
+                                    <li><a asp-action="AddClub" asp-controller="Club" class="btn btn-floating tooltipped transparent" data-position="left" data-delay="150" data-tooltip="Create Club"><i class="material-icons" style="color:teal">people</i></a></li>
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+
+                @*
+                    <p id="eventTitleText" class="card-title center-align">
+                        @UserManager.GetUserName(User) here is a list of your events.
+                        <br /> You currently have : @Model.Count() Events
+                    </p>*@ @*
+                    <span id="eventTiteText" class="card-title">@UserManager.GetUserName(User)</span>
+                    <span class="card-title right">Events</span>
                     <div class="row">
-                        <div class="col s12 center">
-                            <form asp-controller="Event" asp-action="SearchEvent" method="get">
-                                <div class="input-field col s12 center">
-                                    <input id="autocomplete" type="text" class="validate" name="SearchLocation" required>
-                                    <label for="searchEvents">Search Event By Location</label>
-                                    <input type="submit" value="Search" class="btn waves-effect waves-light btn-large teal lighten-1" />
+                        <div class="col s6">
+                            Number of Events:
+                        </div>
+                        <div class="col s6">
+                            Upcoming Event:<br /> Time until next event starts:
+                        </div>
+                    </div>*@
 
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col s12">
+                                <ul class="white accent-4 tabs">
+                                    <li class="tab col s4"><a class="black-text" href="#activeEvents">Active Events</a></li>
+                                    <li class="tab col s4"><a class="active black-text" href="#openEvents">Open Events</a></li>
+                                    <li class="tab col s4"><a class="black-text" href="#closedEvents">Closed Events</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-                                </div>
+                        <div class="row">
+                            <div class="col s12 center">
+                                <form asp-controller="Event" asp-action="SearchEvent" method="get">
+                                    <div class="input-field col s12 center">
+                                        <input id="autocomplete" type="text" class="validate" name="SearchLocation" required>
+                                        <label for="searchEvents">Search Event By Location</label>
+                                        <input type="submit" value="Search" class="btn waves-effect waves-light btn-large teal lighten-1" />
+                                    </div>
+                                </form>
 
-                            </form>
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <div id="activeEvents">
-
-        <div class="row">
-            <ul class="collection" id="activeEventList">
-                @if (Model.Count() > 0)
-                {
-                    @if ((ViewBag.ActiveEvents as IEnumerable<Event>).Count() > 0)
+        <div id="activeEvents">
+            <div class="row">
+                <ul class="collection" id="activeEventList">
+                    @if (Model.Count() > 0)
+                    { @if ((ViewBag.ActiveEvents as IEnumerable
+<Event>).Count() > 0)
                     {
                         foreach (Event evnt in ViewBag.ActiveEvents)
                         {
@@ -78,99 +105,117 @@
                                         </i>
                                     </a>
                                 </div>
-                            </li>
-                        }
+                            </li>}
                     }
                     else
                     {
-                        <li class="collection-item" style="text-align:center;"><h5>There are no Active Events</h5></li>
-                    }
-                }
-                else
-                {
-                    <li class="collection-item" style="text-align:center;"><h5>There are no Events to display</h5></li>
-                }
-            </ul>
-
-        </div>
-    </div>
-    <div id="openEvents">
-
-        <div class="row">
-            <ul class="collection" id="openEventList">
-                @if (Model.Count() > 0)
-                {
-                    if ((ViewBag.OpenEvents as IEnumerable<Event>).Count() > 0)
+                        <li class="collection-item" style="text-align:center;">
+                            <h5>There are no Active Events</h5>
+                        </li>} }
+                    else
                     {
-                        foreach (Event evnt in ViewBag.OpenEvents)
+                        <li class="collection-item" style="text-align:center;">
+                            <h5>There are no Events to display</h5>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div id="openEvents">
+            <div class="row">
+                <ul class="collection" id="openEventList">
+                    @if (Model.Count() > 0)
+                    {
+                        if ((ViewBag.OpenEvents as IEnumerable
+                <Event>).Count() > 0)
                         {
+                            foreach (Event evnt in ViewBag.OpenEvents)
+                            {
 
-                            <li class="collection-item">
-                                <div>
-                                    @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
-                                    <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
-                                        <i class="material-icons">
-                                            delete
-                                        </i>
-                                    </a>
-                                </div>
-                            </li>
+                                <li class="collection-item">
+                                    <div>
+                                        @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                                        <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
+                                            <i class="material-icons">
+                                                delete
+                                            </i>
+                                        </a>
+                                    </div>
+                                </li>
+                            }
                         }
-                    }
-                    else
-                    {
-                        <li class="collection-item" style="text-align:center;"><h5>There are no Open Events</h5></li>
-                    }
-                }
-                else
-                {
-                    <li class="center"><h5>There are no Events to display</h5></li>
-                }
-
-
-            </ul>
-
-        </div>
-    </div>
-    <div id="closedEvents">
-        <div class="row">
-            <ul class="collection" id="activeEventList">
-                @if (Model.Count() > 0)
-                {
-                    if ((ViewBag.ClosedEvents as IEnumerable<Event>).Count() > 0)
-                    {
-                        foreach (Event evnt in ViewBag.ClosedEvents)
+                        else
                         {
-                            <li class="collection-item">
-                                <div>
-                                    @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
-                                    <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
-                                        <i class="material-icons">
-                                            delete
-                                        </i>
-                                    </a>
-                                </div>
+                            <li class="collection-item" style="text-align:center;">
+                                <h5>There are no Open Events</h5>
                             </li>
                         }
                     }
                     else
                     {
-                        <li class="collection-item" style="text-align:center;"><h5>There are no Closed Events</h5></li>
+                        <li class="center">
+                            <h5>There are no Events to display</h5>
+                        </li>
                     }
-                }
-                else
-                {
-                    <li class="collection-item" style="text-align:center;"><h5>There are no Events to display</h5></li>
-                }
 
-
-            </ul>
-
+                </ul>
+            </div>
         </div>
-    </div>
+            <div id="closedEvents">
+                <div class="row">
+                    <ul class="collection" id="activeEventList">
+                        @if (Model.Count() > 0)
+                        {
+                            if ((ViewBag.ClosedEvents as IEnumerable
+                    <Event>).Count() > 0)
+                            {
+                                foreach (Event evnt in ViewBag.ClosedEvents)
+                                {
+                                    <li class="collection-item">
+                                        <div>
+                                            @Html.ActionLink(evnt.Title + "-" + evnt.Location, "EventDetails", new { id = evnt.EventId })
+                                            <a class="secondary-content" href=@Url.Action("DeleteEvent", "Event", new { id = evnt.EventId })>
+                                                <i class="material-icons">
+                                                    delete
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li class="collection-item" style="text-align:center;">
+                                    <h5>There are no Closed Events</h5>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="collection-item" style="text-align:center;">
+                                <h5>There are no Events to display</h5>
+                            </li>
+                        }
 
-    
+                    </ul>
+                </div>
+            </div>
 }
+@*<div class="row">
+    <div class="col pull-s6 right">
+        <a asp-action="CreateEvent" asp-controller="Event" class="btn waves-effect waves-light btn-large teal lighten-1">
+            Create Event
+            <i class="material-icons right">send</i>
+        </a>
+    </div>
+    <div class="col push-s6 left">
+        <a asp-action="Map" asp-controller="Map" class="btn waves-effect waves-light btn-large teal lighten-1">
+            Create Route
+            <i class="material-icons right">send</i>
+        </a>
+    </div>
+</div>*@
+
 <script src="/lib/jquery/dist/jquery.js"></script>
 <script>
     $(document).ready(function () {
@@ -193,7 +238,6 @@
         }
     });
 </script>
-
 <script>
     var hours = new Date().getHours();
     var message;
