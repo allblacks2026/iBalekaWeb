@@ -42,6 +42,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 UserID = mapRoute.UserID,
                 Title = mapRoute.Title,
                 Distance = mapRoute.TotalDistance,
+                Location = mapRoute.Location,
                 Checkpoint = newCheckPoints
             };
             var createdRoute = PostContent(MapUrl, newRoute);
@@ -65,6 +66,7 @@ namespace iBalekaWeb.Data.iBalekaAPI
                 UserID = mapRoute.UserID,
                 Title = mapRoute.Title,
                 Distance = mapRoute.TotalDistance,
+                Location = mapRoute.Location,
                 Checkpoint = newCheckPoints
             };
             var createdRoute = PutContent(MapUrl, newRoute);

@@ -55,6 +55,8 @@ namespace iBalekaWeb.Models
         public string Title { get; set; }
         public EventType EventStatus { get; set; }
         public bool Deleted { get; set; }
+        public string Timezone { get; set; }
+        public DateTime EventDateTime { get; set; }
         public int ClubID { get; set; }
         public virtual Club Club { get; set; }
         public virtual ICollection<EventRegistration> EventRegistration { get; set; }

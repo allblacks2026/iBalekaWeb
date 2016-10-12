@@ -58,6 +58,9 @@ namespace iBalekaWeb.Models.EventViewModels
         public string DateCreated { get; set; }
         [Required(ErrorMessage = "Event Description is Required")]
         public string Description { get; set; }
+        public string Timezone { get; set; }
+        public string LocationCoords { get; set; }
+        public DateTime EventDateTime { get; set; }
         [Required(ErrorMessage = "Event Location is Required")]
         public string Location { get; set; }
         [Required(ErrorMessage = "Event Title is Required")]

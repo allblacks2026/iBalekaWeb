@@ -40,5 +40,6 @@ namespace iBalekaWeb.Models.MapViewModels
 
         [DisplayName("Total Distance")]
         public double TotalDistance { get; set; }
+        public string Location { get; set; }
     }
 }

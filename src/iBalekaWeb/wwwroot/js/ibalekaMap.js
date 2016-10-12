@@ -1,11 +1,11 @@
 ﻿//Load Google Maps
-var map, editButton, statsPanel, settingsPanel, searchPanel, searchInput, autocomplete;
+var map, editButton, statsPanel, settingsPanel, searchPanel, searchInput, autocomplete, geocoder;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: { lat: -33.9913503, lng: 25.6568993 },
         zoomControl: true,
-        streetViewControl:false,
+        streetViewControl: false,
         scaleControl: true
     });
     getLocation();
@@ -13,13 +13,13 @@ function initMap() {
     statsPanel = document.getElementById('statsPanel');
     settingsPanel = document.getElementById('settingsPanel');
     searchPanel = document.getElementById('searchPanel');
-    
+
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(editButton);
-    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(statsPanel);      
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(settingsPanel);   
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(statsPanel);
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(settingsPanel);
 
     initializeAutocomplete();
-
+    geocoder = new google.maps.Geocoder;
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(searchPanel);
     searchPanel.style.display = "none";
     settingsPanel.style.display = "none";
@@ -29,7 +29,7 @@ function initMap() {
 }
 //method to initalize automcomplete
 function initializeAutocomplete() {
-    autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{ types: ['geocode'] });
+    autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), { types: ['geocode'] });
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
         fillInAddress();
     });
@@ -71,7 +71,7 @@ function settingsPanelToggle() {
     } else {
         closeSettingsPanel();
     }
-    
+
 }
 function openSettingsPanel() {
     google.maps.event.clearListeners(map, 'click');
@@ -115,7 +115,7 @@ function searchLocation() {
         map.fitBounds(place.geometry.viewport);
     } else {
         map.setCenter(place.geometry.location);
-        map.setZoom(16);  
+        map.setZoom(16);
     }
 }
 function searchPanelToggle() {
@@ -125,7 +125,7 @@ function searchPanelToggle() {
         }
         google.maps.event.clearListeners(map, 'click');
         searchPanel.style.display = "block";
-        removeMarkerEvents()
+        removeMarkerEvents();
         Materialize.toast('Map Click Suspended', 3000);
     } else {
         closeSearchPanel();
@@ -314,7 +314,7 @@ function createToolbox(toolboxDiv, map) {
 //save route
 function saveRoute() {
     var title;
-    if (routePoints[2]!==null) {
+    if (routePoints[2] !== null) {
         if (routeTitleText.value === "") {
             $('#routeTitleModal').openModal();
 
@@ -325,8 +325,8 @@ function saveRoute() {
     } else {
         Materialize.toast('Not Enough Checkpoints to Save Route', 3000);
     }
-    
-    
+
+
 }
 function saveRouteModal() {
     var title = document.getElementById('routeTitleTextModal');
@@ -353,9 +353,14 @@ function saveRouteAJAX(title) {
         }
     });
 }
-function createObject(title) {    
-    var routeModel = {Title: title,Checkpoints: [] ,TotalDistance:totalDistance};
+function createObject(title) {
+    var routeModel = { Title: title, Checkpoints: [], TotalDistance: totalDistance, Location: "" };
     for (var i = 0; i < markersOrders.length; i++) {
+        if (i === 1) {
+            var routeLocationCoord = markersOrders[i].getPosition();
+           
+            routeModel.Location = getRouteLocation(routeLocationCoord);
+        }
         var latlng = markersOrders[i].getPosition();
         var Checkpoint = {
             'Latitude': latlng.lat(),
@@ -364,6 +369,25 @@ function createObject(title) {
         routeModel.Checkpoints.push(Checkpoint);
     }
     return JSON.stringify(routeModel);
+}
+function getRouteLocation(latlng) {
+    var locationName = "";    
+    geocoder.geocode({ 'location': latlng }, function (results, status) {
+        if (status === 'OK') {
+            for (var i in results.address_components) {
+                if (results.address_components[i].types[0] === "locality")
+                    locationName += results.address_components[i].long_name + ",";
+                if (results.address_components[i].types[0] === "administrative_area_level_1")
+                    locationName += results.address_components[i].long_name + ",";
+                if (results.address_components[i].types[0] === "country")
+                    locationName += results.address_components[i].long_name;
+            } 
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+   
+return locationName;
 }
 function clearRoute() {
     for (var key in markers) {
@@ -421,7 +445,7 @@ function getCheckpointLength() {
 //Load Route
 
 var loadedRoute;
-function loadRoute(route) {    
+function loadRoute(route) {
     routeTitleText.value = route.title;
     updateRouteTitle();
     map.setCenter(new google.maps.LatLng(route.checkpoints[0].latitude, route.checkpoints[0].longitude));
@@ -460,15 +484,15 @@ function loadCheckpoints(coOrds) {
 }
 
 //update Route
-function updateRouteModal(){
+function updateRouteModal() {
     var title = document.getElementById('routeTitleTextModal');
     routeTitleText.value = title.value;
     updateRouteTitle();
     updateRouteAJAX();
 }
 function updateRoute() {
-    if (routePoints[2]!==null) {
-        if (routeTitleText.value !== "") {            
+    if (routePoints[2] !== null) {
+        if (routeTitleText.value !== "") {
             $('#btnUpdateRoute').prop('disabled', true);
             var $toastContent = $('<span>Updating Route...</span>');
             Materialize.toast($toastContent, 9000);
@@ -554,7 +578,7 @@ function deleteRoute() {
 
 //events
 function removeMarkerEvents() {
-    if (markersOrders!==null) {
+    if (markersOrders !== null) {
         for (var i = 0; i < markersOrders.length; i++) {
             google.maps.event.clearListeners(markersOrders[i], 'rightclick');
             marker.setDraggable(false);
@@ -562,7 +586,7 @@ function removeMarkerEvents() {
     }
 }
 function addMarkerEvents() {
-    if (markersOrders!==null) {
+    if (markersOrders !== null) {
         for (var i = 0; i < markersOrders.length; i++) {
             bindMarkerPolylineEvents(markersOrders[i]);
             marker.setDraggable(true);

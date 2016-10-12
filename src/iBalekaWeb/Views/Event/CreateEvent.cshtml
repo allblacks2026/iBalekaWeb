@@ -98,7 +98,6 @@
                 <input type="text" class="autocomplete active" asp-for="Location" id="autocomplete">
                 <span asp-validation-for="Location" class="red-text text-darken-2" />
 
-
             </div>
 
 
@@ -134,13 +133,14 @@
                     @Html.DropDownList("ClubId", ViewBag.UserClubs as SelectList, new { @class = "checked" })
 
                     @Html.LabelFor(model => model.ClubId, "Event Owner")
+                
                     <span asp-validation-for="ClubId" class="red-text text-darken-2" />
                 }
                 else
                 {
                     <label>No Clubs Created</label>
                 }
-
+                
             </div>
         </div>
         <div class="row">
@@ -173,7 +173,6 @@
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script src="~/lib/datedropper/datedropper.js"></script>
     <script src="~/js/chosen.jquery.js"></script>
-    <script src="~/js/eventsAjax.js"></script>
     <script src="~/lib/timedropper/timedropper.js"></script>
 
     <script>
@@ -185,8 +184,11 @@
             maxYear: @DateTime.Now.AddYears(1).ToString("yyyy"),
             minYear:@DateTime.Now.ToString("yyyy")};
         $("#datepicker").dateDropper(options);
-        $("#timepicker").timeDropper();
+        var timeOptions = {
+          format:"HH:mm"          
+        };
+        $("#timepicker").timeDropper(timeOptions);
     </script> @*Hookup Chosen Plugin*@
-
+   
 }
 

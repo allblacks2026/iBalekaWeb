@@ -109,7 +109,10 @@
                 minYear:@DateTime.Now.ToString("yyyy"),
             };
             $("#datepicker").dateDropper(options);
-            $("#timepicker").timeDropper();
+            var timeOptions = {
+                format:"HH:mm"          
+            };
+            $("#timepicker").timeDropper(timeOptions);
         });
     </script>
 
