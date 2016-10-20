@@ -47,15 +47,6 @@ namespace iBalekaWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("ServerConnection")));
-            services.AddMvc()
-                .AddJsonOptions(jsonOptions =>
-                {
-                    jsonOptions.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                })
-                .AddViewLocalization()
-                .AddDataAnnotationsLocalization();
-            services.AddCors();
             // Add framework services.
             services.AddDbContext<iBalekaDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ServerConnection")));
@@ -67,7 +58,16 @@ namespace iBalekaWeb
                 .AddDefaultTokenProviders();
             services.AddDistributedMemoryCache();
             services.AddSession();
-            
+            GlobalConfiguration.Configuration.UseSqlServerStorage(Configuration.GetConnectionString("ServerConnection"));
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("ServerConnection")));
+            services.AddMvc()
+                .AddJsonOptions(jsonOptions =>
+                {
+                    jsonOptions.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                })
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
+            services.AddCors();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -133,10 +133,10 @@ namespace iBalekaWeb
             });
             
             var hangFireOptions = new DashboardOptions { Authorization = Enumerable.Empty<IDashboardAuthorizationFilter>() };
-            if (env.IsDevelopment())
-                app.UseHangfireDashboard("/dashboard");
+            //if (env.IsDevelopment())
+              //  app.UseHangfireDashboard("/dashboard");
             //else
-            //    app.UseHangfireDashboard("/dashboard", hangFireOptions);
+            app.UseHangfireDashboard("/dashboard", hangFireOptions);
             app.UseHangfireServer();
             app.UseMvc(routes =>
             {
