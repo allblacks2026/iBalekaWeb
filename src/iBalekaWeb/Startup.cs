@@ -72,7 +72,6 @@ namespace iBalekaWeb
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //repos
             services.AddScoped<IHangfireTasks, HangFireTasks>();
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
@@ -96,26 +95,24 @@ namespace iBalekaWeb
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            var hangFireOptions = new DashboardOptions { Authorization = Enumerable.Empty<IDashboardAuthorizationFilter>() };
+            
             if (env.IsDevelopment())
             {
-                app.UseHangfireDashboard("/dashboard");
+                
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
             {
-                app.UseHangfireDashboard("/dashboard", hangFireOptions);
+                
                 app.UseExceptionHandler("/Shared/Error");
             }
             app.UseCors(builder =>
                 builder.WithOrigins("http://https://ibalekaapi.azurewebsites.net/")
                     .AllowAnyHeader()
-                );
-
+                );            
             
-            app.UseHangfireServer();
             app.UseStaticFiles();
             app.UseSession();
             //app.UseIISPlatformHandler();
@@ -134,6 +131,13 @@ namespace iBalekaWeb
                 ClientId = Configuration["Authentication:Google:AppId"],
                 ClientSecret = Configuration["Authentication:Google:AppSecret"]
             });
+            
+            var hangFireOptions = new DashboardOptions { Authorization = Enumerable.Empty<IDashboardAuthorizationFilter>() };
+            if (env.IsDevelopment())
+                app.UseHangfireDashboard("/dashboard");
+            //else
+            //    app.UseHangfireDashboard("/dashboard", hangFireOptions);
+            app.UseHangfireServer();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
