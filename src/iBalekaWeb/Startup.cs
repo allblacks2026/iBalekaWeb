@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using Hangfire;
 using iBalekaWeb.Models;
 using iBalekaWeb.Services;
 using iBalekaWeb.Data.Configurations;
@@ -17,6 +17,7 @@ using iBalekaWeb.Data.Infastructure;
 using Microsoft.AspNetCore.Mvc;
 using iBalekaWeb.Data.Infrastructure;
 using iBalekaWeb.Data.iBalekaAPI;
+using iBalekaWeb.Controllers.Filters;
 
 namespace iBalekaWeb
 {
@@ -44,6 +45,7 @@ namespace iBalekaWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("ServerConnection")));
             services.AddMvc()
                 .AddJsonOptions(jsonOptions =>
                 {
@@ -70,6 +72,7 @@ namespace iBalekaWeb
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             //repos
+            services.AddScoped<IHangfireTasks, HangFireTasks>();
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IApiClient, ApiClient>();
             services.AddScoped<IMapClient, MapClient>();
@@ -94,18 +97,25 @@ namespace iBalekaWeb
 
             if (env.IsDevelopment())
             {
+                app.UseHangfireDashboard("/dashboard");
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
             {
+                app.UseHangfireDashboard("/dashboard", new DashboardOptions
+                {
+                    Authorization = new[] { new HangFireAuthorizationFilter() }
+                });
                 app.UseExceptionHandler("/Shared/Error");
             }
             app.UseCors(builder =>
                 builder.WithOrigins("http://https://ibalekaapi.azurewebsites.net/")
                     .AllowAnyHeader()
                 );
+            
+            app.UseHangfireServer();
             app.UseStaticFiles();
             app.UseSession();
             //app.UseIISPlatformHandler();
