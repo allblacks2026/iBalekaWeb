@@ -97,24 +97,20 @@ namespace iBalekaWeb
 
             if (env.IsDevelopment())
             {
-                app.UseHangfireDashboard("/dashboard");
+                
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
             {
-                app.UseHangfireDashboard("/dashboard", new DashboardOptions
-                {
-                    Authorization = new[] { new HangFireAuthorizationFilter() }
-                });
                 app.UseExceptionHandler("/Shared/Error");
             }
             app.UseCors(builder =>
                 builder.WithOrigins("http://https://ibalekaapi.azurewebsites.net/")
                     .AllowAnyHeader()
                 );
-            
+            app.UseHangfireDashboard("/dashboard");
             app.UseHangfireServer();
             app.UseStaticFiles();
             app.UseSession();
