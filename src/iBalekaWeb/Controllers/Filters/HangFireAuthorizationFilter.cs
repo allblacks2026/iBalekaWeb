@@ -1,4 +1,5 @@
 ﻿using Hangfire.Dashboard;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,17 @@ namespace iBalekaWeb.Controllers.Filters
 {
     public class HangFireAuthorizationFilter : IDashboardAuthorizationFilter
     {
+        private readonly IHttpContextAccessor _contextAccessor;
+        
+        //public HangFireAuthorizationFilter(IHttpContextAccessor context)
+        //{
+        //    _contextAccessor = context;
+        //}
         public bool Authorize(DashboardContext context)
         {
-            var httpContext = context.GetHttpContext();
-            if (httpContext.Authentication.HttpContext.User.Identity.IsAuthenticated)
-                return httpContext.Authentication.HttpContext.User.Identity.IsAuthenticated;
-            else
-                return false;
+            return true;
+            //return _contextAccessor.HttpContext.User.Identity.IsAuthenticated;           
+
         }
     }
 }

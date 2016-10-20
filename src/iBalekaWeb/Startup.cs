@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using iBalekaWeb.Data.Infrastructure;
 using iBalekaWeb.Data.iBalekaAPI;
 using iBalekaWeb.Controllers.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace iBalekaWeb
 {
@@ -70,7 +71,7 @@ namespace iBalekaWeb
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //repos
             services.AddScoped<IHangfireTasks, HangFireTasks>();
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
@@ -90,27 +91,29 @@ namespace iBalekaWeb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            var hangFireOptions = new DashboardOptions { Authorization = new[] { new HangFireAuthorizationFilter() } };
             if (env.IsDevelopment())
             {
-                
+                app.UseHangfireDashboard("/dashboard");
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
             {
+                app.UseHangfireDashboard("/dashboard", hangFireOptions);
                 app.UseExceptionHandler("/Shared/Error");
             }
             app.UseCors(builder =>
                 builder.WithOrigins("http://https://ibalekaapi.azurewebsites.net/")
                     .AllowAnyHeader()
                 );
-            app.UseHangfireDashboard("/dashboard");
+
+            
             app.UseHangfireServer();
             app.UseStaticFiles();
             app.UseSession();
