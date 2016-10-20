@@ -11,7 +11,7 @@ namespace iBalekaWeb.Controllers.Filters
 {
     public class HangFireAuthorizationFilter : IDashboardAuthorizationFilter
     {
-        private readonly IHttpContextAccessor _contextAccessor;
+        //private readonly IHttpContextAccessor _contextAccessor;
         
         //public HangFireAuthorizationFilter(IHttpContextAccessor context)
         //{

@@ -19,6 +19,7 @@ using iBalekaWeb.Data.Infrastructure;
 using iBalekaWeb.Data.iBalekaAPI;
 using iBalekaWeb.Controllers.Filters;
 using Microsoft.AspNetCore.Http;
+using Hangfire.Dashboard;
 
 namespace iBalekaWeb
 {
@@ -95,7 +96,7 @@ namespace iBalekaWeb
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            var hangFireOptions = new DashboardOptions { Authorization = new[] { new HangFireAuthorizationFilter() } };
+            var hangFireOptions = new DashboardOptions { Authorization = Enumerable.Empty<IDashboardAuthorizationFilter>() };
             if (env.IsDevelopment())
             {
                 app.UseHangfireDashboard("/dashboard");
