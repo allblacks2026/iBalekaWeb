@@ -19,7 +19,7 @@ function initMap() {
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(settingsPanel);
 
     initializeAutocomplete();
-
+    geocoder = new google.maps.Geocoder;
     map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(searchPanel);
     searchPanel.style.display = "none";
     settingsPanel.style.display = "none";
@@ -356,12 +356,12 @@ function saveRouteAJAX(title) {
 function createObject(title) {
     var routeModel = { Title: title, Checkpoints: [], TotalDistance: totalDistance, Location: "" };
     for (var i = 0; i < markersOrders.length; i++) {
-        var latlng = markersOrders[i].getPosition();
-        if (latlng !== null) {
-            if (i === 0)
-                routeModel.Location = getRouteLocation(latlng);
+        if (i === 1) {
+            var routeLocationCoord = markersOrders[i].getPosition();
+           
+            routeModel.Location = getRouteLocation(routeLocationCoord);
         }
-
+        var latlng = markersOrders[i].getPosition();
         var Checkpoint = {
             'Latitude': latlng.lat(),
             'Longitude': latlng.lng()
@@ -371,24 +371,23 @@ function createObject(title) {
     return JSON.stringify(routeModel);
 }
 function getRouteLocation(latlng) {
-    var locationName = "";
-    geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-        if (status === "OK") {
-            for (var i in results[0].address_components) {
-                if (results[0].address_components[i].types[0] === "locality")
+    var locationName = "";    
+    geocoder.geocode({ 'location': latlng }, function (results, status) {
+        if (status === 'OK') {
+            for (var i in results.address_components) {
+                if (results.address_components[i].types[0] === "locality")
                     locationName += results.address_components[i].long_name + ",";
-                if (results[0].address_components[i].types[0] === "administrative_area_level_1")
+                if (results.address_components[i].types[0] === "administrative_area_level_1")
                     locationName += results.address_components[i].long_name + ",";
-                if (results[0].address_components[i].types[0] === "country")
+                if (results.address_components[i].types[0] === "country")
                     locationName += results.address_components[i].long_name;
-            }
+            } 
         } else {
             window.alert('Geocoder failed due to: ' + status);
         }
     });
-
-    return locationName;
+   
+return locationName;
 }
 function clearRoute() {
     for (var key in markers) {
