@@ -131,7 +131,7 @@
                     <ul class="collection">
                         @foreach (EventRegistration reg in ViewBag.RegisteredAthletes)
                         {
-                            <li class="collection-item">@Html.ActionLink(reg.Athlete.Name + " " + reg.Athlete.Surname, "AthleteDetails", new { id = reg.Athlete.AthleteId })</li>
+                            <li class="collection-item">@Html.ActionLink("Name: "+reg.Athlete.Name + " " + reg.Athlete.Surname + " Date Registered: " + reg.DateRegistered, "AthleteDetails", new { id = reg.Athlete.AthleteId })</li>
                         }
                     </ul>
                 }
